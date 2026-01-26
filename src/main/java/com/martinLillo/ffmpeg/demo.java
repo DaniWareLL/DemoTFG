@@ -1,4 +1,4 @@
-package com.martinLillo;
+package com.martinLillo.ffmpeg;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.martinLillo;
+package com.martinLillo.vlcj;
 
 import com.sun.jna.NativeLibrary;
 import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;

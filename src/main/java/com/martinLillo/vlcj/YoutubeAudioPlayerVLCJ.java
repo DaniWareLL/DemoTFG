@@ -1,11 +1,6 @@
-package com.martinLillo;
+package com.martinLillo.vlcj;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.SourceDataLine;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 

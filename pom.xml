@@ -13,5 +13,26 @@
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
+    <repositories>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>dev.arbjerg</groupId>
+            <artifactId>lavaplayer</artifactId>
+            <version>2.2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>uk.co.caprica</groupId>
+            <artifactId>vlcj</artifactId>
+            <version>4.8.2</version>
+        </dependency>
+    </dependencies>
+
 </project>

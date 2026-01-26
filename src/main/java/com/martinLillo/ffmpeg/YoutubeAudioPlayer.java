@@ -1,4 +1,4 @@
-package com.martinLillo;
+package com.martinLillo.ffmpeg;
 
 import javax.sound.sampled.*;
 import java.io.*;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
+             version="3.2">
+    <persistence-unit name="login">
+        <!-- Clases -->
+        <class>com.martinLillo.login.model.User</class>
+        <properties>
+            <!-- Propiedades de conexión -->
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:postgresql://localhost:5432/tfg_db?currentSchema=auth"/>
+
+            <property name="jakarta.persistence.jdbc.driver"
+                      value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.user"
+                      value="admin"/>
+            <property name="jakarta.persistence.jdbc.password"
+                      value="admin"/>
+            <property
+                    name="jakarta.persistence.schema-generation.database.action"
+                    value="drop-and-create"/>
+            <!-- Mostrar sentencias SQL generadas -->
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

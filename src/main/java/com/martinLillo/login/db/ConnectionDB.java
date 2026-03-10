@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * No se usa con ORM pero nos puede servir pa algo a si q ahi se queda
+ */
 public class ConnectionDB {
     private static final String URL = "jdbc:postgresql://localhost:5432/tfg_db";
     private static final String USER = "admin";

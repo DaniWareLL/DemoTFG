@@ -1,6 +1,8 @@
 package com.martinLillo.login.service;
 
 import com.martinLillo.login.dao.LoginDAO;
+import com.martinLillo.login.exceptions.DataAccessException;
+import com.martinLillo.login.exceptions.DuplicateIdException;
 import com.martinLillo.login.model.User;
 
 public class UserService {
@@ -13,7 +15,12 @@ public class UserService {
         this.passwordService = new PasswordService();
     }
 
-    public void register(User user) {
+    /**
+     * Creates the hash password and account if the user doesn't exists in the DDBB
+     *
+     * @param user
+     */
+    public void register(User user) throws DuplicateIdException, DataAccessException {
         if (!loginDAO.existsUser(user)) {
             String hashed = passwordService.hashPassword(user.getPassword_hash());
             user.setPassword_hash(hashed);
@@ -21,6 +28,13 @@ public class UserService {
         }
     }
 
+    /**
+     * Returns true if the user exists in the DDBB
+     *
+     * @param email
+     * @param password
+     * @return
+     */
     public boolean login(String email, String password) {
         User user = loginDAO.findUser(email, password);
         if (user == null) return false;

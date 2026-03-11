@@ -58,7 +58,7 @@ public class SignUpController {
     }
 
     public void CreateAccountButton_MouseClicked(MouseEvent mouseEvent) throws DuplicateIdException, DataAccessException {
-        User user = new User(EmailTextfield.getText(), UserTextfield.getText(), PasswordTextfield.getText(), LocalDate.now());
+        User user = new User(UserTextfield.getText(), EmailTextfield.getText(), PasswordTextfield.getText(), LocalDate.now());
         userService.register(user);
         BackToLogin();
     }

@@ -29,6 +29,7 @@ public class LoginDAO_Impl implements LoginDAO {
                 tx = em.getTransaction();
                 tx.begin();
                 em.persist(user);
+                System.out.println("****USUARIO CREADO****");
                 em.getTransaction().commit();
                 em.close();
             } catch (EntityExistsException ex) {
@@ -51,7 +52,8 @@ public class LoginDAO_Impl implements LoginDAO {
             EntityManager em = emf.createEntityManager();
             tx = em.getTransaction();
             tx.begin();
-            em.remove(user);
+            User temp = em.find(User.class, user.getUserId());
+            em.remove(temp);
             em.getTransaction().commit();
             em.close();
         } catch (PersistenceException | IllegalStateException e) {
@@ -67,13 +69,13 @@ public class LoginDAO_Impl implements LoginDAO {
     @Override
     public boolean existsUser(User user) {
         EntityManager em = emf.createEntityManager();
-        TypedQuery <User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
-        query.setParameter("email", user.getEmail());
-        User temp = query.getSingleResult();
-        if (temp != null) {
-            return true;
-        }
-        return false;
+        TypedQuery<User> query = em.createQuery(
+                "SELECT u FROM User u WHERE u.userName = :userName",
+                User.class
+        );
+        query.setParameter("userName", user.getUserName());
+
+        return !query.getResultList().isEmpty();
     }
 
     @Override
@@ -83,7 +85,8 @@ public class LoginDAO_Impl implements LoginDAO {
             EntityManager em = emf.createEntityManager();
             tx = em.getTransaction();
             tx.begin();
-            em.merge(user);
+            User temp = em.find(User.class, user.getUserId());
+            em.merge(temp);
             tx.commit();
         } catch (PersistenceException | IllegalStateException e) {
             if (tx != null) {
@@ -98,7 +101,12 @@ public class LoginDAO_Impl implements LoginDAO {
     }
 
     @Override
-    public User findUser(String email, String password) {
-        return null;
+    public User findUser(String userName) throws ObjectNotFoundException {
+        EntityManager em = emf.createEntityManager();
+        final TypedQuery <User> query = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
+        query.setParameter("userName", userName);
+        User user = query.getSingleResult();
+        if (user == null) throw new ObjectNotFoundException("User not found");
+        return user;
     }
 }

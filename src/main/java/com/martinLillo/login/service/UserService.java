@@ -3,6 +3,7 @@ package com.martinLillo.login.service;
 import com.martinLillo.login.dao.LoginDAO;
 import com.martinLillo.login.exceptions.DataAccessException;
 import com.martinLillo.login.exceptions.DuplicateIdException;
+import com.martinLillo.login.exceptions.ObjectNotFoundException;
 import com.martinLillo.login.model.User;
 
 public class UserService {
@@ -31,12 +32,12 @@ public class UserService {
     /**
      * Returns true if the user exists in the DDBB
      *
-     * @param email
+     * @param userName
      * @param password
      * @return
      */
-    public boolean login(String email, String password) {
-        User user = loginDAO.findUser(email, password);
+    public boolean login(String userName, String password) throws ObjectNotFoundException {
+        User user = loginDAO.findUser(userName);
         if (user == null) return false;
 
         return passwordService.checkPassword(password, user.getPassword_hash());

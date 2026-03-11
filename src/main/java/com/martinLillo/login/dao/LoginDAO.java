@@ -46,8 +46,7 @@ public interface LoginDAO {
      * Find user
      *
      * @param email
-     * @param password
      * @return
      */
-    public User findUser (String email, String password);
+    public User findUser (String email) throws ObjectNotFoundException;
 }

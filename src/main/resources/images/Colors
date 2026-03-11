@@ -1,0 +1,17 @@
+| Uso aproximado          | Hex         | RGB          |
+| ----------------------- | ----------- | ------------ |
+| Naranja cobre principal | **#C66631** | (198,102,49) |
+| Naranja cobre medio     | **#C86A34** | (200,106,52) |
+| Naranja cobre cálido    | **#CA6833** | (202,104,51) |
+| Naranja cobre claro     | **#C96B34** | (201,107,52) |
+| Naranja highlight       | **#CA6C35** | (202,108,53) |
+
+
+
+
+
+#000000   (background)
+#C66631   (primary copper)
+#CA6C35   (highlight copper)
+#8A3F1D   (shadow copper)
+#FFFFFF   (white logo version)

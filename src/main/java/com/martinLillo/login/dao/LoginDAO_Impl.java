@@ -6,9 +6,6 @@ import com.martinLillo.login.exceptions.ObjectNotFoundException;
 import com.martinLillo.login.model.User;
 import jakarta.persistence.*;
 
-/**
- * Lo suyo sería hacer un servidor que aceptara multiples peticiones simultáneas de nuestro programa (No es dificil ya sabes)
- */
 public class LoginDAO_Impl implements LoginDAO {
 
     /**

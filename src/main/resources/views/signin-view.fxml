@@ -23,12 +23,12 @@
          <children>
             <ImageView fitHeight="600.0" fitWidth="476.0" layoutX="-1.0" layoutY="-1.0">
                <image>
-                  <Image url="@../images/Background.jpg" />
+                  <Image url="@../images/Sonik/Gemini_Generated_Image_fp8e38fp8e38fp8e.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="356.0" fitWidth="355.0" layoutX="60.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="356.0" fitWidth="355.0" layoutX="60.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Spotify_WhiteLogo.png" />
+                  <Image url="@../images/Sonik/Logo%20moderno%20sonik%20en%203D.png" />
                </image>
             </ImageView>
          </children>
@@ -46,7 +46,7 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
@@ -67,7 +67,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                           <color>
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
@@ -87,7 +92,7 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
@@ -99,11 +104,6 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="227.0" layoutY="58.0">
-               <image>
-                  <Image url="@../images/Spotify_GreenLogo.png" />
-               </image>
-            </ImageView>
             <Label layoutX="156.0" layoutY="144.0" text="Sign in now">
                <font>
                   <Font name="Manrope ExtraBold" size="34.0" />
@@ -113,7 +113,7 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
@@ -159,7 +159,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                           <color>
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
@@ -205,7 +210,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                           <color>
+                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
@@ -217,11 +227,16 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Button fx:id="SignInButton1" layoutX="297.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#SignUpButton_MouseClicked" prefHeight="29.0" prefWidth="70.0" style="-fx-background-color: transient;" text="Sign up" textFill="#51c2ff">
+            <Button fx:id="SignInButton1" layoutX="297.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#SignUpButton_MouseClicked" prefHeight="29.0" prefWidth="70.0" style="-fx-background-color: transient;" text="Sign up" textFill="#c96b34">
                <font>
                   <Font name="Manrope Medium" size="14.0" />
                </font>
             </Button>
+            <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="212.0" layoutY="29.0">
+               <image>
+                  <Image url="@../images/Sonik/LogoSInFOndo.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
    </right>
 </BorderPane>

@@ -32,7 +32,7 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                        <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
@@ -53,7 +53,7 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                        <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
@@ -74,7 +74,7 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                        <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
@@ -86,11 +86,6 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="476.0" layoutY="80.0">
-         <image>
-            <Image url="@../images/Spotify_WhiteLogo.png" />
-         </image>
-      </ImageView>
       <Label layoutX="405.0" layoutY="166.0" text="Sign up now">
          <font>
             <Font name="Manrope ExtraBold" size="34.0" />
@@ -100,7 +95,7 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                        <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
@@ -147,7 +142,7 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                        <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
@@ -194,7 +189,7 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.12719298899173737" green="0.7631579041481018" blue="0.2967836260795593" />
+                        <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
@@ -232,5 +227,15 @@
             </Lighting>
          </effect>
       </TextField>
+      <ImageView fitHeight="76.0" fitWidth="75.0" layoutX="462.0" layoutY="55.0">
+         <image>
+            <Image url="@../images/Sonik/LogoSInFOndo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="92.0" fitWidth="143.0" layoutX="428.0" layoutY="523.0">
+         <image>
+            <Image url="@../images/Sonik/Logo%20moderno%20sonik%20en%203D.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

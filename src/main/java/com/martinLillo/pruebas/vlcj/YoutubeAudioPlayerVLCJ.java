@@ -10,6 +10,8 @@ public class YoutubeAudioPlayerVLCJ {
 
     static Scanner sc = new Scanner(System.in);
 
+    public static String searchPrefix = "";
+
     /**
      * Obtiene la URL directa del audio usando yt-dlp
      * Es una herramienta en línea de comandos que sirve para obtener un enlace temporal cifrado con solo el audio
@@ -26,12 +28,25 @@ public class YoutubeAudioPlayerVLCJ {
      * IMPORTANTE (Obtiene el primer video de la búsqueda)
      *
      */
-    public static String getStreamUrl(String videoUrl) throws Exception {
+    public static String getStreamUrl(String platform, String videoUrl) throws Exception {
+
+        platform = platform.toLowerCase();
+        switch (platform) {
+            case "youtube":
+                searchPrefix = "ytsearch:";
+                break;
+            case "soundcloud":
+                searchPrefix = "scsearch:";
+                break;
+            default:
+                System.out.println("ERROR");
+        }
+
         ProcessBuilder pb = new ProcessBuilder(
                 "yt-dlp",
                 "-f", "bestaudio",
                 "--get-url",
-                "ytsearch:" + videoUrl
+                searchPrefix + videoUrl
 
         );
 
@@ -75,7 +90,7 @@ public class YoutubeAudioPlayerVLCJ {
                 "--audio-format", "mp3",
                 "--audio-quality", "0",
                 "--ffmpeg-location", "./ffmpeg-8.0.1-essentials_build/bin/ffmpeg.exe",
-                "ytsearch:" + busqueda
+                searchPrefix + busqueda
         );
 
         pb.redirectErrorStream(true);
@@ -125,11 +140,14 @@ public class YoutubeAudioPlayerVLCJ {
             getVersionYt_dlp();
             updateVersionYt_dlp();
 
+            System.out.println("Introduzca la plataforma del audio: ");
+            String proveedor = sc.nextLine();
+
             System.out.println("Introduzca el nombre de la canción: ");
             String busqueda = sc.nextLine();
 
             System.out.println("Buscando canción...");
-            String streamUrl = getStreamUrl(busqueda);
+            String streamUrl = getStreamUrl(proveedor, busqueda);
 
             System.out.println("URL obtenida:");
             System.out.println(streamUrl);

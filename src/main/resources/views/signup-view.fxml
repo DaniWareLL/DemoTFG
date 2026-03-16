@@ -11,6 +11,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -18,11 +19,15 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.martinLillo.login.ui.controllers.SignUpController">
    <children>
-      <ImageView fitHeight="537.0" fitWidth="526.0" layoutX="237.0" layoutY="32.0" opacity="0.71">
-         <image>
-            <Image url="@../images/Disc02.png" />
-         </image>
-      </ImageView>
+      <Pane prefHeight="615.0" prefWidth="1000.0">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="999.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Sonik/Gemini_Generated_Image_8ptb6f8ptb6f8ptb.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <Label layoutX="354.0" layoutY="316.0" text="User">
          <font>
             <Font name="Manrope ExtraBold" size="28.0" />

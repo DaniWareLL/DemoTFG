@@ -3,13 +3,22 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
              version="3.2">
-    <persistence-unit name="login">
+    <persistence-unit name="sonik">
         <!-- Clases -->
-        <class>com.martinLillo.login.model.User</class>
+        <class>com.sonik.model.User</class>
+        <class>com.sonik.model.Song</class>
+        <class>com.sonik.model.UserLibrary</class>
+        <class>com.sonik.model.Playlist</class>
+        <class>com.sonik.model.SongSource</class>
+        <class>com.sonik.model.UserLibraryId</class>
+        <class>com.sonik.model.UserPref</class>
+        <class>com.sonik.model.PlaylistsSongs</class>
+        <class>com.sonik.model.PlaylistsSongsId</class>
+
         <properties>
             <!-- Propiedades de conexión -->
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:postgresql://localhost:5432/tfg_db?currentSchema=auth"/>
+                      value="jdbc:postgresql://localhost:5432/tfg_db?currentSchema=sonik"/>
 
             <property name="jakarta.persistence.jdbc.driver"
                       value="org.postgresql.Driver"/>
@@ -19,7 +28,7 @@
                       value="admin"/>
             <property
                     name="jakarta.persistence.schema-generation.database.action"
-                    value="none"/>
+                    value="drop-and-create"/>
             <!-- Mostrar sentencias SQL generadas -->
             <property name="hibernate.show_sql" value="true"/>
         </properties>

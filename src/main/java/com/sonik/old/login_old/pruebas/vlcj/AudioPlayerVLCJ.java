@@ -24,6 +24,7 @@ public class AudioPlayerVLCJ {
 
     // Constructor
     public AudioPlayerVLCJ() {
+
         factory = new MediaPlayerFactory();
         player = factory.mediaPlayers().newMediaPlayer();
 

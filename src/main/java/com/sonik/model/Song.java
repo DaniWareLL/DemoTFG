@@ -93,4 +93,19 @@ public class Song {
             throw new IllegalArgumentException("Aggregation date cannot be in the future");
         this.aggregationDate = aggregationDate;
     }
+
+    @Override
+    public String toString() {
+        return "Song{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", durationSec=" + durationSec +
+                ", originalUrl='" + originalUrl + '\'' +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", aggregationDate=" + aggregationDate +
+                ", sources=" + sources +
+                ", playlists=" + playlists +
+                ", userLibraries=" + userLibraries +
+                '}';
+    }
 }

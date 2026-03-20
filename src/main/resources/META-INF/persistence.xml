@@ -5,7 +5,7 @@
              version="3.2">
     <persistence-unit name="login">
         <!-- Clases -->
-        <class>com.martinLillo.login.model.User</class>
+        <class>com.sonik.login.model.User</class>
         <properties>
             <!-- Propiedades de conexión -->
             <property name="jakarta.persistence.jdbc.url"

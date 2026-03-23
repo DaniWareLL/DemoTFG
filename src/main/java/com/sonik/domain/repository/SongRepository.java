@@ -1,6 +1,5 @@
 package com.sonik.domain.repository;
 
-import com.sonik.domain.model.Playlist;
 import com.sonik.domain.model.Song;
 
 import java.util.List;

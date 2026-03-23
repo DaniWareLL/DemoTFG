@@ -1,4 +1,4 @@
-package com.sonik.infrastructure.audio;
+package com.sonik.service.audio;
 
 /**
  * Generic interface to easily change the audio playing technology

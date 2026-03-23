@@ -20,6 +20,11 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
+    public User findByUsername(String username) {
+        return null;
+    }
+
+    @Override
     public void save(User user) {
 
     }

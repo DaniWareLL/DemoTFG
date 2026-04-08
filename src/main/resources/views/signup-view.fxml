@@ -11,18 +11,29 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.login.ui.controllers.SignUpController">
+<?import javafx.scene.effect.Light?>
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.login.SignUpController">
    <children>
-      <ImageView fitHeight="537.0" fitWidth="526.0" layoutX="237.0" layoutY="32.0" opacity="0.71">
-         <image>
-            <Image url="@../images/Disc02.png" />
-         </image>
-      </ImageView>
+      <Pane prefHeight="615.0" prefWidth="1000.0">
+         <children>
+            <ImageView fitHeight="615.0" fitWidth="942.0" opacity="0.56">
+               <image>
+                  <Image url="@../../../../../TFG_Dlillo_Jmartin/src/main/resources/images/Sonik/Gemini_Generated_Image_b2mmyyb2mmyyb2mm.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="124.0" fitWidth="191.0" layoutX="405.0" layoutY="24.0">
+               <image>
+                  <Image url="@../../../../../TFG_Dlillo_Jmartin/src/main/resources/images/Sonik/Sin título(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <Label layoutX="354.0" layoutY="316.0" text="User">
          <font>
             <Font name="Manrope ExtraBold" size="28.0" />
@@ -227,15 +238,5 @@
             </Lighting>
          </effect>
       </TextField>
-      <ImageView fitHeight="76.0" fitWidth="75.0" layoutX="462.0" layoutY="55.0">
-         <image>
-            <Image url="@../images/Sonik/LogoSInFOndo.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="92.0" fitWidth="143.0" layoutX="428.0" layoutY="523.0">
-         <image>
-            <Image url="@../images/Sonik/Logo%20moderno%20sonik%20en%203D.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

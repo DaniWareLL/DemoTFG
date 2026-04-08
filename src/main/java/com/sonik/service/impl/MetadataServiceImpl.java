@@ -22,19 +22,21 @@ public class MetadataServiceImpl implements MetadataService {
     public Song getMetadata(String searchPattern) throws Exception {
         String json = extractor.execute(List.of(
                 "yt-dlp",
-                "--dump-json",
-                "--flat-playlist",
+                "-J",
                 searchPrefix + searchPattern
         ));
 
-        JsonObject entry = JsonParser.parseString(json).getAsJsonObject();
+        JsonObject root  = JsonParser.parseString(json).getAsJsonObject();
+        JsonObject entry = root.getAsJsonArray("entries")
+                .get(0)
+                .getAsJsonObject();
 
-        Song song = new Song();
-        song.setTitle(entry.get("title").getAsString());
-        song.setDurationSec(entry.get("duration").getAsInt());
-        song.setOriginalUrl(entry.get("webpage_url").getAsString());
-        song.setThumbnailUrl(entry.get("thumbnail").getAsString());
+        Song metadata = new Song();
+        metadata.setTitle(entry.get("title").getAsString());
+        metadata.setDurationSec(entry.get("duration").getAsInt());
+        metadata.setOriginalUrl(entry.get("webpage_url").getAsString());
+        metadata.setThumbnailUrl(entry.get("thumbnail").getAsString());
 
-        return song;
+        return metadata;
     }
 }

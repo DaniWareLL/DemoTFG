@@ -1,0 +1,6 @@
+Color,Hexadecimal,Descripción
+,#3B1F16,Cobre Oscuro: Las sombras más profundas en los bordes de las letras.
+,#8C5033,Bronce Medio: El tono base de la mayoría de las letras.
+,#C58A5F,Cobre Cálido: Los tonos medios que dan volumen.
+,#E9B18A,Oro Rosado / Brillo: Los puntos de luz y reflejos más claros.
+,#0A0A0A,Negro Mate: El fondo oscuro que resalta el metalizado.

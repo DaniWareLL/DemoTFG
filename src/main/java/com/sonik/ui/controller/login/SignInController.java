@@ -55,7 +55,7 @@ public class SignInController {
 
     public void SignUpButton_MouseClicked(MouseEvent mouseEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signin-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signup-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
             Stage stage = (Stage) SignInButton.getScene().getWindow();

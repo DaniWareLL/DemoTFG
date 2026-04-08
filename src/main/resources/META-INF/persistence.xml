@@ -28,7 +28,7 @@
                       value="admin"/>
             <property
                     name="jakarta.persistence.schema-generation.database.action"
-                    value="drop-and-create"/>
+                    value="none"/>
             <!-- Mostrar sentencias SQL generadas -->
             <property name="hibernate.show_sql" value="true"/>
         </properties>

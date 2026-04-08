@@ -1,12 +1,13 @@
 package com.sonik.service.impl;
 
+import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.service.PlayerService;
 import com.sonik.service.audio.AudioExtractor;
 
 import java.util.List;
 
 
-/**
+/*
  * Implementation of the {@link PlayerService Player Service}
  */
 public class PlayerServiceImpl implements PlayerService {
@@ -18,28 +19,34 @@ public class PlayerServiceImpl implements PlayerService {
         this.searchPrefix = searchPrefix;
     }
 
-    /**
+    @Override
+    /*
      * Obtiene la URL directa del stream de audio usando yt-dlp.
      * El enlace firmado caduca en minutos.
      *
      * @param searchPattern nombre de la canción
      * @return URL directa del stream de audio
      */
-    public String[] getStreamUrl(String searchPattern) throws Exception {
-        String result = extractor.execute(List.of(
-                "yt-dlp",
-                "-f",        "bestaudio",
-                "--get-url",
-                searchPrefix + searchPattern
-        ));
+    public String[] getStreamUrl(String searchPattern) throws AudioExtractorException {
+        try {
+            String result = extractor.execute(List.of(
+                    "yt-dlp",
+                    "-f", "bestaudio",
+                    "--get-url",
+                    searchPrefix + searchPattern
+            ));
 
-        System.out.println(result);
+            System.out.println(result);
 
-        if (result == null || result.isBlank()) {
-            throw new RuntimeException("No se pudo obtener la URL del audio");
+            if (result == null || result.isBlank()) {
+                throw new AudioExtractorException(AudioExtractorException.STREAM_URL_ERROR);
+            }
+
+            // yt-dlp puede devolver múltiples líneas, nos quedamos con la última
+            return result.split("\n");
+
+        } catch (Exception e) {
+            throw new AudioExtractorException(AudioExtractorException.STREAM_URL_ERROR, e);
         }
-
-        // yt-dlp puede devolver múltiples líneas, nos quedamos con la última
-        return result.split("\n");
     }
 }

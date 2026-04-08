@@ -7,6 +7,7 @@
 <?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,12 +24,12 @@
          <children>
             <ImageView fitHeight="600.0" fitWidth="500.0" layoutX="-1.0" layoutY="1.0">
                <image>
-                  <Image url="@../../../../../TFG_Dlillo_Jmartin/src/main/resources/images/Sonik/Gemini_Generated_Image_pfe7u1pfe7u1pfe7.png" />
+                  <Image url="@../images/Sonik/FondoSignin.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="392.0" fitWidth="498.0" layoutX="1.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/com/sonik/ui/images/Sonik/Adobe Express - file.png" />
+                  <Image url="@../images/Sonik/SonikLetrasWhite.png" />
                </image>
             </ImageView>
          </children>
@@ -125,7 +126,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <TextField fx:id="UserTextfield" layoutX="104.0" layoutY="266.0" onKeyPressed="#OnkeyPressed_UserTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transient; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+            <TextField fx:id="UserTextfield" layoutX="104.0" layoutY="266.0" onKeyPressed="#OnkeyPressed_UserTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
                <font>
                   <Font name="Manrope ExtraLight" size="15.0" />
                </font>
@@ -150,7 +151,7 @@
                      </light>
                   </Lighting>
                </effect></TextField>
-            <Button fx:id="SignInButton" layoutX="206.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#SignInButton_MouseClicked" prefHeight="0.0" prefWidth="91.0" style="-fx-background-color: transient; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Sign in">
+            <Button fx:id="SignInButton" layoutX="206.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#SignInButton_MouseClicked" prefHeight="0.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Sign in">
                <font>
                   <Font name="Manrope Medium" size="16.0" />
                </font>
@@ -176,7 +177,7 @@
                   </LinearGradient>
                </textFill>
             </Button>
-            <PasswordField fx:id="PasswordTextfield" layoutX="104.0" layoutY="342.0" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transient; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+            <PasswordField fx:id="PasswordTextfield" layoutX="104.0" layoutY="342.0" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
                <font>
                   <Font name="Manrope Light" size="15.0" />
                </font>
@@ -227,14 +228,14 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Button fx:id="SignInButton1" layoutX="297.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#SignUpButton_MouseClicked" prefHeight="29.0" prefWidth="70.0" style="-fx-background-color: transient;" text="Sign up" textFill="#c96b34">
+            <Button fx:id="SignInButton1" layoutX="297.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#SignUpButton_MouseClicked" prefHeight="29.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Sign up" textFill="#c96b34">
                <font>
                   <Font name="Manrope Medium" size="14.0" />
                </font>
             </Button>
             <ImageView fitHeight="98.0" fitWidth="147.0" layoutX="179.0" layoutY="14.0">
                <image>
-                  <Image url="@../../../../../TFG_Dlillo_Jmartin/src/main/resources/images/Sonik/Sin título(1).png" />
+                  <Image url="@../images/Sonik/IconoSonikColor.png" />
                </image>
             </ImageView>
          </children></AnchorPane>

@@ -82,10 +82,11 @@ public class User {
     }
 
     public void setCreation_date(LocalDate creation_date) {
+        if (creation_date == null) {
+            throw new IllegalArgumentException("Creation Date cannot be null");
+        }
         if (creation_date.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Creation Date cannot be in the future");
-        } else if (creation_date == null){
-            throw new IllegalArgumentException("Creation Date cannot be null");
         }
         this.creation_date = creation_date;
     }

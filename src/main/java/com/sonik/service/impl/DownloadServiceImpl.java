@@ -1,5 +1,6 @@
 package com.sonik.service.impl;
 
+import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.service.DownloadService;
 import com.sonik.service.audio.AudioExtractor;
 
@@ -20,23 +21,23 @@ public class DownloadServiceImpl implements DownloadService {
         this.searchPrefix = searchPrefix;
     }
 
-    /**
-     *
-     * @param searchPattern
-     * @throws Exception
-     */
-    public void downloadMp3(String searchPattern) throws Exception {
-        extractor.execute(List.of(
-                "yt-dlp",
-                "-f",                "bestaudio",
-                "--extract-audio",
-                "--audio-format",    "mp3",
-                "--audio-quality",   "0",
-                "--add-metadata",
-                "--embed-thumbnail",
-                "--convert-thumbnails", "jpg",
-                "--ffmpeg-location", ffmpegPath,
-                searchPrefix + searchPattern
-        ));
+    @Override
+    public void downloadToMp3(String searchPattern) throws AudioExtractorException {
+        try {
+            extractor.execute(List.of(
+                    "yt-dlp",
+                    "-f",                "bestaudio",
+                    "--extract-audio",
+                    "--audio-format",    "mp3",
+                    "--audio-quality",   "0",
+                    "--add-metadata",
+                    "--embed-thumbnail",
+                    "--convert-thumbnails", "jpg",
+                    "--ffmpeg-location", ffmpegPath,
+                    searchPrefix + searchPattern
+            ));
+        } catch (Exception e) {
+            throw new AudioExtractorException(AudioExtractorException.DOWNLOAD_ERROR, e);
+        }
     }
 }

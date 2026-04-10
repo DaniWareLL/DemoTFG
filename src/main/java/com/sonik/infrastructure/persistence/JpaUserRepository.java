@@ -167,7 +167,7 @@ public class JpaUserRepository implements UserRepository {
         if (tx != null && tx.isActive()) {
             try {
                 tx.rollback();
-            } catch (Exception rollbackEx) {
+            } catch (IllegalStateException | PersistenceException rollbackEx) {
                 throw new DataAccessException(DataAccessException.REVERT_ERROR, rollbackEx);
             }
         }

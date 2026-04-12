@@ -24,12 +24,6 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() throws DataAccessException {
-        return List.of();
-        // ¿Realmente lo necesitamos? Creo que no
-    }
-
-    @Override
     public User findById(Long id) throws DataAccessException, ObjectNotFoundException {
         EntityManager em = null;
 

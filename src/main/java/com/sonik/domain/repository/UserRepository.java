@@ -14,13 +14,6 @@ import java.util.List;
 public interface UserRepository {
 
     /**
-     * Retrieves all user entities stored in the data source
-     * @return a list containing all users; never null
-     * @throws DataAccessException if a data access error occurs
-     */
-    List<User> findAll() throws DataAccessException;
-
-    /**
      * Retrieves a user entity matching the given id
      * @param id
      * @return

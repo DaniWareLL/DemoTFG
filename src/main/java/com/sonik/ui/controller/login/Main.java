@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * No se ejecuta directamente, se ejecuta el GUIStarter como intermediario
+ * No se ejecuta directamente, se ejecuta el GUILoginStarter como intermediario
  */
 public class Main extends Application {
 

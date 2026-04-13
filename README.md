@@ -1,6 +1,6 @@
 <h1>Project Sonik</h1>
 <br>
-This branch consists of several empty packages with readme.md files inside each package to better explain its purpose.
+This branch consists of several packages with readme.md files inside each package to better explain its purpose.
 There are many packages to make the project as modular as possible. The readme.md files for each package are listed below:<br>
 
 <h3>Packages:</h3>

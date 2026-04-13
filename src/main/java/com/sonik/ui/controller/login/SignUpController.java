@@ -26,8 +26,7 @@ import java.time.LocalDate;
 
 public class SignUpController {
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("sonik");;
-    private final AuthServiceImpl authService = new AuthServiceImpl(new JpaUserRepository(emf), new PasswordServiceImpl());
+    private AuthServiceImpl authService;
 
     @FXML
     public TextField EmailTextfield;
@@ -39,8 +38,8 @@ public class SignUpController {
     public Button CreateAccountButton;
 
 
-    public void initialize() {
-        // init presets
+    public void initialize(AuthServiceImpl authService) {
+        this.authService = authService;
     }
 
     public void OnkeyPressed_EmailTexfield(KeyEvent keyEvent) {

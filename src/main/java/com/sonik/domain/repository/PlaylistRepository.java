@@ -1,5 +1,8 @@
 package com.sonik.domain.repository;
 
+import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.DuplicateIdException;
+import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Playlist;
 
 import java.util.List;
@@ -9,11 +12,9 @@ import java.util.List;
  */
 public interface PlaylistRepository {
 
-    List<Playlist> findAll();
+    Playlist findById(Long id) throws DataAccessException, ObjectNotFoundException;
 
-    Playlist findById(Long id);
+    void save(Playlist playlist) throws DuplicateIdException, DataAccessException;
 
-    void save(Playlist playlist);
-
-    void delete(Playlist playlist);
+    void delete(Playlist playlist) throws DataAccessException, ObjectNotFoundException;
 }

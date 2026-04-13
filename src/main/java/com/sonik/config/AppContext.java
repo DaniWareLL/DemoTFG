@@ -1,6 +1,11 @@
 package com.sonik.config;
 
-import jakarta.persistence.EntityManager;
+import com.sonik.infrastructure.persistence.JpaPlaylistRepository;
+import com.sonik.infrastructure.persistence.JpaSongRepository;
+import com.sonik.infrastructure.persistence.JpaUserRepository;
+import com.sonik.service.impl.AuthServiceImpl;
+import com.sonik.service.impl.PasswordServiceImpl;
+import jakarta.persistence.EntityManagerFactory;
 
 /**
  * This class essentially initializes the application, necessary views and controllers, persistence and JPA.
@@ -21,13 +26,16 @@ public class AppContext {
      */
     public static void initializeApplication() {
 
-        try (EntityManager em = PersistenceConfig.initializePersistence()) {
-            /*
-         Create services
-         Create repositories
-         Create AudioPlayer
-         Create AudioChain(Chain of responsibility)
-          */
+        try (EntityManagerFactory emf = PersistenceConfig.initializePersistence()) {
+
+            JpaUserRepository jpaUserRepository = new JpaUserRepository(emf);
+            JpaSongRepository jpaSongRepository = new JpaSongRepository(emf);
+            JpaPlaylistRepository jpaPlaylistRepository = new JpaPlaylistRepository(emf);
+            AuthServiceImpl authService = new AuthServiceImpl(jpaUserRepository, new PasswordServiceImpl());
+
+
+            // Create AudioChain(Chain of responsibility)
+
         }
 
 

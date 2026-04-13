@@ -16,7 +16,7 @@ public class AuthServiceImpl implements AuthService {
 
     /**
      * We use interfaces to comply with the Dependency Inversion Principle (DIP),
-     * keeping the service independent from concrete implementations.
+     * keeping the service independent of concrete implementations.
      */
     private final UserRepository userRepository;
     private final PasswordService passwordService;

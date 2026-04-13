@@ -1,20 +1,20 @@
 package com.sonik.domain.repository;
 
+import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.DuplicateIdException;
+import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
 
-import java.util.List;
 
 /**
  * Operations over the JPA entity Song
  */
 public interface SongRepository {
 
-    List<Song> findAll();
+    Song findById(Long id) throws DataAccessException, ObjectNotFoundException;
 
-    Song findById(Long id);
+    void save(Song song) throws DuplicateIdException, DataAccessException;
 
-    void save(Song song);
-
-    void delete(Song song);
+    void delete(Song song) throws DataAccessException, ObjectNotFoundException;
 
 }

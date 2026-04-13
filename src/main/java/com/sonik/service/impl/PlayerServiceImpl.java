@@ -7,7 +7,7 @@ import com.sonik.service.audio.AudioExtractor;
 import java.util.List;
 
 
-/*
+/**
  * Implementation of the {@link PlayerService Player Service}
  */
 public class PlayerServiceImpl implements PlayerService {
@@ -19,14 +19,15 @@ public class PlayerServiceImpl implements PlayerService {
         this.searchPrefix = searchPrefix;
     }
 
-    @Override
-    /*
+
+    /**
      * Obtiene la URL directa del stream de audio usando yt-dlp.
      * El enlace firmado caduca en minutos.
      *
      * @param searchPattern nombre de la canción
      * @return URL directa del stream de audio
      */
+    @Override
     public String[] getStreamUrl(String searchPattern) throws AudioExtractorException {
         try {
             String result = extractor.execute(List.of(

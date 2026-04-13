@@ -2,6 +2,7 @@ package com.sonik.ui.controller.login;
 
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
+import com.sonik.domain.repository.UserRepository;
 import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.AuthService;
 import com.sonik.service.impl.AuthServiceImpl;
@@ -21,9 +22,9 @@ import javafx.stage.Stage;
 
 public class SignInController {
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("sonik");
+    public SignInController() {}
 
-    private final AuthService authService = new AuthServiceImpl(new JpaUserRepository(emf), new PasswordServiceImpl());
+    private AuthServiceImpl authService;
 
     @FXML
     public TextField UserTextfield;
@@ -32,12 +33,9 @@ public class SignInController {
     @FXML
     public Button SignInButton;
 
-    @FXML
-    public Button ButtonPrueba;
 
-
-    public void initialize() {
-        // init presets
+    public void initialize(AuthServiceImpl authService) {
+        this.authService =  authService;
     }
 
     public void OnkeyPressed_UserTexfield(KeyEvent keyEvent) {
@@ -46,9 +44,7 @@ public class SignInController {
         }
     }
 
-    public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {
-
-    }
+    public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {}
 
     public void SignInButton_MouseClicked(MouseEvent mouseEvent) throws ObjectNotFoundException, DataAccessException {
         authService.login(UserTextfield.getText(), PasswordTextfield.getText());

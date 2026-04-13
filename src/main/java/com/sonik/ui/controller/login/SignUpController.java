@@ -7,6 +7,7 @@ import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.model.User;
 import com.sonik.infrastructure.persistence.JpaUserRepository;
 
+import com.sonik.service.AuthService;
 import com.sonik.service.impl.AuthServiceImpl;
 import com.sonik.service.impl.PasswordServiceImpl;
 import jakarta.persistence.EntityManagerFactory;
@@ -27,7 +28,7 @@ import java.time.LocalDate;
 public class SignUpController {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("sonik");;
-    private final AuthServiceImpl authService = new AuthServiceImpl(new JpaUserRepository(emf), new PasswordServiceImpl());
+    private final AuthService authService = new AuthServiceImpl(new JpaUserRepository(emf), new PasswordServiceImpl());
 
     @FXML
     public TextField EmailTextfield;

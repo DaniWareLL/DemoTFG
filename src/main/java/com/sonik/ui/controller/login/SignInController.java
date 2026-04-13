@@ -3,6 +3,7 @@ package com.sonik.ui.controller.login;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.infrastructure.persistence.JpaUserRepository;
+import com.sonik.service.AuthService;
 import com.sonik.service.impl.AuthServiceImpl;
 import com.sonik.service.impl.PasswordServiceImpl;
 import jakarta.persistence.EntityManagerFactory;
@@ -22,7 +23,7 @@ public class SignInController {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("sonik");
 
-    private final AuthServiceImpl authService = new AuthServiceImpl(new JpaUserRepository(emf), new PasswordServiceImpl());
+    private final AuthService authService = new AuthServiceImpl(new JpaUserRepository(emf), new PasswordServiceImpl());
 
     @FXML
     public TextField UserTextfield;

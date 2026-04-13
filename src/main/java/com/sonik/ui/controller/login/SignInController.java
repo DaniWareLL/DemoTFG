@@ -2,13 +2,8 @@ package com.sonik.ui.controller.login;
 
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
-import com.sonik.domain.repository.UserRepository;
-import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.AuthService;
 import com.sonik.service.impl.AuthServiceImpl;
-import com.sonik.service.impl.PasswordServiceImpl;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,7 +19,7 @@ public class SignInController {
 
     public SignInController() {}
 
-    private AuthServiceImpl authService;
+    private AuthService authService;
 
     @FXML
     public TextField UserTextfield;
@@ -34,7 +29,7 @@ public class SignInController {
     public Button SignInButton;
 
 
-    public void initialize(AuthServiceImpl authService) {
+    public void initialize(AuthService authService) {
         this.authService =  authService;
     }
 

@@ -5,12 +5,8 @@ package com.sonik.ui.controller.login;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.model.User;
-import com.sonik.infrastructure.persistence.JpaUserRepository;
 
-import com.sonik.service.impl.AuthServiceImpl;
-import com.sonik.service.impl.PasswordServiceImpl;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import com.sonik.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,7 +22,9 @@ import java.time.LocalDate;
 
 public class SignUpController {
 
-    private AuthServiceImpl authService;
+    private AuthService authService;
+    /* No creas un objeto de la impl para desacoplar el codigo y cumplir el principio
+     de inversion de dependencias */
 
     @FXML
     public TextField EmailTextfield;
@@ -38,7 +36,7 @@ public class SignUpController {
     public Button CreateAccountButton;
 
 
-    public void initialize(AuthServiceImpl authService) {
+    public void initialize(AuthService authService) {
         this.authService = authService;
     }
 

@@ -1,5 +1,6 @@
 package com.sonik;
 
+import com.sonik.config.AppConfig;
 import com.sonik.domain.model.Song;
 import com.sonik.infrastructure.audio.VlcjAudioPlayer;
 import com.sonik.infrastructure.audio.YtDlpClient;
@@ -17,7 +18,6 @@ public class MainServices {
         VlcjAudioPlayer audioPlayer = new VlcjAudioPlayer();
 
         String searchPrefix = "ytsearch:";
-        String ffmpegPath = "ffmpeg-8.0.1-essentials_build/bin/ffmpeg.exe";
 
         SettingServiceImpl management = new SettingServiceImpl(client);
         System.out.println(management.getToolVersion());
@@ -30,7 +30,7 @@ public class MainServices {
         Song temp = metadata.getMetadata(searchPattern);
         System.out.println(temp);
 
-        DownloadServiceImpl download = new DownloadServiceImpl(client, ffmpegPath, searchPrefix);
+        DownloadServiceImpl download = new DownloadServiceImpl(client, AppConfig.FFMPEG_PATH, searchPrefix);
         download.downloadToMp3(searchPattern);
 
         audioPlayer.playStream(StreamURL[0]);

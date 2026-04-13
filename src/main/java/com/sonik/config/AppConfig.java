@@ -11,4 +11,6 @@ public class AppConfig {
     public static final String downloadsDefaultPath = "maxFileSize";
     */
 
+    public static final String FFMPEG_PATH = "ffmpeg-8.0.1-essentials_build/bin/ffmpeg.exe";
+
 }

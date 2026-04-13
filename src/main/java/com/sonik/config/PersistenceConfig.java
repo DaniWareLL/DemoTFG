@@ -1,12 +1,15 @@
 package com.sonik.config;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 /**
  * This class initializes the Hibernate and JPA components
  */
 public class PersistenceConfig {
 
+    private static final String persistenceUnitName = "sonik";
     /**
      * This constructor is not meant to be used at all, instead use {@link #initializePersistence()}
      */
@@ -15,13 +18,8 @@ public class PersistenceConfig {
     /**
      * Initializes and configures the access to the DB and entities
      */
-    protected static EntityManager initializePersistence() {
-        /*
-        Create EntityManager through EntityManagerFactory and return it
-        Configure DB access
-        Configure Hibernate with its persistence unit
-        */
-        return null;
+    protected static EntityManagerFactory initializePersistence() {
+        return Persistence.createEntityManagerFactory(persistenceUnitName);
     }
 
 }

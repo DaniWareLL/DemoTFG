@@ -1,0 +1,2 @@
+CREATE DATABASE tfg_db;
+CREATE SCHEMA sonik;

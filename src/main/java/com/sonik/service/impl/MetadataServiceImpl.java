@@ -2,6 +2,7 @@ package com.sonik.service.impl;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sonik.config.AppConfig;
 import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.model.Song;
 import com.sonik.service.MetadataService;
@@ -23,7 +24,7 @@ public class MetadataServiceImpl implements MetadataService {
     public Song getMetadata(String searchPattern) throws AudioExtractorException {
         try {
             String json = extractor.execute(List.of(
-                    "yt-dlp",
+                    AppConfig.YTDLP_PATH,
                     "-J",
                     searchPrefix + searchPattern
             ));

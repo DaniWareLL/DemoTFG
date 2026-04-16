@@ -1,16 +1,20 @@
 package com.sonik.config;
 
+import java.nio.file.Paths;
+
 /**
  * This class contains the application constants such as the name, version and other important information.
  * It basically contains all(or most) of the application's default values.
  */
 public class AppConfig {
 
-    /* EXAMPLES
-    public static final String VLCDefaultSearchPath = "C:\Program Files\VideoLAN";
-    public static final String downloadsDefaultPath = "maxFileSize";
-    */
+    public static final String FFMPEG_PATH = Paths.get("bin", "ffmpeg.exe").toAbsolutePath().toString();
 
-    public static final String FFMPEG_PATH = "ffmpeg-8.0.1-essentials_build/bin/ffmpeg.exe";
+    public static final String YTDLP_PATH =  Paths.get("bin", "yt-dlp.exe").toAbsolutePath().toString();
+
+    // it depends on the S.O
+    // public static final String VLC_PATH = Paths.get("bin", "libvlc").toAbsolutePath().toString();
+
+
 
 }

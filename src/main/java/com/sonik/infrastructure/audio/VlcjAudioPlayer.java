@@ -7,6 +7,7 @@ import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -16,14 +17,19 @@ public class VlcjAudioPlayer implements AudioPlayer {
 
     public static Scanner sc = new Scanner(System.in);
 
-    // Configurar ruta de VLC
+    private static final String VLC_PATH;
+
     static {
         if (RuntimeUtil.isWindows()) {
-            NativeLibrary.addSearchPath("libvlc", "C:\\Program Files\\VideoLAN\\VLC");
+            VLC_PATH = Paths.get("bin", "libvlc-win").toAbsolutePath().toString();
         } else {
-            NativeLibrary.addSearchPath("libvlc", "/usr/lib/x86_64-linux-gnu");
+            VLC_PATH = Paths.get("bin", "libvlc-linux").toAbsolutePath().toString();
         }
+
+        NativeLibrary.addSearchPath("libvlc", VLC_PATH);
+        System.setProperty("jna.library.path", VLC_PATH);
     }
+
 
     private final MediaPlayerFactory factory;
     private final MediaPlayer player;
@@ -31,7 +37,9 @@ public class VlcjAudioPlayer implements AudioPlayer {
     // Constructor
     public VlcjAudioPlayer() {
 
-        factory = new MediaPlayerFactory();
+        String pluginPath = Paths.get(VLC_PATH, "plugins").toString();
+
+        factory = new MediaPlayerFactory("--plugin-path=" + pluginPath);
         player = factory.mediaPlayers().newMediaPlayer();
 
         // Listener de eventos (hay que mirarlo)

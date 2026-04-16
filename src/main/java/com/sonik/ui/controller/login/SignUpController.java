@@ -1,11 +1,9 @@
 package com.sonik.ui.controller.login;
 
-
-
+import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.model.User;
-
 import com.sonik.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,8 +34,8 @@ public class SignUpController {
     public Button CreateAccountButton;
 
 
-    public void initialize(AuthService authService) {
-        this.authService = authService;
+    public void initialize() {
+        this.authService = AppContext.getAuthService();;
     }
 
     public void OnkeyPressed_EmailTexfield(KeyEvent keyEvent) {

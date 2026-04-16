@@ -1,5 +1,6 @@
 package com.sonik.service.impl;
 
+import com.sonik.config.AppConfig;
 import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.service.SettingService;
 import com.sonik.service.audio.AudioExtractor;
@@ -17,7 +18,7 @@ public class SettingServiceImpl implements SettingService {
     @Override
     public String getToolVersion() throws AudioExtractorException {
         try {
-            return audioExtractor.execute(List.of("yt-dlp", "--version"));
+            return audioExtractor.execute(List.of(AppConfig.YTDLP_PATH, "--version"));
         } catch (Exception e) {
             throw new AudioExtractorException(AudioExtractorException.SETTING_ERROR, e);
         }
@@ -26,7 +27,7 @@ public class SettingServiceImpl implements SettingService {
     @Override
     public String updateTool() throws AudioExtractorException {
         try {
-            return audioExtractor.execute(List.of("yt-dlp", "-U"));
+            return audioExtractor.execute(List.of(AppConfig.YTDLP_PATH, "-U"));
         } catch (Exception e) {
             throw new AudioExtractorException(AudioExtractorException.SETTING_ERROR, e);
         }

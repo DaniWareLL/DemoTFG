@@ -1,5 +1,6 @@
 package com.sonik.service.impl;
 
+import com.sonik.config.AppConfig;
 import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.service.PlayerService;
 import com.sonik.service.audio.AudioExtractor;
@@ -31,7 +32,7 @@ public class PlayerServiceImpl implements PlayerService {
     public String[] getStreamUrl(String searchPattern) throws AudioExtractorException {
         try {
             String result = extractor.execute(List.of(
-                    "yt-dlp",
+                    AppConfig.YTDLP_PATH,
                     "-f", "bestaudio",
                     "--get-url",
                     searchPrefix + searchPattern

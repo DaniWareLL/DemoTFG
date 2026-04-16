@@ -3,58 +3,432 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.effect.Light?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.HomeController">
    <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="900.0" prefWidth="230.0" spacing="10.0" style="-fx-border-width: 0 2 0 0; -fx-border-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="75.0" style="-fx-background-color: black;" text="Home" textFill="WHITE">
+            <ImageView fitHeight="71.0" fitWidth="62.0" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../images/Sonik/IconoSonikColor.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="15.0" top="15.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label text="Discover" textFill="WHITE">
                <font>
-                  <Font name="Manrope ExtraLight" size="12.0" />
+                  <Font name="Manrope ExtraBold" size="22.0" />
                </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="75.0" style="-fx-background-color: black;" text="Explore" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="15.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="ButtonHome" mnemonicParsing="false" prefHeight="41.0" prefWidth="100.0" style="-fx-background-color: black;" text="Home" textFill="WHITE">
                <font>
-                  <Font name="Manrope Light" size="12.0" />
+                  <Font name="Manrope Regular" size="16.0" />
                </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="mdi2h-home-outline" iconSize="30" />
+               </graphic>
             </Button>
+            <Button fx:id="ButtonExplore" mnemonicParsing="false" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: black;" text="Explore" textFill="WHITE">
+               <font>
+                  <Font name="Manrope Regular" size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="mdi2c-compass-outline" iconSize="30" />
+               </graphic>
+            </Button>
+            <Separator prefWidth="200.0" style="-fx-background-color: white; -fx-border-width: 0.1;">
+               <VBox.margin>
+                  <Insets left="12.0" right="12.0" />
+               </VBox.margin>
+            </Separator>
+            <Label text="Library" textFill="WHITE">
+               <font>
+                  <Font name="Manrope ExtraBold" size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="ButtonPlaylist" mnemonicParsing="false" prefHeight="41.0" prefWidth="110.0" style="-fx-background-color: black;" text="Playlist" textFill="WHITE">
+               <font>
+                  <Font name="Manrope Regular" size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="mdi2p-playlist-play" iconSize="30" />
+               </graphic>
+            </Button>
+            <Button fx:id="ButtonSongs" mnemonicParsing="false" prefHeight="41.0" prefWidth="104.0" style="-fx-background-color: black;" text="Songs" textFill="WHITE">
+               <font>
+                  <Font name="Manrope Regular" size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="mdi2m-music-note-outline" iconSize="30" />
+               </graphic>
+            </Button>
+            <Separator prefWidth="200.0" style="-fx-background-color: white;">
+               <VBox.margin>
+                  <Insets left="12.0" right="12.0" />
+               </VBox.margin>
+            </Separator>
          </children>
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="500.0" spacing="40.0">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <TextField promptText="Search..." style="-fx-border-color: #C66631; -fx-border-radius: 20px; -fx-background-radius: 20px;">
-                     <font>
-                        <Font name="Manrope Light" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label text="Account" textFill="WHITE">
-                     <font>
-                        <Font name="Manrope Light" size="12.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="41.0" fitWidth="50.0">
-                     <image>
-                        <Image url="@../images/Sonik/Gemini_Generated_Image_s83ut1s83ut1s83u.png" />
-                     </image>
-                  </ImageView>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="500.0" spacing="410.0">
+                     <padding>
+                        <Insets right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="450.0" spacing="8.0" style="-fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 7;">
+                           <children>
+                              <FontIcon iconColor="WHITE" iconLiteral="mdi2m-magnify" iconSize="25" />
+                              <TextField fx:id="SearchBar" prefHeight="32.0" prefWidth="404.0" promptText="Search..." style="-fx-background-color: transparent; -fx-border-radius: 7px; -fx-text-fill: white;">
+                                 <font>
+                                    <Font name="Manrope ExtraLight" size="15.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </HBox>
+                        <Button fx:id="ButtonOptions" mnemonicParsing="false" prefHeight="41.0" prefWidth="33.0" style="-fx-background-color: black;" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Regular" size="16.0" />
+                           </font>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="mdi2c-cog-outline" iconSize="30" text="󰢻" />
+                           </graphic>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Playlists" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope ExtraBold" size="35.0" />
+                           </font>
+                        </Label>
+                        <Label text="Your lists" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="235.0" fitWidth="235.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Playlist.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Playlist name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Description" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="235.0" fitWidth="235.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Playlist.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Playlist name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Description" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="235.0" fitWidth="235.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Playlist.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Playlist name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Description" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="235.0" fitWidth="235.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Playlist.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Playlist name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Description" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="70.0" top="15.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Library" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope ExtraBold" size="35.0" />
+                           </font>
+                        </Label>
+                        <Label text="Your Songs" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="135.0" fitWidth="135.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Image.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text=" Song name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="135.0" fitWidth="135.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Image.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text=" Song name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="135.0" fitWidth="135.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Image.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text=" Song name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="135.0" fitWidth="135.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Image.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text=" Song name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="135.0" fitWidth="135.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Image.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text=" Song name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="135.0" fitWidth="135.0">
+                                       <image>
+                                          <Image url="@../images/Sonik/Image.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text=" Song name" textFill="WHITE">
+                                       <font>
+                                          <Font name="Manrope Medium" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="70.0" top="30.0" />
+                     </padding>
+                  </VBox>
                </children>
-               <padding>
-                  <Insets right="10.0" top="10.0" />
-               </padding>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
    </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="120.0" prefWidth="1440.0" spacing="200.0" style="-fx-border-color: white; -fx-border-width: 2 0 0 0;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <ImageView>
+                     <image>
+                        <Image url="@../images/Sonik/Image.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="3.0">
+                     <children>
+                        <Label text="Song" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="Quality" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Source" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="118.0" prefWidth="570.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="570.0">
+                     <children>
+                        <Button fx:id="ButtonPreviousSong" mnemonicParsing="false" prefHeight="41.0" prefWidth="100.0" style="-fx-background-color: black;" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Regular" size="16.0" />
+                           </font>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="mdi2s-skip-previous-outline" iconSize="45" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="ButtonPlay" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="100.0" style="-fx-background-color: black;" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Regular" size="16.0" />
+                           </font>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="mdi2p-play" iconSize="45" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="ButtonNextSong" mnemonicParsing="false" prefHeight="41.0" prefWidth="100.0" style="-fx-background-color: black;" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Regular" size="16.0" />
+                           </font>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="mdi2s-skip-next-outline" iconSize="45" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="17.0" prefWidth="570.0" spacing="3.0">
+                     <children>
+                        <Label text="0:00" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Regular" size="15.0" />
+                           </font>
+                        </Label>
+                        <ProgressBar fx:id="ProgressBar" prefHeight="10.0" prefWidth="500.0" progress="0.5" />
+                        <Label text="0:00" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Regular" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="118.0" prefWidth="233.0" spacing="3.0">
+               <children>
+                  <FontIcon iconColor="WHITE" iconLiteral="mdi2v-volume-high" iconSize="30" />
+                  <Slider fx:id="VolumeSlider" prefWidth="180.0" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

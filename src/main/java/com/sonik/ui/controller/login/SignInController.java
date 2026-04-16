@@ -1,9 +1,12 @@
 package com.sonik.ui.controller.login;
 
+import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.service.AuthService;
 import com.sonik.service.impl.AuthServiceImpl;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,9 +18,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class SignInController {
+import java.io.IOException;
 
-    public SignInController() {}
+public class SignInController {
 
     private AuthService authService;
 
@@ -29,8 +32,8 @@ public class SignInController {
     public Button SignInButton;
 
 
-    public void initialize(AuthService authService) {
-        this.authService =  authService;
+    public void initialize() {
+        this.authService = AppContext.getAuthService();;
     }
 
     public void OnkeyPressed_UserTexfield(KeyEvent keyEvent) {
@@ -41,8 +44,15 @@ public class SignInController {
 
     public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {}
 
-    public void SignInButton_MouseClicked(MouseEvent mouseEvent) throws ObjectNotFoundException, DataAccessException {
-        authService.login(UserTextfield.getText(), PasswordTextfield.getText());
+    public void SignInButton_MouseClicked(MouseEvent mouseEvent) throws ObjectNotFoundException, DataAccessException, IOException {
+        if(authService.login(UserTextfield.getText(), PasswordTextfield.getText())){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
+            Scene newScene = new Scene(loader.load());
+
+            Stage stage = (Stage) SignInButton.getScene().getWindow();
+            stage.setScene(newScene);
+            stage.show();
+        }
     }
 
     public void SignUpButton_MouseClicked(MouseEvent mouseEvent) {
@@ -53,6 +63,7 @@ public class SignInController {
             Stage stage = (Stage) SignInButton.getScene().getWindow();
             stage.setScene(newScene);
             stage.show();
+
 
         } catch (Exception e) {
             e.printStackTrace();

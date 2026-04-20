@@ -5,7 +5,9 @@ import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.User;
+import com.sonik.domain.model.UserPref;
 import com.sonik.domain.repository.UserRepository;
+import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.AuthService;
 import com.sonik.service.PasswordService;
 
@@ -37,7 +39,12 @@ public class AuthServiceImpl implements AuthService {
             throw new DataAccessException(e.getMessage(), e);
         }
 
-        // 2. Guardar en repositorio
+        // 2. Crear preferencias por defecto del usuario
+        UserPref userPref = new UserPref(); // HIGH, DARK, YOUTUBE
+        userPref.setUser(user);
+        user.setPreferences(userPref);
+
+        // 3. Guardar en repositorio
         userRepository.create(user);
     }
 

@@ -5,6 +5,7 @@ import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.User;
+import com.sonik.domain.model.UserPref;
 import com.sonik.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

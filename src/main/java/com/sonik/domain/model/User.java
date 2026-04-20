@@ -18,7 +18,10 @@ public class User {
     )
     private int Id;
 
-    @Column(name= "username", nullable = false)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserPref preferences;
+
+    @Column(name= "username", nullable = false, unique = true)
     private String userName;
 
     @Column(nullable = false)
@@ -86,5 +89,16 @@ public class User {
         if (creation_date == null || creation_date.isAfter(LocalDate.now()))
             throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
         this.creation_date = creation_date;
+    }
+
+    public UserPref getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(UserPref preferences) {
+        if (preferences == null) {
+            throw new IllegalArgumentException("Preferences cannot be null");
+        }
+        this.preferences = preferences;
     }
 }

@@ -3,28 +3,21 @@ package com.sonik.ui.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.BorderPane;
 
 public class SettingsController {
-    // En tu MainController.java
+
+    // Elementos del FXML
     @FXML
-    private BorderPane mainContainer;  // El contenedor principal
-
+    private ChoiceBox<String> quealityCB;  // Nota: tiene typo "queality" en lugar de "quality"
     @FXML
-    private void openSettingsPanel() {
-        // NO creas nueva ventana, SOLO cambias el contenido
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/settings.fxml"));
-            Node settingsPanel = loader.load();  // ← Es solo un nodo, no una ventana
-
-            // Reemplazas el contenido CENTRAL de tu ventana principal
-            mainContainer.setCenter(settingsPanel);  // ← REEMPLAZA, no crea nueva
-
-            // La ventana principal SIGUE SIENDO LA MISMA
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-// Resultado: El usuario ve UNA SOLA ventana, solo cambió el contenido
+    private ChoiceBox<String> sourceCB;
+    @FXML
+    private ChoiceBox<String> themeCB;
+    @FXML
+    private Button saveChangesButton;
+    @FXML
+    private Button backHomeButton;
 }

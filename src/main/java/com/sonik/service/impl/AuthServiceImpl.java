@@ -4,7 +4,9 @@ import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.User;
+import com.sonik.domain.model.UserPref;
 import com.sonik.domain.repository.UserRepository;
+import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.AuthService;
 import com.sonik.service.PasswordService;
 
@@ -32,7 +34,12 @@ public class AuthServiceImpl implements AuthService {
         String hashed = passwordService.hashPassword(user.getPassword_hash());
         user.setPassword_hash(hashed);
 
-        // 2. Guardar en repositorio
+        // 2. Crear preferencias por defecto del usuario
+        UserPref userPref = new UserPref(); // HIGH, DARK, YOUTUBE
+        userPref.setUser(user);
+        user.setPreferences(userPref);
+
+        // 3. Guardar en repositorio
         userRepository.create(user);
     }
 

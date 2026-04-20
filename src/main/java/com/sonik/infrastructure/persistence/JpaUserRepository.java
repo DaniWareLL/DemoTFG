@@ -133,4 +133,24 @@ public class JpaUserRepository implements UserRepository {
             throw new DataAccessException(DataAccessException.CONNECTION_ERROR, ex);
         }
     }
+
+    @Override
+    public void update(User user) throws DataAccessException, ObjectNotFoundException {
+        EntityTransaction tx = null;
+        try (EntityManager em = emf.createEntityManager();) {
+
+            tx = em.getTransaction();
+            tx.begin();
+
+            User temp = em.find(User.class, user.getId());
+            if (temp == null) {
+                throw new ObjectNotFoundException("User not found");
+            }
+            em.merge(user);
+            tx.commit();
+
+        } catch (PersistenceException | IllegalStateException e) {
+            handleRollbackAndThrow(e, tx);
+        }
+    }
 }

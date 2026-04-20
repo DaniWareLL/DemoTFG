@@ -4,6 +4,7 @@ import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.User;
+import com.sonik.domain.model.UserPref;
 
 import javax.xml.crypto.Data;
 import java.util.List;
@@ -56,4 +57,12 @@ public interface UserRepository {
      * @throws DataAccessException if a data access error occurs
      */
     boolean existsByUsername(String username) throws DataAccessException;
+
+    /**
+     * Updates a user entity matching the given user object
+     * @param user
+     * @throws DataAccessException
+     * @throws ObjectNotFoundException
+     */
+    void update(User user) throws DataAccessException, ObjectNotFoundException;
 }

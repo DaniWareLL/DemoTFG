@@ -1,5 +1,6 @@
 package com.sonik.domain.model;
 
+import com.sonik.domain.model.enums.SourceName;
 import jakarta.persistence.*;
 
 @Entity
@@ -27,23 +28,29 @@ public class UserPref {
     @Column(name = "interface_theme", nullable = false)
     private InterfaceTheme interfaceTheme = InterfaceTheme.DARK;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "audio_source", nullable = false)
+    private SourceName audioSource = SourceName.YOUTUBE;
+
     // ENUMs internos
     public enum StreamingQuality { LOW, MEDIUM, HIGH }
     public enum InterfaceTheme   { LIGHT, DARK }
 
     public UserPref() {}
 
-    public UserPref(User user, StreamingQuality streamingQuality, InterfaceTheme interfaceTheme) {
+    public UserPref(User user, StreamingQuality streamingQuality, InterfaceTheme interfaceTheme,  SourceName audioSource) {
         setUser(user);
         setStreamingQuality(streamingQuality);
         setInterfaceTheme(interfaceTheme);
+        setAudioSource(audioSource);
     }
 
     // Getters
-    public int getId()                          { return id; }
-    public User getUser()                       { return user; }
-    public StreamingQuality getStreamingQuality(){ return streamingQuality; }
-    public InterfaceTheme getInterfaceTheme()   { return interfaceTheme; }
+    public int getId() { return id; }
+    public User getUser() { return user; }
+    public StreamingQuality getStreamingQuality() { return streamingQuality; }
+    public InterfaceTheme getInterfaceTheme() { return interfaceTheme; }
+    public SourceName getAudioSource() { return audioSource; }
 
     // Setters
     public void setUser(User user) {
@@ -59,5 +66,10 @@ public class UserPref {
     public void setInterfaceTheme(InterfaceTheme interfaceTheme) {
         if (interfaceTheme == null) throw new IllegalArgumentException("Interface theme cannot be null");
         this.interfaceTheme = interfaceTheme;
+    }
+
+    public void setAudioSource(SourceName audioSource) {
+        if ( audioSource == null) throw new IllegalArgumentException("Audio source cannot be null");
+        this.audioSource = audioSource;
     }
 }

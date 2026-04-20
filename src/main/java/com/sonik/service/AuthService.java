@@ -15,7 +15,7 @@ public interface AuthService {
     void register(User user) throws DuplicateIdException, DataAccessException;
 
     /**
-     * Valida las credenciales y devuelve el usuario si es correcto.
+     * Valida las credenciales y devuelve true si es correcto.
      */
     Boolean login(String username, String password) throws ObjectNotFoundException, DataAccessException;
 

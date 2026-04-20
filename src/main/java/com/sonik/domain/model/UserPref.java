@@ -1,5 +1,6 @@
 package com.sonik.domain.model;
 
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import jakarta.persistence.*;
 
 @Entity
@@ -33,7 +34,7 @@ public class UserPref {
 
     public UserPref() {}
 
-    public UserPref(User user, StreamingQuality streamingQuality, InterfaceTheme interfaceTheme) {
+    public UserPref(User user, StreamingQuality streamingQuality, InterfaceTheme interfaceTheme) throws IncorrectArgumentException {
         setUser(user);
         setStreamingQuality(streamingQuality);
         setInterfaceTheme(interfaceTheme);
@@ -46,18 +47,18 @@ public class UserPref {
     public InterfaceTheme getInterfaceTheme()   { return interfaceTheme; }
 
     // Setters
-    public void setUser(User user) {
-        if (user == null) throw new IllegalArgumentException("User cannot be null");
+    public void setUser(User user) throws IncorrectArgumentException {
+        if (user == null) throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.user = user;
     }
 
-    public void setStreamingQuality(StreamingQuality streamingQuality) {
-        if (streamingQuality == null) throw new IllegalArgumentException("Streaming quality cannot be null");
+    public void setStreamingQuality(StreamingQuality streamingQuality) throws IncorrectArgumentException {
+        if (streamingQuality == null) throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.streamingQuality = streamingQuality;
     }
 
-    public void setInterfaceTheme(InterfaceTheme interfaceTheme) {
-        if (interfaceTheme == null) throw new IllegalArgumentException("Interface theme cannot be null");
+    public void setInterfaceTheme(InterfaceTheme interfaceTheme) throws IncorrectArgumentException {
+        if (interfaceTheme == null) throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.interfaceTheme = interfaceTheme;
     }
 }

@@ -1,5 +1,6 @@
 package com.sonik.domain.model;
 
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -33,7 +34,7 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String email, String password_hash, LocalDate creation_date) {
+    public User(String userName, String email, String password_hash, LocalDate creation_date) throws IncorrectArgumentException {
         setUserName(userName);
         setEmail(email);
         setPassword_hash(password_hash);
@@ -48,9 +49,9 @@ public class User {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(String userName) throws IncorrectArgumentException {
         if (userName.isBlank()){
-            throw new IllegalArgumentException("Username cannot be empty");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         }
         this.userName = userName;
     }
@@ -59,9 +60,9 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws IncorrectArgumentException {
         if (email.isBlank()){
-            throw new IllegalArgumentException("Email cannot be empty");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         }
         this.email = email;
     }
@@ -70,9 +71,9 @@ public class User {
         return password_hash;
     }
 
-    public void setPassword_hash(String password_hash) {
+    public void setPassword_hash(String password_hash) throws IncorrectArgumentException {
         if (password_hash.isBlank()){
-            throw new IllegalArgumentException("Password hash cannot be empty");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         }
         this.password_hash = password_hash;
     }
@@ -81,13 +82,9 @@ public class User {
         return creation_date;
     }
 
-    public void setCreation_date(LocalDate creation_date) {
-        if (creation_date == null) {
-            throw new IllegalArgumentException("Creation Date cannot be null");
-        }
-        if (creation_date.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Creation Date cannot be in the future");
-        }
+    public void setCreation_date(LocalDate creation_date) throws IncorrectArgumentException {
+        if (creation_date == null || creation_date.isAfter(LocalDate.now()))
+            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
         this.creation_date = creation_date;
     }
 }

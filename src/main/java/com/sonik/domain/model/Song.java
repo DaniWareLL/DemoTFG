@@ -1,5 +1,6 @@
 package com.sonik.domain.model;
 
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -46,7 +47,7 @@ public class Song {
     public Song() {}
 
     public Song(String title, Integer durationSec, String originalUrl,
-                String thumbnailUrl, LocalDate aggregationDate) {
+                String thumbnailUrl, LocalDate aggregationDate) throws IncorrectArgumentException {
         setTitle(title);
         setDurationSec(durationSec);
         setOriginalUrl(originalUrl);
@@ -66,15 +67,15 @@ public class Song {
     public List<UserLibrary> getUserLibraries() { return userLibraries; }
 
     // Setters
-    public void setTitle(String title) {
+    public void setTitle(String title) throws IncorrectArgumentException {
         if (title == null || title.isBlank())
-            throw new IllegalArgumentException("Title cannot be empty");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.title = title;
     }
 
-    public void setDurationSec(Integer durationSec) {
+    public void setDurationSec(Integer durationSec) throws IncorrectArgumentException {
         if (durationSec != null && durationSec < 0)
-            throw new IllegalArgumentException("Duration cannot be negative");
+            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_NUMBER);
         this.durationSec = durationSec;
     }
 
@@ -86,11 +87,9 @@ public class Song {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public void setAggregationDate(LocalDate aggregationDate) {
-        if (aggregationDate == null)
-            throw new IllegalArgumentException("Aggregation date cannot be null");
-        if (aggregationDate.isAfter(LocalDate.now()))
-            throw new IllegalArgumentException("Aggregation date cannot be in the future");
+    public void setAggregationDate(LocalDate aggregationDate) throws IncorrectArgumentException {
+        if (aggregationDate == null || aggregationDate.isAfter(LocalDate.now()))
+            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
         this.aggregationDate = aggregationDate;
     }
 

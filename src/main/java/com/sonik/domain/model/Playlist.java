@@ -1,5 +1,6 @@
 package com.sonik.domain.model;
 
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -41,7 +42,7 @@ public class Playlist {
     public Playlist() {}
 
     public Playlist(User user, String name, String description,
-                    LocalDate creationDate, int sortOrder) {
+                    LocalDate creationDate, int sortOrder) throws  IncorrectArgumentException {
         setUser(user);
         setName(name);
         setDescription(description);
@@ -59,33 +60,34 @@ public class Playlist {
     public List<PlaylistsSongs> getSongs()  { return songs; }
 
     // Setters
-    public void setUser(User user) {
+    public void setUser(User user) throws IncorrectArgumentException {
         if (user == null)
-            throw new IllegalArgumentException("User cannot be null");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.user = user;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws IncorrectArgumentException {
         if (name == null || name.isBlank())
-            throw new IllegalArgumentException("Playlist name cannot be empty");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.name = name;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description) throws IncorrectArgumentException {
+        if (description == null || description.isBlank()) {
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+        }
         this.description = description;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        if (creationDate == null)
-            throw new IllegalArgumentException("Creation date cannot be null");
-        if (creationDate.isAfter(LocalDate.now()))
-            throw new IllegalArgumentException("Creation date cannot be in the future");
+    public void setCreationDate(LocalDate creationDate) throws IncorrectArgumentException {
+        if (creationDate == null || creationDate.isAfter(LocalDate.now()))
+            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
         this.creationDate = creationDate;
     }
 
-    public void setSortOrder(int sortOrder) {
+    public void setSortOrder(int sortOrder) throws IncorrectArgumentException {
         if (sortOrder < 0)
-            throw new IllegalArgumentException("Sort order cannot be negative");
+            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_NUMBER);
         this.sortOrder = sortOrder;
     }
 }

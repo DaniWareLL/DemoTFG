@@ -3,14 +3,13 @@ package com.sonik.ui.controller.login;
 import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.User;
 import com.sonik.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -56,9 +55,23 @@ public class SignUpController {
         }
     }
 
-    public void CreateAccountButton_MouseClicked(MouseEvent mouseEvent) throws DuplicateIdException, DataAccessException {
-        User user = new User(UserTextfield.getText(), EmailTextfield.getText(), PasswordTextfield.getText(), LocalDate.now());
-        authService.register(user);
+    public void CreateAccountButton_MouseClicked(MouseEvent mouseEvent) {
+        User user = null;
+        try {
+            user = new User(UserTextfield.getText(), EmailTextfield.getText(), PasswordTextfield.getText(), LocalDate.now());
+        } catch (IncorrectArgumentException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Some of the fields contain invalid characters or are empty.", ButtonType.OK);
+        }
+        try {
+            authService.register(user);
+        } catch (DuplicateIdException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "A user with the same name already exists, please choose a different name.", ButtonType.OK);
+        } catch (DataAccessException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "There was an error while connecting to the database.", ButtonType.OK);
+        }
         BackToLogin();
     }
 

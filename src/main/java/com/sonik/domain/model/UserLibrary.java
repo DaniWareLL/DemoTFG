@@ -1,5 +1,6 @@
 package com.sonik.domain.model;
 
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ public class UserLibrary {
 
     public UserLibrary() {}
 
-    public UserLibrary(User user, Song song, LocalDate addedAt) {
+    public UserLibrary(User user, Song song, LocalDate addedAt) throws IncorrectArgumentException {
         this.id = new UserLibraryId(user.getId(), song.getId());
         setUser(user);
         setSong(song);
@@ -40,23 +41,21 @@ public class UserLibrary {
     public LocalDate getAddedAt(){ return addedAt; }
 
     // Setters
-    public void setUser(User user) {
+    public void setUser(User user) throws IncorrectArgumentException {
         if (user == null)
-            throw new IllegalArgumentException("User cannot be null");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.user = user;
     }
 
-    public void setSong(Song song) {
+    public void setSong(Song song) throws IncorrectArgumentException {
         if (song == null)
-            throw new IllegalArgumentException("Song cannot be null");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.song = song;
     }
 
-    public void setAddedAt(LocalDate addedAt) {
-        if (addedAt == null)
-            throw new IllegalArgumentException("Added date cannot be null");
-        if (addedAt.isAfter(LocalDate.now()))
-            throw new IllegalArgumentException("Added date cannot be in the future");
+    public void setAddedAt(LocalDate addedAt) throws IncorrectArgumentException {
+        if (addedAt == null || addedAt.isAfter(LocalDate.now()))
+            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
         this.addedAt = addedAt;
     }
 }

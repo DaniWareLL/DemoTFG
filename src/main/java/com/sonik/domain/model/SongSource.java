@@ -1,5 +1,6 @@
 package com.sonik.domain.model;
 
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import jakarta.persistence.*;
 
 @Entity
@@ -34,7 +35,7 @@ public class SongSource {
 
     public SongSource() {}
 
-    public SongSource(Song song, SourceName sourceName, int priority, String path) {
+    public SongSource(Song song, SourceName sourceName, int priority, String path) throws IncorrectArgumentException {
         setSong(song);
         setSourceName(sourceName);
         setPriority(priority);
@@ -49,21 +50,21 @@ public class SongSource {
     public String getPath()         { return path; }
 
     // Setters
-    public void setSong(Song song) {
+    public void setSong(Song song) throws IncorrectArgumentException {
         if (song == null)
-            throw new IllegalArgumentException("Song cannot be null");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.song = song;
     }
 
-    public void setSourceName(SourceName sourceName) {
+    public void setSourceName(SourceName sourceName) throws IncorrectArgumentException {
         if (sourceName == null)
-            throw new IllegalArgumentException("Source name cannot be null");
+            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
         this.sourceName = sourceName;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(int priority) throws IncorrectArgumentException {
         if (priority < 1)
-            throw new IllegalArgumentException("Priority must be at least 1");
+            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_NUMBER);
         this.priority = priority;
     }
 

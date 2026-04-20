@@ -2,6 +2,7 @@ package com.sonik.service.impl;
 
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.User;
 import com.sonik.domain.repository.UserRepository;
@@ -30,7 +31,11 @@ public class AuthServiceImpl implements AuthService {
     public void register(User user) throws DuplicateIdException, DataAccessException {
         // 1. Cifrar la contraseña usando el servicio
         String hashed = passwordService.hashPassword(user.getPassword_hash());
-        user.setPassword_hash(hashed);
+        try {
+            user.setPassword_hash(hashed);
+        } catch (IncorrectArgumentException e) {
+            throw new DataAccessException(e.getMessage(), e);
+        }
 
         // 2. Guardar en repositorio
         userRepository.create(user);

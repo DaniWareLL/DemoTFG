@@ -38,8 +38,6 @@ public class PlayerServiceImpl implements PlayerService {
                     searchPrefix + searchPattern
             ));
 
-            System.out.println(result);
-
             if (result == null || result.isBlank()) {
                 throw new AudioExtractorException(AudioExtractorException.STREAM_URL_ERROR);
             }

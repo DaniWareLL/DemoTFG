@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -44,13 +46,22 @@ public class SignInController {
 
     public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {}
 
-    public void SignInButton_MouseClicked(MouseEvent mouseEvent) throws ObjectNotFoundException, DataAccessException, IOException {
-        if(authService.login(UserTextfield.getText(), PasswordTextfield.getText())){
+    public void SignInButton_MouseClicked(MouseEvent mouseEvent)
+            throws ObjectNotFoundException, DataAccessException, IOException {
+
+        if (authService.login(UserTextfield.getText(), PasswordTextfield.getText())) {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
             Stage stage = (Stage) SignInButton.getScene().getWindow();
+
             stage.setScene(newScene);
+            stage.centerOnScreen();
+
+            System.setProperty("prism.allowhidpi", "true");
+            System.setProperty("glass.graphics.ui", "sw");
+            stage.setMaximized(true);
             stage.show();
         }
     }

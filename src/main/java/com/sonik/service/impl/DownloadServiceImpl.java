@@ -1,6 +1,7 @@
     package com.sonik.service.impl;
 
     import com.sonik.config.AppConfig;
+    import com.sonik.config.UserSession;
     import com.sonik.domain.exceptions.AudioExtractorException;
     import com.sonik.service.DownloadService;
     import com.sonik.service.audio.AudioExtractor;
@@ -14,6 +15,7 @@
 
         private final AudioExtractor extractor;
         private final String searchPrefix;
+        String downloadDir = UserSession.getPreferences().getDownloadLocation();
 
         public DownloadServiceImpl(AudioExtractor extractor, String searchPrefix) {
             this.extractor = extractor;
@@ -33,6 +35,7 @@
                         "--embed-thumbnail",
                         "--convert-thumbnails", "jpg",
                         "--ffmpeg-location", AppConfig.FFMPEG_PATH,
+                        "-P", downloadDir,
                         searchPrefix + searchPattern
                 ));
             } catch (Exception e) {

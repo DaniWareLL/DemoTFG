@@ -5,7 +5,6 @@ import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.User;
-import com.sonik.domain.model.UserPref;
 import com.sonik.service.AuthService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -37,7 +36,7 @@ public class SignUpController {
 
 
     public void initialize() {
-        this.authService = AppContext.getAuthService();;
+        this.authService = AppContext.getAuthService();
     }
 
     public void OnkeyPressed_EmailTexfield(KeyEvent keyEvent) {

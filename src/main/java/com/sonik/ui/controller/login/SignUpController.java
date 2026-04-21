@@ -72,6 +72,8 @@ public class SignUpController {
         } catch (DataAccessException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "There was an error while connecting to the database.", ButtonType.OK);
+        } catch (IncorrectArgumentException e) {
+            e.printStackTrace();
         }
         BackToLogin();
     }

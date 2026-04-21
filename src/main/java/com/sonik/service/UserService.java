@@ -1,6 +1,7 @@
 package com.sonik.service;
 
 import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.exceptions.UserValidationException;
 import com.sonik.domain.model.UserPref;
@@ -13,22 +14,20 @@ public interface UserService {
     /**
      * Retrieves the preferences of the user with the given username.
      *
-     * @param username the username of the user
      * @return the user's preferences
      * @throws ObjectNotFoundException
      * @throws DataAccessException
      */
-    UserPref getPreferences(String username) throws ObjectNotFoundException, DataAccessException;
+    UserPref getPreferences() throws ObjectNotFoundException, DataAccessException;
 
     /**
      * Updates the preferences of the user with the given username.
      *
-     * @param username the username of the user
      * @param newPreferences the new preferences to apply
      * @throws ObjectNotFoundException
      * @throws DataAccessException
      */
-    void updatePreferences(String username, UserPref newPreferences) throws ObjectNotFoundException, DataAccessException;
+    void updatePreferences(UserPref newPreferences) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException;
 
     /**
      * Changes the username of an existing user.
@@ -41,7 +40,7 @@ public interface UserService {
      * @throws DataAccessException
      * @throws UserValidationException the current username is taken
      */
-    void changeUsername(String oldUsername, String newUsername) throws ObjectNotFoundException, DataAccessException, UserValidationException;
+    void changeUsername(String oldUsername, String newUsername) throws ObjectNotFoundException, DataAccessException, UserValidationException, IncorrectArgumentException;
 
 
     /**
@@ -56,5 +55,5 @@ public interface UserService {
      * @throws DataAccessException
      * @throws UserValidationException the credentials are incorrect
      */
-    void changePassword(String username, String currentPassword, String newPassword) throws ObjectNotFoundException, DataAccessException, UserValidationException;
+    void changePassword(String username, String currentPassword, String newPassword) throws ObjectNotFoundException, DataAccessException, UserValidationException, IncorrectArgumentException;
 }

@@ -8,7 +8,6 @@ import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.User;
 import com.sonik.domain.model.UserPref;
 import com.sonik.domain.repository.UserRepository;
-import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.AuthService;
 import com.sonik.service.PasswordService;
 

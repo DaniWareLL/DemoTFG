@@ -1,16 +1,9 @@
 package com.sonik.ui.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 
 public class HomeController {
-
-    @FXML
-    private BorderPane mainContainer;
 
     // --- Top bar / búsqueda ---
     @FXML
@@ -49,25 +42,8 @@ public class HomeController {
     private Slider VolumeSlider;
 
     @FXML
-    private Label currentTimeLabel;
+    private Label currentTimeLabel;   // si quieres, puedes enlazar al primer "0:00"
 
     @FXML
-    private Label totalTimeLabel;
-
-    public void settingButtonMC(MouseEvent mouseEvent) {
-        try {
-            // Cargar ajustes
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/settings-view.fxml"));
-            Node settingsPanel = loader.load();
-
-            // Configurar controller
-            SettingsController controller = loader.getController();
-
-            // SOLO cambiar el centro - izquierda y abajo se quedan igual
-            mainContainer.setCenter(settingsPanel);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private Label totalTimeLabel;     // y al segundo "0:00"
 }

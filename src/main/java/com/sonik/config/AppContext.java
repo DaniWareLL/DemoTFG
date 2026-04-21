@@ -7,11 +7,8 @@ import com.sonik.infrastructure.persistence.JpaPlaylistRepository;
 import com.sonik.infrastructure.persistence.JpaSongRepository;
 import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.AuthService;
-import com.sonik.service.PasswordService;
-import com.sonik.service.UserService;
 import com.sonik.service.impl.AuthServiceImpl;
 import com.sonik.service.impl.PasswordServiceImpl;
-import com.sonik.service.impl.UserServiceImpl;
 import jakarta.persistence.EntityManagerFactory;
 
 /**
@@ -25,8 +22,6 @@ public class AppContext {
     private static SongRepository jpaSongRepository;
     private static PlaylistRepository jpaPlaylistRepository;
     private static AuthService authService;
-    private static UserService userService;
-    private static PasswordService  passwordService;
 
 
     /**
@@ -47,9 +42,7 @@ public class AppContext {
         jpaUserRepository = new JpaUserRepository(emf);
         jpaSongRepository = new JpaSongRepository(emf);
         jpaPlaylistRepository = new JpaPlaylistRepository(emf);
-        passwordService = new PasswordServiceImpl();
-        authService = new AuthServiceImpl(jpaUserRepository, passwordService);
-        userService = new UserServiceImpl(jpaUserRepository, authService, passwordService);
+        authService = new AuthServiceImpl(jpaUserRepository, new PasswordServiceImpl());
 
 
         // Create AudioChain(Chain of responsibility)
@@ -81,13 +74,5 @@ public class AppContext {
 
     public static AuthService getAuthService() {
         return authService;
-    }
-
-    public static UserService getUserService() {
-        return userService;
-    }
-
-    public static PasswordService getPasswordService() {
-        return passwordService;
     }
 }

@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void register(User user) throws DuplicateIdException, DataAccessException {
+    public void register(User user) throws DuplicateIdException, DataAccessException, IncorrectArgumentException {
         // 1. Cifrar la contraseña usando el servicio
         String hashed = passwordService.hashPassword(user.getPassword_hash());
         try {

@@ -1,6 +1,7 @@
 package com.sonik.service;
 
 import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.exceptions.UserValidationException;
 import com.sonik.domain.model.UserPref;
@@ -28,7 +29,7 @@ public interface UserService {
      * @throws ObjectNotFoundException
      * @throws DataAccessException
      */
-    void updatePreferences(String username, UserPref newPreferences) throws ObjectNotFoundException, DataAccessException;
+    void updatePreferences(String username, UserPref newPreferences) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException;
 
     /**
      * Changes the username of an existing user.
@@ -41,7 +42,7 @@ public interface UserService {
      * @throws DataAccessException
      * @throws UserValidationException the current username is taken
      */
-    void changeUsername(String oldUsername, String newUsername) throws ObjectNotFoundException, DataAccessException, UserValidationException;
+    void changeUsername(String oldUsername, String newUsername) throws ObjectNotFoundException, DataAccessException, UserValidationException, IncorrectArgumentException;
 
 
     /**
@@ -56,5 +57,5 @@ public interface UserService {
      * @throws DataAccessException
      * @throws UserValidationException the credentials are incorrect
      */
-    void changePassword(String username, String currentPassword, String newPassword) throws ObjectNotFoundException, DataAccessException, UserValidationException;
+    void changePassword(String username, String currentPassword, String newPassword) throws ObjectNotFoundException, DataAccessException, UserValidationException, IncorrectArgumentException;
 }

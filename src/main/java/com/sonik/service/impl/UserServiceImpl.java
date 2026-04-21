@@ -1,6 +1,7 @@
 package com.sonik.service.impl;
 
 import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.exceptions.UserValidationException;
 import com.sonik.domain.model.User;
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePreferences(String username, UserPref newPreferences) throws DataAccessException, ObjectNotFoundException {
+    public void updatePreferences(String username, UserPref newPreferences) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException {
 
             User user = userRepository.findByUsername(username);
 
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeUsername(String oldUsername, String newUsername)
-            throws DataAccessException, ObjectNotFoundException, UserValidationException {
+            throws DataAccessException, ObjectNotFoundException, UserValidationException, IncorrectArgumentException {
 
         User user = userRepository.findByUsername(oldUsername);
 
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePassword(String username, String currentPassword, String newPassword)
-            throws DataAccessException, ObjectNotFoundException, UserValidationException {
+            throws DataAccessException, ObjectNotFoundException, UserValidationException, IncorrectArgumentException {
 
         User user = userRepository.findByUsername(username);
 

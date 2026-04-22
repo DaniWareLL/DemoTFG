@@ -54,6 +54,12 @@ public class HomeController {
     @FXML
     private Label totalTimeLabel;
 
+    private Node homeContent;
+
+    public void initialize() {
+        homeContent = mainContainer.getCenter(); // guardas el contenido original
+    }
+
     public void settingButtonMC(MouseEvent mouseEvent) {
         try {
             // Cargar ajustes
@@ -62,6 +68,8 @@ public class HomeController {
 
             // Configurar controller
             SettingsController controller = loader.getController();
+            controller.setMainContainer(mainContainer);
+            controller.setHomeContent(homeContent);
 
             // SOLO cambiar el centro - izquierda y abajo se quedan igual
             mainContainer.setCenter(settingsPanel);

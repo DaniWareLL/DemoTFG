@@ -41,6 +41,18 @@ public class SettingsController {
     @FXML
     private Button backHomeButton;
 
+    private BorderPane mainContainer;
+
+    private Node homeContent;
+
+    public void setMainContainer(BorderPane mainContainer) {
+        this.mainContainer = mainContainer;
+    }
+
+    public void setHomeContent(Node homeContent) {
+        this.homeContent = homeContent;
+    }
+
     public void initialize() {
         qualityCB.getItems().addAll(
                 Arrays.stream(UserPref.StreamingQuality.values())
@@ -61,7 +73,7 @@ public class SettingsController {
         );
 
         // Cargar preferencias del usuario
-        var pref = UserSession.getPreferences();
+        UserPref pref = UserSession.getPreferences();
 
         qualityCB.setValue(pref.getStreamingQuality().name());
         sourceCB.setValue(pref.getAudioSource().name());
@@ -98,11 +110,7 @@ public class SettingsController {
     }
 
     public void backHomeMC(MouseEvent mouseEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
-            Node homeView = loader.load();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        mainContainer.setCenter(homeContent);
     }
 }

@@ -4,106 +4,223 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SettingsController">
-
-   <!-- PANEL PRINCIPAL RESPONSIVE -->
-   <VBox alignment="TOP_LEFT" spacing="30" style="-fx-background-color: #191919; -fx-background-radius: 20;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
-
-      <padding>
-         <Insets bottom="50" left="50" right="50" top="50" />
-      </padding>
-
-
-      <!-- TÍTULO -->
-      <Label text="Settings" textFill="WHITE">
-         <font>
-            <Font name="Manrope ExtraBold" size="35" />
-         </font>
-      </Label>
-
-      <!-- STREAM QUALITY -->
-      <VBox spacing="5">
-         <HBox alignment="CENTER_LEFT" spacing="30">
-            <Label text="Stream Quality" textFill="WHITE">
-               <font><Font name="Manrope Medium" size="22" /></font>
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SettingsController">
+   <content>
+      <AnchorPane style="-fx-background-color: black;">
+      
+         <!-- PANEL PRINCIPAL RESPONSIVE -->
+         <VBox alignment="TOP_LEFT" spacing="30" style="-fx-background-color: #191919; -fx-background-radius: 20;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
+      
+            <padding>
+               <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+            </padding>
+      
+      
+            <!-- TÍTULO -->
+            <Label text="Preferences" textFill="WHITE">
+               <font>
+                  <Font name="Manrope ExtraBold" size="28.0" />
+               </font>
             </Label>
-            <ChoiceBox fx:id="qualityCB" prefWidth="150" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
-         </HBox>
-         <Label text="Sets the audio quality used during playback" textFill="WHITE">
-            <font><Font name="Manrope Medium" size="12" /></font>
-         </Label>
-      </VBox>
-
-      <!-- AUDIO SOURCE -->
-      <VBox spacing="5">
-         <HBox alignment="CENTER_LEFT" spacing="30">
-            <Label text="Audio Source" textFill="WHITE">
-               <font><Font name="Manrope Medium" size="22" /></font>
-            </Label>
-            <ChoiceBox fx:id="sourceCB" prefWidth="150" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
-         </HBox>
-         <Label text="Chooses the platform or service where audio is fetched from" textFill="WHITE">
-            <font><Font name="Manrope Medium" size="12" /></font>
-         </Label>
-      </VBox>
-
-      <!-- THEME -->
-      <VBox spacing="5">
-         <HBox alignment="CENTER_LEFT" spacing="30">
-            <Label text="Theme" textFill="WHITE">
-               <font><Font name="Manrope Medium" size="22" /></font>
-            </Label>
-            <ChoiceBox fx:id="themeCB" prefWidth="150" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
-         </HBox>
-         <Label text="Switches the visual style of the application" textFill="WHITE">
-            <font><Font name="Manrope Medium" size="12" /></font>
-         </Label>
-      </VBox>
-
-      <!-- DOWNLOAD LOCATION -->
-      <VBox spacing="5">
-         <HBox alignment="CENTER_LEFT" spacing="30">
-            <Label text="Download Location" textFill="WHITE">
-               <font><Font name="Manrope Medium" size="22" /></font>
-            </Label>
-            <Button fx:id="browseButton" onMouseClicked="#browseButtonMC" prefWidth="100" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Browse" textFill="WHITE">
-               <font><Font name="Manrope Medium" size="16" /></font>
+      
+            <!-- STREAM QUALITY -->
+            <VBox spacing="5">
+               <HBox alignment="CENTER_LEFT" spacing="30">
+                  <Label text="Stream Quality" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Medium" size="22" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="qualityCB" prefWidth="150" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
+               </HBox>
+               <Label text="Sets the audio quality used during playback" textFill="WHITE">
+                  <font>
+                     <Font name="Manrope Medium" size="12" />
+                  </font>
+               </Label>
+            </VBox>
+      
+            <!-- AUDIO SOURCE -->
+            <VBox spacing="5">
+               <HBox alignment="CENTER_LEFT" spacing="30">
+                  <Label text="Audio Source" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Medium" size="22" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="sourceCB" prefWidth="150" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
+               </HBox>
+               <Label text="Chooses the platform or service where audio is fetched from" textFill="WHITE">
+                  <font>
+                     <Font name="Manrope Medium" size="12" />
+                  </font>
+               </Label>
+            </VBox>
+      
+            <!-- THEME -->
+            <VBox spacing="5">
+               <HBox alignment="CENTER_LEFT" spacing="30">
+                  <Label text="Theme" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Medium" size="22" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="themeCB" prefWidth="150" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
+               </HBox>
+               <Label text="Switches the visual style of the application" textFill="WHITE">
+                  <font>
+                     <Font name="Manrope Medium" size="12" />
+                  </font>
+               </Label>
+            </VBox>
+      
+            <!-- DOWNLOAD LOCATION -->
+            <VBox spacing="5">
+               <HBox alignment="CENTER_LEFT" spacing="30">
+                  <Label text="Download Location" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Medium" size="22" />
+                     </font>
+                  </Label>
+                  <Button fx:id="browseButton" onMouseClicked="#browseButtonMC" prefWidth="100" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Browse" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Medium" size="16" />
+                     </font>
+                  </Button>
+               </HBox>
+      
+               <Label text="Define the folder where all downloaded files will be saved" textFill="WHITE">
+                  <font>
+                     <Font name="Manrope Medium" size="12" />
+                  </font>
+               </Label>
+      
+               <Label text="You can select any directory on the system" textFill="WHITE">
+                  <font>
+                     <Font name="Manrope Medium" size="12" />
+                  </font>
+               </Label>
+      
+               <Label fx:id="downloadLocationLabel" textFill="WHITE">
+                  <font>
+                     <Font name="Manrope Regular" size="12" />
+                  </font>
+               </Label>
+            </VBox>
+      
+            <!-- SAVE CHANGES -->
+            <Button fx:id="saveChangesButton" onMouseClicked="#onSaveChangesMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Save changes" textFill="WHITE">
+               <font>
+                  <Font name="Manrope Medium" size="16" />
+               </font>
             </Button>
-         </HBox>
-
-         <Label text="Define the folder where all downloaded files will be saved" textFill="WHITE">
-            <font><Font name="Manrope Medium" size="12" /></font>
+      
+            <Separator />
+            <Label text="Profile" textFill="WHITE">
+               <font>
+                  <Font name="Manrope ExtraBold" size="28.0" />
+               </font>
+            </Label>
+            <VBox spacing="5.0">
+               <children>
+                  <Label text="Change Username" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Medium" size="22" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" spacing="30">
+                     <children>
+                        <Label text="Current username" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField style="-fx-background-color: #191919; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="30">
+                     <children>
+                        <Label text="New username" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField style="-fx-background-color: #191919; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <Label text="Change Password" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Medium" size="22" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" spacing="30">
+                     <children>
+                        <Label text="Username" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField style="-fx-background-color: #191919; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="30">
+                     <children>
+                        <Label text="Old password" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField style="-fx-background-color: #191919; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="30">
+                     <children>
+                        <Label text="New password" textFill="WHITE">
+                           <font>
+                              <Font name="Manrope Medium" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField style="-fx-background-color: #191919; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Separator />
+      
+            <!-- BACK HOME -->
+            <HBox alignment="CENTER_LEFT">
+               <Button fx:id="backHomeButton" onMouseClicked="#backHomeMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Back home" textFill="WHITE">
+                  <font>
+                     <Font name="Manrope Medium" size="16" />
+                  </font>
+               </Button>
+            </HBox>
+      
+         </VBox>
+         <Label text="Settings" textFill="#8c5033">
+            <font>
+               <Font name="Manrope ExtraBold" size="35" />
+            </font>
+            <padding>
+               <Insets left="20.0" top="20.0" />
+            </padding>
          </Label>
-
-         <Label text="You can select any directory on the system" textFill="WHITE">
-            <font><Font name="Manrope Medium" size="12" /></font>
-         </Label>
-
-         <Label fx:id="downloadLocationLabel" textFill="WHITE">
-            <font><Font name="Manrope Regular" size="12" /></font>
-         </Label>
-      </VBox>
-
-      <!-- SAVE CHANGES -->
-      <Button fx:id="saveChangesButton" onMouseClicked="#onSaveChangesMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Save changes" textFill="WHITE">
-         <font><Font name="Manrope Medium" size="16" /></font>
-      </Button>
-
-      <Separator />
-
-      <!-- BACK HOME -->
-      <HBox alignment="CENTER_LEFT">
-         <Button fx:id="backHomeButton" onMouseClicked="#backHomeMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Back home" textFill="WHITE">
-            <font><Font name="Manrope Medium" size="16" /></font>
-         </Button>
-      </HBox>
-
-   </VBox>
-
-</AnchorPane>
+         <padding>
+            <Insets bottom="75.0" left="75.0" right="75.0" top="75.0" />
+         </padding>
+      
+      </AnchorPane>
+   </content>
+</ScrollPane>

@@ -36,6 +36,7 @@ public class Playlist {
     @Column(name = "sort_order", nullable = false)
     private int sortOrder = 0;
 
+    // If a playlist is deleted, its relations will also be deleted
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlaylistsSongs> songs = new ArrayList<>();
 

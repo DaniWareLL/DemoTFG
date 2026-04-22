@@ -5,8 +5,8 @@ import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.User;
+import com.sonik.domain.model.UserPref;
 import com.sonik.service.AuthService;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +16,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class SignUpController {
@@ -36,7 +35,7 @@ public class SignUpController {
 
 
     public void initialize() {
-        this.authService = AppContext.getAuthService();
+        this.authService = AppContext.getAuthService();;
     }
 
     public void OnkeyPressed_EmailTexfield(KeyEvent keyEvent) {
@@ -62,27 +61,19 @@ public class SignUpController {
         try {
             user = new User(UserTextfield.getText(), EmailTextfield.getText(), PasswordTextfield.getText(), LocalDate.now());
         } catch (IncorrectArgumentException e) {
-            Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "Some of the fields contain incorrect information or are empty.", ButtonType.OK);
-                alert.showAndWait();});
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Some of the fields contain invalid characters or are empty.", ButtonType.OK);
         }
-
         try {
             authService.register(user);
         } catch (DuplicateIdException e) {
-            Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR,
+            Alert alert = new Alert(Alert.AlertType.ERROR,
                     "A user with the same name already exists, please choose a different name.", ButtonType.OK);
-                alert.showAndWait();});
-
         } catch (DataAccessException e) {
-            Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "An error occurred while connecting to the database.", ButtonType.OK);
-                alert.showAndWait();});
-
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "There was an error while connecting to the database.", ButtonType.OK);
         } catch (IncorrectArgumentException e) {
-            Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "Some of the fields contain incorrect information or are empty.", ButtonType.OK);
-                alert.showAndWait();});
+            e.printStackTrace();
         }
         BackToLogin();
     }
@@ -96,10 +87,8 @@ public class SignUpController {
             stage.setScene(newScene);
             stage.show();
 
-        } catch (IOException e) {
-            Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "An error occurred when loading signin-view.fxml.", ButtonType.OK);
-                alert.showAndWait();});
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

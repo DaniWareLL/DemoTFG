@@ -1,5 +1,6 @@
 package com.sonik.service.impl;
 
+import com.sonik.config.UserSession;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
@@ -24,21 +25,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserPref getPreferences(String username) throws ObjectNotFoundException, DataAccessException {
-            User user = userRepository.findByUsername(username);
-            return user.getPreferences();
+    public UserPref getPreferences() {
+        return UserSession.getPreferences();
     }
 
     @Override
-    public void updatePreferences(String username, UserPref newPreferences) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException {
+    public void updatePreferences(UserPref newPreferences) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException {
 
-            User user = userRepository.findByUsername(username);
+        User user = UserSession.getUser();
+        UserPref pref = user.getPreferences();
 
-            user.getPreferences().setInterfaceTheme(newPreferences.getInterfaceTheme());
-            user.getPreferences().setStreamingQuality(newPreferences.getStreamingQuality());
-            user.getPreferences().setAudioSource(newPreferences.getAudioSource());
+        pref.setInterfaceTheme(newPreferences.getInterfaceTheme());
+        pref.setStreamingQuality(newPreferences.getStreamingQuality());
+        pref.setAudioSource(newPreferences.getAudioSource());
 
-            userRepository.update(user);
+        userRepository.update(user);
+
+        // Actualizar la sesión en memoria
+        UserSession.updatePreferences(pref);
 
     }
 
@@ -46,15 +50,17 @@ public class UserServiceImpl implements UserService {
     public void changeUsername(String oldUsername, String newUsername)
             throws DataAccessException, ObjectNotFoundException, UserValidationException, IncorrectArgumentException {
 
-        User user = userRepository.findByUsername(oldUsername);
+        User user = UserSession.getUser();
 
-        // Validar que el nuevo username no exista
         if (userRepository.existsByUsername(newUsername)) {
             throw new UserValidationException(UserValidationException.DUPLICATE_USERNAME);
         }
 
         user.setUserName(newUsername);
         userRepository.update(user);
+
+        // Actualizar sesión
+        UserSession.start(user);
     }
 
 

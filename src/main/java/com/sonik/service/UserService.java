@@ -14,22 +14,20 @@ public interface UserService {
     /**
      * Retrieves the preferences of the user with the given username.
      *
-     * @param username the username of the user
      * @return the user's preferences
      * @throws ObjectNotFoundException
      * @throws DataAccessException
      */
-    UserPref getPreferences(String username) throws ObjectNotFoundException, DataAccessException;
+    UserPref getPreferences() throws ObjectNotFoundException, DataAccessException;
 
     /**
      * Updates the preferences of the user with the given username.
      *
-     * @param username the username of the user
      * @param newPreferences the new preferences to apply
      * @throws ObjectNotFoundException
      * @throws DataAccessException
      */
-    void updatePreferences(String username, UserPref newPreferences) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException;
+    void updatePreferences(UserPref newPreferences) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException;
 
     /**
      * Changes the username of an existing user.

@@ -34,6 +34,10 @@ public class UserPref {
     @Column(name = "audio_source", nullable = false)
     private SourceName audioSource = SourceName.YOUTUBE;
 
+    @Column(name = "download_location", nullable = false)
+    private String downloadLocation = System.getProperty("user.home") + "/Downloads";
+
+
     // ENUMs internos
     public enum StreamingQuality { LOW, MEDIUM, HIGH }
     public enum InterfaceTheme   { LIGHT, DARK }
@@ -53,6 +57,7 @@ public class UserPref {
     public StreamingQuality getStreamingQuality() { return streamingQuality; }
     public InterfaceTheme getInterfaceTheme() { return interfaceTheme; }
     public SourceName getAudioSource() { return audioSource; }
+    public String getDownloadLocation() { return downloadLocation; }
 
     // Setters
     public void setUser(User user) throws IncorrectArgumentException {
@@ -74,4 +79,6 @@ public class UserPref {
         if ( audioSource == null) throw new IllegalArgumentException("Audio source cannot be null");
         this.audioSource = audioSource;
     }
+
+    public void setDownloadLocation(String downloadLocation) {}
 }

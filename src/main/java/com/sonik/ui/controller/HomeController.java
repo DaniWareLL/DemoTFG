@@ -1,11 +1,14 @@
 package com.sonik.ui.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+
+import java.io.IOException;
 
 public class HomeController {
 
@@ -74,8 +77,11 @@ public class HomeController {
             // SOLO cambiar el centro - izquierda y abajo se quedan igual
             mainContainer.setCenter(settingsPanel);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error", ButtonType.OK);
+                alert.showAndWait();
+            });
         }
     }
 }

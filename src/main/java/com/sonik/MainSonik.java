@@ -1,25 +1,17 @@
 package com.sonik;
 
 import com.sonik.config.AppContext;
+import com.sonik.ui.controller.Main;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
  * This class starts the program, by using {@link AppContext#initializeApplication()}
  */
-public class MainSonik extends Application {
+public class MainSonik {
 
     public static void main(String[] args) {
-
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
         AppContext.initializeApplication();
-    }
-
-    @Override
-    public void stop() throws Exception {
-        AppContext.shutDown();
+        Application.launch(Main.class, args);
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.login.SignUpController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SignUpController">
    <children>
       <Pane prefHeight="615.0" prefWidth="1000.0">
          <children>

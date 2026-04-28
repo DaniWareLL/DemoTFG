@@ -1,4 +1,4 @@
-package com.sonik.ui.controller.login;
+package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
 import javafx.application.Application;
@@ -8,14 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * No se ejecuta directamente, se ejecuta el GUILoginStarter como intermediario
- */
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        AppContext.initializeApplication();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/views/signin-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

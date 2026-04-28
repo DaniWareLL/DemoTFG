@@ -478,9 +478,9 @@
             </HBox>
             <HBox fx:id="windowButtons" alignment="CENTER_RIGHT">
                <children>
-                  <Button fx:id="minBtn" mnemonicParsing="false" style="-fx-background-color: black;" text="-" textFill="WHITE" />
-                  <Button fx:id="maxBtn" mnemonicParsing="false" style="-fx-background-color: black;" text="□" textFill="WHITE" />
-                  <Button fx:id="closeBtn" mnemonicParsing="false" style="-fx-background-color: black;" text="✕" textFill="WHITE" />
+                  <Button fx:id="minBtn" mnemonicParsing="false" style="-fx-background-color: black;" text="-" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="maxBtn" mnemonicParsing="false" style="-fx-background-color: black;" text="□" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeBtn" mnemonicParsing="false" style="-fx-background-color: black;" text="✕" textFill="WHITE" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

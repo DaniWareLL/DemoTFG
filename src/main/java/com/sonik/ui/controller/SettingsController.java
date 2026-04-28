@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
@@ -44,6 +45,12 @@ public class SettingsController {
     private BorderPane mainContainer;
 
     private Node homeContent;
+
+    @FXML
+    private Label audioExtractorVersionTF;
+
+    @FXML
+    private Button updateToolBtn;
 
     public void setMainContainer(BorderPane mainContainer) {
         this.mainContainer = mainContainer;
@@ -84,6 +91,9 @@ public class SettingsController {
         // Cargar UserService
         userService = AppContext.getUserService();
 
+        String version = audioExtractorVersionTF.getText();
+        audioExtractorVersionTF.setText(version + " " + AppContext.getSettingService().getToolVersion());
+
     }
 
 
@@ -112,5 +122,9 @@ public class SettingsController {
     public void backHomeMC(MouseEvent mouseEvent) {
 
         mainContainer.setCenter(homeContent);
+    }
+
+    public void updateToolMC(MouseEvent mouseEvent) {
+
     }
 }

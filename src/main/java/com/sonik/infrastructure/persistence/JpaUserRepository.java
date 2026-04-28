@@ -72,14 +72,22 @@ public class JpaUserRepository implements UserRepository {
 
         EntityTransaction tx = null;
 
-        try (EntityManager em = emf.createEntityManager();) {
+        try (EntityManager em = emf.createEntityManager()) {
 
-            tx = em.getTransaction();
-            tx.begin();
+            try {
+                findByUsername(user.getUserName());
+                throw new DuplicateIdException("User with name " + user.getUserName() + " already exists");
+            } catch (DuplicateIdException die) {
+                throw new DuplicateIdException(die.getMessage());
+            } catch (Exception e) {
 
-            em.persist(user);
+                tx = em.getTransaction();
+                tx.begin();
 
-            tx.commit();
+                em.persist(user);
+
+                tx.commit();
+            }
 
         } catch (EntityExistsException ex) {
             if (tx != null && tx.isActive()) {

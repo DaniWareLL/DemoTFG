@@ -26,13 +26,13 @@ public class SignUpController {
      de inversion de dependencias */
 
     @FXML
-    public TextField EmailTextfield;
+    public TextField emailTextfield;
     @FXML
-    public TextField UserTextfield;
+    public TextField userTextfield;
     @FXML
-    public PasswordField PasswordTextfield;
+    public PasswordField passwordTextfield;
     @FXML
-    public Button CreateAccountButton;
+    public Button createAccountButton;
 
 
     public void initialize() {
@@ -41,26 +41,26 @@ public class SignUpController {
 
     public void OnkeyPressed_EmailTexfield(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            UserTextfield.requestFocus();
+            userTextfield.requestFocus();
         }
     }
 
     public void OnkeyPressed_UserTexfield(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            PasswordTextfield.requestFocus();
+            passwordTextfield.requestFocus();
         }
     }
 
     public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            CreateAccountButton.requestFocus();
+            createAccountButton.requestFocus();
         }
     }
 
     public void CreateAccountButton_MouseClicked(MouseEvent mouseEvent) {
 
         try {
-            User user = new User(UserTextfield.getText(), EmailTextfield.getText(), PasswordTextfield.getText(), LocalDate.now());
+            User user = new User(userTextfield.getText(), emailTextfield.getText(), passwordTextfield.getText(), LocalDate.now());
             authService.register(user);
         } catch (DuplicateIdException e) {
             Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR,
@@ -68,6 +68,7 @@ public class SignUpController {
                 alert.showAndWait();});
 
         } catch (DataAccessException e) {
+            e.printStackTrace();
             Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR,
                     "An error occurred while connecting to the database.", ButtonType.OK);
                 alert.showAndWait();});
@@ -85,7 +86,7 @@ public class SignUpController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signin-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
-            Stage stage = (Stage) EmailTextfield.getScene().getWindow();
+            Stage stage = (Stage) emailTextfield.getScene().getWindow();
             stage.setScene(newScene);
             stage.show();
 

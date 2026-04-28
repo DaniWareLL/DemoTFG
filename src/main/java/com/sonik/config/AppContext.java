@@ -4,12 +4,17 @@ import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.repository.PlaylistRepository;
 import com.sonik.domain.repository.SongRepository;
 import com.sonik.domain.repository.UserRepository;
+import com.sonik.infrastructure.audio.VlcjAudioPlayer;
+import com.sonik.infrastructure.audio.YtDlpClient;
 import com.sonik.infrastructure.persistence.JpaPlaylistRepository;
 import com.sonik.infrastructure.persistence.JpaSongRepository;
 import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.*;
+import com.sonik.service.audio.AudioExtractor;
+import com.sonik.service.audio.AudioPlayer;
 import com.sonik.service.impl.AuthServiceImpl;
 import com.sonik.service.impl.PasswordServiceImpl;
+import com.sonik.service.impl.SettingServiceImpl;
 import com.sonik.service.impl.UserServiceImpl;
 import com.sun.jna.NativeLibrary;
 import jakarta.persistence.EntityManagerFactory;
@@ -23,6 +28,9 @@ import com.sonik.config.AppConfig;
 public class AppContext {
 
     private static EntityManagerFactory emf;
+
+    private static AudioExtractor audioExtractor;
+    private static AudioPlayer audioPlayer;
 
     private static UserRepository jpaUserRepository;
     private static SongRepository jpaSongRepository;
@@ -53,12 +61,19 @@ public class AppContext {
     public static void initializeApplication() throws DataAccessException {
 
         emf = PersistenceConfig.initializePersistence();
+
+        audioExtractor = new YtDlpClient();
+        audioPlayer = new VlcjAudioPlayer();
+
         jpaUserRepository = new JpaUserRepository(emf);
         jpaSongRepository = new JpaSongRepository(emf);
         jpaPlaylistRepository = new JpaPlaylistRepository(emf);
+
         passwordService = new PasswordServiceImpl();
         authService = new AuthServiceImpl(jpaUserRepository, passwordService);
         userService = new UserServiceImpl(jpaUserRepository, authService, passwordService);
+        settingService = new SettingServiceImpl(audioExtractor);
+
         AppConfig config = new AppConfig();
         NativeLibrary.addSearchPath("libvlc", AppConfig.getVlcPath());
         System.setProperty("jna.library.path", AppConfig.getVlcPath());

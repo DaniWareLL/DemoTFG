@@ -75,12 +75,15 @@ public class HomeController {
     @FXML
     private Node homeContent;
 
+
+
     private double xOffset = 0;
     private double yOffset = 0;
 
     public void initialize() {
         homeContent = mainContainer.getCenter(); // guardas el contenido original
         userNameLabel.setText(UserSession.getUser().getUserName());
+
         enableWindowDrag();
 
         // Acciones de la ventana
@@ -110,6 +113,7 @@ public class HomeController {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error", ButtonType.OK);
                 alert.showAndWait();
             });
+            e.printStackTrace();
         }
     }
 

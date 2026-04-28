@@ -51,14 +51,21 @@ public class SignInController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
+            // Obtener controller del Home
+            HomeController controller = loader.getController();
+
             // Crear un Stage NUEVO para el Home
             Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.UNDECORATED); // SOLO el Home sin bordes
+            homeStage.initStyle(StageStyle.UNDECORATED);
             homeStage.setScene(newScene);
             homeStage.setMaximized(true);
+
+            // PASAR EL STAGE AL CONTROLADOR
+            controller.setStage(homeStage);
+
             homeStage.show();
 
-            // Cerrar el Stage del login
+            // Cerrar login
             Stage loginStage = (Stage) SignInButton.getScene().getWindow();
             loginStage.close();
         }

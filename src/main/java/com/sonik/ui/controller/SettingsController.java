@@ -8,13 +8,11 @@ import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.UserPref;
 import com.sonik.domain.model.enums.SourceName;
 import com.sonik.service.UserService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
@@ -120,11 +118,14 @@ public class SettingsController {
     }
 
     public void backHomeMC(MouseEvent mouseEvent) {
-
         mainContainer.setCenter(homeContent);
     }
 
     public void updateToolMC(MouseEvent mouseEvent) {
-
+        AppContext.getSettingService().updateTool();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The Audio tool have been updated successfully", ButtonType.OK);
+            alert.showAndWait();
+        });
     }
 }

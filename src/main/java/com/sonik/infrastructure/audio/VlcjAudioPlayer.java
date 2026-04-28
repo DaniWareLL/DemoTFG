@@ -1,5 +1,6 @@
 package com.sonik.infrastructure.audio;
 
+import com.sonik.config.AppConfig;
 import com.sonik.service.audio.AudioPlayer;
 import com.sun.jna.NativeLibrary;
 import org.apache.commons.lang3.SystemUtils;
@@ -18,19 +19,6 @@ public class VlcjAudioPlayer implements AudioPlayer {
 
     public static Scanner sc = new Scanner(System.in);
 
-    private static final String VLC_PATH;
-
-    static {
-        if (SystemUtils.IS_OS_WINDOWS) {
-            VLC_PATH = Paths.get("bin", "libvlc-win").toAbsolutePath().toString();
-        } else {
-            VLC_PATH = Paths.get("bin", "libvlc-linux").toAbsolutePath().toString();
-        }
-
-        NativeLibrary.addSearchPath("libvlc", VLC_PATH);
-        System.setProperty("jna.library.path", VLC_PATH);
-    }
-
 
     private final MediaPlayerFactory factory;
     private final MediaPlayer player;
@@ -38,7 +26,7 @@ public class VlcjAudioPlayer implements AudioPlayer {
     // Constructor
     public VlcjAudioPlayer() {
 
-        String pluginPath = Paths.get(VLC_PATH, "plugins").toString();
+        String pluginPath = Paths.get(AppConfig.getVlcPath(), "plugins").toString();
 
         factory = new MediaPlayerFactory("--plugin-path=" + pluginPath);
         player = factory.mediaPlayers().newMediaPlayer();

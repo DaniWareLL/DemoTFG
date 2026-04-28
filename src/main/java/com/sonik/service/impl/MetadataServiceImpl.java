@@ -24,7 +24,7 @@ public class MetadataServiceImpl implements MetadataService {
     public Song getMetadata(String searchPattern) throws AudioExtractorException {
         try {
             String json = extractor.execute(List.of(
-                    AppConfig.YTDLP_PATH,
+                    AppConfig.getYTDLPPath(),
                     "-J",
                     searchPrefix + searchPattern
             ));

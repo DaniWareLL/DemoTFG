@@ -1,6 +1,7 @@
 package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
+import com.sonik.domain.exceptions.DataAccessException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, DataAccessException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/views/signin-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

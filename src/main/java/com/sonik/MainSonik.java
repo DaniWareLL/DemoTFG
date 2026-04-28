@@ -1,6 +1,7 @@
 package com.sonik;
 
 import com.sonik.config.AppContext;
+import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.ui.controller.Main;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class MainSonik {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DataAccessException {
         AppContext.initializeApplication();
         Application.launch(Main.class, args);
     }

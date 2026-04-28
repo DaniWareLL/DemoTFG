@@ -6,6 +6,7 @@ public class DataAccessException extends Exception {
     public static final int REVERT_ERROR = 2;
     public static final int CLOSE_OPERATION_ERROR = 3;
     public static final int CONNECTION_ERROR = 4;
+    public static final int ALREADY_CONFIGURED = 5;
 
     private final int errorCode;
 
@@ -19,6 +20,7 @@ public class DataAccessException extends Exception {
                     "Error al cerrar la conexión o recurso.";
             case CONNECTION_ERROR ->
                     "Error al intentar conectar con la base de datos o recurso.";
+            case ALREADY_CONFIGURED -> "The application's default values have already been set up.";
             default ->
                     "Código de error desconocido: " + errorCode;
         };

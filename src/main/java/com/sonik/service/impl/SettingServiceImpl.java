@@ -18,7 +18,7 @@ public class SettingServiceImpl implements SettingService {
     @Override
     public String getToolVersion() throws AudioExtractorException {
         try {
-            return audioExtractor.execute(List.of(AppConfig.YTDLP_PATH, "--version"));
+            return audioExtractor.execute(List.of(AppConfig.getYTDLPPath(), "--version"));
         } catch (Exception e) {
             throw new AudioExtractorException(AudioExtractorException.SETTING_ERROR, e);
         }
@@ -27,7 +27,7 @@ public class SettingServiceImpl implements SettingService {
     @Override
     public String updateTool() throws AudioExtractorException {
         try {
-            return audioExtractor.execute(List.of(AppConfig.YTDLP_PATH, "-U"));
+            return audioExtractor.execute(List.of(AppConfig.getYTDLPPath(), "-U"));
         } catch (Exception e) {
             throw new AudioExtractorException(AudioExtractorException.SETTING_ERROR, e);
         }

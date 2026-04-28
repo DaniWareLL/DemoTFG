@@ -32,7 +32,7 @@ public class PlayerServiceImpl implements PlayerService {
     public String[] getStreamUrl(String searchPattern) throws AudioExtractorException {
         try {
             String result = extractor.execute(List.of(
-                    AppConfig.YTDLP_PATH,
+                    AppConfig.getYTDLPPath(),
                     "-f", "bestaudio",
                     "--get-url",
                     searchPrefix + searchPattern

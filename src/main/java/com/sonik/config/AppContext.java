@@ -1,5 +1,6 @@
 package com.sonik.config;
 
+import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.repository.PlaylistRepository;
 import com.sonik.domain.repository.SongRepository;
 import com.sonik.domain.repository.UserRepository;
@@ -10,7 +11,10 @@ import com.sonik.service.*;
 import com.sonik.service.impl.AuthServiceImpl;
 import com.sonik.service.impl.PasswordServiceImpl;
 import com.sonik.service.impl.UserServiceImpl;
+import com.sun.jna.NativeLibrary;
 import jakarta.persistence.EntityManagerFactory;
+
+import com.sonik.config.AppConfig;
 
 /**
  * This class essentially initializes the application, necessary views and controllers, persistence and JPA.
@@ -46,7 +50,7 @@ public class AppContext {
     /**
      * Initializes the application's dependencies and its main components every time it's started(dependency injector)
      */
-    public static void initializeApplication() {
+    public static void initializeApplication() throws DataAccessException {
 
         emf = PersistenceConfig.initializePersistence();
         jpaUserRepository = new JpaUserRepository(emf);
@@ -55,9 +59,9 @@ public class AppContext {
         passwordService = new PasswordServiceImpl();
         authService = new AuthServiceImpl(jpaUserRepository, passwordService);
         userService = new UserServiceImpl(jpaUserRepository, authService, passwordService);
-
-
-        // Create AudioChain(Chain of responsibility)
+        AppConfig config = new AppConfig();
+        NativeLibrary.addSearchPath("libvlc", AppConfig.getVlcPath());
+        System.setProperty("jna.library.path", AppConfig.getVlcPath());
 
 
     }

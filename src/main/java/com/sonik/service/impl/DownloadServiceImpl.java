@@ -26,7 +26,7 @@
         public void downloadToMp3(String searchPattern) throws AudioExtractorException {
             try {
                 extractor.execute(List.of(
-                        AppConfig.YTDLP_PATH,
+                        AppConfig.getYTDLPPath(),
                         "-f",                "bestaudio",
                         "--extract-audio",
                         "--audio-format",    "mp3",
@@ -34,7 +34,7 @@
                         "--add-metadata",
                         "--embed-thumbnail",
                         "--convert-thumbnails", "jpg",
-                        "--ffmpeg-location", AppConfig.FFMPEG_PATH,
+                        "--ffmpeg-location", AppConfig.getFFmpegPath(),
                         "-P", downloadDir,
                         searchPrefix + searchPattern
                 ));

@@ -2,6 +2,7 @@ package com.sonik.infrastructure.audio;
 
 import com.sonik.service.audio.AudioPlayer;
 import com.sun.jna.NativeLibrary;
+import org.apache.commons.lang3.SystemUtils;
 import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
@@ -20,7 +21,7 @@ public class VlcjAudioPlayer implements AudioPlayer {
     private static final String VLC_PATH;
 
     static {
-        if (RuntimeUtil.isWindows()) {
+        if (SystemUtils.IS_OS_WINDOWS) {
             VLC_PATH = Paths.get("bin", "libvlc-win").toAbsolutePath().toString();
         } else {
             VLC_PATH = Paths.get("bin", "libvlc-linux").toAbsolutePath().toString();
@@ -43,6 +44,7 @@ public class VlcjAudioPlayer implements AudioPlayer {
         player = factory.mediaPlayers().newMediaPlayer();
 
         // Listener de eventos (hay que mirarlo)
+        // Esto solo es una clase que sirve para hacer algo según lo que esté pasando con la canción que se está reproduciendo
         player.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
             public void playing(MediaPlayer mediaPlayer) {

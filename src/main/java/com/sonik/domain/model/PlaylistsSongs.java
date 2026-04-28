@@ -31,7 +31,6 @@ public class PlaylistsSongs {
     public PlaylistsSongs() {}
 
     public PlaylistsSongs(Playlist playlist, Song song, int position, LocalDate addedAt) throws IncorrectArgumentException {
-        this.id = new PlaylistsSongsId(playlist.getId(), song.getId());
         setPlaylist(playlist);
         setSong(song);
         setPosition(position);

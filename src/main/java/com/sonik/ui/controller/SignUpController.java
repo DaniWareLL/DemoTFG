@@ -68,7 +68,6 @@ public class SignUpController {
                 alert.showAndWait();});
 
         } catch (DataAccessException e) {
-            e.printStackTrace();
             Platform.runLater(()->{Alert alert = new Alert(Alert.AlertType.ERROR,
                     "An error occurred while connecting to the database.", ButtonType.OK);
                 alert.showAndWait();});

@@ -1,5 +1,8 @@
 package com.sonik;
 
+import com.sonik.config.AppConfig;
+import com.sonik.config.AppContext;
+import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.model.Song;
 import com.sonik.domain.model.enums.SourceName;
 import com.sonik.infrastructure.audio.VlcjAudioPlayer;
@@ -10,7 +13,9 @@ import com.sonik.service.impl.PlayerServiceImpl;
 import com.sonik.service.impl.SettingServiceImpl;
 
 public class MainServices {
-    static void main() {
+    static void main() throws DataAccessException {
+
+        AppContext.initializeApplication();
 
         final String searchPattern = "Bohemian Rhapsody - Queen";
 

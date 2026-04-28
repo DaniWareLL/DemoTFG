@@ -71,8 +71,9 @@ public class SignInController {
 
             Stage stage = (Stage) SignInButton.getScene().getWindow();
             stage.setScene(newScene);
-            stage.setMaximized(true);
             stage.show();
+            stage.sizeToScene();
+            stage.centerOnScreen();
 
 
         } catch (Exception e) {

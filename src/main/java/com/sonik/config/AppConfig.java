@@ -34,9 +34,10 @@ public class AppConfig {
         if (SystemUtils.IS_OS_WINDOWS) {
             VLC_PATH = Paths.get("bin", "libvlc-win").toAbsolutePath().toString();
             FFMPEG_PATH = Paths.get("bin", "ffmpeg.exe").toAbsolutePath().toString();
-            YTDLP_PATH = Paths.get("bin", "youtube").toAbsolutePath().toString();
+            YTDLP_PATH = Paths.get("bin", "yt-dlp.exe").toAbsolutePath().toString();
         } else {
             VLC_PATH = Paths.get("bin", "libvlc-linux").toAbsolutePath().toString();
+            YTDLP_PATH = Paths.get("bin", "yt-dlp_linux").toAbsolutePath().toString();
         }
         alreadyStarted = true;
     }

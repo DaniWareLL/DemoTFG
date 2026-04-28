@@ -19,6 +19,9 @@ public class Main extends Application {
         stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
+        stage.sizeToScene();
+        stage.centerOnScreen();
+
     }
 
     public static void main(String[] args) {

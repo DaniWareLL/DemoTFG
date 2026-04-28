@@ -19,8 +19,6 @@ import com.sonik.service.impl.UserServiceImpl;
 import com.sun.jna.NativeLibrary;
 import jakarta.persistence.EntityManagerFactory;
 
-import com.sonik.config.AppConfig;
-
 /**
  * This class essentially initializes the application, necessary views and controllers, persistence and JPA.
  * It uses {@link AppConfig AppConfig} to load the default configuration for the application
@@ -60,6 +58,10 @@ public class AppContext {
      */
     public static void initializeApplication() throws DataAccessException {
 
+        AppConfig.initializeContext();
+        NativeLibrary.addSearchPath("libvlc", AppConfig.getVlcPath());
+        System.setProperty("jna.library.path", AppConfig.getVlcPath());
+
         emf = PersistenceConfig.initializePersistence();
 
         audioExtractor = new YtDlpClient();
@@ -73,11 +75,6 @@ public class AppContext {
         authService = new AuthServiceImpl(jpaUserRepository, passwordService);
         userService = new UserServiceImpl(jpaUserRepository, authService, passwordService);
         settingService = new SettingServiceImpl(audioExtractor);
-
-        AppConfig config = new AppConfig();
-        NativeLibrary.addSearchPath("libvlc", AppConfig.getVlcPath());
-        System.setProperty("jna.library.path", AppConfig.getVlcPath());
-
 
     }
 

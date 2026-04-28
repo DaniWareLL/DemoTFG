@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 /**
  * This class contains the application constants.<br>
- * Each constant has to be initialized in the constructor, and accessed only through its static {@code get} method.
+ * Each constant has to be initialized in the {@link #initilizeContext()} method, and accessed only through its static {@code get} method.
  */
 public class AppConfig {
 
@@ -23,9 +23,10 @@ public class AppConfig {
     private static boolean alreadyStarted = false;
 
     /**
-     * Constructor can only be used once (ideally on startup)
+     * This method can only be used once (ideally on startup)
+     * @throws DataAccessException When this method is called after having been called already
      */
-    protected AppConfig() throws DataAccessException {
+    protected static void initializeContext() throws DataAccessException {
 
         if (alreadyStarted) {
             throw new DataAccessException(DataAccessException.ALREADY_CONFIGURED);

@@ -209,12 +209,12 @@
             </HBox>
       
          </VBox>
-         <Label text="Settings" textFill="#8c5033">
+         <Label text="Settings" textFill="WHITE">
             <font>
                <Font name="Manrope ExtraBold" size="35" />
             </font>
             <padding>
-               <Insets left="20.0" top="20.0" />
+               <Insets left="40.0" top="20.0" />
             </padding>
          </Label>
          <padding>

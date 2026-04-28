@@ -1,15 +1,11 @@
-package com.sonik.ui.controller.login;
+package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.service.AuthService;
-import com.sonik.service.impl.AuthServiceImpl;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -17,8 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -51,18 +47,20 @@ public class SignInController {
 
         if (authService.login(UserTextfield.getText(), PasswordTextfield.getText())) {
 
+            // Cargar Home
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
-            Stage stage = (Stage) SignInButton.getScene().getWindow();
+            // Crear un Stage NUEVO para el Home
+            Stage homeStage = new Stage();
+            homeStage.initStyle(StageStyle.UNDECORATED); // SOLO el Home sin bordes
+            homeStage.setScene(newScene);
+            homeStage.setMaximized(true);
+            homeStage.show();
 
-            stage.setScene(newScene);
-            stage.centerOnScreen();
-
-            System.setProperty("prism.allowhidpi", "true");
-            System.setProperty("glass.graphics.ui", "sw");
-            stage.setMaximized(true);
-            stage.show();
+            // Cerrar el Stage del login
+            Stage loginStage = (Stage) SignInButton.getScene().getWindow();
+            loginStage.close();
         }
     }
 
@@ -73,6 +71,7 @@ public class SignInController {
 
             Stage stage = (Stage) SignInButton.getScene().getWindow();
             stage.setScene(newScene);
+            stage.setMaximized(true);
             stage.show();
 
 

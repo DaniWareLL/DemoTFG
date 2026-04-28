@@ -6,9 +6,7 @@ import com.sonik.domain.repository.UserRepository;
 import com.sonik.infrastructure.persistence.JpaPlaylistRepository;
 import com.sonik.infrastructure.persistence.JpaSongRepository;
 import com.sonik.infrastructure.persistence.JpaUserRepository;
-import com.sonik.service.AuthService;
-import com.sonik.service.PasswordService;
-import com.sonik.service.UserService;
+import com.sonik.service.*;
 import com.sonik.service.impl.AuthServiceImpl;
 import com.sonik.service.impl.PasswordServiceImpl;
 import com.sonik.service.impl.UserServiceImpl;
@@ -21,12 +19,19 @@ import jakarta.persistence.EntityManagerFactory;
 public class AppContext {
 
     private static EntityManagerFactory emf;
+
     private static UserRepository jpaUserRepository;
     private static SongRepository jpaSongRepository;
     private static PlaylistRepository jpaPlaylistRepository;
+
     private static AuthService authService;
     private static UserService userService;
     private static PasswordService  passwordService;
+    private static PlayerService playerService;
+    private static DownloadService downloadService;
+    private static SettingService settingService;
+    private static MetadataService metadataService;
+    private static PlaylistService playlistService;
 
 
     /**
@@ -89,5 +94,25 @@ public class AppContext {
 
     public static PasswordService getPasswordService() {
         return passwordService;
+    }
+
+    public static PlayerService getPlayerService() {
+        return playerService;
+    }
+
+    public static DownloadService getDownloadService() {
+        return downloadService;
+    }
+
+    public static SettingService getSettingService() {
+        return settingService;
+    }
+
+    public static MetadataService getMetadataService() {
+        return metadataService;
+    }
+
+    public static PlaylistService getPlaylistService() {
+        return playlistService;
     }
 }

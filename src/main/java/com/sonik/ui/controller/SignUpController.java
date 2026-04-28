@@ -1,4 +1,4 @@
-package com.sonik.ui.controller.login;
+package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;

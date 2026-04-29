@@ -54,7 +54,7 @@ public class User {
 
     public void setUserName(String userName) throws IncorrectArgumentException {
         if (userName.isBlank()){
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_USERNAME);
         }
         this.userName = userName;
     }
@@ -65,7 +65,10 @@ public class User {
 
     public void setEmail(String email) throws IncorrectArgumentException {
         if (email.isBlank()){
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_EMAIL);
+        }
+        if (!email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_EMAIL);
         }
         this.email = email;
     }
@@ -76,7 +79,7 @@ public class User {
 
     public void setPassword_hash(String password_hash) throws IncorrectArgumentException {
         if (password_hash.isBlank()){
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_PASSWORD);
         }
         this.password_hash = password_hash;
     }
@@ -87,7 +90,7 @@ public class User {
 
     public void setCreation_date(LocalDate creation_date) throws IncorrectArgumentException {
         if (creation_date == null || creation_date.isAfter(LocalDate.now()))
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DATE);
         this.creation_date = creation_date;
     }
 

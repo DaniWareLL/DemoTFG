@@ -125,6 +125,10 @@
                               </Lighting>
                            </effect>
                         </TextField>
+                        <Label fx:id="emailErrorLabel"
+                               text="The email address is incorrectly formatted"
+                               visible="false"
+                               style="-fx-text-fill: red; -fx-font-size: 12px;" />
                         <Label text="User">
                            <font>
                               <Font name="Manrope ExtraBold" size="28.0" />
@@ -172,6 +176,10 @@
                               </Lighting>
                            </effect>
                         </TextField>
+                        <Label fx:id="usernameErrorLabel"
+                               text="The username has already been taken"
+                               visible="false"
+                               style="-fx-text-fill: red; -fx-font-size: 12px;" />
                         <Label text="Password">
                            <font>
                               <Font name="Manrope ExtraBold" size="28.0" />
@@ -219,6 +227,10 @@
                               </Lighting>
                            </effect>
                         </PasswordField>
+                        <Label fx:id="passwordErrorLabel"
+                               text="A password is required to continue"
+                               visible="false"
+                               style="-fx-text-fill: red; -fx-font-size: 12px;" />
                      </children>
                   </VBox>
                   <Button fx:id="CreateAccountButton" mnemonicParsing="false" onMouseClicked="#CreateAccountButton_MouseClicked" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Create Account">

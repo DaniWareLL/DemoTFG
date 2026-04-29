@@ -1,13 +1,14 @@
 package com.sonik.config;
 
 import com.sonik.domain.exceptions.DataAccessException;
+import com.sun.jna.NativeLibrary;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.nio.file.Paths;
 
 /**
  * This class contains the application constants.<br>
- * Each constant has to be initialized in the {@link #initilizeContext()} method, and accessed only through its static {@code get} method.
+ * Each constant has to be initialized in the {@link #initializeContext()} method, and accessed only through its static {@code get} method.
  */
 public class AppConfig {
 
@@ -37,6 +38,7 @@ public class AppConfig {
             YTDLP_PATH = Paths.get("bin", "yt-dlp.exe").toAbsolutePath().toString();
         } else {
             VLC_PATH = Paths.get("bin", "libvlc-linux").toAbsolutePath().toString();
+            FFMPEG_PATH = Paths.get("bin", "ffmpeg_linux").toAbsolutePath().toString();
             YTDLP_PATH = Paths.get("bin", "yt-dlp_linux").toAbsolutePath().toString();
         }
         alreadyStarted = true;

@@ -34,11 +34,7 @@ public class AuthServiceImpl implements AuthService {
     public void register(User user) throws DuplicateIdException, DataAccessException, IncorrectArgumentException {
         // 1. Cifrar la contraseña usando el servicio
         String hashed = passwordService.hashPassword(user.getPassword_hash());
-        try {
-            user.setPassword_hash(hashed);
-        } catch (IncorrectArgumentException e) {
-            throw new DataAccessException(e.getMessage(), e);
-        }
+        user.setPassword_hash(hashed);
 
         // 2. Crear preferencias por defecto del usuario
         UserPref userPref = new UserPref(); // HIGH, DARK, YOUTUBE

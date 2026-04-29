@@ -77,9 +77,7 @@ public class JpaUserRepository implements UserRepository {
             try {
                 findByUsername(user.getUserName());
                 throw new DuplicateIdException("User with name " + user.getUserName() + " already exists");
-            } catch (DuplicateIdException die) {
-                throw new DuplicateIdException(die.getMessage());
-            } catch (Exception e) {
+            } catch (ObjectNotFoundException e) {
 
                 tx = em.getTransaction();
                 tx.begin();

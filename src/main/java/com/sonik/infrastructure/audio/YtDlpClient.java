@@ -3,6 +3,7 @@ package com.sonik.infrastructure.audio;
 import com.sonik.service.audio.AudioExtractor;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import java.util.List;
 public class YtDlpClient implements AudioExtractor {
 
     @Override
-    public String execute (List<String> args) throws Exception {
+    public String execute (List<String> args) throws IOException, InterruptedException {
         ProcessBuilder pb = new ProcessBuilder(args);
         pb.redirectErrorStream(false);
         Process process = pb.start();

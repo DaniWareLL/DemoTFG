@@ -47,25 +47,25 @@ public class PlaylistsSongs {
     // Setters
     public void setPlaylist(Playlist playlist) throws IncorrectArgumentException {
         if (playlist == null)
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.playlist = playlist;
     }
 
     public void setSong(Song song) throws IncorrectArgumentException {
         if (song == null)
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.song = song;
     }
 
     public void setPosition(int position) throws IncorrectArgumentException {
         if (position < 0)
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_NUMBER);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_NUMBER);
         this.position = position;
     }
 
     public void setAddedAt(LocalDate addedAt) throws IncorrectArgumentException {
         if (addedAt == null || addedAt.isAfter(LocalDate.now()))
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DATE);
         this.addedAt = addedAt;
     }
 }

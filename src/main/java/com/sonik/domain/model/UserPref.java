@@ -61,22 +61,22 @@ public class UserPref {
 
     // Setters
     public void setUser(User user) throws IncorrectArgumentException {
-        if (user == null) throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+        if (user == null) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.user = user;
     }
 
     public void setStreamingQuality(StreamingQuality streamingQuality) throws IncorrectArgumentException {
-        if (streamingQuality == null) throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+        if (streamingQuality == null) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.streamingQuality = streamingQuality;
     }
 
     public void setInterfaceTheme(InterfaceTheme interfaceTheme) throws IncorrectArgumentException {
-        if (interfaceTheme == null) throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+        if (interfaceTheme == null) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.interfaceTheme = interfaceTheme;
     }
 
-    public void setAudioSource(SourceName audioSource) {
-        if ( audioSource == null) throw new IllegalArgumentException("Audio source cannot be null");
+    public void setAudioSource(SourceName audioSource) throws IncorrectArgumentException {
+        if (audioSource == null) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.audioSource = audioSource;
     }
 

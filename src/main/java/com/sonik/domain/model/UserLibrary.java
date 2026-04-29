@@ -43,19 +43,19 @@ public class UserLibrary {
     // Setters
     public void setUser(User user) throws IncorrectArgumentException {
         if (user == null)
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.user = user;
     }
 
     public void setSong(Song song) throws IncorrectArgumentException {
         if (song == null)
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.song = song;
     }
 
     public void setAddedAt(LocalDate addedAt) throws IncorrectArgumentException {
         if (addedAt == null || addedAt.isAfter(LocalDate.now()))
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DATE);
         this.addedAt = addedAt;
     }
 }

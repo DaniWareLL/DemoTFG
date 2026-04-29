@@ -62,32 +62,32 @@ public class Playlist {
     // Setters
     public void setUser(User user) throws IncorrectArgumentException {
         if (user == null)
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.user = user;
     }
 
     public void setName(String name) throws IncorrectArgumentException {
         if (name == null || name.isBlank())
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.name = name;
     }
 
     public void setDescription(String description) throws IncorrectArgumentException {
         if (description == null || description.isBlank()) {
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         }
         this.description = description;
     }
 
     public void setCreationDate(LocalDate creationDate) throws IncorrectArgumentException {
         if (creationDate == null || creationDate.isAfter(LocalDate.now()))
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DATE);
         this.creationDate = creationDate;
     }
 
     public void setSortOrder(int sortOrder) throws IncorrectArgumentException {
         if (sortOrder < 0)
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_NUMBER);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_NUMBER);
         this.sortOrder = sortOrder;
     }
 }

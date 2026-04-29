@@ -69,13 +69,13 @@ public class Song {
     // Setters
     public void setTitle(String title) throws IncorrectArgumentException {
         if (title == null || title.isBlank())
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.title = title;
     }
 
     public void setDurationSec(Integer durationSec) throws IncorrectArgumentException {
         if (durationSec != null && durationSec < 0)
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_NUMBER);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_NUMBER);
         this.durationSec = durationSec;
     }
 
@@ -89,7 +89,7 @@ public class Song {
 
     public void setAggregationDate(LocalDate aggregationDate) throws IncorrectArgumentException {
         if (aggregationDate == null || aggregationDate.isAfter(LocalDate.now()))
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_DATE);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DATE);
         this.aggregationDate = aggregationDate;
     }
 

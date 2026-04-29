@@ -6,6 +6,7 @@
     import com.sonik.service.DownloadService;
     import com.sonik.service.audio.AudioExtractor;
 
+    import java.io.IOException;
     import java.util.List;
 
     /**
@@ -38,7 +39,7 @@
                         "-P", downloadDir,
                         searchPrefix + searchPattern
                 ));
-            } catch (Exception e) {
+            } catch (IOException | InterruptedException e) {
                 throw new AudioExtractorException(AudioExtractorException.DOWNLOAD_ERROR, e);
             }
         }

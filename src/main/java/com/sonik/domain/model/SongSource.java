@@ -52,19 +52,19 @@ public class SongSource {
     // Setters
     public void setSong(Song song) throws IncorrectArgumentException {
         if (song == null)
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.song = song;
     }
 
     public void setSourceName(SourceName sourceName) throws IncorrectArgumentException {
         if (sourceName == null)
-            throw new IncorrectArgumentException(IncorrectArgumentException.NULL_OR_EMPTY_OBJECT);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.sourceName = sourceName;
     }
 
     public void setPriority(int priority) throws IncorrectArgumentException {
         if (priority < 1)
-            throw new IncorrectArgumentException(IncorrectArgumentException.INVALID_NUMBER);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_NUMBER);
         this.priority = priority;
     }
 

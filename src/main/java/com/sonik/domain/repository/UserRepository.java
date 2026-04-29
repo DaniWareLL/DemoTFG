@@ -34,7 +34,7 @@ public interface UserRepository {
 
     /**
      * Creates a new user record in the data source
-     * @param user
+     * @param user The user to be created
      * @throws DataAccessException if a data access error occurs
      * @throws DuplicateIdException if the user already exists
      */

@@ -59,31 +59,36 @@ public class SignInController {
 
     public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {}
 
-    public void SignInButton_MouseClicked(MouseEvent mouseEvent)
-            throws ObjectNotFoundException, DataAccessException, IOException {
+    public void SignInButton_MouseClicked(MouseEvent mouseEvent) {
 
-        if (authService.login(UserTextfield.getText(), PasswordTextfield.getText())) {
+        try {
+            if (authService.login(UserTextfield.getText(), PasswordTextfield.getText())) {
 
-            // Cargar Home
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
-            Scene newScene = new Scene(loader.load());
+                // Cargar Home
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
+                Scene newScene = new Scene(loader.load());
 
-            // Obtener controller del Home
-            HomeController controller = loader.getController();
+                // Obtener controller del Home
+                HomeController controller = loader.getController();
 
-            // Crear un Stage NUEVO para el Home
-            Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.UNDECORATED);
-            homeStage.setScene(newScene);
+                // Crear un Stage NUEVO para el Home
+                Stage homeStage = new Stage();
+                homeStage.initStyle(StageStyle.UNDECORATED);
+                homeStage.setScene(newScene);
 
-            // PASAR EL STAGE AL CONTROLADOR
-            controller.setStage(homeStage);
+                // PASAR EL STAGE AL CONTROLADOR
+                controller.setStage(homeStage);
 
-            homeStage.show();
+                homeStage.show();
 
-            // Cerrar login
-            Stage loginStage = (Stage) SignInButton.getScene().getWindow();
-            loginStage.close();
+                // Cerrar login
+                Stage loginStage = (Stage) SignInButton.getScene().getWindow();
+                loginStage.close();
+            }
+        } catch (ObjectNotFoundException e) {
+            //TODO: Mostrar al usuario por pantalla(no vale sout) que sus creedenciales son incorrectas
+        } catch (DataAccessException | IOException e) {
+            // TODO: Mostrar error por pantalla(Alert está bien)
         }
     }
 

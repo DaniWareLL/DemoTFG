@@ -26,9 +26,7 @@ public class VlcjAudioPlayer implements AudioPlayer {
     // Constructor
     public VlcjAudioPlayer() {
 
-        String pluginPath = Paths.get(AppConfig.getVlcPath(), "plugins").toString();
-
-        factory = new MediaPlayerFactory("--plugin-path=" + pluginPath);
+        factory = new MediaPlayerFactory();
         player = factory.mediaPlayers().newMediaPlayer();
 
         // Listener de eventos (hay que mirarlo)

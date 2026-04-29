@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<DialogPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.CreatePlaylistDialogController">
+   <content>
+      <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #191919; -fx-background-radius: 20;">
+         <children>
+            <Label text="Create playlist" textFill="#c58a5f">
+               <font>
+                  <Font name="Manrope ExtraBold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="20.0" top="10.0" />
+               </padding>
+            </Label>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Playlist name" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameTextField" promptText="Name" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white;">
+                     <font>
+                        <Font name="Manrope ExtraLight" size="15.0" />
+                     </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <BoxBlur>
+                                 <input>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </input>
+                              </BoxBlur>
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Playlist descrption" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="descriptionTextField" promptText="Description" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white;">
+                     <font>
+                        <Font name="Manrope ExtraLight" size="15.0" />
+                     </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <BoxBlur>
+                                 <input>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </input>
+                              </BoxBlur>
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="cancelBtn" onMouseClicked="#cancelBtnMC" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Cancel" textFill="#c58a5f">
+                     <font>
+                        <Font name="Manrope Medium" size="16" />
+                     </font>
+                  </Button>
+                  <Button fx:id="createBtn" onMouseClicked="#createBtnMC" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Create" textFill="#c58a5f">
+                     <font>
+                        <Font name="Manrope Medium" size="16" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</DialogPane>

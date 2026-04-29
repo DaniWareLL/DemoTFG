@@ -1,233 +1,294 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SignInController">
+<BorderPane minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SignInController">
    <left>
-      <AnchorPane prefHeight="400.0" prefWidth="234.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <HBox fx:id="leftHBox" alignment="CENTER" minWidth="415.0" style="-fx-background-image: url('/images/Sonik/FondoSignin.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-radius: 20; -fx-background-insets: 0;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="600.0" fitWidth="500.0" layoutX="-1.0" layoutY="1.0">
+            <ImageView fitHeight="147.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Sonik/FondoSignin500x600.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="153.0" fitWidth="396.0" layoutX="52.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Sonik/SonikLetrasWhite.png" />
+                  <Image url="@/images/Sonik/SonikLetrasWhite.png" />
                </image>
             </ImageView>
          </children>
-      </AnchorPane>
+         <BorderPane.margin>
+            <Insets bottom="40.0" left="10.0" top="40.0" />
+         </BorderPane.margin>
+      </HBox>
    </left>
    <right>
-      <AnchorPane fx:id="leftPane" prefHeight="600.0" prefWidth="500.0" style="-fx-background-size: cover;">
-
-      <children>
-            <Label layoutX="105.0" layoutY="226.0" text="User">
-               <font>
-                  <Font name="Manrope ExtraBold" size="28.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label layoutX="102.0" layoutY="305.0" text="Password">
-               <font>
-                  <Font name="Manrope ExtraBold" size="28.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill></Label>
-            <Label layoutX="134.0" layoutY="112.0" text="Continue where you left">
-               <font>
-                  <Font name="Manrope ExtraBold" size="20.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label layoutX="156.0" layoutY="144.0" text="Sign in now">
-               <font>
-                  <Font name="Manrope ExtraBold" size="34.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <TextField fx:id="UserTextfield" layoutX="104.0" layoutY="266.0" onKeyPressed="#OnkeyPressed_UserTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white;">
-               <font>
-                  <Font name="Manrope ExtraLight" size="15.0" />
-               </font>
-               <effect>
-                  <Lighting>
-                     <bumpInput>
-                        <BoxBlur>
-                           <input>
-                              <Lighting>
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                                 <light>
-                                    <Light.Distant />
-                                 </light>
-                              </Lighting>
-                           </input>
-                        </BoxBlur>
-                     </bumpInput>
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect></TextField>
-            <Button fx:id="SignInButton" layoutX="206.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#SignInButton_MouseClicked" prefHeight="0.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Sign in">
-               <font>
-                  <Font name="Manrope Medium" size="16.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Button>
-            <PasswordField fx:id="PasswordTextfield" layoutX="104.0" layoutY="342.0" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
-               <font>
-                  <Font name="Manrope Light" size="15.0" />
-               </font>
-               <effect>
-                  <Lighting>
-                     <bumpInput>
-                        <BoxBlur>
-                           <input>
-                              <Lighting>
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                                 <light>
-                                    <Light.Distant />
-                                 </light>
-                              </Lighting>
-                           </input>
-                        </BoxBlur>
-                     </bumpInput>
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect></PasswordField>
-            <Label layoutX="138.0" layoutY="434.0" text="Don't have an account?">
-               <font>
-                  <Font name="Manrope ExtraBold" size="14.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Button fx:id="SignInButton1" layoutX="297.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#SignUpButton_MouseClicked" prefHeight="29.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Sign up" textFill="#c96b34">
-               <font>
-                  <Font name="Manrope Medium" size="14.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="85.0" fitWidth="55.0" layoutX="222.0" layoutY="27.0">
-               <image>
-                  <Image url="@../../../../../TFG_Dlillo_Jmartin/src/main/resources/images/Sonik/IconoSonikColor.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
+      <HBox alignment="CENTER" minWidth="450.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="40.0" right="10.0" top="40.0" />
+         </BorderPane.margin>
+         <children>
+            <AnchorPane fx:id="leftPane" minWidth="450.0" opacity="0.75" style="-fx-background-size: cover; -fx-background-color: #191919; -fx-background-radius: 20;" HBox.hgrow="ALWAYS">
+      
+            <children>
+                  <HBox alignment="CENTER" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox spacing="20.0">
+                           <children>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <ImageView fitHeight="85.0" fitWidth="55.0">
+                                       <image>
+                                          <Image url="@/images/Sonik/IconoSonikColor.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Continue where you left">
+                                       <font>
+                                          <Font name="Manrope ExtraBold" size="20.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Label>
+                                    <Label text="Sign in now">
+                                       <font>
+                                          <Font name="Manrope ExtraBold" size="34.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="User">
+                                       <font>
+                                          <Font name="Manrope ExtraBold" size="28.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Label>
+                                    <TextField fx:id="UserTextfield" onKeyPressed="#OnkeyPressed_UserTexfield" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white;">
+                                       <font>
+                                          <Font name="Manrope ExtraLight" size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <Lighting>
+                                             <bumpInput>
+                                                <BoxBlur>
+                                                   <input>
+                                                      <Lighting>
+                                                         <bumpInput>
+                                                            <Shadow />
+                                                         </bumpInput>
+                                                         <light>
+                                                            <Light.Distant />
+                                                         </light>
+                                                      </Lighting>
+                                                   </input>
+                                                </BoxBlur>
+                                             </bumpInput>
+                                             <light>
+                                                <Light.Distant />
+                                             </light>
+                                          </Lighting>
+                                       </effect>
+                                    </TextField>
+                                    <Label text="Password">
+                                       <font>
+                                          <Font name="Manrope ExtraBold" size="28.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Label>
+                                    <PasswordField fx:id="PasswordTextfield" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+                                       <font>
+                                          <Font name="Manrope Light" size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <Lighting>
+                                             <bumpInput>
+                                                <BoxBlur>
+                                                   <input>
+                                                      <Lighting>
+                                                         <bumpInput>
+                                                            <Shadow />
+                                                         </bumpInput>
+                                                         <light>
+                                                            <Light.Distant />
+                                                         </light>
+                                                      </Lighting>
+                                                   </input>
+                                                </BoxBlur>
+                                             </bumpInput>
+                                             <light>
+                                                <Light.Distant />
+                                             </light>
+                                          </Lighting>
+                                       </effect>
+                                    </PasswordField>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="SignInButton" mnemonicParsing="false" onMouseClicked="#SignInButton_MouseClicked" prefHeight="0.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Sign in">
+                                       <font>
+                                          <Font name="Manrope Medium" size="16.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <HBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                    <Label text="Don't have an account?">
+                                       <font>
+                                          <Font name="Manrope ExtraBold" size="14.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                   <color>
+                                                      <Color red="0.7764706015586853" green="0.4000000059604645" blue="0.1921568661928177" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Label>
+                                    <Button fx:id="SignInButton1" mnemonicParsing="false" onMouseClicked="#SignUpButton_MouseClicked" style="-fx-background-color: transparent;" text="Sign up" textFill="#c96b34">
+                                       <font>
+                                          <Font name="Manrope Medium" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets bottom="1.0" />
+                                       </padding>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </AnchorPane>
+         </children>
+      </HBox>
    </right>
 </BorderPane>

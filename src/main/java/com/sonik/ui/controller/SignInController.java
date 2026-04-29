@@ -13,6 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -23,6 +26,9 @@ public class SignInController {
     private AuthService authService;
 
     @FXML
+    private HBox leftHBox; // crea este fx:id en el FXML
+
+    @FXML
     public TextField UserTextfield;
     @FXML
     public PasswordField PasswordTextfield;
@@ -31,7 +37,18 @@ public class SignInController {
 
 
     public void initialize() {
-        this.authService = AppContext.getAuthService();;
+
+        this.authService = AppContext.getAuthService();
+
+        /**
+         * Código para redondear background-image
+         */
+        Rectangle clip = new Rectangle();
+        clip.setArcWidth(20);
+        clip.setArcHeight(20);
+        clip.widthProperty().bind(leftHBox.widthProperty());
+        clip.heightProperty().bind(leftHBox.heightProperty());
+        leftHBox.setClip(clip);
     }
 
     public void OnkeyPressed_UserTexfield(KeyEvent keyEvent) {
@@ -58,7 +75,6 @@ public class SignInController {
             Stage homeStage = new Stage();
             homeStage.initStyle(StageStyle.UNDECORATED);
             homeStage.setScene(newScene);
-            homeStage.setMaximized(true);
 
             // PASAR EL STAGE AL CONTROLADOR
             controller.setStage(homeStage);
@@ -73,7 +89,7 @@ public class SignInController {
 
     public void SignUpButton_MouseClicked(MouseEvent mouseEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/singup-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signup-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
             Stage stage = (Stage) SignInButton.getScene().getWindow();

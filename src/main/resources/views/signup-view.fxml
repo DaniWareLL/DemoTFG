@@ -99,7 +99,7 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <TextField fx:id="EmailTextfield" onKeyPressed="#OnkeyPressed_EmailTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Email" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+                        <TextField fx:id="emailTextfield" onKeyPressed="#OnkeyPressed_EmailTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Email" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
                            <font>
                               <Font name="Manrope ExtraLight" size="15.0" />
                            </font>
@@ -146,7 +146,7 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <TextField fx:id="UserTextfield" onKeyPressed="#OnkeyPressed_UserTexfield" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+                        <TextField fx:id="userTextfield" onKeyPressed="#OnkeyPressed_UserTexfield" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
                            <font>
                               <Font name="Manrope ExtraLight" size="15.0" />
                            </font>
@@ -193,7 +193,7 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <PasswordField fx:id="PasswordTextfield" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+                        <PasswordField fx:id="passwordTextfield" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
                            <font>
                               <Font name="Manrope Light" size="15.0" />
                            </font>

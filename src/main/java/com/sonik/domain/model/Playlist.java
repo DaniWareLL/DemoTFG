@@ -43,12 +43,11 @@ public class Playlist {
     public Playlist() {}
 
     public Playlist(User user, String name, String description,
-                    LocalDate creationDate, int sortOrder) throws  IncorrectArgumentException {
+                    LocalDate creationDate) throws  IncorrectArgumentException {
         setUser(user);
         setName(name);
         setDescription(description);
         setCreationDate(creationDate);
-        setSortOrder(sortOrder);
     }
 
     // Getters

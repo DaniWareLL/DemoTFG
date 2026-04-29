@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
@@ -122,10 +123,9 @@ public class SettingsController {
     }
 
     public void updateToolMC(MouseEvent mouseEvent) {
-        AppContext.getSettingService().updateTool();
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The Audio tool have been updated successfully", ButtonType.OK);
-            alert.showAndWait();
-        });
+
+    }
+
+    public void searchBarOnKP(KeyEvent keyEvent) {
     }
 }

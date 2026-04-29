@@ -3,14 +3,15 @@ package com.sonik.ui.controller;
 import javafx.application.Platform;
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
-import com.sonik.service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,6 +27,9 @@ public class HomeController {
 
     @FXML
     private BorderPane mainContainer;
+
+    @FXML
+    private VBox leftContainer;
 
     // Top bar / búsqueda
     @FXML
@@ -75,6 +79,9 @@ public class HomeController {
     @FXML
     private Node homeContent;
 
+    @FXML
+    private Node leftContent;
+
 
 
     private double xOffset = 0;
@@ -82,6 +89,7 @@ public class HomeController {
 
     public void initialize() {
         homeContent = mainContainer.getCenter(); // guardas el contenido original
+        leftContent = mainContainer.getLeft();   // ← sidebar original
         userNameLabel.setText(UserSession.getUser().getUserName());
 
         enableWindowDrag();
@@ -122,6 +130,31 @@ public class HomeController {
     }
 
     public void playlistButtonOnMC(MouseEvent mouseEvent) {
+        try {
+            // Cargar panel central
+            FXMLLoader loaderCenter = new FXMLLoader(getClass().getResource("/views/playlist-view.fxml"));
+            Node playlistPanel = loaderCenter.load();
+
+            // Cargar panel izquierdo (sidebar)
+            FXMLLoader loaderLeft = new FXMLLoader(getClass().getResource("/views/playlist-sidebar.fxml"));
+            Node playlistSidebar = loaderLeft.load();
+            BorderPane.setMargin(playlistSidebar, new Insets(7, 5, 2, 10));
+
+            // Configurar controllers si hace falta
+            PlaylistController controllerCenter = loaderCenter.getController();
+            PlaylistSidebarController controllerLeft = loaderLeft.getController();
+
+            // Cambiar CENTER y LEFT
+            mainContainer.setCenter(playlistPanel);
+            mainContainer.setLeft(playlistSidebar);
+
+        } catch (IOException e) {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error", ButtonType.OK);
+                alert.showAndWait();
+            });
+            e.printStackTrace();
+        }
     }
 
     public void songButtonOnMC(MouseEvent mouseEvent) {
@@ -155,5 +188,10 @@ public class HomeController {
     }
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void homeBtnMC(MouseEvent mouseEvent) {
+        mainContainer.setCenter(homeContent);
+        mainContainer.setLeft(leftContent);
     }
 }

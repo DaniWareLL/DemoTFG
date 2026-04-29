@@ -30,7 +30,7 @@
       
       
             <!-- TÍTULO -->
-            <Label text="Preferences" textFill="WHITE">
+            <Label text="Preferences" textFill="#c58a5f">
                <font>
                   <Font name="Manrope ExtraBold" size="28.0" />
                </font>
@@ -44,7 +44,7 @@
                         <Font name="Manrope Medium" size="22" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="qualityCB" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
+                  <ChoiceBox fx:id="qualityCB" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../css/choice-box.css" />
                </HBox>
                <Label text="Sets the audio quality used during playback" textFill="WHITE">
                   <font>
@@ -61,7 +61,7 @@
                         <Font name="Manrope Medium" size="22" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="sourceCB" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
+                  <ChoiceBox fx:id="sourceCB" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../css/choice-box.css" />
                </HBox>
                <Label text="Chooses the platform or service where audio is fetched from" textFill="WHITE">
                   <font>
@@ -78,7 +78,7 @@
                         <Font name="Manrope Medium" size="22" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="themeCB" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" />
+                  <ChoiceBox fx:id="themeCB" style="-fx-background-color: #191919; -fx-border-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../css/choice-box.css" />
                </HBox>
                <Label text="Switches the visual style of the application" textFill="WHITE">
                   <font>
@@ -95,7 +95,7 @@
                         <Font name="Manrope Medium" size="22" />
                      </font>
                   </Label>
-                  <Button fx:id="browseButton" onMouseClicked="#browseButtonMC" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Browse" textFill="WHITE">
+                  <Button fx:id="browseButton" onMouseClicked="#browseButtonMC" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Browse" textFill="#c58a5f">
                      <font>
                         <Font name="Manrope Medium" size="16" />
                      </font>
@@ -122,14 +122,14 @@
             </VBox>
       
             <!-- SAVE CHANGES -->
-            <Button fx:id="saveChangesButton" onMouseClicked="#onSaveChangesMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Save changes" textFill="WHITE">
+            <Button fx:id="saveChangesButton" onMouseClicked="#onSaveChangesMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Save changes" textFill="#c58a5f">
                <font>
                   <Font name="Manrope Medium" size="16" />
                </font>
             </Button>
       
             <Separator />
-            <Label text="Profile" textFill="WHITE">
+            <Label text="Profile" textFill="#c58a5f">
                <font>
                   <Font name="Manrope ExtraBold" size="28.0" />
                </font>
@@ -206,7 +206,7 @@
             <!-- BACK HOME -->
             <HBox alignment="CENTER_LEFT" />
             <Separator />
-            <Label text="Tools" textFill="WHITE">
+            <Label text="Tools" textFill="#c58a5f">
                <font>
                   <Font name="Manrope ExtraBold" size="28.0" />
                </font>
@@ -223,7 +223,7 @@
                         <Font name="Manrope Medium" size="12" />
                      </font>
                   </Label>
-                  <Button fx:id="updateToolBtn" onMouseClicked="#updateToolMC" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Update tool" textFill="WHITE">
+                  <Button fx:id="updateToolBtn" onMouseClicked="#updateToolMC" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Update tool" textFill="#c58a5f">
                      <font>
                         <Font name="Manrope Medium" size="16" />
                      </font>
@@ -231,7 +231,7 @@
                </children>
             </VBox>
             <Separator />
-            <Button fx:id="backHomeButton" onMouseClicked="#backHomeMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Back home" textFill="WHITE">
+            <Button fx:id="backHomeButton" onMouseClicked="#backHomeMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Back home" textFill="#c58a5f">
                <font>
                   <Font name="Manrope Medium" size="16" />
                </font>

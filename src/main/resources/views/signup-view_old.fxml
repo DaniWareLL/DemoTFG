@@ -117,7 +117,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TextField fx:id="UserTextfield" layoutX="353.0" layoutY="356.0" onKeyPressed="#OnkeyPressed_UserTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+      <TextField fx:id="userTextfield" layoutX="353.0" layoutY="356.0" onKeyPressed="#OnkeyPressed_UserTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
          <font>
             <Font name="Manrope ExtraLight" size="15.0" />
          </font>
@@ -143,7 +143,7 @@
             </Lighting>
          </effect>
       </TextField>
-      <Button fx:id="CreateAccountButton" layoutX="429.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#CreateAccountButton_MouseClicked" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Create Account">
+      <Button fx:id="createAccountButton" layoutX="429.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#CreateAccountButton_MouseClicked" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Create Account">
          <font>
             <Font name="Manrope Medium" size="16.0" />
          </font>
@@ -164,7 +164,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <PasswordField fx:id="PasswordTextfield" layoutX="353.0" layoutY="432.0" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+      <PasswordField fx:id="passwordTextfield" layoutX="353.0" layoutY="432.0" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
          <font>
             <Font name="Manrope Light" size="15.0" />
          </font>
@@ -211,7 +211,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TextField fx:id="EmailTextfield" layoutX="352.0" layoutY="282.0" onKeyPressed="#OnkeyPressed_EmailTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Email" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+      <TextField fx:id="emailTextfield" layoutX="352.0" layoutY="282.0" onKeyPressed="#OnkeyPressed_EmailTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Email" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
          <font>
             <Font name="Manrope ExtraLight" size="15.0" />
          </font>

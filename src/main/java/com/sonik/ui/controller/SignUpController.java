@@ -6,7 +6,6 @@ import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.User;
 import com.sonik.service.AuthService;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,9 +26,9 @@ public class SignUpController {
      de inversion de dependencias */
 
     @FXML
-    public TextField EmailTextfield;
+    public TextField emailTextfield;
     @FXML
-    public TextField UserTextfield;
+    public TextField userTextfield;
 
     @FXML
     private Label emailErrorLabel;
@@ -39,9 +38,9 @@ public class SignUpController {
     private Label passwordErrorLabel;
 
     @FXML
-    public PasswordField PasswordTextfield;
+    public PasswordField passwordTextfield;
     @FXML
-    public Button CreateAccountButton;
+    public Button createAccountButton;
 
 
     public void initialize() {
@@ -49,37 +48,37 @@ public class SignUpController {
     }
 
     public void OnkeyPressed_EmailTexfield(KeyEvent keyEvent) {
-        AuxiliaryMethods.setErrorLabelState(false, emailErrorLabel, EmailTextfield, Optional.empty());
+        AuxiliaryMethods.setErrorLabelState(false, emailErrorLabel, emailTextfield, Optional.empty());
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            UserTextfield.requestFocus();
+            userTextfield.requestFocus();
         }
     }
 
     public void OnkeyPressed_UserTexfield(KeyEvent keyEvent) {
-        AuxiliaryMethods.setErrorLabelState(false, usernameErrorLabel, UserTextfield, Optional.empty());
+        AuxiliaryMethods.setErrorLabelState(false, usernameErrorLabel, userTextfield, Optional.empty());
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            PasswordTextfield.requestFocus();
+            passwordTextfield.requestFocus();
         }
     }
 
     public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {
-        AuxiliaryMethods.setErrorLabelState(false, passwordErrorLabel, PasswordTextfield, Optional.empty());
+        AuxiliaryMethods.setErrorLabelState(false, passwordErrorLabel, passwordTextfield, Optional.empty());
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            CreateAccountButton.requestFocus();
+            createAccountButton.requestFocus();
         }
     }
 
     public void CreateAccountButton_MouseClicked(MouseEvent mouseEvent) {
 
         try {
-            User user = new User(UserTextfield.getText(), EmailTextfield.getText(), PasswordTextfield.getText(), LocalDate.now());
+            User user = new User(userTextfield.getText(), emailTextfield.getText(), passwordTextfield.getText(), LocalDate.now());
             authService.register(user);
 
             BackToLogin();
         } catch (DuplicateIdException e) {
             AuxiliaryMethods.setErrorLabelState(true,
                     usernameErrorLabel,
-                    UserTextfield,
+                    userTextfield,
                     Optional.of("The username has already been taken"));
 
         } catch (DataAccessException e) {
@@ -91,19 +90,19 @@ public class SignUpController {
                 case INVALID_DATE -> AuxiliaryMethods.showAlert("The user's creation date is invalid.");
                 case EMPTY_PASSWORD -> AuxiliaryMethods.setErrorLabelState(true,
                         passwordErrorLabel,
-                        PasswordTextfield,
+                        passwordTextfield,
                         Optional.of("Password cannot be empty."));
                 case EMPTY_EMAIL -> AuxiliaryMethods.setErrorLabelState(true,
                         emailErrorLabel,
-                        EmailTextfield,
+                        emailTextfield,
                         Optional.of("Email cannot be empty."));
                 case INVALID_EMAIL -> AuxiliaryMethods.setErrorLabelState(true,
                         emailErrorLabel,
-                        EmailTextfield,
+                        emailTextfield,
                         Optional.of("Invalid email address(example@domain.com)."));
                 case EMPTY_USERNAME -> AuxiliaryMethods.setErrorLabelState(true,
                         usernameErrorLabel,
-                        UserTextfield,
+                        userTextfield,
                         Optional.of("The username cannot be empty."));
                 case INVALID_NUMBER -> AuxiliaryMethods.showAlert(
                         "An invalid number was entered(usually a negative number when only positive numbers are allowed).");
@@ -117,7 +116,7 @@ public class SignUpController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signin-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
-            Stage stage = (Stage) EmailTextfield.getScene().getWindow();
+            Stage stage = (Stage) emailTextfield.getScene().getWindow();
             stage.setScene(newScene);
             stage.show();
 

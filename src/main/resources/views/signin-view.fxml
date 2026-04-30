@@ -97,6 +97,11 @@
                                           </LinearGradient>
                                        </textFill>
                                     </Label>
+                                    <Label fx:id="accountCreatedLabel"
+                                           wrapText="true"
+                                           text="Account successfully created!!&#10;You can now log in using your credentials."
+                                           visible="false"
+                                           style="-fx-text-fill: green; -fx-font-size: 12px; -fx-font-weight: bold;" />
                                  </children>
                                  <VBox.margin>
                                     <Insets />

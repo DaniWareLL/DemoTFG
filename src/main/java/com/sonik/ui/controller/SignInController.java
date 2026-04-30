@@ -32,16 +32,18 @@ public class SignInController {
     private HBox leftHBox; // crea este fx:id en el FXML
 
     @FXML
-    public TextField userTextfield;
+    private TextField userTextfield;
     @FXML
-    public PasswordField passwordTextField;
+    private PasswordField passwordTextField;
     @FXML
-    public Button signInButton;
+    private Button signInButton;
 
     @FXML
     private Label usernameErrorLabel;
     @FXML
-    public Label passwordErrorLabel;
+    private Label passwordErrorLabel;
+    @FXML
+    private Label accountCreatedLabel;
 
     public void initialize() {
 
@@ -58,7 +60,12 @@ public class SignInController {
         leftHBox.setClip(clip);
     }
 
+    public void showAccountCreatedMessage() {
+        accountCreatedLabel.setVisible(true);
+    }
+
     public void OnkeyPressed_UserTexfield(KeyEvent keyEvent) {
+        accountCreatedLabel.setVisible(false);
         AuxiliaryMethods.setErrorLabelState(false, usernameErrorLabel, userTextfield, Optional.empty());
         if (keyEvent.getCode() == KeyCode.ENTER) {
             passwordTextField.requestFocus();
@@ -66,6 +73,7 @@ public class SignInController {
     }
 
     public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {
+        accountCreatedLabel.setVisible(false);
         AuxiliaryMethods.setErrorLabelState(false, passwordErrorLabel, passwordTextField, Optional.empty());
     }
 

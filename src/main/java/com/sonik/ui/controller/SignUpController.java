@@ -26,9 +26,9 @@ public class SignUpController {
      de inversion de dependencias */
 
     @FXML
-    public TextField emailTextfield;
+    private TextField emailTextfield;
     @FXML
-    public TextField userTextfield;
+    private TextField userTextfield;
 
     @FXML
     private Label emailErrorLabel;
@@ -38,9 +38,9 @@ public class SignUpController {
     private Label passwordErrorLabel;
 
     @FXML
-    public PasswordField passwordTextfield;
+    private PasswordField passwordTextfield;
     @FXML
-    public Button createAccountButton;
+    private Button createAccountButton;
 
 
     public void initialize() {
@@ -104,14 +104,22 @@ public class SignUpController {
 
     }
 
-    public void BackToLogin() {
+    private void BackToLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signin-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
+            SignInController controller = loader.getController();
+
             Stage stage = (Stage) emailTextfield.getScene().getWindow();
             stage.setScene(newScene);
+            stage.setWidth(1000);
+            stage.setHeight(700);
+            stage.setMinWidth(900);
+            stage.setMinHeight(600);
             stage.show();
+
+            controller.showAccountCreatedMessage();
 
         } catch (IOException e) {
             AuxiliaryMethods.showAlert("An error occurred when loading signin-view.fxml.");

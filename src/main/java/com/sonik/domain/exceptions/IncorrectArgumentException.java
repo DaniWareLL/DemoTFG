@@ -8,14 +8,11 @@ public class IncorrectArgumentException extends Exception {
         EMPTY_PASSWORD,
         EMPTY_EMAIL,
         INVALID_EMAIL,
-        EMPTY_USERNAME, INVALID_NUMBER
+        EMPTY_USERNAME,
+        INVALID_NUMBER
     }
 
     private ErrorType errorType;
-
-    public IncorrectArgumentException(String message, Throwable cause) {
-        super(message, cause);
-    }
 
     public IncorrectArgumentException(ErrorType error, Throwable cause) {
         this.errorType = error;
@@ -25,10 +22,6 @@ public class IncorrectArgumentException extends Exception {
     public IncorrectArgumentException(ErrorType error) {
         this.errorType = error;
         super(resolveErrorCode(error));
-    }
-
-    public IncorrectArgumentException(String message) {
-        super(message);
     }
 
     private static String resolveErrorCode(ErrorType error) {

@@ -29,7 +29,7 @@
                   <Insets left="15.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="ButtonExplore" mnemonicParsing="false" onMouseClicked="#exploreButtonOnMC" style="-fx-alignment: left; -fx-background-color: #191919;" text="Explore" textFill="WHITE">
+            <Button fx:id="buttonExplore" mnemonicParsing="false" onMouseClicked="#exploreButtonOnMC" style="-fx-alignment: left; -fx-background-color: #191919;" text="Explore" textFill="WHITE">
                <font>
                   <Font name="Manrope Regular" size="16.0" />
                </font>
@@ -51,7 +51,7 @@
                   <Insets left="15.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="ButtonPlaylist" mnemonicParsing="false" onMouseClicked="#playlistButtonOnMC" style="-fx-alignment: left; -fx-background-color: #191919;" text="Playlist" textFill="WHITE">
+            <Button fx:id="buttonPlaylist" mnemonicParsing="false" onMouseClicked="#playlistButtonOnMC" style="-fx-alignment: left; -fx-background-color: #191919;" text="Playlist" textFill="WHITE">
                <font>
                   <Font name="Manrope Regular" size="16.0" />
                </font>
@@ -60,7 +60,7 @@
                </graphic>
                <maxWidth>1.7976931348623157E308</maxWidth>
             </Button>
-            <Button fx:id="ButtonSongs" mnemonicParsing="false" onMouseClicked="#songButtonOnMC" style="-fx-alignment: left; -fx-background-color: #191919;" text="Songs" textFill="WHITE">
+            <Button fx:id="buttonSongs" mnemonicParsing="false" onMouseClicked="#songButtonOnMC" style="-fx-alignment: left; -fx-background-color: #191919;" text="Songs" textFill="WHITE">
                <font>
                   <Font name="Manrope Regular" size="16.0" />
                </font>
@@ -361,7 +361,7 @@
                               <FontIcon iconColor="WHITE" iconLiteral="mdi2p-play" iconSize="25" text="󰐊" />
                            </graphic>
                         </Button>
-                        <Button fx:id="ButtonNextSong" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
+                        <Button fx:id="buttonNextSong" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
                            <font>
                               <Font name="Manrope Regular" size="16.0" />
                            </font>
@@ -381,7 +381,7 @@
                               <Insets bottom="10.0" />
                            </HBox.margin>
                         </Label>
-                        <ProgressBar fx:id="ProgressBar" maxWidth="1.7976931348623157E308" prefHeight="10.0" progress="0.5" HBox.hgrow="ALWAYS">
+                        <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" prefHeight="10.0" progress="0.5" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets bottom="10.0" />
                            </HBox.margin></ProgressBar>
@@ -407,7 +407,7 @@
             <HBox alignment="CENTER" spacing="10.0">
                <children>
                   <FontIcon iconColor="WHITE" iconLiteral="mdi2v-volume-high" iconSize="25" />
-                  <Slider fx:id="VolumeSlider" maxWidth="180.0" minWidth="80.0" HBox.hgrow="ALWAYS" />
+                  <Slider fx:id="volumeSlider" maxWidth="180.0" minWidth="80.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>
@@ -449,7 +449,7 @@
             <HBox alignment="CENTER_LEFT" maxHeight="40.0" spacing="8.0" style="-fx-background-radius: 20; -fx-background-color: #191919;" HBox.hgrow="ALWAYS">
                <children>
                   <FontIcon iconColor="WHITE" iconLiteral="mdi2m-magnify" iconSize="25" />
-                  <TextField fx:id="SearchBar" onKeyPressed="#searchBarOnKP" promptText="Search..." style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: none;" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="searchBar" onKeyPressed="#searchBarOnKP" promptText="Search..." style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: none;" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Manrope ExtraLight" size="15.0" />
                      </font>
@@ -472,7 +472,7 @@
             </Region>
             <HBox alignment="CENTER" style="-fx-background-radius: 20;">
                <children>
-                  <Button fx:id="ButtonOptions" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
+                  <Button fx:id="buttonOptions" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
                      <font>
                         <Font name="Manrope Regular" size="16.0" />
                      </font>

@@ -18,7 +18,7 @@ public interface AuthService {
     /**
      * Valida las credenciales y devuelve true si es correcto.
      */
-    Boolean login(String username, String password) throws ObjectNotFoundException, DataAccessException;
+    boolean login(String username, String password) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException;
 
     /**
      * Finaliza la sesión actual (si manejas estado de sesión).

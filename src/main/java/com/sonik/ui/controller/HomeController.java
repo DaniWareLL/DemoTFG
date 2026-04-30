@@ -33,23 +33,23 @@ public class HomeController {
 
     // Top bar / búsqueda
     @FXML
-    private TextField SearchBar;
+    private TextField searchBar;
 
     @FXML
-    private Button ButtonOptions;
+    private Button buttonOptions;
 
     // Menú lateral
     @FXML
     private Button ButtonHome;
 
     @FXML
-    private Button ButtonExplore;
+    private Button buttonExplore;
 
     @FXML
-    private Button ButtonPlaylist;
+    private Button buttonPlaylist;
 
     @FXML
-    private Button ButtonSongs;
+    private Button buttonSongs;
 
     // Reproductor inferior
     @FXML
@@ -59,13 +59,13 @@ public class HomeController {
     private Button ButtonPlay;
 
     @FXML
-    private Button ButtonNextSong;
+    private Button buttonNextSong;
 
     @FXML
-    private ProgressBar ProgressBar;
+    private ProgressBar progressBar;
 
     @FXML
-    private Slider VolumeSlider;
+    private Slider volumeSlider;
 
     @FXML
     private Label currentTimeLabel;
@@ -126,7 +126,7 @@ public class HomeController {
     }
 
     public void exploreButtonOnMC(MouseEvent mouseEvent) {
-        SearchBar.requestFocus();
+        searchBar.requestFocus();
     }
 
     public void playlistButtonOnMC(MouseEvent mouseEvent) {
@@ -182,7 +182,7 @@ public class HomeController {
     }
 
     public void searchBarOnKP(KeyEvent keyEvent) {
-        String search =  SearchBar.getText();
+        String search =  searchBar.getText();
         AppContext.getPlayerService().getStreamUrl(search);
         AppContext.getMetadataService().getMetadata(search);
     }

@@ -125,7 +125,7 @@
                                           </LinearGradient>
                                        </textFill>
                                     </Label>
-                                    <TextField fx:id="UserTextfield" onKeyPressed="#OnkeyPressed_UserTexfield" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white;">
+                                    <TextField fx:id="userTextfield" onKeyPressed="#OnkeyPressed_UserTexfield" promptText="Username" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white;">
                                        <font>
                                           <Font name="Manrope ExtraLight" size="15.0" />
                                        </font>
@@ -151,6 +151,10 @@
                                           </Lighting>
                                        </effect>
                                     </TextField>
+                                    <Label fx:id="usernameErrorLabel"
+                                           text="The username has already been taken"
+                                           visible="false"
+                                           style="-fx-text-fill: red; -fx-font-size: 12px;" />
                                     <Label text="Password">
                                        <font>
                                           <Font name="Manrope ExtraBold" size="28.0" />
@@ -177,7 +181,7 @@
                                           </LinearGradient>
                                        </textFill>
                                     </Label>
-                                    <PasswordField fx:id="PasswordTextfield" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
+                                    <PasswordField fx:id="passwordTextField" onKeyPressed="#OnkeyPressed_PasswordTexfield" prefHeight="30.0" prefWidth="295.0" promptText="Password" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20px; -fx-text-fill: white">
                                        <font>
                                           <Font name="Manrope Light" size="15.0" />
                                        </font>
@@ -203,11 +207,15 @@
                                           </Lighting>
                                        </effect>
                                     </PasswordField>
+                                    <Label fx:id="passwordErrorLabel"
+                                           text="The password entered is incorrect"
+                                           visible="false"
+                                           style="-fx-text-fill: red; -fx-font-size: 12px;" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER">
                                  <children>
-                                    <Button fx:id="SignInButton" mnemonicParsing="false" onMouseClicked="#SignInButton_MouseClicked" prefHeight="0.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Sign in">
+                                    <Button fx:id="signInButton" mnemonicParsing="false" onMouseClicked="#SignInButton_MouseClicked" prefHeight="0.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Sign in">
                                        <font>
                                           <Font name="Manrope Medium" size="16.0" />
                                        </font>
@@ -263,7 +271,7 @@
                                           </LinearGradient>
                                        </textFill>
                                     </Label>
-                                    <Button fx:id="SignInButton1" mnemonicParsing="false" onMouseClicked="#SignUpButton_MouseClicked" style="-fx-background-color: transparent;" text="Sign up" textFill="#c96b34">
+                                    <Button fx:id="signInButton1" mnemonicParsing="false" onMouseClicked="#SignUpButton_MouseClicked" style="-fx-background-color: transparent;" text="Sign up" textFill="#c96b34">
                                        <font>
                                           <Font name="Manrope Medium" size="14.0" />
                                        </font>

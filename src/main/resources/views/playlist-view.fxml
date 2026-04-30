@@ -50,7 +50,7 @@
                      <HBox alignment="CENTER_LEFT" maxHeight="40.0" prefHeight="40.0" prefWidth="300.0" spacing="8.0" style="-fx-background-radius: 20; -fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: white;" HBox.hgrow="ALWAYS">
                         <children>
                            <FontIcon iconColor="#c58a5f" iconLiteral="mdi2m-magnify" iconSize="25" />
-                           <TextField fx:id="SearchBar" onKeyPressed="#searchBarOnKP" promptText="Search. songs.." style="-fx-background-color: transparent; -fx-text-fill: #C58A5F;">
+                           <TextField fx:id="searchBar" onKeyPressed="#searchBarOnKP" promptText="Search. songs.." style="-fx-background-color: transparent; -fx-text-fill: #C58A5F;">
                               <font>
                                  <Font name="Manrope ExtraLight" size="15.0" />
                               </font>

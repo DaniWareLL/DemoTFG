@@ -15,8 +15,7 @@ public class AuxiliaryMethods {
      * @param state Whether to enable or disable the label ({@code true} makes the label visible and {@code false} makes it invisible)
      * @param label The label to be changed
      * @param textField The {@link javafx.scene.control.TextField} associated to the label
-     * @param message The text to be shown in the label (if it is empty, the message shown will be the one initially present in the label,
-     *               meaning the label's text won't be altered whatsoever)
+     * @param message The text to be shown in the label (if it is empty, the message shown will be the one initially present in the label)
      */
     protected static void setErrorLabelState(boolean state, Label label, TextField textField, Optional<String> message) {
 

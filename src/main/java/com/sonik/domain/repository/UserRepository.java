@@ -2,6 +2,7 @@ package com.sonik.domain.repository;
 
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.User;
 import com.sonik.domain.model.UserPref;
@@ -30,7 +31,7 @@ public interface UserRepository {
      * @throws DataAccessException if a data access error occurs
      * @throws ObjectNotFoundException if no user with the given username exists
      */
-    User findByUsername(String username) throws DataAccessException, ObjectNotFoundException;
+    User findByUsername(String username) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException;
 
     /**
      * Creates a new user record in the data source
@@ -38,7 +39,7 @@ public interface UserRepository {
      * @throws DataAccessException if a data access error occurs
      * @throws DuplicateIdException if the user already exists
      */
-    void create(User user) throws DataAccessException, DuplicateIdException;
+    void create(User user) throws DataAccessException, DuplicateIdException, IncorrectArgumentException;
 
 
     /**

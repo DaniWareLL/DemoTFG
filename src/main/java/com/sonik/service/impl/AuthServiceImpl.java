@@ -46,9 +46,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Boolean login(String username, String password) throws ObjectNotFoundException, DataAccessException {
+    public boolean login(String username, String password) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException {
         User user = userRepository.findByUsername(username);
-        if (user == null) return false;
+        if (password.trim().isBlank()) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_PASSWORD);
 
         if (passwordService.checkPassword(password, user.getPassword_hash())) {
             UserSession.start(user); // Guardar datos del usuario en memoria

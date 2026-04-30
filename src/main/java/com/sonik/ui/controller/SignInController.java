@@ -2,26 +2,29 @@ package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class SignInController {
+
 
     private AuthService authService;
 
@@ -29,12 +32,16 @@ public class SignInController {
     private HBox leftHBox; // crea este fx:id en el FXML
 
     @FXML
-    public TextField UserTextfield;
+    public TextField userTextfield;
     @FXML
-    public PasswordField PasswordTextfield;
+    public PasswordField passwordTextField;
     @FXML
-    public Button SignInButton;
+    public Button signInButton;
 
+    @FXML
+    private Label usernameErrorLabel;
+    @FXML
+    public Label passwordErrorLabel;
 
     public void initialize() {
 
@@ -52,17 +59,20 @@ public class SignInController {
     }
 
     public void OnkeyPressed_UserTexfield(KeyEvent keyEvent) {
+        AuxiliaryMethods.setErrorLabelState(false, usernameErrorLabel, userTextfield, Optional.empty());
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            PasswordTextfield.requestFocus();
+            passwordTextField.requestFocus();
         }
     }
 
-    public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {}
+    public void OnkeyPressed_PasswordTexfield(KeyEvent keyEvent) {
+        AuxiliaryMethods.setErrorLabelState(false, passwordErrorLabel, passwordTextField, Optional.empty());
+    }
 
     public void SignInButton_MouseClicked(MouseEvent mouseEvent) {
 
         try {
-            if (authService.login(UserTextfield.getText(), PasswordTextfield.getText())) {
+            if (authService.login(userTextfield.getText(), passwordTextField.getText())) {
 
                 // Cargar Home
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
@@ -82,13 +92,22 @@ public class SignInController {
                 homeStage.show();
 
                 // Cerrar login
-                Stage loginStage = (Stage) SignInButton.getScene().getWindow();
+                Stage loginStage = (Stage) signInButton.getScene().getWindow();
                 loginStage.close();
+            } else {
+                AuxiliaryMethods.setErrorLabelState(true, passwordErrorLabel, passwordTextField, Optional.of("Incorrect password"));
             }
+        } catch (IncorrectArgumentException iae) {
+            if (iae.getErrorType() == IncorrectArgumentException.ErrorType.EMPTY_USERNAME) {
+                AuxiliaryMethods.setErrorLabelState(true, usernameErrorLabel, userTextfield, Optional.of(iae.getMessage()));
+            } else if (iae.getErrorType() == IncorrectArgumentException.ErrorType.EMPTY_PASSWORD) {
+                AuxiliaryMethods.setErrorLabelState(true, passwordErrorLabel, passwordTextField, Optional.of(iae.getMessage()));
+            }
+
         } catch (ObjectNotFoundException e) {
-            //TODO: Mostrar al usuario por pantalla(no vale sout) que sus creedenciales son incorrectas
+            AuxiliaryMethods.setErrorLabelState(true, usernameErrorLabel ,userTextfield, Optional.of(e.getMessage()));
         } catch (DataAccessException | IOException e) {
-            // TODO: Mostrar error por pantalla(Alert está bien)
+            AuxiliaryMethods.showAlert(e.getMessage());
         }
     }
 
@@ -97,15 +116,15 @@ public class SignInController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signup-view.fxml"));
             Scene newScene = new Scene(loader.load());
 
-            Stage stage = (Stage) SignInButton.getScene().getWindow();
+            Stage stage = (Stage) signInButton.getScene().getWindow();
             stage.setScene(newScene);
             stage.show();
             stage.sizeToScene();
             stage.centerOnScreen();
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
         }
 
     }

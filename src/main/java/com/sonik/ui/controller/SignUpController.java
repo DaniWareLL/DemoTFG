@@ -82,30 +82,23 @@ public class SignUpController {
                     Optional.of("The username has already been taken"));
 
         } catch (DataAccessException e) {
-            AuxiliaryMethods.showAlert("An error occurred while connecting to the database.");
+            AuxiliaryMethods.showAlert(e.getMessage());
 
         } catch (IncorrectArgumentException e) {
             switch (e.getErrorType()) {
-                case NULL_OBJECT_RECEIVED -> AuxiliaryMethods.showAlert("A null object was received as a parameter.");
-                case INVALID_DATE -> AuxiliaryMethods.showAlert("The user's creation date is invalid.");
+                case NULL_OBJECT_RECEIVED, INVALID_NUMBER, INVALID_DATE -> AuxiliaryMethods.showAlert(e.getMessage());
                 case EMPTY_PASSWORD -> AuxiliaryMethods.setErrorLabelState(true,
                         passwordErrorLabel,
                         passwordTextfield,
-                        Optional.of("Password cannot be empty."));
-                case EMPTY_EMAIL -> AuxiliaryMethods.setErrorLabelState(true,
+                        Optional.of(e.getMessage()));
+                case EMPTY_EMAIL, INVALID_EMAIL -> AuxiliaryMethods.setErrorLabelState(true,
                         emailErrorLabel,
                         emailTextfield,
-                        Optional.of("Email cannot be empty."));
-                case INVALID_EMAIL -> AuxiliaryMethods.setErrorLabelState(true,
-                        emailErrorLabel,
-                        emailTextfield,
-                        Optional.of("Invalid email address(example@domain.com)."));
+                        Optional.of(e.getMessage()));
                 case EMPTY_USERNAME -> AuxiliaryMethods.setErrorLabelState(true,
                         usernameErrorLabel,
                         userTextfield,
-                        Optional.of("The username cannot be empty."));
-                case INVALID_NUMBER -> AuxiliaryMethods.showAlert(
-                        "An invalid number was entered(usually a negative number when only positive numbers are allowed).");
+                        Optional.of(e.getMessage()));
             }
         }
 

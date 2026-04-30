@@ -2,6 +2,7 @@ package com.sonik.infrastructure.persistence;
 
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.User;
 import com.sonik.domain.repository.UserRepository;
@@ -44,7 +45,9 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public User findByUsername(String username) throws DataAccessException, ObjectNotFoundException {
+    public User findByUsername(String username) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException {
+
+        if (username.trim().isBlank()) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_USERNAME);
 
         try (EntityManager em = emf.createEntityManager()) {
 
@@ -59,7 +62,7 @@ public class JpaUserRepository implements UserRepository {
             return user;
 
         } catch (NoResultException e) {
-            throw new ObjectNotFoundException("User with name " + username + " not found");
+            throw new ObjectNotFoundException("User with name \"" + username + "\" not found");
         } catch (NonUniqueResultException nure) {
             throw new DataAccessException("Found more than one user with the same name, try searching by user id.", nure);
         } catch (PersistenceException ex) {
@@ -68,7 +71,7 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public void create(User user) throws DataAccessException, DuplicateIdException {
+    public void create(User user) throws DataAccessException, DuplicateIdException, IncorrectArgumentException {
 
         EntityTransaction tx = null;
 

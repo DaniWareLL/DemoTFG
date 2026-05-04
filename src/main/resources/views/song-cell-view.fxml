@@ -55,7 +55,7 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Button mnemonicParsing="false" style="-fx-background-color: transpoarent;">
+      <Button fx:id="optionsBtn" mnemonicParsing="false" onMouseClicked="#optionsBtnMC" style="-fx-background-color: transpoarent;">
          <graphic>
       
               <!-- Botón opciones -->

@@ -1,13 +1,21 @@
 package com.sonik.ui.controller;
 
+import com.sonik.config.AppContext;
+import com.sonik.config.UserSession;
 import com.sonik.domain.model.Song;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Popup;
 import org.kordamp.ikonli.javafx.FontIcon;
+
+import java.io.IOException;
 
 public class SongCellController {
 
@@ -20,6 +28,7 @@ public class SongCellController {
     @FXML private Label qualityLabel;
     @FXML private Label dateLabel;
     @FXML private FontIcon optionsIcon;
+
 
     private Song currentSong;
 
@@ -36,7 +45,7 @@ public class SongCellController {
         idLabel.setText(String.valueOf(index + 1));
         titleLabel.setText(song.getTitle());
         timeLabel.setText(formatDuration(song.getDurationSec()));
-        qualityLabel.setText("High");
+        qualityLabel.setText(UserSession.getPreferences().getStreamingQuality().toString());
         sourceLabel.setText(song.getSource());
 
         dateLabel.setText(song.getAggregationDate() != null ?
@@ -66,5 +75,29 @@ public class SongCellController {
     private void showOptionsMenu() {
         // Mostrar menú contextual
         System.out.println("Opciones para: " + currentSong.getTitle());
+    }
+
+    public void optionsBtnMC(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/song-options-menu.fxml"));
+            VBox menuRoot = loader.load();
+
+            SongOptionsMenuController controller = loader.getController();
+            controller.setSong(currentSong);
+
+            Popup popup = new Popup();
+            popup.getContent().add(menuRoot);
+            popup.setAutoHide(true);
+
+            controller.setParentPopup(popup);
+
+            double x = optionsIcon.localToScreen(optionsIcon.getBoundsInLocal()).getMinX();
+            double y = optionsIcon.localToScreen(optionsIcon.getBoundsInLocal()).getMaxY();
+
+            popup.show(optionsIcon.getScene().getWindow(), x, y);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

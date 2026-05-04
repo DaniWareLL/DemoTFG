@@ -112,6 +112,7 @@ public class SettingsController {
 
         pref.setAudioSource(SourceName.valueOf(sourceCB.getValue()));
         pref.setInterfaceTheme(UserPref.InterfaceTheme.valueOf(themeCB.getValue()));
+        pref.setStreamingQuality(StreamingQuality.valueOf(qualityCB.getValue()));
         pref.setDownloadLocation(downloadLocationLabel.getText());
 
         userService.updatePreferences(pref);

@@ -7,6 +7,8 @@ import com.sonik.domain.model.Playlist;
 import com.sonik.domain.repository.PlaylistRepository;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 import static com.sonik.infrastructure.persistence.AuxiliaryMethods.handleRollbackAndThrow;
 
 /**
@@ -108,4 +110,21 @@ public class JpaPlaylistRepository implements PlaylistRepository {
             handleRollbackAndThrow(iae, et);
         }
     }
+
+    @Override
+    public List<Playlist> getAllPlaylist() throws DataAccessException, ObjectNotFoundException {
+        try (EntityManager em = emf.createEntityManager()) {
+
+            TypedQuery<Playlist> query =
+                    em.createQuery("SELECT p FROM Playlist p", Playlist.class);
+
+            return query.getResultList();
+
+        } catch (NoResultException e) {
+            throw new ObjectNotFoundException("No playlist found");
+        } catch (PersistenceException ex) {
+            throw new DataAccessException(DataAccessException.CONNECTION_ERROR, ex);
+        }
+    }
+
 }

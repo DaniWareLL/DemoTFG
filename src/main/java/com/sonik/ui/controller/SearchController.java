@@ -1,11 +1,13 @@
 package com.sonik.ui.controller;
 
 
+import com.sonik.config.AppConfig;
 import com.sonik.config.AppContext;
 import com.sonik.domain.model.Song;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 
@@ -50,5 +52,4 @@ public class SearchController {
     public void setResults(List<Song> songs) {
         searchedSongsList.getItems().setAll(songs);
     }
-
 }

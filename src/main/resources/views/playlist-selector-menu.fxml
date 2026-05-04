@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="8" style="-fx-background-color: #1f1f1f; -fx-padding: 10; -fx-background-radius: 8;" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label text="Añadir a playlist" style="-fx-text-fill: white; -fx-font-size: 14;" />
+
+        <VBox fx:id="playlistContainer" spacing="6" />
+    </children>
+</VBox>

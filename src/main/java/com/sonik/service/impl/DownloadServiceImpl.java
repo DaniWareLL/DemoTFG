@@ -21,24 +21,23 @@
         }
 
         @Override
-        public void downloadToMp3(String searchPattern) throws AudioExtractorException {
+        public void downloadToMp3(String url) throws AudioExtractorException {
 
             String downloadDir = UserSession.getPreferences().getDownloadLocation();
-            String searchPrefix = UserSession.getPreferences().getAudioSource().getSearchPrefix();
             String quality = UserSession.getPreferences().getStreamingQuality().getYtdlpFormat();
             try {
                 extractor.execute(List.of(
                         AppConfig.getYTDLPPath(),
-                        "-f",                quality,
+                        "-f", quality,
                         "--extract-audio",
-                        "--audio-format",    "mp3",
-                        "--audio-quality",   "0",
+                        "--audio-format", "mp3",
+                        "--audio-quality", "0",
                         "--add-metadata",
                         "--embed-thumbnail",
                         "--convert-thumbnails", "jpg",
                         "--ffmpeg-location", AppConfig.getFFmpegPath(),
                         "-P", downloadDir,
-                        searchPrefix + searchPattern
+                        url
                 ));
             } catch (IOException | InterruptedException e) {
                 throw new AudioExtractorException(AudioExtractorException.DOWNLOAD_ERROR, e);

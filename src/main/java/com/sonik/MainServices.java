@@ -55,8 +55,8 @@ public class MainServices {
             System.out.println(song);
         }
 
-//        DownloadServiceImpl download = new DownloadServiceImpl(client);
-//        download.downloadToMp3(searchPattern);
+        DownloadServiceImpl download = new DownloadServiceImpl(client);
+        download.downloadToMp3(searchPattern);
 
         audioPlayer.play(StreamURL);
 

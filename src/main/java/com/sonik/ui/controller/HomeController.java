@@ -84,6 +84,8 @@ public class HomeController {
     @FXML
     private Node leftContent;
 
+    private Node searchPanel;
+    private SearchController searchController;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -103,10 +105,13 @@ public class HomeController {
 
         closeBtn.setOnAction(e -> stage.close());
 
-        Platform.runLater(() -> {
-            searchBar.setOnKeyPressed(this::searchBarOnKP);
-            searchBar.requestFocus();
-        });
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/search-view.fxml"));
+            searchPanel = loader.load();
+            searchController = loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -195,30 +200,13 @@ public class HomeController {
 
                     List<Song> results = AppContext.getMetadataService().getMetadata(searchPattern);
 
-                    for(Song song : results) {
-                        System.out.println(song);
-                    }
-
                     Platform.runLater(() -> {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/search-view.fxml"));
-                            Node searchPanel = loader.load();
-
-                            SearchController controller = loader.getController();
-                            controller.setResults(results);
-
-                            mainContainer.setCenter(searchPanel);
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        searchController.setResults(results);
+                        mainContainer.setCenter(searchPanel);
                     });
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Platform.runLater(() -> {
-                        // ERROR
-                    });
                 }
             });
         }

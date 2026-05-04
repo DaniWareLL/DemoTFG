@@ -26,10 +26,10 @@
                       value="admin"/>
             <property name="jakarta.persistence.jdbc.password"
                       value="admin"/>
+            <!-- Mostrar sentencias SQL generadas -->
             <property
                     name="jakarta.persistence.schema-generation.database.action"
                     value="none"/>
-            <!-- Mostrar sentencias SQL generadas -->
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

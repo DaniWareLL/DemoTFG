@@ -17,4 +17,6 @@ public interface PlaylistRepository {
     void save(Playlist playlist) throws DuplicateIdException, DataAccessException;
 
     void delete(Playlist playlist) throws DataAccessException, ObjectNotFoundException;
+
+    List<Playlist> getAllPlaylist() throws DataAccessException, ObjectNotFoundException;
 }

@@ -10,8 +10,8 @@ public interface DownloadService {
 
     /**
      *
-     * @param searchPattern
+     * @param url
      * @throws AudioExtractorException
      */
-    public void downloadToMp3(String searchPattern) throws AudioExtractorException;
+    public void downloadToMp3(String url) throws AudioExtractorException;
 }

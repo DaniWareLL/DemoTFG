@@ -1,6 +1,8 @@
 package com.sonik.service.impl;
 
 import com.sonik.config.AppConfig;
+import com.sonik.config.AppContext;
+import com.sonik.config.UserSession;
 import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.service.PlayerService;
 import com.sonik.service.audio.AudioExtractor;
@@ -13,11 +15,9 @@ import java.util.List;
  */
 public class PlayerServiceImpl implements PlayerService {
     private final AudioExtractor extractor;
-    private final String searchPrefix;
 
-    public PlayerServiceImpl(AudioExtractor extractor, String searchPrefix) {
+    public PlayerServiceImpl(AudioExtractor extractor) {
         this.extractor = extractor;
-        this.searchPrefix = searchPrefix;
     }
 
 
@@ -29,23 +29,26 @@ public class PlayerServiceImpl implements PlayerService {
      * @return URL directa del stream de audio
      */
     @Override
-    public String[] getStreamUrl(String searchPattern) throws AudioExtractorException {
+    public String getStreamUrl(String searchPattern) throws AudioExtractorException {
+        String searchPrefix = UserSession.getPreferences().getAudioSource().getSearchPrefix();
+        String quality = UserSession.getPreferences().getStreamingQuality().getYtdlpFormat();
+
         try {
             String result = extractor.execute(List.of(
                     AppConfig.getYTDLPPath(),
-                    "-f", "bestaudio",
+                    "-f", quality,
                     "--get-url",
-                    searchPrefix + searchPattern
+                    searchPrefix +":" + searchPattern
             ));
 
             if (result == null || result.isBlank()) {
                 throw new AudioExtractorException(AudioExtractorException.STREAM_URL_ERROR);
             }
 
-            // yt-dlp puede devolver múltiples líneas, nos quedamos con la última
-            return result.split("\n");
+            return result;
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new AudioExtractorException(AudioExtractorException.STREAM_URL_ERROR, e);
         }
     }

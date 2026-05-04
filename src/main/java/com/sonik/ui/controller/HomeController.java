@@ -1,13 +1,14 @@
 package com.sonik.ui.controller;
 
+import com.sonik.domain.model.Song;
 import javafx.application.Platform;
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -15,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class HomeController {
 
@@ -83,11 +85,11 @@ public class HomeController {
     private Node leftContent;
 
 
-
     private double xOffset = 0;
     private double yOffset = 0;
 
     public void initialize() {
+
         homeContent = mainContainer.getCenter(); // guardas el contenido original
         leftContent = mainContainer.getLeft();   // ← sidebar original
         userNameLabel.setText(UserSession.getUser().getUserName());
@@ -100,6 +102,12 @@ public class HomeController {
         maxBtn.setOnAction(e -> stage.setMaximized(!stage.isMaximized()));
 
         closeBtn.setOnAction(e -> stage.close());
+
+        Platform.runLater(() -> {
+            searchBar.setOnKeyPressed(this::searchBarOnKP);
+            searchBar.requestFocus();
+        });
+
     }
 
     public void settingButtonMC(MouseEvent mouseEvent) {
@@ -136,9 +144,8 @@ public class HomeController {
             Node playlistPanel = loaderCenter.load();
 
             // Cargar panel izquierdo (sidebar)
-            FXMLLoader loaderLeft = new FXMLLoader(getClass().getResource("/views/playlist-sidebar.fxml"));
+            FXMLLoader loaderLeft = new FXMLLoader(getClass().getResource("/views/playlist-sidebar-view.fxml"));
             Node playlistSidebar = loaderLeft.load();
-            BorderPane.setMargin(playlistSidebar, new Insets(7, 5, 2, 10));
 
             // Configurar controllers si hace falta
             PlaylistController controllerCenter = loaderCenter.getController();
@@ -160,10 +167,6 @@ public class HomeController {
     public void songButtonOnMC(MouseEvent mouseEvent) {
     }
 
-    public void homeButtonOnMC(MouseEvent mouseEvent) {
-
-    }
-
     private void enableWindowDrag() {
         // El top bar es el HBox que tienes en el <top> del BorderPane
         Node topBar = mainContainer.getTop();
@@ -182,10 +185,45 @@ public class HomeController {
     }
 
     public void searchBarOnKP(KeyEvent keyEvent) {
-        String search =  searchBar.getText();
-        AppContext.getPlayerService().getStreamUrl(search);
-        AppContext.getMetadataService().getMetadata(search);
+
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String searchPattern = searchBar.getText();
+
+            AppContext.getExecutor().submit(() -> {
+                try {
+
+                    List<Song> results = AppContext.getMetadataService().getMetadata(searchPattern);
+
+                    for(Song song : results) {
+                        System.out.println(song);
+                    }
+
+                    Platform.runLater(() -> {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/search-view.fxml"));
+                            Node searchPanel = loader.load();
+
+                            SearchController controller = loader.getController();
+                            controller.setResults(results);
+
+                            mainContainer.setCenter(searchPanel);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Platform.runLater(() -> {
+                        // ERROR
+                    });
+                }
+            });
+        }
     }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -194,4 +232,5 @@ public class HomeController {
         mainContainer.setCenter(homeContent);
         mainContainer.setLeft(leftContent);
     }
+
 }

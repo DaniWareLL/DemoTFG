@@ -9,7 +9,9 @@ public class IncorrectArgumentException extends Exception {
         EMPTY_EMAIL,
         INVALID_EMAIL,
         EMPTY_USERNAME,
-        INVALID_NUMBER
+        INVALID_NUMBER,
+        INVALID_SOURCE,
+        INVALID_DONWLOAD_PATH
     }
 
     private ErrorType errorType;
@@ -33,6 +35,8 @@ public class IncorrectArgumentException extends Exception {
             case INVALID_EMAIL -> "The user's email is invalid(example@domain.com)";
             case EMPTY_USERNAME -> "The user must provide a username";
             case INVALID_NUMBER -> "Number must be greater than zero";
+            case INVALID_SOURCE -> "Source cannot be null";
+            case INVALID_DONWLOAD_PATH -> "Donwload path cannot be null";
         };
     }
 

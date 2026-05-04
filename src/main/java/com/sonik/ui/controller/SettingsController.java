@@ -7,6 +7,7 @@ import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.UserPref;
 import com.sonik.domain.model.enums.SourceName;
+import com.sonik.domain.model.enums.StreamingQuality;
 import com.sonik.service.UserService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -61,7 +62,7 @@ public class SettingsController {
 
     public void initialize() {
         qualityCB.getItems().addAll(
-                Arrays.stream(UserPref.StreamingQuality.values())
+                Arrays.stream(StreamingQuality.values())
                         .map(Enum::name)
                         .toList()
         );
@@ -109,7 +110,6 @@ public class SettingsController {
     public void onSaveChangesMC(MouseEvent mouseEvent) throws IncorrectArgumentException, ObjectNotFoundException, DataAccessException {
         var pref = UserSession.getPreferences();
 
-        pref.setStreamingQuality(UserPref.StreamingQuality.valueOf(qualityCB.getValue()));
         pref.setAudioSource(SourceName.valueOf(sourceCB.getValue()));
         pref.setInterfaceTheme(UserPref.InterfaceTheme.valueOf(themeCB.getValue()));
         pref.setDownloadLocation(downloadLocationLabel.getText());

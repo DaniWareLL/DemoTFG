@@ -44,4 +44,12 @@ public class UserSession {
         user = null;
         preferences = null;
     }
+
+    public static void setUser(User user) {
+        UserSession.user = user;
+    }
+
+    public static void setPreferences(UserPref preferences) {
+        UserSession.preferences = preferences;
+    }
 }

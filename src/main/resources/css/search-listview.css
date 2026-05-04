@@ -1,0 +1,26 @@
+.list-view {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+}
+
+.list-view .virtual-flow {
+    -fx-background-color: transparent;
+}
+
+.list-view .clipped-container {
+    -fx-background-color: transparent;
+}
+
+.list-view .cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.list-view .cell:filled:selected,
+.list-view .cell:filled:hover {
+    -fx-background-color: #2a2a2a; /* o el color que quieras */
+}

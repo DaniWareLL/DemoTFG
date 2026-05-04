@@ -3,6 +3,8 @@ package com.sonik.service;
 import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.model.Song;
 
+import java.util.List;
+
 public interface MetadataService {
     /**
      *
@@ -10,5 +12,5 @@ public interface MetadataService {
      * @return
      * @throws AudioExtractorException
      */
-    Song getMetadata(String searchPattern) throws AudioExtractorException;
+    List<Song> getMetadata(String searchPattern) throws AudioExtractorException;
 }

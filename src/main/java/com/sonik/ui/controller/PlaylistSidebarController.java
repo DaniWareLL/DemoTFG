@@ -20,6 +20,8 @@ public class PlaylistSidebarController {
     @FXML
     private ListView<Playlist> playlistListView;
 
+    private Dialog<?> dialog;
+
     public void initialize() {
         playlistListView.setCellFactory(list -> new PlaylistCell());
     }
@@ -29,10 +31,12 @@ public class PlaylistSidebarController {
         DialogPane pane = loader.load();
 
         CreatePlaylistDialogController controller = loader.getController();
+        controller.setDialog(dialog);
 
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(pane);
         dialog.setTitle("Crear playlist");
+
 
         Optional<ButtonType> result = dialog.showAndWait();
 

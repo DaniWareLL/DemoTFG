@@ -35,8 +35,11 @@ public class Song {
     @Column(name = "aggregation_date", nullable = false)
     private LocalDate aggregationDate;
 
-    @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SongSource> sources = new ArrayList<>();
+    @Column(name = "source_name", nullable = false)
+    private String source;
+
+    @Column(name ="download_path", nullable = true)
+    private String downloadPath;
 
     @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlaylistsSongs> playlists = new ArrayList<>();
@@ -56,15 +59,18 @@ public class Song {
     }
 
     // Getters
-    public int getId()                          { return id; }
-    public String getTitle()                    { return title; }
-    public Integer getDurationSec()             { return durationSec; }
-    public String getOriginalUrl()              { return originalUrl; }
-    public String getThumbnailUrl()             { return thumbnailUrl; }
-    public LocalDate getAggregationDate()       { return aggregationDate; }
-    public List<SongSource> getSources()        { return sources; }
-    public List<PlaylistsSongs> getPlaylists()  { return playlists; }
+    public int getId() { return id; }
+    public String getTitle() { return title; }
+    public Integer getDurationSec() { return durationSec; }
+    public String getOriginalUrl() { return originalUrl; }
+    public String getThumbnailUrl() { return thumbnailUrl; }
+    public LocalDate getAggregationDate() { return aggregationDate; }
+    //public List<SongSource> getSources()        { return sources; }
+    public List<PlaylistsSongs> getPlaylists() { return playlists; }
     public List<UserLibrary> getUserLibraries() { return userLibraries; }
+    public String getSource() { return source;}
+    public String getDownloadPath() { return downloadPath; }
+
 
     // Setters
     public void setTitle(String title) throws IncorrectArgumentException {
@@ -93,6 +99,25 @@ public class Song {
         this.aggregationDate = aggregationDate;
     }
 
+
+    public void setSource(String source) throws IncorrectArgumentException {
+        if (source == null || source.isBlank()) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_SOURCE);
+        this.source = source;
+    }
+
+    public void setDownloadPath(String downloadPath) throws IncorrectArgumentException {
+        if (downloadPath == null || downloadPath.isBlank()) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DONWLOAD_PATH);
+        this.downloadPath = downloadPath;
+    }
+
+    public void setPlaylists(List<PlaylistsSongs> playlists) {
+        this.playlists = playlists;
+    }
+
+    public void setUserLibraries(List<UserLibrary> userLibraries) {
+        this.userLibraries = userLibraries;
+    }
+
     @Override
     public String toString() {
         return "Song{" +
@@ -102,7 +127,7 @@ public class Song {
                 ", originalUrl='" + originalUrl + '\'' +
                 ", thumbnailUrl='" + thumbnailUrl + '\'' +
                 ", aggregationDate=" + aggregationDate +
-                ", sources=" + sources +
+                // ", sources=" + sources +
                 ", playlists=" + playlists +
                 ", userLibraries=" + userLibraries +
                 '}';

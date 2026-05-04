@@ -15,20 +15,21 @@
     public class DownloadServiceImpl implements DownloadService {
 
         private final AudioExtractor extractor;
-        private final String searchPrefix;
-        String downloadDir = UserSession.getPreferences().getDownloadLocation();
 
-        public DownloadServiceImpl(AudioExtractor extractor, String searchPrefix) {
+        public DownloadServiceImpl(AudioExtractor extractor) {
             this.extractor = extractor;
-            this.searchPrefix = searchPrefix;
         }
 
         @Override
         public void downloadToMp3(String searchPattern) throws AudioExtractorException {
+
+            String downloadDir = UserSession.getPreferences().getDownloadLocation();
+            String searchPrefix = UserSession.getPreferences().getAudioSource().getSearchPrefix();
+            String quality = UserSession.getPreferences().getStreamingQuality().getYtdlpFormat();
             try {
                 extractor.execute(List.of(
                         AppConfig.getYTDLPPath(),
-                        "-f",                "bestaudio",
+                        "-f",                quality,
                         "--extract-audio",
                         "--audio-format",    "mp3",
                         "--audio-quality",   "0",

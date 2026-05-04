@@ -3,6 +3,7 @@ package com.sonik.domain.model;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.enums.SourceName;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
+import com.sonik.domain.model.enums.StreamingQuality;
 import jakarta.persistence.*;
 
 @Entity
@@ -37,9 +38,6 @@ public class UserPref {
     @Column(name = "download_location", nullable = false)
     private String downloadLocation = System.getProperty("user.home") + "/Downloads";
 
-
-    // ENUMs internos
-    public enum StreamingQuality { LOW, MEDIUM, HIGH }
     public enum InterfaceTheme   { LIGHT, DARK }
 
     public UserPref() {}
@@ -80,5 +78,8 @@ public class UserPref {
         this.audioSource = audioSource;
     }
 
-    public void setDownloadLocation(String downloadLocation) {}
+    public void setDownloadLocation(String downloadLocation) throws IncorrectArgumentException {
+        if (downloadLocation == null ) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
+        this.downloadLocation = downloadLocation;
+    }
 }

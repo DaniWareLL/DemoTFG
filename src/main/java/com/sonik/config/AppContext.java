@@ -12,12 +12,12 @@ import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.*;
 import com.sonik.service.audio.AudioExtractor;
 import com.sonik.service.audio.AudioPlayer;
-import com.sonik.service.impl.AuthServiceImpl;
-import com.sonik.service.impl.PasswordServiceImpl;
-import com.sonik.service.impl.SettingServiceImpl;
-import com.sonik.service.impl.UserServiceImpl;
+import com.sonik.service.impl.*;
 import com.sun.jna.NativeLibrary;
 import jakarta.persistence.EntityManagerFactory;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * This class essentially initializes the application, necessary views and controllers, persistence and JPA.
@@ -37,12 +37,13 @@ public class AppContext {
     private static AuthService authService;
     private static UserService userService;
     private static PasswordService  passwordService;
-    private static PlayerService playerService;
-    private static DownloadService downloadService;
     private static SettingService settingService;
+    private static PlayerService playerService;
     private static MetadataService metadataService;
+    private static DownloadService downloadService;
     private static PlaylistService playlistService;
 
+    private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(4);
 
     /**
      * <strong>IMPORTANT!!</strong> This constructor is not supposed to be used at all (hence the private access modifier),
@@ -76,7 +77,12 @@ public class AppContext {
         userService = new UserServiceImpl(jpaUserRepository, authService, passwordService);
         settingService = new SettingServiceImpl(audioExtractor);
 
-    }
+        playerService = new PlayerServiceImpl(audioExtractor);
+        metadataService = new MetadataServiceImpl(audioExtractor);
+        downloadService = new DownloadServiceImpl(audioExtractor);
+        playerService = new PlayerServiceImpl(audioExtractor);
+        playlistService = new PlaylistServiceImpl(jpaPlaylistRepository);
+   }
 
     /**
      * Closes every resource and shuts down the application
@@ -86,6 +92,18 @@ public class AppContext {
         if (emf != null && emf.isOpen()) {
             emf.close();
         }
+    }
+
+    public static AudioExtractor getAudioExtractor() {
+        return audioExtractor;
+    }
+
+    public static AudioPlayer getAudioPlayer() {
+        return audioPlayer;
+    }
+
+    public static PlaylistRepository getJpaPlaylistRepository() {
+        return jpaPlaylistRepository;
     }
 
     public static UserRepository getJpaUserRepository() {
@@ -131,4 +149,9 @@ public class AppContext {
     public static PlaylistService getPlaylistService() {
         return playlistService;
     }
+
+    public static ExecutorService getExecutor() {
+        return EXECUTOR;
+    }
+
 }

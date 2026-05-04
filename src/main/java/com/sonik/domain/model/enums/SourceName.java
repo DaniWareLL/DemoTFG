@@ -2,8 +2,8 @@ package com.sonik.domain.model.enums;
 
 public enum SourceName {
 
-    YOUTUBE("ytsearch:"),
-    SOUNDCLOUD("scsearch:");
+    YOUTUBE("ytsearch"),
+    SOUNDCLOUD("scsearch");
 
     private final String searchPrefix;
 
@@ -15,7 +15,7 @@ public enum SourceName {
         return searchPrefix;
     }
 
-    public static SourceName fromString(String value) {
+    public static SourceName fromDisplay(String value) {
         return switch (value.toLowerCase()) {
             case "youtube" -> YOUTUBE;
             case "soundcloud" -> SOUNDCLOUD;

@@ -50,16 +50,20 @@ public class VlcjAudioPlayer implements AudioPlayer {
 
     }
 
-    /**
-     * Reproduce la URL usando VLCJ
-     */
-    public void playStream(String streamUrl) {
+
+    @Override
+    public void play(String streamUrl) {
         player.media().play(streamUrl);
         System.out.println("[Enter] to finish...");
         sc.nextLine();
     }
 
-    public void stop() {
+    @Override
+    public void pause(String streamUrl) {
+
+    }
+
+    public void stop(String streamUrl) {
         player.controls().stop();
     }
 

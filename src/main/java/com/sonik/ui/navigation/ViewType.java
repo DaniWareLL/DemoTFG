@@ -1,12 +1,32 @@
 package com.sonik.ui.navigation;
 
+import java.net.URL;
+
 /**
  * Contains all the different types of views
  */
 public enum ViewType {
-    SIGN_IN,
-    SIGN_UP,
-    HOME,
-    SEARCH,
-    SETTINGS,
+
+    // Main Side
+    SIGN_IN("/views/signin-view.fxml"),
+    SIGN_UP("/views/signup-view.fxml"),
+    HOME("/views/home-view.fxml"),
+    SEARCH("/views/search-view.fxml"),
+    SETTINGS("/views/settings-view.fxml"),
+    PLAYLIST("/views/playlist-view.fxml"),
+
+    // Left Side
+    PLAYLIST_SIDEBAR ("/views/playlist-side-bar-view.fxml"),
+    SEARCH_SIDEBAR("/views/search-side-bar-view.fxml");
+
+
+    private final String fxmlPath;
+
+    ViewType(String fxmlPath) {
+        this.fxmlPath = fxmlPath;
+    }
+
+    public URL getUrl() {
+        return ViewType.class.getResource(fxmlPath);
+    }
 }

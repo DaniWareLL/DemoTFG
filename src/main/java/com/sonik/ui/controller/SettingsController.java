@@ -9,6 +9,8 @@ import com.sonik.domain.model.UserPref;
 import com.sonik.domain.model.enums.SourceName;
 import com.sonik.domain.model.enums.StreamingQuality;
 import com.sonik.service.UserService;
+import com.sonik.ui.navigation.ViewManager;
+import com.sonik.ui.navigation.ViewType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,14 +53,6 @@ public class SettingsController {
 
     @FXML
     private Button updateToolBtn;
-
-    public void setMainContainer(BorderPane mainContainer) {
-        this.mainContainer = mainContainer;
-    }
-
-    public void setHomeContent(Node homeContent) {
-        this.homeContent = homeContent;
-    }
 
     public void initialize() {
         qualityCB.getItems().addAll(
@@ -119,14 +113,18 @@ public class SettingsController {
         UserSession.updatePreferences(pref);
     }
 
-    public void backHomeMC(MouseEvent mouseEvent) {
-        mainContainer.setCenter(homeContent);
-    }
 
     public void updateToolMC(MouseEvent mouseEvent) {
-
+        AppContext.getExecutor().submit(() -> {
+            try {
+                AppContext.getSettingService().updateTool();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
-
-    public void searchBarOnKP(KeyEvent keyEvent) {
+    public void logOutBtnMC(MouseEvent mouseEvent) {
+        AppContext.getAuthService().logout();
+        ViewManager.switchScene(ViewType.SIGN_IN);
     }
 }

@@ -1,27 +1,25 @@
 package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
+import com.sonik.config.UserSession;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.service.AuthService;
+import com.sonik.ui.navigation.ViewManager;
+import com.sonik.ui.navigation.ViewType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.io.IOException;
 import java.util.Optional;
+
+import static com.sonik.config.SessionStorage.clear;
+import static com.sonik.config.SessionStorage.save;
+
 
 public class SignInController {
 
@@ -45,9 +43,17 @@ public class SignInController {
     @FXML
     private Label accountCreatedLabel;
 
+    @FXML
+    private CheckBox rememberCheckBox;
+
     public void initialize() {
 
         this.authService = AppContext.getAuthService();
+
+        if (ViewManager.NavigationFlags.showAccountCreated) {
+            showAccountCreatedMessage();
+            ViewManager.NavigationFlags.showAccountCreated = false;
+        }
 
         /**
          * Código para redondear background-image
@@ -82,26 +88,15 @@ public class SignInController {
         try {
             if (authService.login(userTextfield.getText(), passwordTextField.getText())) {
 
-                // Cargar Home
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home-view.fxml"));
-                Scene newScene = new Scene(loader.load());
+                boolean remember = rememberCheckBox.isSelected();
 
-                // Obtener controller del Home
-                HomeController controller = loader.getController();
+                if (remember) {
+                    save(UserSession.getUser().getUserName());
+                } else {
+                    clear();
+                }
+                ViewManager.switchScene(ViewType.HOME);
 
-                // Crear un Stage NUEVO para el Home
-                Stage homeStage = new Stage();
-                homeStage.initStyle(StageStyle.UNDECORATED);
-                homeStage.setScene(newScene);
-
-                // PASAR EL STAGE AL CONTROLADOR
-                controller.setStage(homeStage);
-
-                homeStage.show();
-
-                // Cerrar login
-                Stage loginStage = (Stage) signInButton.getScene().getWindow();
-                loginStage.close();
             } else {
                 AuxiliaryMethods.setErrorLabelState(true, passwordErrorLabel, passwordTextField, Optional.of("Incorrect password"));
             }
@@ -114,26 +109,12 @@ public class SignInController {
 
         } catch (ObjectNotFoundException e) {
             AuxiliaryMethods.setErrorLabelState(true, usernameErrorLabel ,userTextfield, Optional.of(e.getMessage()));
-        } catch (DataAccessException | IOException e) {
+        } catch (DataAccessException e) {
             AuxiliaryMethods.showAlert(e.getMessage());
         }
     }
 
     public void SignUpButton_MouseClicked(MouseEvent mouseEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signup-view.fxml"));
-            Scene newScene = new Scene(loader.load());
-
-            Stage stage = (Stage) signInButton.getScene().getWindow();
-            stage.setScene(newScene);
-            stage.show();
-            stage.sizeToScene();
-            stage.centerOnScreen();
-
-
-        } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
-        }
-
+        ViewManager.switchScene(ViewType.SIGN_UP);
     }
 }

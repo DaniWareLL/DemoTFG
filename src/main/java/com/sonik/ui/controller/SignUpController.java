@@ -6,6 +6,8 @@ import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.User;
 import com.sonik.service.AuthService;
+import com.sonik.ui.navigation.ViewManager;
+import com.sonik.ui.navigation.ViewType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -105,25 +107,11 @@ public class SignUpController {
     }
 
     private void BackToLogin() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signin-view.fxml"));
-            Scene newScene = new Scene(loader.load());
 
-            SignInController controller = loader.getController();
+        ViewManager.NavigationFlags.showAccountCreated = true;
+        ViewManager.switchScene(ViewType.SIGN_IN);
 
-            Stage stage = (Stage) emailTextfield.getScene().getWindow();
-            stage.setScene(newScene);
-            stage.setWidth(1000);
-            stage.setHeight(700);
-            stage.setMinWidth(900);
-            stage.setMinHeight(600);
-            stage.show();
-
-            controller.showAccountCreatedMessage();
-
-        } catch (IOException e) {
-            AuxiliaryMethods.showAlert("An error occurred when loading signin-view.fxml.");
-        }
+        //AuxiliaryMethods.showAlert("An error occurred when loading signin-view.fxml.");
     }
 
 

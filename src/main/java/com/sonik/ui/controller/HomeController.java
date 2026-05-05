@@ -1,6 +1,8 @@
 package com.sonik.ui.controller;
 
 import com.sonik.domain.model.Song;
+import com.sonik.ui.navigation.ViewManager;
+import com.sonik.ui.navigation.ViewType;
 import javafx.application.Platform;
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
@@ -92,50 +94,46 @@ public class HomeController {
 
     public void initialize() {
 
-        homeContent = mainContainer.getCenter(); // guardas el contenido original
-        leftContent = mainContainer.getLeft();   // ← sidebar original
+        ViewManager.setMainContainer(mainContainer);
+
+        homeContent = mainContainer.getCenter();
+        leftContent = mainContainer.getLeft();
+
         userNameLabel.setText(UserSession.getUser().getUserName());
 
         enableWindowDrag();
 
-        // Acciones de la ventana
+        // Min
         minBtn.setOnAction(e -> stage.setIconified(true));
+        minBtn.setOnMousePressed(e -> {
+            minBtn.setStyle("-fx-background-color:  #191919;");
+        });
+        minBtn.setOnMouseReleased(e -> {
+            minBtn.setStyle("-fx-background-color: black;");
+        });
 
+        // Max
         maxBtn.setOnAction(e -> stage.setMaximized(!stage.isMaximized()));
+        maxBtn.setOnMousePressed(e -> {
+            maxBtn.setStyle("-fx-background-color:  #191919;");
+        });
+        maxBtn.setOnMouseReleased(e -> {
+            maxBtn.setStyle("-fx-background-color: black;");
+        });
 
+        // Close
         closeBtn.setOnAction(e -> stage.close());
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/search-view.fxml"));
-            searchPanel = loader.load();
-            searchController = loader.getController();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        closeBtn.setOnMousePressed(e -> {
+            closeBtn.setStyle("-fx-background-color: red;");
+        });
+        closeBtn.setOnMouseReleased(e -> {
+            closeBtn.setStyle("-fx-background-color: black;");
+        });
 
     }
 
     public void settingButtonMC(MouseEvent mouseEvent) {
-        try {
-            // Cargar ajustes
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/settings-view.fxml"));
-            Node settingsPanel = loader.load();
-
-            // Configurar controller
-            SettingsController controller = loader.getController();
-            controller.setMainContainer(mainContainer);
-            controller.setHomeContent(homeContent);
-
-            // SOLO cambiar el centro - izquierda y abajo se quedan igual
-            mainContainer.setCenter(settingsPanel);
-
-        } catch (IOException e) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error", ButtonType.OK);
-                alert.showAndWait();
-            });
-            e.printStackTrace();
-        }
+        ViewManager.loadIntoCenter(ViewType.SETTINGS);
     }
 
     public void exploreButtonOnMC(MouseEvent mouseEvent) {
@@ -143,37 +141,15 @@ public class HomeController {
     }
 
     public void playlistButtonOnMC(MouseEvent mouseEvent) {
-        try {
-            // Cargar panel central
-            FXMLLoader loaderCenter = new FXMLLoader(getClass().getResource("/views/playlist-view.fxml"));
-            Node playlistPanel = loaderCenter.load();
-
-            // Cargar panel izquierdo (sidebar)
-            FXMLLoader loaderLeft = new FXMLLoader(getClass().getResource("/views/playlist-sidebar-view.fxml"));
-            Node playlistSidebar = loaderLeft.load();
-
-            // Configurar controllers si hace falta
-            PlaylistController controllerCenter = loaderCenter.getController();
-            PlaylistSidebarController controllerLeft = loaderLeft.getController();
-
-            // Cambiar CENTER y LEFT
-            mainContainer.setCenter(playlistPanel);
-            mainContainer.setLeft(playlistSidebar);
-
-        } catch (IOException e) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error", ButtonType.OK);
-                alert.showAndWait();
-            });
-            e.printStackTrace();
-        }
+        ViewManager.loadIntoCenter(ViewType.PLAYLIST);
+        ViewManager.loadIntoLeft(ViewType.PLAYLIST_SIDEBAR);
     }
 
     public void songButtonOnMC(MouseEvent mouseEvent) {
     }
 
     private void enableWindowDrag() {
-        // El top bar es el HBox que tienes en el <top> del BorderPane
+
         Node topBar = mainContainer.getTop();
 
         topBar.setOnMousePressed(event -> {
@@ -201,8 +177,8 @@ public class HomeController {
                     List<Song> results = AppContext.getMetadataService().getMetadata(searchPattern);
 
                     Platform.runLater(() -> {
-                        searchController.setResults(results);
-                        mainContainer.setCenter(searchPanel);
+                        SearchController controller = ViewManager.loadIntoCenterWithController(ViewType.SEARCH);
+                        controller.setResults(results);
                     });
 
                 } catch (Exception e) {

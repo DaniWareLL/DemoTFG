@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SettingsController">
+<ScrollPane fitToWidth="true" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SettingsController">
    <content>
       <AnchorPane style="-fx-background-color: black;">
-      
+
          <!-- PANEL PRINCIPAL RESPONSIVE -->
-         <VBox alignment="TOP_LEFT" spacing="30" style="-fx-background-color: #191919; -fx-background-radius: 20;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
-      
+         <VBox alignment="TOP_LEFT" spacing="30" style="-fx-background-color: #191919; -fx-background-radius: 20;">
+
             <padding>
                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
             </padding>
@@ -27,15 +27,15 @@
                   <Font name="Manrope ExtraBold" size="35" />
                </font>
             </Label>
-      
-      
+
+
             <!-- TÍTULO -->
             <Label text="Preferences" textFill="#c58a5f">
                <font>
                   <Font name="Manrope ExtraBold" size="28.0" />
                </font>
             </Label>
-      
+
             <!-- STREAM QUALITY -->
             <VBox spacing="5">
                <HBox alignment="CENTER_LEFT" spacing="30">
@@ -52,7 +52,7 @@
                   </font>
                </Label>
             </VBox>
-      
+
             <!-- AUDIO SOURCE -->
             <VBox spacing="5">
                <HBox alignment="CENTER_LEFT" spacing="30">
@@ -69,7 +69,7 @@
                   </font>
                </Label>
             </VBox>
-      
+
             <!-- THEME -->
             <VBox spacing="5">
                <HBox alignment="CENTER_LEFT" spacing="30">
@@ -86,7 +86,7 @@
                   </font>
                </Label>
             </VBox>
-      
+
             <!-- DOWNLOAD LOCATION -->
             <VBox spacing="5">
                <HBox alignment="CENTER_LEFT" spacing="30">
@@ -101,33 +101,33 @@
                      </font>
                   </Button>
                </HBox>
-      
+
                <Label text="Define the folder where all downloaded files will be saved" textFill="WHITE">
                   <font>
                      <Font name="Manrope Medium" size="12" />
                   </font>
                </Label>
-      
+
                <Label text="You can select any directory on the system" textFill="WHITE">
                   <font>
                      <Font name="Manrope Medium" size="12" />
                   </font>
                </Label>
-      
+
                <Label fx:id="downloadLocationLabel" textFill="WHITE">
                   <font>
                      <Font name="Manrope Regular" size="12" />
                   </font>
                </Label>
             </VBox>
-      
+
             <!-- SAVE CHANGES -->
-            <Button fx:id="saveChangesButton" onMouseClicked="#onSaveChangesMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Save changes" textFill="#c58a5f">
+            <Button fx:id="saveChangesButton" onMouseClicked="#onSaveChangesMC" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Save changes" textFill="#c58a5f">
                <font>
                   <Font name="Manrope Medium" size="16" />
                </font>
             </Button>
-      
+
             <Separator />
             <Label text="Profile" textFill="#c58a5f">
                <font>
@@ -202,7 +202,7 @@
                   </HBox>
                </children>
             </VBox>
-      
+
             <!-- BACK HOME -->
             <HBox alignment="CENTER_LEFT" />
             <Separator />
@@ -231,17 +231,17 @@
                </children>
             </VBox>
             <Separator />
-            <Button fx:id="backHomeButton" onMouseClicked="#backHomeMC" prefWidth="150" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Back home" textFill="#c58a5f">
+            <Button fx:id="logOutBtn" onMouseClicked="#logOutBtnMC" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20;" text="Log out" textFill="#c58a5f">
                <font>
                   <Font name="Manrope Medium" size="16" />
                </font>
             </Button>
-      
+
          </VBox>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
-      
+
       </AnchorPane>
    </content>
 </ScrollPane>

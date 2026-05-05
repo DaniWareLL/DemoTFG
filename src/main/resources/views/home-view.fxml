@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@/css/window-buttons.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.HomeController">
+<BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.HomeController">
    <left>
       <VBox fx:id="leftContainer" maxWidth="260.0" minWidth="200.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #191919; -fx-background-radius: 20;">
          <children>
@@ -85,8 +85,7 @@
          <content>
             <VBox style="-fx-background-color: #191919; -fx-background-radius: 20;">
                <children>
-      
-                                                <VBox fillWidth="false" VBox.vgrow="ALWAYS">
+                  <VBox fillWidth="false" VBox.vgrow="ALWAYS">
                      <children>
                         <Label text="Playlists" textFill="WHITE">
                            <font>
@@ -420,7 +419,7 @@
       </HBox>
    </bottom>
    <top>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" stylesheets="@../css/window-buttons.css" BorderPane.alignment="CENTER">
          <children>
             <HBox>
                <children>
@@ -493,22 +492,22 @@
                   <Insets />
                </HBox.margin>
             </HBox>
-            <HBox fx:id="windowButtons" alignment="CENTER_RIGHT" stylesheets="@../css/window-buttons.css">
+            <HBox fx:id="windowButtons" alignment="CENTER_RIGHT" stylesheets="@../css/window-buttons.css" HBox.hgrow="NEVER">
                <children>
-                  <Button fx:id="minBtn" mnemonicParsing="false" styleClass="window-btn min" textFill="WHITE" HBox.hgrow="ALWAYS">
+                  <Button fx:id="minBtn" minHeight="28.0" minWidth="36.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn min" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="mdi2w-window-minimize" iconSize="18" />
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2w-window-minimize" iconSize="20" />
                      </graphic>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
-                  <Button fx:id="maxBtn" mnemonicParsing="false" styleClass="window-btn max" textFill="WHITE" HBox.hgrow="ALWAYS">
+                  <Button fx:id="maxBtn" minHeight="28.0" minWidth="36.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn max" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="mdi2w-window-maximize" iconSize="18" />
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2w-window-maximize" iconSize="20" />
                      </graphic></Button>
-                  <Button fx:id="closeBtn" mnemonicParsing="false" styleClass="window-btn close" textFill="WHITE" HBox.hgrow="ALWAYS">
+                  <Button fx:id="closeBtn" minHeight="28.0" minWidth="36.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn close" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="mdi2c-close" iconSize="18" />
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2c-close" iconSize="20" text="󰅖" />
                      </graphic></Button>
                </children>
             </HBox>

@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class MainSonik {
 
     public static void main(String[] args) throws DataAccessException {
-        AppContext.initializeApplication();
         Application.launch(Main.class, args);
     }
 }

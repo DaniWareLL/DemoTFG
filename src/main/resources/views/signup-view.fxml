@@ -125,10 +125,7 @@
                               </Lighting>
                            </effect>
                         </TextField>
-                        <Label fx:id="emailErrorLabel"
-                               text="The email address is incorrectly formatted"
-                               visible="false"
-                               style="-fx-text-fill: red; -fx-font-size: 12px;" />
+                        <Label fx:id="emailErrorLabel" style="-fx-text-fill: red; -fx-font-size: 12px;" text="The email address is incorrectly formatted" visible="false" />
                         <Label text="User">
                            <font>
                               <Font name="Manrope ExtraBold" size="28.0" />
@@ -176,10 +173,7 @@
                               </Lighting>
                            </effect>
                         </TextField>
-                        <Label fx:id="usernameErrorLabel"
-                               text="The username has already been taken"
-                               visible="false"
-                               style="-fx-text-fill: red; -fx-font-size: 12px;" />
+                        <Label fx:id="usernameErrorLabel" style="-fx-text-fill: red; -fx-font-size: 12px;" text="The username has already been taken" visible="false" />
                         <Label text="Password">
                            <font>
                               <Font name="Manrope ExtraBold" size="28.0" />
@@ -227,10 +221,7 @@
                               </Lighting>
                            </effect>
                         </PasswordField>
-                        <Label fx:id="passwordErrorLabel"
-                               text="A password is required to continue"
-                               visible="false"
-                               style="-fx-text-fill: red; -fx-font-size: 12px;" />
+                        <Label fx:id="passwordErrorLabel" style="-fx-text-fill: red; -fx-font-size: 12px;" text="A password is required to continue" visible="false" />
                      </children>
                   </VBox>
                   <Button fx:id="createAccountButton" mnemonicParsing="false" onMouseClicked="#CreateAccountButton_MouseClicked" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px;" text="Create Account">
@@ -256,8 +247,11 @@
                   </Button>
                </children>
                <padding>
-                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                  <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
                </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>

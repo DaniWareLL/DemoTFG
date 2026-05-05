@@ -1,5 +1,7 @@
 package com.sonik.service.impl;
 
+import com.sonik.config.AppContext;
+import com.sonik.config.SessionStorage;
 import com.sonik.config.UserSession;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
@@ -11,6 +13,8 @@ import com.sonik.domain.repository.UserRepository;
 import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.AuthService;
 import com.sonik.service.PasswordService;
+import com.sonik.ui.navigation.ViewManager;
+import com.sonik.ui.navigation.ViewType;
 
 
 /**
@@ -32,16 +36,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void register(User user) throws DuplicateIdException, DataAccessException, IncorrectArgumentException {
-        // 1. Cifrar la contraseña usando el servicio
+        // Cifrar la contraseña usando el servicio
         String hashed = passwordService.hashPassword(user.getPassword_hash());
         user.setPassword_hash(hashed);
 
-        // 2. Crear preferencias por defecto del usuario
-        UserPref userPref = new UserPref(); // HIGH, DARK, YOUTUBE
+        // Crear preferencias por defecto del usuario
+        UserPref userPref = new UserPref();
         userPref.setUser(user);
         user.setPreferences(userPref);
 
-        // 3. Guardar en repositorio
+        // Guardar en repositorio
         userRepository.create(user);
     }
 
@@ -60,6 +64,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void logout() {
-        // Limpiar sesión
+        SessionStorage.clear();
     }
 }

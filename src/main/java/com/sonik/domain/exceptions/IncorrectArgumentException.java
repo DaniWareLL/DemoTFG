@@ -9,6 +9,8 @@ public class IncorrectArgumentException extends Exception {
         EMPTY_EMAIL,
         INVALID_EMAIL,
         EMPTY_USERNAME,
+        EMPTY_PLAYLIST_NAME,
+        EMPTY_PLAYLIST_DESCRIPTION,
         INVALID_NUMBER,
         INVALID_SOURCE,
         INVALID_DONWLOAD_PATH
@@ -34,6 +36,8 @@ public class IncorrectArgumentException extends Exception {
             case EMPTY_EMAIL -> "The user's email cannot be empty";
             case INVALID_EMAIL -> "The user's email is invalid(example@domain.com)";
             case EMPTY_USERNAME -> "The user must provide a username";
+            case EMPTY_PLAYLIST_NAME -> "The playlist must have a name.";
+            case EMPTY_PLAYLIST_DESCRIPTION -> "The playlist must have a description.";
             case INVALID_NUMBER -> "Number must be greater than zero";
             case INVALID_SOURCE -> "Source cannot be null";
             case INVALID_DONWLOAD_PATH -> "Donwload path cannot be null";

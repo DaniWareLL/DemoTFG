@@ -2,6 +2,7 @@ package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
+import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
@@ -92,7 +93,11 @@ public class SettingsController {
         userService = AppContext.getUserService();
 
         String version = audioExtractorVersionTF.getText();
-        audioExtractorVersionTF.setText(version + " " + AppContext.getSettingService().getToolVersion());
+        try {
+            audioExtractorVersionTF.setText(version + " " + AppContext.getSettingService().getToolVersion());
+        } catch (AudioExtractorException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
+        }
 
     }
 

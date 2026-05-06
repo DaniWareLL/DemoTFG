@@ -1,5 +1,6 @@
 package com.sonik.ui.controller;
 
+import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.model.Song;
 import javafx.application.Platform;
 import com.sonik.config.AppContext;
@@ -103,13 +104,15 @@ public class HomeController {
 
         maxBtn.setOnAction(e -> stage.setMaximized(!stage.isMaximized()));
 
-        closeBtn.setOnAction(e -> stage.close());
+        closeBtn.setOnAction(e -> {AppContext.shutDown();
+            stage.close();});
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/search-view.fxml"));
             searchPanel = loader.load();
             searchController = loader.getController();
         } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
             e.printStackTrace();
         }
 
@@ -130,10 +133,7 @@ public class HomeController {
             mainContainer.setCenter(settingsPanel);
 
         } catch (IOException e) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error", ButtonType.OK);
-                alert.showAndWait();
-            });
+            AuxiliaryMethods.showAlert(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -161,10 +161,7 @@ public class HomeController {
             mainContainer.setLeft(playlistSidebar);
 
         } catch (IOException e) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error", ButtonType.OK);
-                alert.showAndWait();
-            });
+            AuxiliaryMethods.showAlert(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -205,8 +202,8 @@ public class HomeController {
                         mainContainer.setCenter(searchPanel);
                     });
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (AudioExtractorException e) {
+                    AuxiliaryMethods.showAlert(e.getMessage());
                 }
             });
         }

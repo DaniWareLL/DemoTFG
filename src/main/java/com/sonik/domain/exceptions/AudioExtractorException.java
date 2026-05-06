@@ -1,6 +1,6 @@
 package com.sonik.domain.exceptions;
 
-public class AudioExtractorException extends RuntimeException {
+public class AudioExtractorException extends Exception {
 
     public static final int DOWNLOAD_ERROR = 1;
     public static final int METADATA_ERROR = 2;

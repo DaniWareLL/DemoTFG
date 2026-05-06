@@ -92,6 +92,7 @@ public class AppContext {
         if (emf != null && emf.isOpen()) {
             emf.close();
         }
+        System.exit(0);
     }
 
     public static AudioExtractor getAudioExtractor() {

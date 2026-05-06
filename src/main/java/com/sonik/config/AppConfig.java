@@ -25,7 +25,7 @@ public class AppConfig {
 
     /**
      * This method can only be used once (ideally on startup)
-     * @throws DataAccessException When this method is called after having been called already
+     * @throws DataAccessException When this method has already been called
      */
     protected static void initializeContext() throws DataAccessException {
 

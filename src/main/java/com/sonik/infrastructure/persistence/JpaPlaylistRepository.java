@@ -23,6 +23,29 @@ public class JpaPlaylistRepository implements PlaylistRepository {
     }
 
     /**
+     * Finds all playlists associated with the user received
+     * @return A list containing all playlists associated with said user
+     * @param username The name of the user who is associated with the playlists
+     * @throws DataAccessException If there is any error accessing the data
+     */
+    public List<Playlist> findAllByUsername(String username) throws DataAccessException, ObjectNotFoundException {
+
+        try (EntityManager em = emf.createEntityManager()) {
+
+            TypedQuery<Playlist> query = em.createQuery("SELECT p FROM Playlist p WHERE p.user.userName =: username", Playlist.class);
+            query.setParameter("username", username);
+            List<Playlist> playlists = query.getResultList();
+            if (playlists.isEmpty()) {
+                throw new ObjectNotFoundException("No playlists found for user: " + username);
+            }
+            return query.getResultList();
+
+        } catch (PersistenceException | IllegalStateException e) {
+            throw new DataAccessException(DataAccessException.CONNECTION_ERROR, e);
+        }
+    }
+
+    /**
      * Finds a {@link com.sonik.domain.model.Playlist Playlist} by id and returns it
      * @param id The id from the playlist to search for
      * @return The playlist with the corresponding id
@@ -49,13 +72,11 @@ public class JpaPlaylistRepository implements PlaylistRepository {
             TypedQuery<Playlist> query = em.createQuery("SELECT p FROM Playlist p WHERE p.name =: name", Playlist.class);
             query.setParameter("name", name);
 
-            Playlist playlist = query.getSingleResult();
-
-            return playlist;
+            return query.getSingleResult();
         } catch (NoResultException e) {
             throw new ObjectNotFoundException("Playlist with name " + name + " not found");
         } catch (NonUniqueResultException nure) {
-            throw new DataAccessException("Found more than one playlist with the same name, try searching by user id.", nure);
+            throw new DataAccessException("Found more than one playlist with the same name, try searching by playlist id.", nure);
         } catch (PersistenceException ex) {
             throw new DataAccessException(DataAccessException.CONNECTION_ERROR, ex);
         }
@@ -69,21 +90,31 @@ public class JpaPlaylistRepository implements PlaylistRepository {
      */
     public void save(Playlist playlist) throws DuplicateIdException, DataAccessException {
 
-        EntityTransaction et = null;
+        EntityTransaction tx = null;
+
         try (EntityManager em = emf.createEntityManager()) {
 
-            et = em.getTransaction();
-            et.begin();
-            em.persist(playlist);
-            et.commit();
+            try {
+                findByName(playlist.getName());
+                throw new DuplicateIdException("Playlist with name " + playlist.getName()+ " already exists");
+            } catch (ObjectNotFoundException e) {
 
-        } catch (EntityExistsException e) {
-            if (et != null && et.isActive()) {
-                et.rollback();
+                tx = em.getTransaction();
+                tx.begin();
+
+                em.persist(playlist);
+
+                tx.commit();
             }
-            throw new DuplicateIdException("Playlist with id " + playlist.getId() + " already exists");
-        } catch (IllegalArgumentException iae) {
-            throw new DataAccessException(DataAccessException.CONNECTION_ERROR, iae);
+
+        } catch (EntityExistsException ex) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new DuplicateIdException(ex);
+
+        } catch (PersistenceException | IllegalStateException ex) {
+            handleRollbackAndThrow(ex, tx);
         }
     }
 
@@ -99,31 +130,15 @@ public class JpaPlaylistRepository implements PlaylistRepository {
 
             et = em.getTransaction();
 
-            if (em.find(Playlist.class, playlist.getId()) == null) {
+            et.begin();
+            if ((playlist = em.find(Playlist.class, playlist.getId())) == null) {
                 throw new ObjectNotFoundException("The playlist you are trying to delete does not exist.");
             }
-            et.begin();
             em.remove(playlist);
             et.commit();
 
         } catch (IllegalArgumentException | PersistenceException iae) {
             handleRollbackAndThrow(iae, et);
-        }
-    }
-
-    @Override
-    public List<Playlist> getAllPlaylist() throws DataAccessException, ObjectNotFoundException {
-        try (EntityManager em = emf.createEntityManager()) {
-
-            TypedQuery<Playlist> query =
-                    em.createQuery("SELECT p FROM Playlist p", Playlist.class);
-
-            return query.getResultList();
-
-        } catch (NoResultException e) {
-            throw new ObjectNotFoundException("No playlist found");
-        } catch (PersistenceException ex) {
-            throw new DataAccessException(DataAccessException.CONNECTION_ERROR, ex);
         }
     }
 

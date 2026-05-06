@@ -37,11 +37,24 @@ public class Playlist {
     private int sortOrder = 0;
 
     // If a playlist is deleted, its relations will also be deleted
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<PlaylistsSongs> songs = new ArrayList<>();
 
     public Playlist() {}
 
+    /**
+     * Creates a Playlist
+     * @param user The User who owns the playlist
+     * @param name The name of the playlist
+     * @param description The description of the playlist
+     * @param creationDate The creation date of the playlist
+     * @throws IncorrectArgumentException <ul>
+     *     <li>{@link IncorrectArgumentException.ErrorType#NULL_OBJECT_RECEIVED} If User is null</li>
+     *     <li>{@link IncorrectArgumentException.ErrorType#EMPTY_PLAYLIST_NAME}</li>
+     *     <li>{@link IncorrectArgumentException.ErrorType#EMPTY_PLAYLIST_DESCRIPTION}</li>
+     *     <li>{@link IncorrectArgumentException.ErrorType#INVALID_DATE} If the creation date is in the future </li>
+     * </ul>
+     */
     public Playlist(User user, String name, String description,
                     LocalDate creationDate) throws  IncorrectArgumentException {
         setUser(user);
@@ -68,13 +81,13 @@ public class Playlist {
 
     public void setName(String name) throws IncorrectArgumentException {
         if (name == null || name.isBlank())
-            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_PLAYLIST_NAME);
         this.name = name;
     }
 
     public void setDescription(String description) throws IncorrectArgumentException {
         if (description == null || description.isBlank()) {
-            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
+            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_PLAYLIST_DESCRIPTION);
         }
         this.description = description;
     }

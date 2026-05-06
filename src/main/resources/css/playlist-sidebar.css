@@ -1,0 +1,97 @@
+.list-view {
+    -fx-background-color: black;
+    -fx-control-inner-background: black;
+
+    -fx-background-insets: 0;
+    -fx-background-radius: 14;
+
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+
+    -fx-padding: 4;
+}
+
+/* Capas internas del ListView */
+.list-view > .virtual-flow,
+.list-view > .virtual-flow > .clipped-container,
+.list-view > .virtual-flow > .clipped-container > .sheet {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 14;
+}
+
+/* Celdas */
+.list-cell {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.list-cell:empty {
+    -fx-background-color: black;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #171717;
+    -fx-background-radius: 10;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #252525;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+}
+
+/* Scrollbars */
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 2;
+}
+
+/* Track */
+.list-view .scroll-bar .track {
+    -fx-background-color: #151515;
+    -fx-background-insets: 0;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+/* Thumb */
+.list-view .scroll-bar .thumb {
+    -fx-background-color: #555555;
+    -fx-background-insets: 2;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+.list-view .scroll-bar .thumb:hover {
+    -fx-background-color: #6a6a6a;
+}
+
+/* Botones de la scrollbar */
+.list-view .scroll-bar .increment-button,
+.list-view .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 0;
+}
+
+/* Quitar flechas */
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+/* Esquina entre barras */
+.list-view .corner {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+}

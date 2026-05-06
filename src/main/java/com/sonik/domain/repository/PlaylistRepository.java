@@ -18,5 +18,5 @@ public interface PlaylistRepository {
 
     void delete(Playlist playlist) throws DataAccessException, ObjectNotFoundException;
 
-    List<Playlist> getAllPlaylist() throws DataAccessException, ObjectNotFoundException;
+    List<Playlist> findAllByUsername(String username) throws DataAccessException, ObjectNotFoundException;
 }

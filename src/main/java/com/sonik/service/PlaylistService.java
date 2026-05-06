@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface PlaylistService {
 
+    List<Playlist> findAllPlaylistsForUser(String username) throws ObjectNotFoundException, DataAccessException;
+
     /**
      * Creates a new empty playlist
      * @param playlist

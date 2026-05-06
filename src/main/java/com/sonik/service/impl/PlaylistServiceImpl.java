@@ -37,7 +37,11 @@ public class PlaylistServiceImpl implements PlaylistService {
         playlistRepository.save(playlist);
     }
 
-    // TODO: The attribute "position" doesn't actually mean position, its more like priority(no duplicates check)
+    public List<Playlist> findAllPlaylistsForUser(String username) throws ObjectNotFoundException, DataAccessException {
+        return playlistRepository.findAllByUsername(username);
+    }
+
+    // TODO: The attribute "position" doesn't actually mean position, it's more like priority(no duplicates check)
     /**
      * Adds a song to the playlist
      * @param playlist The playlist where the song will be added

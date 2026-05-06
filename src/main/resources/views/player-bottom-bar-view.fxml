@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.PlayerBarController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefWidth="160.0" spacing="10.0" HBox.hgrow="NEVER">
+         <children>
+            <StackPane alignment="CENTER_LEFT" style="-fx-border-radius: 5;" HBox.hgrow="NEVER">
+               <children>
+                  <ImageView fx:id="thumbnailPlaying" fitHeight="60.0" fitWidth="60.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Sonik/Image.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <VBox alignment="CENTER_LEFT" HBox.hgrow="NEVER">
+               <children>
+                  <Label fx:id="songPlaying" style="-fx-text-overrun: clip;" text="Song" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="qualityPlaying" text="Quality" textFill="#e9b18a">
+                     <font>
+                        <Font name="Manrope Medium" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="sourcePlaying" text="Source" textFill="#c66631">
+                     <font>
+                        <Font name="Manrope Medium" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Region HBox.hgrow="ALWAYS" />
+      <VBox alignment="CENTER" prefWidth="500.0" HBox.hgrow="NEVER">
+         <children>
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button fx:id="previousSongBtn" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="16.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2s-skip-previous-outline" iconSize="25" text="󰼨" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="playBtn" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#playBtnMC" style="-fx-background-color: black;" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="16.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fx:id="playIcon" iconColor="WHITE" iconLiteral="mdi2p-play-circle-outline" iconSize="35" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="nextSongBtn" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="16.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2s-skip-next-outline" iconSize="25" text="󰼧" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label fx:id="currentTimeLabel" prefWidth="30.0" text="0:00" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Slider fx:id="progressBar" max="1.0" minWidth="400.0" onMousePressed="#seekStart" onMouseReleased="#seekEnd">
+                     <HBox.margin>
+                        <Insets bottom="5.0" />
+                     </HBox.margin>
+                  </Slider>
+                  <Label fx:id="totalTimeLabel" prefWidth="30.0" text="0:00" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+      </VBox>
+      <Region HBox.hgrow="ALWAYS" />
+      <HBox alignment="CENTER" prefWidth="180.0" spacing="10.0" HBox.hgrow="NEVER">
+         <children>
+            <Button fx:id="muteBtn" mnemonicParsing="false" onMouseClicked="#muteBtnMC" style="-fx-background-color: black;">
+               <graphic>
+                  <FontIcon fx:id="muteIcon" iconColor="WHITE" iconLiteral="mdi2v-volume-high" iconSize="25" text="󰕾" />
+               </graphic>
+            </Button>
+            <Slider fx:id="volumeSlider" maxWidth="180.0" minWidth="80.0" onMouseClicked="#volumeChanged" onMouseDragged="#volumeChanged" HBox.hgrow="NEVER" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="20.0" right="20.0" />
+   </padding>
+</HBox>

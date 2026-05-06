@@ -19,9 +19,9 @@ public enum StreamingQuality {
 
     public static StreamingQuality fromDisplay(String display) {
         return switch (display) {
-            case "Baja" -> LOW;
-            case "Media" -> MEDIUM;
-            case "Alta" -> HIGH;
+            case "Low" -> LOW;
+            case "Medium" -> MEDIUM;
+            case "High" -> HIGH;
             default -> throw new IllegalArgumentException("Valor no válido: " + display);
         };
     }

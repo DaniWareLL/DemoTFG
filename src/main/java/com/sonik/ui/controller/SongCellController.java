@@ -39,7 +39,7 @@ public class SongCellController {
         thumbnailView.setClip(clip);
     }
 
-    public void setSong(Song song, int index) {
+    public void  setSong(Song song, int index) {
         this.currentSong = song;
 
         idLabel.setText(String.valueOf(index + 1));

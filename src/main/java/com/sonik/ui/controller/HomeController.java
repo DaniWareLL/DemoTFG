@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -17,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import javax.swing.*;
 import java.util.List;
 
 public class HomeController {
@@ -56,26 +55,6 @@ public class HomeController {
     private Button buttonSongs;
 
     // Reproductor inferior
-    @FXML
-    private Button ButtonPreviousSong;
-
-    @FXML
-    private Button ButtonPlay;
-
-    @FXML
-    private Button buttonNextSong;
-
-    @FXML
-    private ProgressBar progressBar;
-
-    @FXML
-    private Slider volumeSlider;
-
-    @FXML
-    private Label currentTimeLabel;
-
-    @FXML
-    private Label totalTimeLabel;
 
     @FXML
     private Label userNameLabel;
@@ -95,6 +74,7 @@ public class HomeController {
     public void initialize() {
 
         ViewManager.setMainContainer(mainContainer);
+        ViewManager.loadIntoBottom(ViewType.PLAYER_BOTTOMBAR);
 
         homeContent = mainContainer.getCenter();
         leftContent = mainContainer.getLeft();
@@ -129,7 +109,6 @@ public class HomeController {
         closeBtn.setOnMouseReleased(e -> {
             closeBtn.setStyle("-fx-background-color: black;");
         });
-
     }
 
     public void settingButtonMC(MouseEvent mouseEvent) {
@@ -196,5 +175,4 @@ public class HomeController {
         mainContainer.setCenter(homeContent);
         mainContainer.setLeft(leftContent);
     }
-
 }

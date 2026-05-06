@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SettingsController">
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SettingsController">
    <content>
       <AnchorPane style="-fx-background-color: black;">
 
          <!-- PANEL PRINCIPAL RESPONSIVE -->
-         <VBox alignment="TOP_LEFT" spacing="30" style="-fx-background-color: #191919; -fx-background-radius: 20;">
+         <VBox alignment="TOP_LEFT" spacing="30" style="-fx-background-color: #191919; -fx-background-radius: 20;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
             <padding>
                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

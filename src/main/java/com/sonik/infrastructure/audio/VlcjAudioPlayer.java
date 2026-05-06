@@ -1,6 +1,7 @@
 package com.sonik.infrastructure.audio;
 
 import com.sonik.config.AppConfig;
+import com.sonik.domain.model.Song;
 import com.sonik.service.audio.AudioPlayer;
 import com.sun.jna.NativeLibrary;
 import org.apache.commons.lang3.SystemUtils;
@@ -17,11 +18,12 @@ import java.util.Scanner;
  */
 public class VlcjAudioPlayer implements AudioPlayer {
 
-    public static Scanner sc = new Scanner(System.in);
-
-
     private final MediaPlayerFactory factory;
     private final MediaPlayer player;
+    private String currentUrl;
+    private Song currentSong;
+
+    private Runnable onPlaying;
 
     // Constructor
     public VlcjAudioPlayer() {
@@ -29,12 +31,13 @@ public class VlcjAudioPlayer implements AudioPlayer {
         factory = new MediaPlayerFactory();
         player = factory.mediaPlayers().newMediaPlayer();
 
-        // Listener de eventos (hay que mirarlo)
-        // Esto solo es una clase que sirve para hacer algo según lo que esté pasando con la canción que se está reproduciendo
+        // Listener de eventos
         player.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
             public void playing(MediaPlayer mediaPlayer) {
-                System.out.println("Playing...");
+                if (onPlaying != null) {
+                    onPlaying.run();
+                }
             }
 
             @Override
@@ -53,18 +56,27 @@ public class VlcjAudioPlayer implements AudioPlayer {
 
     @Override
     public void play(String streamUrl) {
+        currentUrl = streamUrl;
         player.media().play(streamUrl);
-        System.out.println("[Enter] to finish...");
-        sc.nextLine();
     }
 
     @Override
-    public void pause(String streamUrl) {
-
+    public void resume() {
+        player.controls().play();
     }
 
-    public void stop(String streamUrl) {
+    @Override
+    public void pause() {
+        player.controls().pause();
+    }
+
+    public void stop() {
         player.controls().stop();
+    }
+
+    @Override
+    public void setOnPlaying(Runnable callback) {
+        this.onPlaying = callback;
     }
 
     public void release() {
@@ -72,27 +84,88 @@ public class VlcjAudioPlayer implements AudioPlayer {
         factory.release();
     }
 
-    /* CONTROLES BASICOS
-     * player.controls().play();
-     * player.controls().pause();
-     * player.controls().stop();
-     * player.controls().setPosition(float pos); // 0.0 a 1.0
-     * player.controls().setTime(long ms);
-     * player.controls().skipTime(long ms);*/
+    @Override
+    public boolean isPlaying() {
+        return player.status().isPlaying();
+    }
 
-    /* CONTROLES DE AUDIO
-     * player.audio().setVolume(int volume); // 0–100
-     * player.audio().getVolume();
-     * player.audio().mute();
-     * player.audio().unmute();
-     * player.audio().isMuted();
-     * */
+    @Override
+    public void setCurrentSong(Song currentSong) {
+        this.currentUrl = currentUrl;
+    }
 
-    /* ESTADO DEL REPRODUCTOR
-     * player.status().isPlaying();
-     * player.status().isPaused();
-     * player.status().isSeekable();
-     * player.status().length();   // duración en ms
-     * player.status().time();     // tiempo actual en ms
-     * player.status().position(); // 0.0 a 1.0*/
+    @Override
+    public void setCurrentUrl(String currentUrl) {
+        this.currentUrl = currentUrl;
+    }
+
+    public String getCurrentUrl() {
+        return currentUrl;
+    }
+
+    @Override
+    public Song getCurrentSong() {
+        return currentSong;
+    }
+
+    @Override
+    public int getCurrentTimeSec() {
+        return (int) (player.status().time() / 1000);
+    }
+
+    @Override
+    public double getPosition() {
+        return player.status().position(); // 0.0 – 1.0
+    }
+
+    @Override
+    public void seekToPosition(double pos) {
+        player.controls().setPosition((float) pos);
+    }
+
+    @Override
+    public void setVolume(int volume) {
+        player.audio().setVolume(volume);
+    }
+
+    @Override
+    public int getVolume() {
+        return player.audio().volume();
+    }
+
+    @Override
+    public void setMute(boolean mute) {
+        player.audio().setMute(mute);
+    }
+
+    @Override
+    public boolean isMute() {
+        return player.audio().isMute();
+    }
+
+
 }
+
+/* CONTROLES BASICOS
+ * player.controls().play();
+ * player.controls().pause();
+ * player.controls().stop();
+ * player.controls().setPosition(float pos); // 0.0 a 1.0
+ * player.controls().setTime(long ms);
+ * player.controls().skipTime(long ms);*/
+
+/* CONTROLES DE AUDIO
+ * player.audio().setVolume(int volume); // 0–100
+ * player.audio().getVolume();
+ * player.audio().mute();
+ * player.audio().unmute();
+ * player.audio().isMuted();
+ * */
+
+/* ESTADO DEL REPRODUCTOR
+ * player.status().isPlaying();
+ * player.status().isPaused();
+ * player.status().isSeekable();
+ * player.status().length();   // duración en ms
+ * player.status().time();     // tiempo actual en ms
+ * player.status().position(); // 0.0 a 1.0*/

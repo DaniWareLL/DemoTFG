@@ -7,7 +7,7 @@ import com.sonik.domain.exceptions.AudioExtractorException;
  */
 public interface PlayerService {
 
-    String getStreamUrl(String searchPattern) throws AudioExtractorException;
+    String getStreamUrl(String url) throws AudioExtractorException;
 
 
 }

@@ -25,12 +25,12 @@ public class PlayerServiceImpl implements PlayerService {
      * Obtiene la URL directa del stream de audio usando yt-dlp.
      * El enlace firmado caduca en minutos.
      *
-     * @param searchPattern nombre de la canción
+     * @param url url pública de la canción
      * @return URL directa del stream de audio
      */
     @Override
-    public String getStreamUrl(String searchPattern) throws AudioExtractorException {
-        String searchPrefix = UserSession.getPreferences().getAudioSource().getSearchPrefix();
+    public String getStreamUrl(String url) throws AudioExtractorException {
+
         String quality = UserSession.getPreferences().getStreamingQuality().getYtdlpFormat();
 
         try {
@@ -38,7 +38,7 @@ public class PlayerServiceImpl implements PlayerService {
                     AppConfig.getYTDLPPath(),
                     "-f", quality,
                     "--get-url",
-                    searchPrefix +":" + searchPattern
+                    url
             ));
 
             if (result == null || result.isBlank()) {

@@ -1,6 +1,7 @@
 package com.sonik.ui.navigation;
 
 
+import com.sonik.ui.controller.PlayerBarController;
 import com.sonik.ui.controller.SignInController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ public class ViewManager {
 
     private static Stage primaryStage;
     private static BorderPane mainContainer;
+    private static PlayerBarController playerBarController;
 
     // Inicializar desde Main o HomeController
     public static void setPrimaryStage(Stage stage) {
@@ -104,6 +106,27 @@ public class ViewManager {
         }
     }
 
+    // Cargar vista dentro del centro del BorderPane
+    public static void loadIntoBottom(ViewType viewType) {
+        try {
+            FXMLLoader loader = new FXMLLoader(viewType.getUrl());
+            Node view = loader.load();
+
+            // Añade esto para guardar el controller cuando se carga el PlayerBar
+            if (viewType == ViewType.PLAYER_BOTTOMBAR) {
+                playerBarController = loader.getController();
+            }
+
+            mainContainer.setBottom(view);
+        } catch (Exception e) {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error", ButtonType.OK);
+                alert.showAndWait();
+            });
+            e.printStackTrace();
+        }
+    }
+
     public static <T> T loadIntoCenterWithController(ViewType viewType) {
         try {
             FXMLLoader loader = new FXMLLoader(viewType.getUrl());
@@ -122,5 +145,9 @@ public class ViewManager {
 
     public class NavigationFlags {
         public static boolean showAccountCreated = false;
+    }
+
+    public static PlayerBarController getPlayerBarController() {
+        return playerBarController;
     }
 }

@@ -1,29 +1,17 @@
 package com.sonik.ui.controller;
 
 import com.sonik.domain.model.Playlist;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+
+
+import java.io.File;
+import java.io.IOException;
 
 public class PlaylistCell extends ListCell<Playlist> {
 
-    private final HBox root = new HBox();
-    private final ImageView thumbnail = new ImageView();
-    private final Label name = new Label();
-    private final Label description = new Label();
-
-    public PlaylistCell() {
-        thumbnail.setFitWidth(32);
-        thumbnail.setFitHeight(32);
-        thumbnail.setPreserveRatio(true);
-        thumbnail.setSmooth(true);
-
-        root.setSpacing(12);
-        root.setAlignment(Pos.CENTER_LEFT);
-        root.getChildren().addAll(thumbnail, name);
-    }
+    private FXMLLoader loader;
+    private PlaylistCellController controller;
 
     @Override
     protected void updateItem(Playlist playlist, boolean empty) {
@@ -34,10 +22,16 @@ public class PlaylistCell extends ListCell<Playlist> {
             return;
         }
 
-        //thumbnail.setImage(playlist.get());
-        name.setText(playlist.getName());
-        description.setText(playlist.getDescription());
+        if (loader == null) {
+            try {
+                loader = new FXMLLoader(getClass().getResource("/views/playlist-cell-view.fxml"));
+                setGraphic(loader.load());
+                controller = loader.getController();
+            } catch (IOException e){
+                AuxiliaryMethods.showAlert("Error while loading playlist-cell-view.fxml");
+            }
+        }
 
-        setGraphic(root);
+        controller.setPlaylist(playlist);
     }
 }

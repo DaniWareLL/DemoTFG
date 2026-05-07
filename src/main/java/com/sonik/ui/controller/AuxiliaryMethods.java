@@ -22,6 +22,7 @@ public class AuxiliaryMethods {
         String color = state ? "red" : "white";
         label.setVisible(state);
         message.ifPresent(value -> label.setText(value));
+        label.setManaged(state);
         textField.setStyle(
                 "-fx-background-radius: 20px; " +
                         "-fx-background-color: transparent; " +

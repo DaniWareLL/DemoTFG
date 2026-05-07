@@ -2,12 +2,14 @@ package com.sonik.ui.controller;
 
 
 import com.sonik.config.AppContext;
+import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.model.Song;
 import com.sonik.ui.navigation.ViewManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,8 +45,8 @@ public class SearchController {
                             });
 
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (AudioExtractorException e) {
+                        AuxiliaryMethods.showAlert(e.getMessage());
                     }
                 });
             }

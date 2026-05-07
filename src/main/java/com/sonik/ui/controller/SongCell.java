@@ -4,6 +4,8 @@ import com.sonik.domain.model.Song;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 
+import java.io.IOException;
+
 public class SongCell extends ListCell<Song> {
 
     private FXMLLoader loader;
@@ -23,9 +25,8 @@ public class SongCell extends ListCell<Song> {
                 loader = new FXMLLoader(getClass().getResource("/views/song-cell-view.fxml"));
                 setGraphic(loader.load());
                 controller = loader.getController();
-            } catch (Exception e) {
-                e.printStackTrace();
-                setText("Error loading cell");
+            } catch (IOException e){
+                AuxiliaryMethods.showAlert("Error while loading song-cell-view.fxml");
                 return;
             }
         }

@@ -13,16 +13,16 @@ public class DataAccessException extends Exception {
     private static String resolverCodigo(int errorCode) {
         return switch (errorCode) {
             case CHANGES_REVERTED ->
-                    "Error al acceder a los datos; los cambios han sido revertidos.";
+                    "Error while accessing data, changes have been reverted.";
             case REVERT_ERROR ->
-                    "Error al intentar revertir los cambios.";
+                    "Error while reverting changes.";
             case CLOSE_OPERATION_ERROR ->
-                    "Error al cerrar la conexión o recurso.";
+                    "Error while closing the resource.";
             case CONNECTION_ERROR ->
-                    "Error al intentar conectar con la base de datos o recurso.";
+                    "Error while trying to connect to the resource.";
             case ALREADY_CONFIGURED -> "The application's default values have already been set up.";
             default ->
-                    "Código de error desconocido: " + errorCode;
+                    "Unknown error code: " + errorCode;
         };
     }
 

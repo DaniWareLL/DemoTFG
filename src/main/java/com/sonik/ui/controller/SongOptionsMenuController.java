@@ -1,5 +1,6 @@
 package com.sonik.ui.controller;
 
+import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
@@ -51,28 +52,25 @@ public class SongOptionsMenuController {
 
             popup.show(selectorRoot.getScene().getWindow());
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ObjectNotFoundException e) {
-            e.printStackTrace();
-        } catch (DataAccessException e) {
-            e.printStackTrace();
+        } catch (IOException | DataAccessException | ObjectNotFoundException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
         }
     }
 
     @FXML
     private void descargarBtnMC() {
-        try {
-            AppContext.getExecutor().submit(() -> {
-                AppContext.getDownloadService().downloadToMp3(song.getOriginalUrl());
-            });
 
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Song downloaded correctly", ButtonType.OK);
-                alert.showAndWait();
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        AppContext.getExecutor().submit(() -> {
+            try {
+                AppContext.getDownloadService().downloadToMp3(song.getOriginalUrl());
+            } catch (AudioExtractorException e) {
+                AuxiliaryMethods.showAlert(e.getMessage());
+            }
+        });
+
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Song downloaded correctly", ButtonType.OK);
+            alert.showAndWait();
+        });
     }
 }

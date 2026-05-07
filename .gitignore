@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 .kotlin
 *.mp3
+*.properties
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

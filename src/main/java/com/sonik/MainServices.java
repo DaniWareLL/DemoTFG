@@ -3,6 +3,7 @@ package com.sonik;
 import com.sonik.config.AppConfig;
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
+import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.Song;
@@ -25,7 +26,7 @@ import java.util.Scanner;
 
 public class MainServices {
 
-    static void main() throws DataAccessException, IncorrectArgumentException {
+    static void main() throws DataAccessException, IncorrectArgumentException, AudioExtractorException {
 
         AppContext.initializeApplication();
         User u = new User("u","example@gmail.com","u", LocalDate.now());

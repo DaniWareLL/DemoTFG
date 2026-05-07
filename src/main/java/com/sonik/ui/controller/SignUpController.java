@@ -109,9 +109,11 @@ public class SignUpController {
     private void BackToLogin() {
 
         ViewManager.NavigationFlags.showAccountCreated = true;
-        ViewManager.switchScene(ViewType.SIGN_IN);
-
-        //AuxiliaryMethods.showAlert("An error occurred when loading signin-view.fxml.");
+        try {
+            ViewManager.switchScene(ViewType.SIGN_IN);
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
+        }
     }
 
 

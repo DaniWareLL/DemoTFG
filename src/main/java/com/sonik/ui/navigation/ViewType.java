@@ -16,9 +16,7 @@ public enum ViewType {
     PLAYLIST("/views/playlist-view.fxml"),
 
     // Left Side
-    PLAYLIST_SIDEBAR("/views/playlist-side-bar-view.fxml"),
-    SEARCH_SIDEBAR("/views/search-side-bar-view.fxml"),
-
+    PLAYLIST_SIDEBAR("/views/playlist-sidebar-view.fxml"),
 
     // Bottom Side
     PLAYER_BOTTOMBAR("/views/player-bottom-bar-view.fxml");

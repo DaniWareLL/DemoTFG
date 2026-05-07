@@ -23,6 +23,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class SettingsController {
@@ -130,6 +131,10 @@ public class SettingsController {
     }
     public void logOutBtnMC(MouseEvent mouseEvent) {
         AppContext.getAuthService().logout();
-        ViewManager.switchScene(ViewType.SIGN_IN);
+        try {
+            ViewManager.switchScene(ViewType.SIGN_IN);
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
+        }
     }
 }

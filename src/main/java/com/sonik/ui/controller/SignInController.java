@@ -15,6 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
+
+import java.io.IOException;
 import java.util.Optional;
 
 import static com.sonik.config.SessionStorage.clear;
@@ -111,10 +113,16 @@ public class SignInController {
             AuxiliaryMethods.setErrorLabelState(true, usernameErrorLabel ,userTextfield, Optional.of(e.getMessage()));
         } catch (DataAccessException e) {
             AuxiliaryMethods.showAlert(e.getMessage());
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
         }
     }
 
     public void SignUpButton_MouseClicked(MouseEvent mouseEvent) {
-        ViewManager.switchScene(ViewType.SIGN_UP);
+        try {
+            ViewManager.switchScene(ViewType.SIGN_UP);
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
+        }
     }
 }

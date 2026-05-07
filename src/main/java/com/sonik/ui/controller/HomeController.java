@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.List;
 
 public class HomeController {
@@ -74,7 +75,11 @@ public class HomeController {
     public void initialize() {
 
         ViewManager.setMainContainer(mainContainer);
-        ViewManager.loadIntoBottom(ViewType.PLAYER_BOTTOMBAR);
+        try {
+            ViewManager.loadIntoBottom(ViewType.PLAYER_BOTTOMBAR);
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
+        }
 
         homeContent = mainContainer.getCenter();
         leftContent = mainContainer.getLeft();
@@ -112,7 +117,11 @@ public class HomeController {
     }
 
     public void settingButtonMC(MouseEvent mouseEvent) {
-        ViewManager.loadIntoCenter(ViewType.SETTINGS);
+        try {
+            ViewManager.loadIntoCenter(ViewType.SETTINGS);
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
+        }
     }
 
     public void exploreButtonOnMC(MouseEvent mouseEvent) {
@@ -120,8 +129,12 @@ public class HomeController {
     }
 
     public void playlistButtonOnMC(MouseEvent mouseEvent) {
-        ViewManager.loadIntoCenter(ViewType.PLAYLIST);
-        ViewManager.loadIntoLeft(ViewType.PLAYLIST_SIDEBAR);
+        try {
+            ViewManager.loadIntoCenter(ViewType.PLAYLIST);
+            ViewManager.loadIntoLeft(ViewType.PLAYLIST_SIDEBAR);
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e.getMessage());
+        }
     }
 
     public void songButtonOnMC(MouseEvent mouseEvent) {
@@ -156,12 +169,17 @@ public class HomeController {
                     List<Song> results = AppContext.getMetadataService().getMetadata(searchPattern);
 
                     Platform.runLater(() -> {
-                        SearchController controller = ViewManager.loadIntoCenterWithController(ViewType.SEARCH);
+                        SearchController controller = null;
+                        try {
+                            controller = ViewManager.loadIntoCenterWithController(ViewType.SEARCH);
+                        } catch (IOException e) {
+                            AuxiliaryMethods.showAlert(e.getMessage());
+                        }
                         controller.setResults(results);
                     });
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    AuxiliaryMethods.showAlert(e.getMessage());
                 }
             });
         }

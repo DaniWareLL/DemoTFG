@@ -10,7 +10,7 @@
     <children>
       <Button mnemonicParsing="false" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
          <graphic>
-              <Label fx:id="anadirPlaylistBtn" onMouseClicked="#anadirPlaylistBtnMC" style="-fx-text-fill: white; -fx-font-size: 14;" text="Añadir a playlist">
+              <Label onMouseClicked="#addToPlaylistBtnMC" style="-fx-text-fill: white; -fx-font-size: 14;" text="Añadir a playlist">
                <font>
                   <Font name="Manrope Medium" size="12.0" />
                </font>
@@ -19,7 +19,7 @@
       </Button>
       <Button mnemonicParsing="false" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
          <graphic>
-              <Label fx:id="descargarBtn" onMouseClicked="#descargarBtnMC" style="-fx-text-fill: white; -fx-font-size: 14;" text="Descargar">
+              <Label onMouseClicked="#downloadBtnMC" style="-fx-text-fill: white; -fx-font-size: 14;" text="Descargar">
                <font>
                   <Font name="Manrope Medium" size="12.0" />
                </font>

@@ -6,6 +6,7 @@ import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
 import com.sonik.domain.model.Playlist;
 import com.sonik.config.AppContext;
+import com.sonik.ui.navigation.ViewType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +33,7 @@ public class SongOptionsMenuController {
     }
 
     @FXML
-    private void anadirPlaylistBtnMC() {
+    private void addToPlaylistBtnMC() {
         parentPopup.hide(); // cerrar menú principal
 
         showPlaylistSelector();
@@ -58,7 +59,7 @@ public class SongOptionsMenuController {
     }
 
     @FXML
-    private void descargarBtnMC() {
+    private void downloadBtnMC() {
 
         AppContext.getExecutor().submit(() -> {
             try {

@@ -46,7 +46,7 @@ public class PlaylistSidebarController {
         try {
             pane = loader.load();
         } catch (IOException e) {
-            AuxiliaryMethods.showAlert("Error while loading create-playlist-dialog.fxml");
+            AuxiliaryMethods.showAlert(e);
         }
         pane.setMinWidth(450);
 
@@ -101,7 +101,7 @@ public class PlaylistSidebarController {
                     try {
                         AppContext.getPlaylistService().deletePlaylist(toDelete);
                     } catch (ObjectNotFoundException | DataAccessException e) {
-                        AuxiliaryMethods.showAlert(e.getMessage());
+                        AuxiliaryMethods.showAlert(e);
                     }
                 }
 

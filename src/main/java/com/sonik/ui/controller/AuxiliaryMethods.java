@@ -1,11 +1,18 @@
 package com.sonik.ui.controller;
 
+import com.sonik.ui.navigation.ViewType;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class AuxiliaryMethods {
@@ -31,14 +38,27 @@ public class AuxiliaryMethods {
     }
 
     /**
-     * Displays an {@link javafx.scene.control.Alert} onscreen containing the desired message
-     * @param message The message to be displayed
+     * Displays an error window containing the exception message and its stack trace
+     * @param exception The exception that was thrown
      */
-    protected static void showAlert(String message) {
-        Platform.runLater(()->{
-            Alert alert = new Alert(Alert.AlertType.ERROR,
-                    message, ButtonType.OK);
-            alert.showAndWait();});
+    protected static void showAlert(Throwable exception) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewType.ERROR_WINDOW.getUrl());
+            VBox root = loader.load();
+
+            // Get the controller and set the error details
+            ErrorWindowController controller = loader.getController();
+            controller.setErrorMessageAndStackTrace(exception);
+
+            // Create and show the stage
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

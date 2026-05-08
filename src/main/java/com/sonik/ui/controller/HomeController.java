@@ -78,7 +78,7 @@ public class HomeController {
         try {
             ViewManager.loadIntoBottom(ViewType.PLAYER_BOTTOMBAR);
         } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
 
         homeContent = mainContainer.getCenter();
@@ -113,6 +113,7 @@ public class HomeController {
         });
         closeBtn.setOnMouseReleased(e -> {
             closeBtn.setStyle("-fx-background-color: black;");
+            AppContext.shutDown();
         });
     }
 
@@ -120,7 +121,7 @@ public class HomeController {
         try {
             ViewManager.loadIntoCenter(ViewType.SETTINGS);
         } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
     }
 
@@ -133,7 +134,7 @@ public class HomeController {
             ViewManager.loadIntoCenter(ViewType.PLAYLIST);
             ViewManager.loadIntoLeft(ViewType.PLAYLIST_SIDEBAR);
         } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
     }
 
@@ -173,13 +174,13 @@ public class HomeController {
                         try {
                             controller = ViewManager.loadIntoCenterWithController(ViewType.SEARCH);
                         } catch (IOException e) {
-                            AuxiliaryMethods.showAlert(e.getMessage());
+                            AuxiliaryMethods.showAlert(e);
                         }
                         controller.setResults(results);
                     });
 
                 } catch (Exception e) {
-                    AuxiliaryMethods.showAlert(e.getMessage());
+                    AuxiliaryMethods.showAlert(e);
                 }
             });
         }

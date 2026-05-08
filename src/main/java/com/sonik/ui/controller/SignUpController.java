@@ -84,11 +84,11 @@ public class SignUpController {
                     Optional.of("The username has already been taken"));
 
         } catch (DataAccessException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
 
         } catch (IncorrectArgumentException e) {
             switch (e.getErrorType()) {
-                case NULL_OBJECT_RECEIVED, INVALID_NUMBER, INVALID_DATE -> AuxiliaryMethods.showAlert(e.getMessage());
+                case NULL_OBJECT_RECEIVED, INVALID_NUMBER, INVALID_DATE -> AuxiliaryMethods.showAlert(e);
                 case EMPTY_PASSWORD -> AuxiliaryMethods.setErrorLabelState(true,
                         passwordErrorLabel,
                         passwordTextfield,
@@ -112,7 +112,7 @@ public class SignUpController {
         try {
             ViewManager.switchScene(ViewType.SIGN_IN);
         } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
     }
 

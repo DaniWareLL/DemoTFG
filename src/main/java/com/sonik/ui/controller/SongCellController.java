@@ -97,7 +97,7 @@ public class SongCellController {
             popup.show(optionsIcon.getScene().getWindow(), x, y);
 
         } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
     }
 }

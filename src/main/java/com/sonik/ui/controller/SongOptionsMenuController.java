@@ -52,8 +52,8 @@ public class SongOptionsMenuController {
 
             popup.show(selectorRoot.getScene().getWindow());
 
-        } catch (IOException | DataAccessException | ObjectNotFoundException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e);
         }
     }
 
@@ -64,7 +64,7 @@ public class SongOptionsMenuController {
             try {
                 AppContext.getDownloadService().downloadToMp3(song.getOriginalUrl());
             } catch (AudioExtractorException e) {
-                AuxiliaryMethods.showAlert(e.getMessage());
+                AuxiliaryMethods.showAlert(e);
             }
         });
 

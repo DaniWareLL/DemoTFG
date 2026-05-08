@@ -20,35 +20,30 @@ public class PlaylistSelectorController {
     @FXML
     private VBox playlistContainer;
 
-    private Song song;
+    private Song selectedSong;
 
-    public void setSong(Song song) throws ObjectNotFoundException, DataAccessException {
-        this.song = song;
-        loadPlaylists();
+    public void setSong(Song newSong) {
+        this.selectedSong = newSong;
     }
 
-    private void loadPlaylists()  {
+    private void addSongToPlaylist(Playlist playlist) {
         try {
-            List<Playlist> playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());
-
-            for (Playlist p : playlists) {
-
-                Label item = new Label(p.getName());
-
-                item.setStyle("-fx-text-fill: white; -fx-font-size: 14; -fx-padding: 5 10;");
-
-                item.setOnMouseClicked(e -> {
-                    try {
-                        AppContext.getPlaylistService().addSongToPlaylist(p, song, 0);
-                    } catch (IncorrectArgumentException | DuplicateIdException ex) {
-                        AuxiliaryMethods.showAlert(ex.getMessage());
-                    }
-                });
-
-                playlistContainer.getChildren().add(item);
-            }
-        } catch (ObjectNotFoundException | DataAccessException e){
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AppContext.getPlaylistService().addSongToPlaylist(playlist, selectedSong);
+        } catch (IncorrectArgumentException | DuplicateIdException | DataAccessException e) {
+            AuxiliaryMethods.showAlert(e);
         }
+        playlistContainer.getScene().getWindow().hide();
+    }
+
+
+    static void scanForPlaylists(ObservableList<Playlist> playlistObservableList) {
+        List<Playlist> playlists = List.of();
+        try {
+            playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());
+        } catch (DataAccessException | ObjectNotFoundException | IncorrectArgumentException e) {
+            AuxiliaryMethods.showAlert(e);
+        }
+        playlistObservableList.clear();
+        playlistObservableList.addAll(playlists);
     }
 }

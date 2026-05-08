@@ -1,8 +1,8 @@
 package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
-import com.sonik.config.UserSession;
 import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Playlist;
 import javafx.application.Platform;
@@ -52,6 +52,7 @@ public class PlaylistSidebarController {
 
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(pane);
+        dialog.initStyle(StageStyle.UNDECORATED);
         dialog.setTitle("Crear playlist");
         dialog.showAndWait();
         playlistListView.setCellFactory(list -> new PlaylistCell());
@@ -62,14 +63,7 @@ public class PlaylistSidebarController {
     }
 
     public void scanForPlaylists() {
-        List<Playlist> playlists = List.of();
-        try {
-            playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());
-        } catch (ObjectNotFoundException | DataAccessException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
-        }
-        playlistObservableList.clear();
-        playlistObservableList.addAll(playlists);
+        PlaylistSelectorController.scanForPlaylists(playlistObservableList);
     }
 
     public void deletePlaylistOnMC(MouseEvent mouseEvent) {

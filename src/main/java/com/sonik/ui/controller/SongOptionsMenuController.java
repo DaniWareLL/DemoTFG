@@ -40,7 +40,7 @@ public class SongOptionsMenuController {
 
     private void showPlaylistSelector() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/playlist-selector-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(ViewType.SONG_OPTIONS.getUrl());
             VBox selectorRoot = loader.load();
 
             PlaylistSelectorController controller = loader.getController();

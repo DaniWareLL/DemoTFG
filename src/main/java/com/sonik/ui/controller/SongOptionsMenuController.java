@@ -50,7 +50,7 @@ public class SongOptionsMenuController {
             popup.getContent().add(selectorRoot);
             popup.setAutoHide(true);
 
-            popup.show(selectorRoot.getScene().getWindow());
+            popup.show(parentPopup.getOwnerWindow());
 
         } catch (IOException e) {
             AuxiliaryMethods.showAlert(e);

@@ -1,5 +1,6 @@
 package com.sonik.infrastructure.persistence;
 
+import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
@@ -26,12 +27,10 @@ public class JpaPlaylistRepository implements PlaylistRepository {
 
         try (EntityManager em = emf.createEntityManager()) {
 
+            AppContext.getJpaUserRepository().findByUsername(username);
             TypedQuery<Playlist> query = em.createQuery("SELECT p FROM Playlist p WHERE p.user.userName =: username", Playlist.class);
             query.setParameter("username", username);
             List<Playlist> playlists = query.getResultList();
-            if (playlists.isEmpty()) {
-                throw new ObjectNotFoundException("No playlists found for user: " + username);
-            }
             return query.getResultList();
 
         } catch (PersistenceException | IllegalStateException e) {

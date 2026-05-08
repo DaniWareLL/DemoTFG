@@ -8,22 +8,39 @@ import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Playlist;
 import com.sonik.domain.model.Song;
 import com.sonik.config.AppContext;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class PlaylistSelectorController {
 
     @FXML
-    private VBox playlistContainer;
+    public ListView<Playlist> playlistListView;
+    @FXML
+    private ObservableList<Playlist> playlistObservableList;
+    @FXML
+    public VBox playlistContainer;
 
     private Song selectedSong;
 
     public void setSong(Song newSong) {
         this.selectedSong = newSong;
+    }
+
+    public void initialize() {
+        playlistListView.setCellFactory(list -> new PlaylistCell());
+        playlistObservableList = FXCollections.observableArrayList();
+        playlistListView.setItems(playlistObservableList);
+        scanForPlaylists(playlistObservableList);
+
+        playlistListView.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) addSongToPlaylist(newValue);
+                });
     }
 
     private void addSongToPlaylist(Playlist playlist) {

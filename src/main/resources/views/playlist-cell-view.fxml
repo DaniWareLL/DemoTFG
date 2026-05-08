@@ -5,13 +5,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox alignment="CENTER_LEFT" spacing="12" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.PlaylistCellController">
+<HBox alignment="CENTER_LEFT" spacing="12" style="-fx-background-color: black; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.PlaylistCellController">
 
     <padding>
         <Insets bottom="8" left="10" right="10" top="8" />
     </padding>
 
-    <StackPane minHeight="32" minWidth="32" style="-fx-border-radius: 5;">
+    <StackPane minHeight="32" minWidth="32" style="-fx-border-radius: 20;">
         <ImageView fx:id="thumbnailView" fitHeight="32" fitWidth="32" preserveRatio="true" />
     </StackPane>
 

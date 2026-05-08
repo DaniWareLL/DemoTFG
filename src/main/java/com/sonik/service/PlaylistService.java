@@ -29,9 +29,9 @@ public interface PlaylistService {
      */
     void createPlaylist(Playlist playlist) throws DuplicateIdException, DataAccessException;
 
-    void addSongToPlaylist(Playlist playlist, Song song, int position) throws IncorrectArgumentException, DuplicateIdException;
+    void addSongToPlaylist(Playlist playlist, Song song) throws IncorrectArgumentException, DuplicateIdException, DataAccessException;
 
-    void deleteSongFromPlaylist(Playlist playlist, Song song) throws ObjectNotFoundException;
+    void deleteSongFromPlaylist(Playlist playlist, Song song) throws ObjectNotFoundException, DataAccessException;
 
     void deletePlaylist(Playlist playlist) throws ObjectNotFoundException, DataAccessException;
 

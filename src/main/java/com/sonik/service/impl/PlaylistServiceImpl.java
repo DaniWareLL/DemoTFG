@@ -1,5 +1,6 @@
 package com.sonik.service.impl;
 
+import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
@@ -37,7 +38,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         playlistRepository.save(playlist);
     }
 
-    public List<Playlist> findAllPlaylistsForUser(String username) throws ObjectNotFoundException, DataAccessException {
+    public List<Playlist> findAllPlaylistsForUser(String username) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException {
         return playlistRepository.findAllByUsername(username);
     }
 
@@ -46,32 +47,17 @@ public class PlaylistServiceImpl implements PlaylistService {
      * Adds a song to the playlist
      * @param playlist The playlist where the song will be added
      * @param song The song to add
-     * @param position The position inside the playlist
      * @throws IncorrectArgumentException
      * @throws DuplicateIdException
      */
     @Override
-    public void addSongToPlaylist(Playlist playlist, Song song, int position) throws IncorrectArgumentException, DuplicateIdException {
-        for (PlaylistsSongs playlistsSongs : playlist.getSongs()) {
-            if (playlistsSongs.getSong().getId() == song.getId()) {
-                throw new DuplicateIdException("Song with id " + song.getId()
-                        + " already exists in playlist " + playlist.getName());
-            }
-        }
-        PlaylistsSongs playlistsSongs = new PlaylistsSongs(playlist, song, position, LocalDate.now());
-        playlist.getSongs().add(playlistsSongs);
+    public void addSongToPlaylist(Playlist playlist, Song song) throws IncorrectArgumentException, DuplicateIdException, DataAccessException {
+        playlistRepository.addSongToPlaylist(playlist, song);
     }
 
     @Override
-    public void deleteSongFromPlaylist(Playlist playlist, Song song) throws ObjectNotFoundException {
-        Iterator<PlaylistsSongs> iterator = playlist.getSongs().iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().getSong().equals(song)) {
-                iterator.remove();
-                return;
-            }
-        }
-        throw new ObjectNotFoundException("Song doesn't exist in the playlist.");
+    public void deleteSongFromPlaylist(Playlist playlist, Song song) throws ObjectNotFoundException, DataAccessException {
+        playlistRepository.removeSongFromPlaylist(playlist, song);
     }
 
     @Override

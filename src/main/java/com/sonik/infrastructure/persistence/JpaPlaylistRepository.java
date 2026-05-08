@@ -22,13 +22,7 @@ public class JpaPlaylistRepository implements PlaylistRepository {
         this.emf = emf;
     }
 
-    /**
-     * Finds all playlists associated with the user received
-     * @return A list containing all playlists associated with said user
-     * @param username The name of the user who is associated with the playlists
-     * @throws DataAccessException If there is any error accessing the data
-     */
-    public List<Playlist> findAllByUsername(String username) throws DataAccessException, ObjectNotFoundException {
+    public List<Playlist> findAllByUsername(String username) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException {
 
         try (EntityManager em = emf.createEntityManager()) {
 

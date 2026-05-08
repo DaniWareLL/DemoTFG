@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="8" style="-fx-background-color: #1f1f1f; -fx-padding: 10; -fx-background-radius: 8;" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="playlistContainer" fx:controller="com.sonik.ui.controller.PlaylistSelectorController" spacing="8" style="-fx-background-color: black; -fx-padding: 10; -fx-background-radius: 8;" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label text="Añadir a playlist" style="-fx-text-fill: white; -fx-font-size: 14;" />
-
-        <VBox fx:id="playlistContainer" spacing="6" />
+        <Label text="Add to playlist" style="-fx-text-fill: white; -fx-font-size: 14;" />
+        <ListView fx:id="playlistListView" style="-fx-background-color: black;  -fx-control-inner-background: black;
+         -fx-background-insets: 0; -fx-padding: 0;" stylesheets="@../css/playlist-sidebar.css" />
     </children>
 </VBox>

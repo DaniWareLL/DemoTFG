@@ -27,7 +27,8 @@ public class PlaylistsSongs {
 
     public PlaylistsSongs() {}
 
-    public PlaylistsSongs(Playlist playlist, Song song, int position, LocalDate addedAt) throws IncorrectArgumentException {
+    public PlaylistsSongs(Playlist playlist, Song song, LocalDate addedAt) throws IncorrectArgumentException {
+        setId(playlist, song);
         setPlaylist(playlist);
         setSong(song);
         setAddedAt(addedAt);
@@ -40,6 +41,11 @@ public class PlaylistsSongs {
     public LocalDate getAddedAt()   { return addedAt; }
 
     // Setters
+
+    public void setId(Playlist playlist, Song song) {
+        this.id = new PlaylistsSongsId(playlist.getId(), song.getId());
+    }
+
     public void setPlaylist(Playlist playlist) throws IncorrectArgumentException {
         if (playlist == null)
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);

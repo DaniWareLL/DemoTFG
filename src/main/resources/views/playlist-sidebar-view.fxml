@@ -15,9 +15,9 @@
             <Insets left="15.0" top="15.0" />
          </VBox.margin>
       </Label>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;">
+      <VBox prefHeight="426.0" prefWidth="230.0" style="-fx-background-color: black; -fx-padding: 0; -fx-spacing: 0;">
          <children>
-            <ListView fx:id="playlistListView" style="-fx-background-color: black;             -fx-border-color: white; -fx-control-inner-background: black; -fx-background-insets: 0; -fx-padding: 0;" stylesheets="@../css/playlist-sidebar.css" />
+            <ListView fx:id="playlistListView" style="-fx-background-color: black;  -fx-control-inner-background: black; -fx-background-insets: 0; -fx-padding: 0;" stylesheets="@../css/playlist-sidebar.css" />
             <Region minHeight="10.0" style="-fx-background-color: black;" />
             <Separator style="-fx-background-color: white; -fx-border-width: 0.1;">
                <VBox.margin>

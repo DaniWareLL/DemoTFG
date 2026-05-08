@@ -1,5 +1,6 @@
 package com.sonik.infrastructure.persistence;
 
+import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;

@@ -111,10 +111,8 @@ public class SignInController {
 
         } catch (ObjectNotFoundException e) {
             AuxiliaryMethods.setErrorLabelState(true, usernameErrorLabel ,userTextfield, Optional.of(e.getMessage()));
-        } catch (DataAccessException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
-        } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+        } catch (DataAccessException | IOException e) {
+            AuxiliaryMethods.showAlert(e);
         }
     }
 
@@ -122,7 +120,7 @@ public class SignInController {
         try {
             ViewManager.switchScene(ViewType.SIGN_UP);
         } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
     }
 }

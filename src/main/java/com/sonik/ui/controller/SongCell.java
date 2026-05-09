@@ -26,7 +26,7 @@ public class SongCell extends ListCell<Song> {
                 setGraphic(loader.load());
                 controller = loader.getController();
             } catch (IOException e){
-                AuxiliaryMethods.showAlert("Error while loading song-cell-view.fxml");
+                AuxiliaryMethods.showAlert(e);
                 return;
             }
         }

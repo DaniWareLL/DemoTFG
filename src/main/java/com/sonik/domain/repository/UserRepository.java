@@ -26,10 +26,11 @@ public interface UserRepository {
 
     /**
      * Retrieves a user entity matching the given username
-     * @param username
+     * @param username The name of the user to search for
      * @return the matching user entity
      * @throws DataAccessException if a data access error occurs
      * @throws ObjectNotFoundException if no user with the given username exists
+     * @throws IncorrectArgumentException {@link IncorrectArgumentException.ErrorType#EMPTY_USERNAME EMPTY_USERNAME} if username is blank
      */
     User findByUsername(String username) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException;
 

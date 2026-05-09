@@ -91,7 +91,7 @@ public class SettingsController {
         try {
             audioExtractorVersionTF.setText(version + " " + AppContext.getSettingService().getToolVersion());
         } catch (AudioExtractorException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
 
     }
@@ -134,7 +134,7 @@ public class SettingsController {
         try {
             ViewManager.switchScene(ViewType.SIGN_IN);
         } catch (IOException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
     }
 }

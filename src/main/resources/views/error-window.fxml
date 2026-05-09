@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-padding: 5;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.ErrorWindowController">
+   <children>
+      <Label style="-fx-text-fill: white;" text="Uhhh...">
+         <font>
+            <Font name="Manrope ExtraBold" size="50.0" />
+         </font>
+      </Label>
+      <Label text="An error occured :(" textFill="WHITE">
+         <font>
+            <Font name="Manrope ExtraBold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorMessage" text="result of e.getMessage() THE USER SHOULD NEVER SEE THIS" textFill="WHITE">
+         <font>
+            <Font name="Manrope Regular" size="13.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="stackTraceTextArea" prefHeight="200.0" prefWidth="200.0" style="-fx-control-inner-background: #505050;" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" style="-fx-padding: 30;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#closeButtonActionPerformed" style="-fx-background-color: white; -fx-background-radius: 50;" text="Close">
+               <font>
+                  <Font name="Manrope ExtraBold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

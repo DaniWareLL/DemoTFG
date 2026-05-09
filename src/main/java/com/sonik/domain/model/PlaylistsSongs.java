@@ -22,18 +22,15 @@ public class PlaylistsSongs {
     @JoinColumn(name = "song_id")
     private Song song;
 
-    @Column(name = "position", nullable = false)
-    private int position;
-
     @Column(name = "added_at", nullable = false)
     private LocalDate addedAt;
 
     public PlaylistsSongs() {}
 
-    public PlaylistsSongs(Playlist playlist, Song song, int position, LocalDate addedAt) throws IncorrectArgumentException {
+    public PlaylistsSongs(Playlist playlist, Song song, LocalDate addedAt) throws IncorrectArgumentException {
+        setId(playlist, song);
         setPlaylist(playlist);
         setSong(song);
-        setPosition(position);
         setAddedAt(addedAt);
     }
 
@@ -41,10 +38,14 @@ public class PlaylistsSongs {
     public PlaylistsSongsId getId() { return id; }
     public Playlist getPlaylist()   { return playlist; }
     public Song getSong()           { return song; }
-    public int getPosition()        { return position; }
     public LocalDate getAddedAt()   { return addedAt; }
 
     // Setters
+
+    public void setId(Playlist playlist, Song song) {
+        this.id = new PlaylistsSongsId(playlist.getId(), song.getId());
+    }
+
     public void setPlaylist(Playlist playlist) throws IncorrectArgumentException {
         if (playlist == null)
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
@@ -55,12 +56,6 @@ public class PlaylistsSongs {
         if (song == null)
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.song = song;
-    }
-
-    public void setPosition(int position) throws IncorrectArgumentException {
-        if (position < 0)
-            throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_NUMBER);
-        this.position = position;
     }
 
     public void setAddedAt(LocalDate addedAt) throws IncorrectArgumentException {

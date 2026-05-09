@@ -29,10 +29,12 @@ public class CreatePlaylistDialogController {
 
     public void nameTextFieldOnKP(KeyEvent keyEvent) {
         AuxiliaryMethods.setErrorLabelState(false, playlistNameErrorLabel, nameTextField, Optional.empty());
+        playlistNameErrorLabel.setManaged(false);
     }
 
     public void descriptionTextFieldOnKP(KeyEvent keyEvent) {
         AuxiliaryMethods.setErrorLabelState(false, playlistDescriptionErrorLabel, descriptionTextField, Optional.empty());
+        playlistDescriptionErrorLabel.setManaged(false);
     }
 
     public void buildPlaylist() throws IncorrectArgumentException, DuplicateIdException, DataAccessException {
@@ -52,16 +54,23 @@ public class CreatePlaylistDialogController {
             ((Stage)playlistDescriptionErrorLabel.getScene().getWindow()).close();
         } catch (IncorrectArgumentException e) {
             switch (e.getErrorType()) {
-                case NULL_OBJECT_RECEIVED, INVALID_DATE -> AuxiliaryMethods.showAlert(e.getMessage());
-                case EMPTY_PLAYLIST_NAME -> AuxiliaryMethods.setErrorLabelState(
+                case NULL_OBJECT_RECEIVED, INVALID_DATE -> AuxiliaryMethods.showAlert(e);
+                case EMPTY_PLAYLIST_NAME -> {
+                    AuxiliaryMethods.setErrorLabelState(
                         true, playlistNameErrorLabel, nameTextField, Optional.of(e.getMessage()));
-                case EMPTY_PLAYLIST_DESCRIPTION -> AuxiliaryMethods.setErrorLabelState(
+                    playlistNameErrorLabel.setManaged(true);
+                }
+                case EMPTY_PLAYLIST_DESCRIPTION -> {
+                    AuxiliaryMethods.setErrorLabelState(
                         true, playlistDescriptionErrorLabel, descriptionTextField, Optional.of(e.getMessage()));
+                    playlistDescriptionErrorLabel.setManaged(true);
+                }
             }
         } catch (DuplicateIdException e) {
             AuxiliaryMethods.setErrorLabelState(true, playlistNameErrorLabel, nameTextField, Optional.of(e.getMessage()));
+            playlistDescriptionErrorLabel.setManaged(true);
         } catch (DataAccessException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+            AuxiliaryMethods.showAlert(e);
         }
     }
 }

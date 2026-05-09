@@ -8,47 +8,59 @@ import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Playlist;
 import com.sonik.domain.model.Song;
 import com.sonik.config.AppContext;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class PlaylistSelectorController {
 
     @FXML
-    private VBox playlistContainer;
+    public ListView<Playlist> playlistListView;
+    @FXML
+    private ObservableList<Playlist> playlistObservableList;
+    @FXML
+    public VBox playlistContainer;
 
-    private Song song;
+    private Song selectedSong;
 
-    public void setSong(Song song) throws ObjectNotFoundException, DataAccessException {
-        this.song = song;
-        loadPlaylists();
+    public void setSong(Song newSong) {
+        this.selectedSong = newSong;
     }
 
-    private void loadPlaylists()  {
-        try {
-            List<Playlist> playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());
+    public void initialize() {
+        playlistListView.setCellFactory(list -> new PlaylistCell());
+        playlistObservableList = FXCollections.observableArrayList();
+        playlistListView.setItems(playlistObservableList);
+        scanForPlaylists(playlistObservableList);
 
-            for (Playlist p : playlists) {
-
-                Label item = new Label(p.getName());
-
-                item.setStyle("-fx-text-fill: white; -fx-font-size: 14; -fx-padding: 5 10;");
-
-                item.setOnMouseClicked(e -> {
-                    try {
-                        AppContext.getPlaylistService().addSongToPlaylist(p, song, 0);
-                    } catch (IncorrectArgumentException | DuplicateIdException ex) {
-                        AuxiliaryMethods.showAlert(ex.getMessage());
-                    }
+        playlistListView.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) addSongToPlaylist(newValue);
                 });
+    }
 
-                playlistContainer.getChildren().add(item);
-            }
-        } catch (ObjectNotFoundException | DataAccessException e){
-            AuxiliaryMethods.showAlert(e.getMessage());
+    private void addSongToPlaylist(Playlist playlist) {
+        try {
+            AppContext.getPlaylistService().addSongToPlaylist(playlist, selectedSong);
+        } catch (IncorrectArgumentException | DuplicateIdException | DataAccessException e) {
+            AuxiliaryMethods.showAlert(e);
         }
+        playlistContainer.getScene().getWindow().hide();
+    }
+
+
+    static void scanForPlaylists(ObservableList<Playlist> playlistObservableList) {
+        List<Playlist> playlists = List.of();
+        try {
+            playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());
+        } catch (DataAccessException | ObjectNotFoundException | IncorrectArgumentException e) {
+            AuxiliaryMethods.showAlert(e);
+        }
+        playlistObservableList.clear();
+        playlistObservableList.addAll(playlists);
     }
 }

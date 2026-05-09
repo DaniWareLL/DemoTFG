@@ -6,6 +6,7 @@ import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
 import com.sonik.domain.model.Playlist;
 import com.sonik.config.AppContext;
+import com.sonik.ui.navigation.ViewType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +33,7 @@ public class SongOptionsMenuController {
     }
 
     @FXML
-    private void anadirPlaylistBtnMC() {
+    private void addToPlaylistBtnMC() {
         parentPopup.hide(); // cerrar menú principal
 
         showPlaylistSelector();
@@ -40,7 +41,7 @@ public class SongOptionsMenuController {
 
     private void showPlaylistSelector() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/playlist-selector-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(ViewType.SONG_OPTIONS.getUrl());
             VBox selectorRoot = loader.load();
 
             PlaylistSelectorController controller = loader.getController();
@@ -50,21 +51,21 @@ public class SongOptionsMenuController {
             popup.getContent().add(selectorRoot);
             popup.setAutoHide(true);
 
-            popup.show(selectorRoot.getScene().getWindow());
+            popup.show(parentPopup.getOwnerWindow());
 
-        } catch (IOException | DataAccessException | ObjectNotFoundException e) {
-            AuxiliaryMethods.showAlert(e.getMessage());
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e);
         }
     }
 
     @FXML
-    private void descargarBtnMC() {
+    private void downloadBtnMC() {
 
         AppContext.getExecutor().submit(() -> {
             try {
                 AppContext.getDownloadService().downloadToMp3(song.getOriginalUrl());
             } catch (AudioExtractorException e) {
-                AuxiliaryMethods.showAlert(e.getMessage());
+                AuxiliaryMethods.showAlert(e);
             }
         });
 

@@ -17,7 +17,7 @@ import static com.sonik.config.SessionStorage.load;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException, DataAccessException, ObjectNotFoundException, IncorrectArgumentException {
+    public void start(Stage stage) throws IOException, DataAccessException, IncorrectArgumentException {
 
         AppContext.initializeApplication();
 
@@ -26,7 +26,12 @@ public class Main extends Application {
         String savedUser = load();
 
         if (savedUser != null) {
-            User user = AppContext.getJpaUserRepository().findByUsername(savedUser);
+            User user = null;
+            try {
+                user = AppContext.getJpaUserRepository().findByUsername(savedUser);
+            } catch (ObjectNotFoundException e) {
+                ViewManager.switchScene(ViewType.SIGN_IN);
+            }
             if (user != null) {
                 UserSession.start(user);
                 ViewManager.switchScene(ViewType.HOME);

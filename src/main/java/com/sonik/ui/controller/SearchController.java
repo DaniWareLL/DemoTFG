@@ -47,7 +47,7 @@ public class SearchController {
 
                         }
                     } catch (AudioExtractorException e) {
-                        AuxiliaryMethods.showAlert(e.getMessage());
+                        AuxiliaryMethods.showAlert(e);
                     }
                 });
             }

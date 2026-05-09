@@ -51,7 +51,7 @@ public class LibraryController {
 
                         }
                     } catch (AudioExtractorException e) {
-                        AuxiliaryMethods.showAlert(e.getMessage());
+                        AuxiliaryMethods.showAlert(e);
                     }
                 });
             }

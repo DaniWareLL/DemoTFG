@@ -14,6 +14,7 @@ public enum ViewType {
     SEARCH("/views/search-view.fxml"),
     SETTINGS("/views/settings-view.fxml"),
     PLAYLIST("/views/playlist-view.fxml"),
+    LIBRARY("/views/library-view.fxml"),
     ERROR_WINDOW("/views/error-window.fxml"),
     SONG_OPTIONS("/views/playlist-selector-menu.fxml"),
 

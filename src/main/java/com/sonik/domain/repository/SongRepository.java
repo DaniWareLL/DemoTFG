@@ -11,7 +11,7 @@ import com.sonik.domain.model.Song;
  */
 public interface SongRepository {
 
-    Song findById(Long id) throws DataAccessException, ObjectNotFoundException;
+    Song findById(int id) throws DataAccessException, ObjectNotFoundException;
 
     void save(Song song) throws DuplicateIdException, DataAccessException;
 

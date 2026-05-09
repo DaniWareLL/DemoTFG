@@ -10,6 +10,7 @@ import com.sonik.domain.model.Song;
 import com.sonik.service.MetadataService;
 import com.sonik.service.audio.AudioExtractor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class MetadataServiceImpl implements MetadataService {
                 } else {
                     metadata.setSource("SoundCloud");
                 }
+                metadata.setAggregationDate(LocalDate.now());
 
 
                 if (entry.has("thumbnails") && entry.getAsJsonArray("thumbnails").size() > 0) {

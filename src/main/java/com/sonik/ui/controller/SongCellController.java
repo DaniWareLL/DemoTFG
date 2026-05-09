@@ -2,7 +2,12 @@ package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
+import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.DuplicateIdException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
+import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -28,7 +33,7 @@ public class SongCellController {
     @FXML private Label qualityLabel;
     @FXML private Label dateLabel;
     @FXML private FontIcon optionsIcon;
-
+    @FXML private FontIcon likeIcon;
 
     private Song currentSong;
 
@@ -39,7 +44,7 @@ public class SongCellController {
         thumbnailView.setClip(clip);
     }
 
-    public void  setSong(Song song, int index) {
+    public void setSong(Song song, int index) {
         this.currentSong = song;
 
         idLabel.setText(String.valueOf(index + 1));
@@ -98,6 +103,34 @@ public class SongCellController {
 
         } catch (IOException e) {
             AuxiliaryMethods.showAlert(e.getMessage());
+        }
+    }
+
+    public void likeBtnMC(MouseEvent mouseEvent) {
+    }
+
+    public void likeBtnOnAction(ActionEvent actionEvent) {
+        try {
+            if(AppContext.getJpaUserLibraryRepository().exists(UserSession.getUser().getId(), currentSong.getId())){
+                AppContext.getLibraryService().removeFavouriteSong(currentSong);
+                likeIcon.setIconLiteral("mdi2h-heart-outline");
+            } else {
+                try {
+                    AppContext.getJpaSongRepository().findById(currentSong.getId());
+                }catch (ObjectNotFoundException e) {
+                    AppContext.getJpaSongRepository().save(currentSong);
+                }
+                AppContext.getLibraryService().addFavouriteSong(currentSong);
+                likeIcon.setIconLiteral("mdi2h-heart");
+            }
+        } catch (ObjectNotFoundException e) {
+            e.printStackTrace();
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        } catch (IncorrectArgumentException e) {
+            e.printStackTrace();
+        } catch (DuplicateIdException e) {
+            e.printStackTrace();
         }
     }
 }

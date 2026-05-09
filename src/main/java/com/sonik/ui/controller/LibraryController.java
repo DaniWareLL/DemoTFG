@@ -1,6 +1,5 @@
 package com.sonik.ui.controller;
 
-
 import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.model.Song;
@@ -8,23 +7,28 @@ import com.sonik.ui.navigation.ViewManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyEvent;
 
-import java.io.IOException;
 import java.util.List;
 
-/**
- * Handles the search views and mainly shows results
- */
-public class SearchController {
+
+public class LibraryController {
 
     @FXML
-    private ListView<Song> searchedSongsList;
+    private ListView<Song> favouriteSongsListView;
 
     public void initialize() {
-        searchedSongsList.setFixedCellSize(65);
-        searchedSongsList.setCellFactory(list -> new SongCell());
+        favouriteSongsListView.setFixedCellSize(65);
+        favouriteSongsListView.setCellFactory(list -> new SongCell());
 
-        searchedSongsList.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        AppContext.getExecutor().submit(() -> {
+            List<Song> favouriteSongs = AppContext.getLibraryService().getFavouriteSongs();
+            Platform.runLater(() -> {
+                setResults(favouriteSongs);
+            });
+        });
+
+        favouriteSongsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 // Hilo para extraer URL
                 AppContext.getExecutor().submit(() -> {
@@ -53,9 +57,11 @@ public class SearchController {
             }
         });
     }
-
     public void setResults(List<Song> songs) {
-        searchedSongsList.getItems().setAll(songs);
+        favouriteSongsListView.getItems().setAll(songs);
     }
 
+
+    public void searchBarOnKP(KeyEvent keyEvent) {
+    }
 }

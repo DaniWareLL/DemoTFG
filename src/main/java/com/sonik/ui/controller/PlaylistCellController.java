@@ -26,7 +26,7 @@ public class PlaylistCellController {
         this.countLabel.setText(playlist.getSongs().size() + " songs");
         String url;
         if (playlist.getSongs().isEmpty()) {
-            url = new File("./src/main/resources/images/Sonik/song.png").toURI().toString();
+            url = new File("/images/Sonik/PlaylistSonik.png").toURI().toString();
         } else {
             url = new File(playlist.getSongs().getFirst().getSong().getThumbnailUrl()).toURI().toString();
         }

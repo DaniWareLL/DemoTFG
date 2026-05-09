@@ -55,6 +55,11 @@
          <font>
             <Font size="15.0" />
          </font></Label>
+      <Button fx:id="likeBtn" mnemonicParsing="false" onAction="#likeBtnOnAction" onMouseClicked="#likeBtnMC" style="-fx-background-color: transparent;" textFill="#ffffff00">
+         <graphic>
+            <FontIcon fx:id="likeIcon" iconColor="WHITE" iconLiteral="mdi2h-heart-outline" iconSize="20" onMouseClicked="#likeBtnMC" />
+         </graphic>
+      </Button>
       <Button fx:id="optionsBtn" mnemonicParsing="false" onMouseClicked="#optionsBtnMC" style="-fx-background-color: transpoarent;">
          <graphic>
       

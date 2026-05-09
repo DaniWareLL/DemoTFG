@@ -21,7 +21,7 @@
                <children>
                   <ImageView fx:id="thumbnailPlaying" fitHeight="60.0" fitWidth="60.0" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Sonik/Image.png" />
+                        <Image url="@../images/Sonik/ViniloSonik.png" />
                      </image>
                   </ImageView>
                </children>

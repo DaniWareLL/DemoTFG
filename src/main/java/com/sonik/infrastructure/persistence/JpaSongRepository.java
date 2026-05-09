@@ -28,7 +28,7 @@ public class JpaSongRepository implements SongRepository {
      * @throws ObjectNotFoundException If no song is found with such id
      */
     @Override
-    public Song findById(Long id) throws DataAccessException, ObjectNotFoundException {
+    public Song findById(int id) throws DataAccessException, ObjectNotFoundException {
         try (EntityManager em = emf.createEntityManager()) {
 
             Song song = em.find(Song.class, id);

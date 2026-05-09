@@ -3,11 +3,13 @@ package com.sonik.config;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.repository.PlaylistRepository;
 import com.sonik.domain.repository.SongRepository;
+import com.sonik.domain.repository.UserLibraryRepository;
 import com.sonik.domain.repository.UserRepository;
 import com.sonik.infrastructure.audio.VlcjAudioPlayer;
 import com.sonik.infrastructure.audio.YtDlpClient;
 import com.sonik.infrastructure.persistence.JpaPlaylistRepository;
 import com.sonik.infrastructure.persistence.JpaSongRepository;
+import com.sonik.infrastructure.persistence.JpaUserLibraryRepository;
 import com.sonik.infrastructure.persistence.JpaUserRepository;
 import com.sonik.service.*;
 import com.sonik.service.audio.AudioExtractor;
@@ -33,6 +35,7 @@ public class AppContext {
     private static UserRepository jpaUserRepository;
     private static SongRepository jpaSongRepository;
     private static PlaylistRepository jpaPlaylistRepository;
+    private static UserLibraryRepository jpaUserLibraryRepository;
 
     private static AuthService authService;
     private static UserService userService;
@@ -42,6 +45,7 @@ public class AppContext {
     private static MetadataService metadataService;
     private static DownloadService downloadService;
     private static PlaylistService playlistService;
+    private static LibraryService libraryService;
 
     private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(4);
 
@@ -71,6 +75,7 @@ public class AppContext {
         jpaUserRepository = new JpaUserRepository(emf);
         jpaSongRepository = new JpaSongRepository(emf);
         jpaPlaylistRepository = new JpaPlaylistRepository(emf);
+        jpaUserLibraryRepository = new JpaUserLibraryRepository(emf);
 
         passwordService = new PasswordServiceImpl();
         authService = new AuthServiceImpl(jpaUserRepository, passwordService);
@@ -82,6 +87,7 @@ public class AppContext {
         downloadService = new DownloadServiceImpl(audioExtractor);
         playerService = new PlayerServiceImpl(audioExtractor);
         playlistService = new PlaylistServiceImpl(jpaPlaylistRepository);
+        libraryService = new LibraryServiceImpl();
    }
 
     /**
@@ -155,4 +161,11 @@ public class AppContext {
         return EXECUTOR;
     }
 
+    public static UserLibraryRepository getJpaUserLibraryRepository() {
+        return jpaUserLibraryRepository;
+    }
+
+    public static LibraryService getLibraryService() {
+        return libraryService;
+    }
 }

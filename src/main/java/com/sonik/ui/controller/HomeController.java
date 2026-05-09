@@ -6,6 +6,7 @@ import com.sonik.ui.navigation.ViewType;
 import javafx.application.Platform;
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -16,7 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class HomeController {
     private Button buttonPlaylist;
 
     @FXML
-    private Button buttonSongs;
+    private Button libraryBtn;
 
     // Reproductor inferior
 
@@ -137,9 +137,6 @@ public class HomeController {
         }
     }
 
-    public void songButtonOnMC(MouseEvent mouseEvent) {
-    }
-
     private void enableWindowDrag() {
 
         Node topBar = mainContainer.getTop();
@@ -192,5 +189,13 @@ public class HomeController {
     public void homeBtnMC(MouseEvent mouseEvent) {
         mainContainer.setCenter(homeContent);
         mainContainer.setLeft(leftContent);
+    }
+
+    public void libraryBtnMC(ActionEvent actionEvent) {
+        try {
+            ViewManager.loadIntoCenter(ViewType.LIBRARY);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

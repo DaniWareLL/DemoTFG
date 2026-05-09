@@ -41,10 +41,17 @@ public class Song {
     @Column(name ="download_path", nullable = true)
     private String downloadPath;
 
-    @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, orphanRemoval = true)
+    /*
+     * We don't use cascade = CascadeType.ALL because Song is an aggregate root.
+     * UserLibrary depends on Song, not the other way around.
+     */
+    @OneToMany(mappedBy = "song")
     private List<PlaylistsSongs> playlists = new ArrayList<>();
 
-    @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, orphanRemoval = true)
+    /*
+     * Same as PlaylistsSongs
+     */
+    @OneToMany(mappedBy = "song")
     private List<UserLibrary> userLibraries = new ArrayList<>();
 
     public Song() {}
@@ -127,9 +134,6 @@ public class Song {
                 ", originalUrl='" + originalUrl + '\'' +
                 ", thumbnailUrl='" + thumbnailUrl + '\'' +
                 ", aggregationDate=" + aggregationDate +
-                // ", sources=" + sources +
-                ", playlists=" + playlists +
-                ", userLibraries=" + userLibraries +
                 '}';
     }
 }

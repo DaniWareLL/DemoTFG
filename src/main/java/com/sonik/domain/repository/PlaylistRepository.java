@@ -29,7 +29,7 @@ public interface PlaylistRepository {
      */
     List<Playlist> findAllByUsername(String username) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException;
 
-    void addSongToPlaylist(Playlist playlist, Song song) throws DuplicateIdException, IncorrectArgumentException, DataAccessException;
+    void addSongToPlaylist(Playlist playlist, Song song) throws DuplicateIdException, IncorrectArgumentException, DataAccessException, ObjectNotFoundException;
 
     void removeSongFromPlaylist(Playlist playlist, Song song) throws DataAccessException;
 }

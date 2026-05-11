@@ -44,7 +44,7 @@ public class JpaPlaylistRepository implements PlaylistRepository {
     }
 
     @Override
-    public void addSongToPlaylist(Playlist playlist, Song song) throws DuplicateIdException, IncorrectArgumentException, DataAccessException {
+    public void addSongToPlaylist(Playlist playlist, Song song) throws DuplicateIdException, IncorrectArgumentException, DataAccessException, ObjectNotFoundException {
 
         if (song.getAggregationDate() == null) {
             song.setAggregationDate(LocalDate.now());
@@ -52,17 +52,18 @@ public class JpaPlaylistRepository implements PlaylistRepository {
         EntityTransaction tx = null;
         try (EntityManager em = emf.createEntityManager()) {
 
-
             tx = em.getTransaction();
             tx.begin();
 
-            AppContext.getJpaSongRepository().save(song);
-
             playlist = em.find(Playlist.class, playlist.getId());
             song = em.find(Song.class, song.getId());
+            if (playlist == null || song == null) {
+                throw new ObjectNotFoundException("The song/playlist does not exist in the current context.");
+            }
 
             for (PlaylistsSongs playlistSong : playlist.getSongs()) {
                 if (playlistSong.getSong().getTitle().equalsIgnoreCase(song.getTitle())) {
+                    if (tx.isActive()) tx.rollback();
                     throw new DuplicateIdException("A song already exists with the same title.");
                 }
             }
@@ -75,12 +76,11 @@ public class JpaPlaylistRepository implements PlaylistRepository {
             if (tx != null && tx.isActive()) {
                 try {
                     tx.rollback();
-                    throw new DataAccessException(DataAccessException.CHANGES_REVERTED, e);
                 } catch (PersistenceException | IllegalStateException ex) {
-                    e.printStackTrace();
                     throw new DataAccessException(DataAccessException.REVERT_ERROR, e);
                 }
             }
+            throw new DataAccessException(DataAccessException.CHANGES_REVERTED, e);
         }
     }
 

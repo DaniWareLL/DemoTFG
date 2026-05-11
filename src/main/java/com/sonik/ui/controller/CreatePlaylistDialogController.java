@@ -7,6 +7,7 @@ import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.IncorrectArgumentException;
 import com.sonik.domain.model.Playlist;
 import javafx.fxml.FXML;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -23,9 +24,21 @@ public class CreatePlaylistDialogController {
     @FXML
     public Label playlistDescriptionErrorLabel;
     @FXML
+    public DialogPane dialogPane;
+    @FXML
     private TextField nameTextField;
     @FXML
     private TextField descriptionTextField;
+
+    @FXML
+    public void initialize() {
+        // Remove default button bar and header panel that JavaFX injects
+        dialogPane.lookupAll(".button-bar").forEach(node -> node.setVisible(false));
+        dialogPane.lookupAll(".header-panel").forEach(node -> node.setVisible(false));
+
+        // Force background to transparent
+        dialogPane.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0;");
+    }
 
     public void nameTextFieldOnKP(KeyEvent keyEvent) {
         AuxiliaryMethods.setErrorLabelState(false, playlistNameErrorLabel, nameTextField, Optional.empty());

@@ -38,6 +38,12 @@ public class PlaylistSidebarController {
         playlistObservableList = FXCollections.observableArrayList();
         playlistListView.setItems(playlistObservableList);
         scanForPlaylists();
+        playlistListView.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+           if (newValue != null) {
+               PlaylistController.getInstance().loadPlaylist(newValue);
+           }
+        });
     }
 
     public void createPlaylistOnMC(MouseEvent mouseEvent) {
@@ -52,7 +58,9 @@ public class PlaylistSidebarController {
 
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(pane);
-        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.initStyle(StageStyle.TRANSPARENT);
+        dialog.getDialogPane().setStyle("-fx-background-color: transparent;");
+        dialog.getDialogPane().getScene().setFill(Color.TRANSPARENT);
         dialog.setTitle("Crear playlist");
         dialog.showAndWait();
         playlistListView.setCellFactory(list -> new PlaylistCell());
@@ -74,9 +82,10 @@ public class PlaylistSidebarController {
             Platform.runLater(() -> {
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.initStyle(StageStyle.UNDECORATED);
+                alert.initStyle(StageStyle.TRANSPARENT);
+                alert.getDialogPane().getScene().setFill(Color.TRANSPARENT);
                 alert.setHeaderText(null);
-                alert.setContentText("This action CANNOT be undone.");
+                alert.setContentText("Are you sure you want to delete this playlist?\nThis action CANNOT be undone.");
                 alert.setGraphic(null);
 
                 ButtonType deleteBtn = new ButtonType("Delete");

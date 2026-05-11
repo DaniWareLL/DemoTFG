@@ -42,7 +42,6 @@ public class PlaylistServiceImpl implements PlaylistService {
         return playlistRepository.findAllByUsername(username);
     }
 
-    // TODO: The attribute "position" doesn't actually mean position, it's more like priority(no duplicates check)
     /**
      * Adds a song to the playlist
      * @param playlist The playlist where the song will be added
@@ -51,7 +50,12 @@ public class PlaylistServiceImpl implements PlaylistService {
      * @throws DuplicateIdException
      */
     @Override
-    public void addSongToPlaylist(Playlist playlist, Song song) throws IncorrectArgumentException, DuplicateIdException, DataAccessException {
+    public void addSongToPlaylist(Playlist playlist, Song song) throws IncorrectArgumentException, DuplicateIdException, DataAccessException, ObjectNotFoundException {
+        try {
+            AppContext.getJpaSongRepository().save(song);
+        } catch (DuplicateIdException ignored) {
+            // This is only to check that the song exists in the database, not in the playlist
+        }
         playlistRepository.addSongToPlaylist(playlist, song);
     }
 

@@ -46,7 +46,7 @@ public class PlaylistSelectorController {
     private void addSongToPlaylist(Playlist playlist) {
         try {
             AppContext.getPlaylistService().addSongToPlaylist(playlist, selectedSong);
-        } catch (IncorrectArgumentException | DuplicateIdException | DataAccessException e) {
+        } catch (IncorrectArgumentException | DuplicateIdException | DataAccessException | ObjectNotFoundException e) {
             AuxiliaryMethods.showAlert(e);
         }
         playlistContainer.getScene().getWindow().hide();

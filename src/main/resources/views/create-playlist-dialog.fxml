@@ -6,9 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<DialogPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.CreatePlaylistDialogController">
+<DialogPane fx:id="dialogPane" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0;"
+            xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.sonik.ui.controller.CreatePlaylistDialogController">
    <content>
-      <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #191919; -fx-background-radius: 20;">
+      <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #0a0a0a; -fx-background-radius: 20;">
          <children>
             <Label text="Create playlist" textFill="#c58a5f">
                <font>

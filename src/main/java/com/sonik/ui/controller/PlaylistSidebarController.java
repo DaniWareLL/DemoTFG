@@ -52,7 +52,9 @@ public class PlaylistSidebarController {
 
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(pane);
-        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.initStyle(StageStyle.TRANSPARENT);
+        dialog.getDialogPane().setStyle("-fx-background-color: transparent;");
+        dialog.getDialogPane().getScene().setFill(Color.TRANSPARENT);
         dialog.setTitle("Crear playlist");
         dialog.showAndWait();
         playlistListView.setCellFactory(list -> new PlaylistCell());

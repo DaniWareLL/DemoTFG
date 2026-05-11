@@ -15,7 +15,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <ListView fx:id="searchedSongsList" style="-fx-background-color: transparent;" stylesheets="@../css/search-listview.css" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="searchedSongsListView" style="-fx-background-color: transparent;" stylesheets="@../css/search-listview.css" VBox.vgrow="ALWAYS" />
          </children>
    
                </VBox>

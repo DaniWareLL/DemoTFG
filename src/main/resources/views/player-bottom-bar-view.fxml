@@ -15,7 +15,7 @@
 
 <HBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.PlayerBarController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefWidth="160.0" spacing="10.0" HBox.hgrow="NEVER">
+      <HBox alignment="CENTER_LEFT" prefWidth="280.0" spacing="10.0" HBox.hgrow="NEVER">
          <children>
             <StackPane alignment="CENTER_LEFT" style="-fx-border-radius: 5;" HBox.hgrow="NEVER">
                <children>
@@ -28,7 +28,7 @@
             </StackPane>
             <VBox alignment="CENTER_LEFT" HBox.hgrow="NEVER">
                <children>
-                  <Label fx:id="songPlaying" style="-fx-text-overrun: clip;" text="Song" textFill="WHITE">
+                  <Label fx:id="songPlaying" text="Song" textFill="WHITE">
                      <font>
                         <Font name="Manrope SemiBold" size="14.0" />
                      </font>
@@ -48,11 +48,11 @@
          </children>
       </HBox>
       <Region HBox.hgrow="ALWAYS" />
-      <VBox alignment="CENTER" prefWidth="500.0" HBox.hgrow="NEVER">
+      <VBox alignment="CENTER" prefWidth="550.0" HBox.hgrow="NEVER">
          <children>
             <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Button fx:id="previousSongBtn" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
+                  <Button fx:id="previousSongBtn" mnemonicParsing="false" onMouseClicked="#previousSongBtnMC" style="-fx-background-color: black;" textFill="WHITE">
                      <font>
                         <Font name="Manrope Regular" size="16.0" />
                      </font>
@@ -68,7 +68,7 @@
                         <FontIcon fx:id="playIcon" iconColor="WHITE" iconLiteral="mdi2p-play-circle-outline" iconSize="35" />
                      </graphic>
                   </Button>
-                  <Button fx:id="nextSongBtn" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
+                  <Button fx:id="nextSongBtn" mnemonicParsing="false" onMouseClicked="#nextSongBtnMC" style="-fx-background-color: black;" textFill="WHITE">
                      <font>
                         <Font name="Manrope Regular" size="16.0" />
                      </font>
@@ -80,7 +80,7 @@
             </HBox>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label fx:id="currentTimeLabel" prefWidth="30.0" text="0:00" textFill="WHITE">
+                  <Label fx:id="currentTimeLabel" text="0:00" textFill="WHITE">
                      <font>
                         <Font name="Manrope Regular" size="13.0" />
                      </font>
@@ -88,12 +88,12 @@
                         <Insets bottom="5.0" />
                      </HBox.margin>
                   </Label>
-                  <Slider fx:id="progressBar" max="1.0" minWidth="400.0" onMousePressed="#seekStart" onMouseReleased="#seekEnd">
+                  <Slider fx:id="progressBar" max="1.0" onMousePressed="#seekStart" onMouseReleased="#seekEnd" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="5.0" />
                      </HBox.margin>
                   </Slider>
-                  <Label fx:id="totalTimeLabel" prefWidth="30.0" text="0:00" textFill="WHITE">
+                  <Label fx:id="totalTimeLabel" text="0:00" textFill="WHITE">
                      <font>
                         <Font name="Manrope Regular" size="13.0" />
                      </font>
@@ -112,14 +112,14 @@
          </padding>
       </VBox>
       <Region HBox.hgrow="ALWAYS" />
-      <HBox alignment="CENTER" prefWidth="180.0" spacing="10.0" HBox.hgrow="NEVER">
+      <HBox alignment="CENTER_RIGHT" prefWidth="280.0" HBox.hgrow="NEVER">
          <children>
             <Button fx:id="muteBtn" mnemonicParsing="false" onMouseClicked="#muteBtnMC" style="-fx-background-color: black;">
                <graphic>
                   <FontIcon fx:id="muteIcon" iconColor="WHITE" iconLiteral="mdi2v-volume-high" iconSize="25" text="󰕾" />
                </graphic>
             </Button>
-            <Slider fx:id="volumeSlider" maxWidth="180.0" minWidth="80.0" onMouseClicked="#volumeChanged" onMouseDragged="#volumeChanged" HBox.hgrow="NEVER" />
+            <Slider fx:id="volumeSlider" maxWidth="140.0" onMouseClicked="#volumeChanged" onMouseDragged="#volumeChanged" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>

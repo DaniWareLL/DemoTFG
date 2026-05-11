@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +27,7 @@ public class HomeController {
     @FXML private Button minBtn;
     @FXML private Button maxBtn;
     @FXML private Button closeBtn;
+    @FXML private FontIcon maxIcon;
 
     private Stage stage;
 
@@ -66,9 +68,6 @@ public class HomeController {
     @FXML
     private Node leftContent;
 
-    private Node searchPanel;
-    private SearchController searchController;
-
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -98,12 +97,33 @@ public class HomeController {
         });
 
         // Max
-        maxBtn.setOnAction(e -> stage.setMaximized(!stage.isMaximized()));
         maxBtn.setOnMousePressed(e -> {
-            maxBtn.setStyle("-fx-background-color:  #191919;");
+            maxBtn.setStyle("-fx-background-color: #191919;");
         });
+
         maxBtn.setOnMouseReleased(e -> {
             maxBtn.setStyle("-fx-background-color: black;");
+        });
+
+        maxBtn.setOnAction(e -> {
+            if (!stage.isMaximized()) {
+                maxIcon.setIconLiteral("mdi2w-window-restore");
+                // Undecorated maximazied no respeta los limites de la barra de tareas
+                // Obtener los límites de la pantalla (respetando la barra de tareas)
+                javafx.geometry.Rectangle2D screenBounds =
+                        javafx.stage.Screen.getPrimary().getVisualBounds();
+
+                // Configurar la ventana al tamaño de la pantalla (sin cubrir barra de tareas)
+                stage.setX(screenBounds.getMinX());
+                stage.setY(screenBounds.getMinY());
+                stage.setWidth(screenBounds.getWidth());
+                stage.setHeight(screenBounds.getHeight());
+
+                stage.setMaximized(true);
+            } else {
+                maxIcon.setIconLiteral("mdi2w-window-maximize");
+                stage.setMaximized(false);
+            }
         });
 
         // Close

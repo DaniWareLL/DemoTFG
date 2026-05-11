@@ -26,7 +26,7 @@ public class Song {
     @Column(name = "duration_sec")
     private Integer durationSec;
 
-    @Column(name = "original_url", length = 500)
+    @Column(name = "original_url", unique = true, length = 500)
     private String originalUrl;
 
     @Column(name = "thumbnail_url", length = 500)

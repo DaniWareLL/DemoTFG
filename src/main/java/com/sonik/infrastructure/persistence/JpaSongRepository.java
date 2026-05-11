@@ -1,6 +1,5 @@
 package com.sonik.infrastructure.persistence;
 
-import com.sonik.config.AppContext;
 import com.sonik.domain.exceptions.DataAccessException;
 import com.sonik.domain.exceptions.DuplicateIdException;
 import com.sonik.domain.exceptions.ObjectNotFoundException;
@@ -42,6 +41,35 @@ public class JpaSongRepository implements SongRepository {
             throw new DataAccessException(DataAccessException.CONNECTION_ERROR, iae);
         }
     }
+
+    @Override
+    public Song findByUrl(String url) throws DataAccessException {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Song> query = em.createQuery(
+                    "SELECT s FROM Song s WHERE s.originalUrl = :url", Song.class);
+            query.setParameter("url", url);
+
+            return query.getResultStream().findFirst().orElse(null);
+        } catch (IllegalArgumentException iae) {
+            throw new DataAccessException(DataAccessException.CONNECTION_ERROR, iae);
+        }
+    }
+
+    @Override
+    public boolean existsUrl(String url) throws DataAccessException {
+        try (EntityManager em = emf.createEntityManager()) {
+
+            TypedQuery<Long> query = em.createQuery(
+                    "SELECT COUNT(s) FROM Song s WHERE s.originalUrl = :url", Long.class);
+            query.setParameter("url", url);
+
+            return query.getSingleResult() > 0;
+
+        } catch (IllegalArgumentException iae) {
+            throw new DataAccessException(DataAccessException.CONNECTION_ERROR, iae);
+        }
+    }
+
 
     /**
      * Saves a {@link com.sonik.domain.model.Song Song} to the database

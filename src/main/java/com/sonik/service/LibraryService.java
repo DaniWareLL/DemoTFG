@@ -18,4 +18,6 @@ public interface LibraryService {
     void removeFavouriteSong(Song song);
 
     List<Song> getFavouriteSongs();
+
+    public boolean isFavourite(Song song) throws ObjectNotFoundException, DataAccessException;
 }

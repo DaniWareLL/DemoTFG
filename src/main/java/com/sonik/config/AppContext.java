@@ -49,6 +49,8 @@ public class AppContext {
 
     private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(4);
 
+    private static PlaybackQueueService playbackQueueService;
+
     /**
      * <strong>IMPORTANT!!</strong> This constructor is not supposed to be used at all (hence the private access modifier),
      * instead its static method {@link #initializeApplication() init()} should be called
@@ -88,6 +90,8 @@ public class AppContext {
         playerService = new PlayerServiceImpl(audioExtractor);
         playlistService = new PlaylistServiceImpl(jpaPlaylistRepository);
         libraryService = new LibraryServiceImpl();
+
+        playbackQueueService = new PlaybackQueueServiceImpl();
    }
 
     /**
@@ -167,5 +171,9 @@ public class AppContext {
 
     public static LibraryService getLibraryService() {
         return libraryService;
+    }
+
+    public static PlaybackQueueService getPlaybackQueueService() {
+        return playbackQueueService;
     }
 }

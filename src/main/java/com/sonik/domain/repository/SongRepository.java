@@ -11,6 +11,10 @@ import com.sonik.domain.model.Song;
  */
 public interface SongRepository {
 
+    Song findByUrl(String url) throws DataAccessException;
+
+    boolean existsUrl(String url) throws ObjectNotFoundException, DataAccessException;
+
     Song findById(int id) throws DataAccessException, ObjectNotFoundException;
 
     void save(Song song) throws DuplicateIdException, DataAccessException;

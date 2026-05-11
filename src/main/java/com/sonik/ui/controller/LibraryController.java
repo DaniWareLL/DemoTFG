@@ -30,6 +30,15 @@ public class LibraryController {
 
         favouriteSongsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
+
+                int index = favouriteSongsListView.getItems().indexOf(newVal);
+
+                // Actualizo cola
+                AppContext.getPlaybackQueueService().setQueue(
+                        favouriteSongsListView.getItems(),
+                        index
+                );
+
                 // Hilo para extraer URL
                 AppContext.getExecutor().submit(() -> {
                     try {
@@ -59,6 +68,7 @@ public class LibraryController {
     }
     public void setResults(List<Song> songs) {
         favouriteSongsListView.getItems().setAll(songs);
+        AppContext.getPlaybackQueueService().setQueue(songs, -1);
     }
 
 

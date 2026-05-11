@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -111,26 +112,25 @@ public class SongCellController {
 
     public void likeBtnOnAction(ActionEvent actionEvent) {
         try {
-            if(AppContext.getJpaUserLibraryRepository().exists(UserSession.getUser().getId(), currentSong.getId())){
+            if (AppContext.getLibraryService().isFavourite(currentSong)) {
                 AppContext.getLibraryService().removeFavouriteSong(currentSong);
                 likeIcon.setIconLiteral("mdi2h-heart-outline");
             } else {
-                try {
-                    AppContext.getJpaSongRepository().findById(currentSong.getId());
-                }catch (ObjectNotFoundException e) {
-                    AppContext.getJpaSongRepository().save(currentSong);
-                }
                 AppContext.getLibraryService().addFavouriteSong(currentSong);
                 likeIcon.setIconLiteral("mdi2h-heart");
             }
-        } catch (ObjectNotFoundException e) {
-            e.printStackTrace();
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-        } catch (IncorrectArgumentException e) {
-            e.printStackTrace();
-        } catch (DuplicateIdException e) {
-            e.printStackTrace();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
+
+    public void updateLikeIcon(boolean isFavourite) {
+        if (isFavourite) {
+            likeIcon.setIconLiteral("mdi2h-heart");
+        } else {
+            likeIcon.setIconLiteral("mdi2h-heart-outline"); // transparente
+        }
+    }
+
 }

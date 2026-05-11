@@ -9,6 +9,7 @@ import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.model.Song;
 import com.sonik.service.MetadataService;
 import com.sonik.service.audio.AudioExtractor;
+import com.sonik.ui.controller.AuxiliaryMethods;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,6 +41,12 @@ public class MetadataServiceImpl implements MetadataService {
             List<Song> songs = new ArrayList<>();
             for (int i = 0; i < entriesArray.size(); i++) {
                 JsonObject entry = entriesArray.get(i).getAsJsonObject();
+
+                // Detectar canal
+                if (entry.has("url") && entry.get("url").getAsString().contains("/channel/")) {
+                    System.out.println("****CANAL****");
+                    continue;
+                }
 
                 Song metadata = new Song();
                 metadata.setTitle(entry.get("title").getAsString());

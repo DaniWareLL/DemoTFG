@@ -1,5 +1,8 @@
 package com.sonik.ui.controller;
 
+import com.sonik.config.AppContext;
+import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
@@ -31,6 +34,15 @@ public class SongCell extends ListCell<Song> {
             }
         }
 
+        boolean isFav = false;
+        try {
+            isFav = AppContext.getLibraryService().isFavourite(song);
+        } catch (ObjectNotFoundException e) {
+            e.printStackTrace();
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
         controller.setSong(song, getIndex());
+        controller.updateLikeIcon(isFav);
     }
 }

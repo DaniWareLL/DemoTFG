@@ -9,7 +9,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -18,14 +17,23 @@ import java.util.List;
 public class SearchController {
 
     @FXML
-    private ListView<Song> searchedSongsList;
+    private ListView<Song> searchedSongsListView;
 
     public void initialize() {
-        searchedSongsList.setFixedCellSize(65);
-        searchedSongsList.setCellFactory(list -> new SongCell());
+        searchedSongsListView.setFixedCellSize(65);
+        searchedSongsListView.setCellFactory(list -> new SongCell());
 
-        searchedSongsList.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        searchedSongsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
+
+                int index = searchedSongsListView.getItems().indexOf(newVal);
+
+                // Actualizo cola
+                AppContext.getPlaybackQueueService().setQueue(
+                        searchedSongsListView.getItems(),
+                        index
+                );
+
                 // Hilo para extraer URL
                 AppContext.getExecutor().submit(() -> {
                     try {
@@ -55,7 +63,8 @@ public class SearchController {
     }
 
     public void setResults(List<Song> songs) {
-        searchedSongsList.getItems().setAll(songs);
+        searchedSongsListView.getItems().setAll(songs);
+        AppContext.getPlaybackQueueService().setQueue(songs, -1);
     }
 
 }

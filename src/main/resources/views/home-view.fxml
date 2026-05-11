@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="mainContainer" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.HomeController">
+<BorderPane fx:id="mainContainer" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.HomeController">
    <left>
       <VBox fx:id="leftContainer" minWidth="230.0" spacing="10.0" style="-fx-background-color: #191919; -fx-background-radius: 20;">
          <BorderPane.margin>
@@ -178,7 +186,7 @@
                   </font>
                </Label>
 
-               <HBox alignment="CENTER_LEFT" spacing="30.0">
+               <HBox fx:id="hBoxLibrary" alignment="CENTER_LEFT" spacing="30.0">
                   <VBox.margin>
                      <Insets top="20.0" />
                   </VBox.margin>
@@ -258,7 +266,7 @@
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
-         <HBox>
+         <HBox prefWidth="350.0" HBox.hgrow="NEVER">
             <HBox.margin>
                <Insets left="20.0" />
             </HBox.margin>
@@ -270,76 +278,84 @@
             </ImageView>
          </HBox>
          <Region HBox.hgrow="ALWAYS" />
-         <Button fx:id="homeBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#homeBtnMC" style="-fx-alignment: center; -fx-background-color: #191919; -fx-background-radius: 20;" textFill="WHITE">
-            <font>
-               <Font name="Manrope Regular" size="16.0" />
-            </font>
-            <graphic>
-               <FontIcon iconColor="WHITE" iconLiteral="mdi2h-home-outline" iconSize="25" />
-            </graphic>
-         </Button>
-         <HBox alignment="CENTER_LEFT" maxHeight="40.0" spacing="8.0" style="-fx-background-radius: 20; -fx-background-color: #191919;" HBox.hgrow="ALWAYS">
-            <padding>
-               <Insets left="5.0" />
-            </padding>
-            <HBox.margin>
-               <Insets left="15.0" />
-            </HBox.margin>
-            <FontIcon iconColor="WHITE" iconLiteral="mdi2m-magnify" iconSize="25" />
-            <TextField fx:id="searchBar" onKeyPressed="#searchBarOnKP" promptText="Search..." style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: none;" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font name="Manrope ExtraLight" size="15.0" />
-               </font>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </TextField>
+         <HBox alignment="CENTER" HBox.hgrow="NEVER">
+            <children>
+               <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#homeBtnMC" style="-fx-alignment: center; -fx-background-color: #191919; -fx-background-radius: 20;" textFill="WHITE" HBox.hgrow="NEVER">
+                  <font>
+                     <Font name="Manrope Regular" size="16.0" />
+                  </font>
+                  <graphic>
+                     <FontIcon iconColor="WHITE" iconLiteral="mdi2h-home-outline" iconSize="25" />
+                  </graphic>
+               </Button>
+               <HBox alignment="CENTER_LEFT" maxHeight="40.0" maxWidth="450.0" prefWidth="450.0" spacing="8.0" style="-fx-background-radius: 20; -fx-background-color: #191919;" HBox.hgrow="NEVER">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+                  <HBox.margin>
+                     <Insets left="15.0" />
+                  </HBox.margin>
+                  <FontIcon iconColor="WHITE" iconLiteral="mdi2m-magnify" iconSize="25" />
+                  <TextField fx:id="searchBar" onKeyPressed="#searchBarOnKP" promptText="Search..." style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: none;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Manrope ExtraLight" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </HBox>
+            </children>
          </HBox>
          <Region HBox.hgrow="ALWAYS">
             <HBox.margin>
                <Insets />
             </HBox.margin>
          </Region>
-         <HBox alignment="CENTER" style="-fx-background-radius: 20;">
-            <HBox.margin>
-               <Insets />
-            </HBox.margin>
-            <Button fx:id="buttonOptions" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
-               <font>
-                  <Font name="Manrope Regular" size="16.0" />
-               </font>
-               <graphic>
-                  <FontIcon fx:id="settingsButton" iconColor="WHITE" iconLiteral="mdi2c-cog-outline" iconSize="25" lineSpacing="200.0" onMouseClicked="#settingButtonMC" text="󰢻" />
-               </graphic>
-            </Button>
-            <Label fx:id="userNameLabel" contentDisplay="CENTER" text="Username" textFill="WHITE">
-               <font>
-                  <Font name="Manrope Regular" size="16.0" />
-               </font>
-               <HBox.margin>
-                  <Insets right="30.0" />
-               </HBox.margin>
-            </Label>
-         </HBox>
-         <HBox fx:id="windowButtons" alignment="CENTER_RIGHT" stylesheets="@../css/window-buttons.css" HBox.hgrow="NEVER">
-            <Button fx:id="minBtn" minHeight="38.0" minWidth="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn min" textFill="WHITE" HBox.hgrow="ALWAYS">
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="mdi2w-window-minimize" iconSize="18" />
-               </graphic>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="maxBtn" minHeight="38.0" minWidth="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn max" textFill="WHITE" HBox.hgrow="ALWAYS">
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="mdi2w-window-maximize" iconSize="18" />
-               </graphic>
-            </Button>
-            <Button fx:id="closeBtn" minHeight="38.0" minWidth="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn close" textFill="WHITE" HBox.hgrow="ALWAYS">
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="mdi2c-close" iconSize="18" text="󰅖" />
-               </graphic>
-            </Button>
+         <HBox alignment="CENTER_RIGHT" prefWidth="350.0">
+            <children>
+               <HBox alignment="CENTER" style="-fx-background-radius: 20;" HBox.hgrow="NEVER">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <Button fx:id="buttonOptions" mnemonicParsing="false" style="-fx-background-color: black;" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="16.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fx:id="settingsButton" iconColor="WHITE" iconLiteral="mdi2c-cog-outline" iconSize="25" lineSpacing="200.0" onMouseClicked="#settingButtonMC" text="󰢻" />
+                     </graphic>
+                  </Button>
+                  <Label fx:id="userNameLabel" contentDisplay="CENTER" text="Username" textFill="WHITE">
+                     <font>
+                        <Font name="Manrope Regular" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </HBox>
+               <HBox fx:id="windowButtons" alignment="CENTER_RIGHT" maxWidth="168.0" prefWidth="168.0" stylesheets="@../css/window-buttons.css" HBox.hgrow="NEVER">
+                  <Button fx:id="minBtn" minHeight="38.0" minWidth="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn min" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2w-window-minimize" iconSize="18" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="maxBtn" minHeight="38.0" minWidth="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn max" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <FontIcon fx:id="maxIcon" iconColor="WHITE" iconLiteral="mdi2w-window-maximize" iconSize="18" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="closeBtn" minHeight="38.0" minWidth="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" styleClass="window-btn close" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2c-close" iconSize="18" text="󰅖" />
+                     </graphic>
+                  </Button>
+               </HBox>
+            </children>
          </HBox>
       </HBox>
    </top>

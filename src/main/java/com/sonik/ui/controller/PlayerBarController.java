@@ -5,6 +5,7 @@ import com.sonik.config.UserSession;
 import com.sonik.domain.model.Song;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.Icon;
@@ -62,6 +64,8 @@ public class PlayerBarController {
 
     private boolean isSeeking = false;
 
+    private Timeline marqueeTimeline;
+
     public void initialize() {
 
         // Inicializar volumen desde VLCJ
@@ -70,9 +74,9 @@ public class PlayerBarController {
         progressBar.setMouseTransparent(true);
         progressBar.setFocusTraversable(false);
 
-        // Timer que actualiza cada 200ms
+        // Timer que actualiza cada 100ms
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(200), e -> updateProgress())
+                new KeyFrame(Duration.millis(100), e -> updateProgress())
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -154,5 +158,43 @@ public class PlayerBarController {
             AppContext.getAudioPlayer().setMute(true);
             muteIcon.setIconLiteral("mdi2v-volume-off");
         }
+    }
+
+    public void previousSongBtnMC(MouseEvent mouseEvent) {
+        Song prev = AppContext.getPlaybackQueueService().previous();
+        if (prev == null) return;
+
+        AppContext.getExecutor().submit(() -> {
+            try {
+                String url = AppContext.getPlayerService().getStreamUrl(prev.getOriginalUrl());
+                if (!url.isEmpty()) {
+                    AppContext.getAudioPlayer().setCurrentSong(prev);
+                    AppContext.getAudioPlayer().play(url);
+
+                    Platform.runLater(() -> updateSongInfo(prev));
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+    }
+
+    public void nextSongBtnMC(MouseEvent mouseEvent) {
+        Song next = AppContext.getPlaybackQueueService().next();
+        if (next == null) return;
+
+        AppContext.getExecutor().submit(() -> {
+            try {
+                String url = AppContext.getPlayerService().getStreamUrl(next.getOriginalUrl());
+                if (!url.isEmpty()) {
+                    AppContext.getAudioPlayer().setCurrentSong(next);
+                    AppContext.getAudioPlayer().play(url);
+
+                    Platform.runLater(() -> updateSongInfo(next));
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }

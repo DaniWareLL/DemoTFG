@@ -38,6 +38,12 @@ public class PlaylistSidebarController {
         playlistObservableList = FXCollections.observableArrayList();
         playlistListView.setItems(playlistObservableList);
         scanForPlaylists();
+        playlistListView.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+           if (newValue != null) {
+               PlaylistController.getInstance().loadPlaylist(newValue);
+           }
+        });
     }
 
     public void createPlaylistOnMC(MouseEvent mouseEvent) {

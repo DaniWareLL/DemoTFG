@@ -76,9 +76,10 @@ public class PlaylistSidebarController {
             Platform.runLater(() -> {
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.initStyle(StageStyle.UNDECORATED);
+                alert.initStyle(StageStyle.TRANSPARENT);
+                alert.getDialogPane().getScene().setFill(Color.TRANSPARENT);
                 alert.setHeaderText(null);
-                alert.setContentText("This action CANNOT be undone.");
+                alert.setContentText("Are you sure you want to delete this playlist?\nThis action CANNOT be undone.");
                 alert.setGraphic(null);
 
                 ButtonType deleteBtn = new ButtonType("Delete");

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="playlistContainer" fx:controller="com.sonik.ui.controller.PlaylistSelectorController" spacing="8" style="-fx-background-color: black; -fx-padding: 10; -fx-background-radius: 8;" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="playlistContainer" spacing="8" style="-fx-background-color: black; -fx-padding: 10; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.PlaylistSelectorController">
     <children>
-        <Label text="Add to playlist" style="-fx-text-fill: white; -fx-font-size: 14;" />
-        <ListView fx:id="playlistListView" style="-fx-background-color: black;  -fx-control-inner-background: black;
-         -fx-background-insets: 0; -fx-padding: 0;" stylesheets="@../css/playlist-sidebar.css" />
+        <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Add to playlist" textFill="WHITE">
+         <font>
+            <Font name="Manrope Medium" size="12.0" />
+         </font></Label>
+        <ListView fx:id="playlistListView" style="-fx-background-color: black;  -fx-control-inner-background: black;          -fx-background-insets: 0; -fx-padding: 0;" stylesheets="@../css/playlist-sidebar.css" />
     </children>
 </VBox>

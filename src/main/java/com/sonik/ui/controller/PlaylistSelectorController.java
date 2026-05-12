@@ -53,7 +53,7 @@ public class PlaylistSelectorController {
     }
 
 
-    static void scanForPlaylists(ObservableList<Playlist> playlistObservableList) {
+    protected static void scanForPlaylists(ObservableList<Playlist> playlistObservableList) {
         List<Playlist> playlists = List.of();
         try {
             playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());

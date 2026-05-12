@@ -17,6 +17,8 @@ public enum ViewType {
     LIBRARY("/views/library-view.fxml"),
     ERROR_WINDOW("/views/error-window.fxml"),
     SONG_OPTIONS("/views/playlist-selector-menu.fxml"),
+    SONG_CELL("/views/song-cell-view.fxml"),
+    SONG_CELL_PLAYLIST("/views/song-cell-playlist-view.fxml"),
 
     // Left Side
     PLAYLIST_SIDEBAR("/views/playlist-sidebar-view.fxml"),

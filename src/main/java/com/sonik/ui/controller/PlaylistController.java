@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class PlaylistController {
     @FXML
     private ListView<Song> songListView;
 
-    private Playlist playlist;
+    private static Playlist playlist;
 
     @FXML
     public TextField searchBar;
@@ -38,7 +37,7 @@ public class PlaylistController {
     public void initialize() {
         instance = this;
         songListView.setFixedCellSize(65);
-        songListView.setCellFactory(list -> new SongCell());
+        songListView.setCellFactory(list -> new SongCellPlaylist());
 
         AppContext.getExecutor().submit(() -> {
             List<Song> songs = AppContext.getPlaylistService().getSongs(playlist);
@@ -81,7 +80,7 @@ public class PlaylistController {
     public void loadPlaylist(Playlist newPlaylist) {
         playlistName.setText(newPlaylist.getName());
         description.setText(newPlaylist.getDescription());
-        this.playlist = newPlaylist;
+        playlist = newPlaylist;
         refreshSongs();
     }
 
@@ -90,6 +89,10 @@ public class PlaylistController {
             List<Song> songs = AppContext.getPlaylistService().getSongs(playlist);
             Platform.runLater(() -> songListView.getItems().setAll(songs));
         });
+    }
+
+    public static Playlist getPlaylist() {
+        return playlist;
     }
 
     public void searchBarOnKP(KeyEvent keyEvent) {

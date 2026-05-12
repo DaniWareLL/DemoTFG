@@ -1,8 +1,5 @@
 package com.sonik.ui.controller;
 
-import com.sonik.config.AppContext;
-import com.sonik.domain.exceptions.DataAccessException;
-import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
 import com.sonik.ui.navigation.ViewType;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +7,10 @@ import javafx.scene.control.ListCell;
 
 import java.io.IOException;
 
-public class SongCell extends ListCell<Song> {
+public class SongCellPlaylist extends ListCell<Song> {
 
     private FXMLLoader loader;
-    private SongCellController controller;
+    private SongCellPlaylistController controller;
 
     @Override
     protected void updateItem(Song song, boolean empty) {
@@ -26,7 +23,7 @@ public class SongCell extends ListCell<Song> {
 
         if (loader == null) {
             try {
-                loader = new FXMLLoader(ViewType.SONG_CELL.getUrl());
+                loader = new FXMLLoader(ViewType.SONG_CELL_PLAYLIST.getUrl());
                 setGraphic(loader.load());
                 controller = loader.getController();
             } catch (IOException e){
@@ -35,13 +32,7 @@ public class SongCell extends ListCell<Song> {
             }
         }
 
-        boolean isFav = false;
-        try {
-            isFav = AppContext.getLibraryService().isFavourite(song);
-        } catch (ObjectNotFoundException | DataAccessException e) {
-            AuxiliaryMethods.showAlert(e);
-        }
-        controller.setSong(song, getIndex());
-        controller.updateLikeIcon(isFav);
+        controller.setSongAndPlaylist(song, getIndex(), PlaylistController.getPlaylist());
     }
+
 }

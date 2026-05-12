@@ -1,0 +1,100 @@
+package com.sonik.ui.controller;
+
+import com.sonik.config.UserSession;
+import com.sonik.domain.model.Playlist;
+import com.sonik.domain.model.Song;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Popup;
+import org.kordamp.ikonli.javafx.FontIcon;
+
+import java.io.IOException;
+
+public class SongCellPlaylistController {
+
+    @FXML
+    private HBox root;
+    @FXML private Label idLabel;
+    @FXML private ImageView thumbnailView;
+    @FXML private Label titleLabel;
+    @FXML private Label timeLabel;
+    @FXML private Label sourceLabel;
+    @FXML private Label qualityLabel;
+    @FXML private Label dateLabel;
+    @FXML private FontIcon optionsIcon;
+    private Playlist playlist;
+
+    private Song currentSong;
+
+    public void initialize() {
+        Rectangle clip = new Rectangle(40, 40);
+        clip.setArcWidth(5);
+        clip.setArcHeight(5);
+        thumbnailView.setClip(clip);
+    }
+
+    public void setSongAndPlaylist(Song song, int index, Playlist playlist) {
+        this.currentSong = song;
+        this.playlist = playlist;
+
+        idLabel.setText(String.valueOf(index + 1));
+        titleLabel.setText(song.getTitle());
+        timeLabel.setText(formatDuration(song.getDurationSec()));
+        qualityLabel.setText(UserSession.getPreferences().getStreamingQuality().toString());
+        sourceLabel.setText(song.getSource());
+
+        dateLabel.setText(song.getAggregationDate() != null ?
+                song.getAggregationDate().toString() : "");
+
+        // Cargar thumbnail
+        loadThumbnail(song.getThumbnailUrl());
+    }
+
+    private void loadThumbnail(String url) {
+        if (url != null && !url.isEmpty()) {
+            Image image = new Image(url, 40, 40, true, true, true);
+            thumbnailView.setImage(image);
+        }
+    }
+
+    private String formatDuration(int seconds) {
+        if (seconds <= 0) return "0:00";
+        int minutes = seconds / 60;
+        int secs = seconds % 60;
+        return String.format("%d:%02d", minutes, secs);
+    }
+
+    public void optionsBtnMC(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/remove-song-menu-view.fxml"));
+            VBox menuRoot = loader.load();
+
+            RemoveSongMenuController controller = loader.getController();
+            controller.setSong(currentSong);
+            controller.setPlaylist(playlist);
+
+            Popup popup = new Popup();
+            popup.getContent().add(menuRoot);
+            popup.setAutoHide(true);
+
+            controller.setParentPopup(popup);
+
+            double x = optionsIcon.localToScreen(optionsIcon.getBoundsInLocal()).getMinX();
+            double y = optionsIcon.localToScreen(optionsIcon.getBoundsInLocal()).getMaxY();
+
+            popup.show(optionsIcon.getScene().getWindow(), x, y);
+
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e);
+        }
+    }
+
+
+}

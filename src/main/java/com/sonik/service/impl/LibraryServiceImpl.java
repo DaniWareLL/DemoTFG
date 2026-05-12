@@ -20,18 +20,21 @@ public class LibraryServiceImpl implements LibraryService {
     public void addFavouriteSong(Song song) throws DuplicateIdException, DataAccessException, IncorrectArgumentException, ObjectNotFoundException {
         User user = AppContext.getUserService().getPreferences().getUser();
 
-        //  Verificar si la canción ya existe en la tabla Song poe Url publica
+        //  Verificar si la canción ya existe en la tabla Song poe Url pública
         if(!AppContext.getJpaSongRepository().existsUrl(song.getOriginalUrl())){
             AppContext.getJpaSongRepository().save(song);
         }
 
+        //  Obtener la canción de la tabla Song ya persistid
+        Song persistentSong = AppContext.getJpaSongRepository().findByUrl(song.getOriginalUrl());
+
         //  Verificar si ya es favorito
-        if (isFavourite(song)) {
+        if (isFavourite(persistentSong)) {
             return;
         }
 
-        //  Crear relación en UserLibrary
-        UserLibrary entry = new UserLibrary(user, song, LocalDate.now());
+        //  Crear relación en UserLibrary con la canción persistida y no la nueva
+        UserLibrary entry = new UserLibrary(user, persistentSong, LocalDate.now());
         AppContext.getJpaUserLibraryRepository().create(entry);
     }
 

@@ -116,6 +116,11 @@ public class SignUpController {
         }
     }
 
-
-
+    public void signInButton_MouseClicked(MouseEvent mouseEvent) {
+        try {
+            ViewManager.switchScene(ViewType.SIGN_IN);
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e);
+        }
+    }
 }

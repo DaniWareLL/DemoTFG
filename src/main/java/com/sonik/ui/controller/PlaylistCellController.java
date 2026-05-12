@@ -22,14 +22,6 @@ public class PlaylistCellController {
     public void setPlaylist(Playlist playlist) {
 
         this.nameLabel.setText(playlist.getName());
-        this.descriptionLabel.setText(playlist.getDescription());
         this.countLabel.setText(playlist.getSongs().size() + " songs");
-        String url;
-        if (playlist.getSongs().isEmpty()) {
-            url = new File("/images/Sonik/PlaylistSonik.png").toURI().toString();
-        } else {
-            url = new File(playlist.getSongs().getFirst().getSong().getThumbnailUrl()).toURI().toString();
-        }
-        this.thumbnailView.setImage(new Image(url, 32, 32, true, true, true));
     }
 }

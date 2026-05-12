@@ -1,23 +1,17 @@
 package com.sonik.ui.controller;
 
 import com.sonik.domain.exceptions.AudioExtractorException;
-import com.sonik.domain.exceptions.DataAccessException;
-import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
-import com.sonik.domain.model.Playlist;
 import com.sonik.config.AppContext;
 import com.sonik.ui.navigation.ViewType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class SongOptionsMenuController {
 
@@ -46,6 +40,7 @@ public class SongOptionsMenuController {
 
             PlaylistSelectorController controller = loader.getController();
             controller.setSong(song);
+            controller.setParentPopup(parentPopup);
 
             Popup popup = new Popup();
             popup.getContent().add(selectorRoot);
@@ -64,14 +59,17 @@ public class SongOptionsMenuController {
         AppContext.getExecutor().submit(() -> {
             try {
                 AppContext.getDownloadService().downloadToMp3(song.getOriginalUrl());
+
+                Platform.runLater(() -> {
+                    AuxiliaryMethods.showPopup("Song downloaded correctly", (Stage) parentPopup.getOwnerWindow());
+                });
+
             } catch (AudioExtractorException e) {
                 AuxiliaryMethods.showAlert(e);
             }
         });
-
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Song downloaded correctly", ButtonType.OK);
-            alert.showAndWait();
-        });
+        parentPopup.hide();
     }
+
+
 }

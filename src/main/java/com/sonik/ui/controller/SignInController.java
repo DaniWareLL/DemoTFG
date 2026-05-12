@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -47,6 +48,25 @@ public class SignInController {
 
     @FXML
     private CheckBox rememberCheckBox;
+
+    @FXML
+    private Button closeBtn;
+
+    private Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+
+        // Close
+        closeBtn.setOnAction(e -> stage.close());
+        closeBtn.setOnMousePressed(e -> {
+            closeBtn.setStyle("-fx-background-color: red;");
+        });
+        closeBtn.setOnMouseReleased(e -> {
+            closeBtn.setStyle("-fx-background-color: black;");
+            AppContext.shutDown();
+        });
+    }
 
     public void initialize() {
 
@@ -122,5 +142,8 @@ public class SignInController {
         } catch (IOException e) {
             AuxiliaryMethods.showAlert(e);
         }
+    }
+
+    public void closeBtnMC(MouseEvent mouseEvent) {
     }
 }

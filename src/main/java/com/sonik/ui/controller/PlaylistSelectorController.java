@@ -8,11 +8,14 @@ import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Playlist;
 import com.sonik.domain.model.Song;
 import com.sonik.config.AppContext;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -27,8 +30,14 @@ public class PlaylistSelectorController {
 
     private Song selectedSong;
 
+    private Popup parentPopup;
+
     public void setSong(Song newSong) {
         this.selectedSong = newSong;
+    }
+
+    public void setParentPopup(Popup popup) {
+        this.parentPopup = popup;
     }
 
     public void initialize() {
@@ -44,14 +53,26 @@ public class PlaylistSelectorController {
     }
 
     private void addSongToPlaylist(Playlist playlist) {
-        try {
-            AppContext.getPlaylistService().addSongToPlaylist(playlist, selectedSong);
-        } catch (IncorrectArgumentException | DuplicateIdException | DataAccessException | ObjectNotFoundException e) {
-            AuxiliaryMethods.showAlert(e);
-        }
+        AppContext.getExecutor().submit(() -> {
+            try {
+                AppContext.getPlaylistService().addSongToPlaylist(playlist, selectedSong);
+                Stage ownerStage = (Stage) parentPopup.getOwnerWindow();
+                Platform.runLater(() -> {
+                    AuxiliaryMethods.showPopup("Song added to playlist: "+playlist.getName()+" correctly", ownerStage);
+                });
+
+            } catch (IncorrectArgumentException | DuplicateIdException | DataAccessException |
+                     ObjectNotFoundException e) {
+                Platform.runLater(() -> {
+                    Stage ownerStage = (Stage) parentPopup.getOwnerWindow();
+                    AuxiliaryMethods.showPopup("Song can't be added to playlist: "+playlist.getName()+" because it already exists", ownerStage);
+                    parentPopup.hide();
+                });
+            }
+        });
+        parentPopup.hide();
         playlistContainer.getScene().getWindow().hide();
     }
-
 
     protected static void scanForPlaylists(ObservableList<Playlist> playlistObservableList) {
         List<Playlist> playlists = List.of();

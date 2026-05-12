@@ -1,16 +1,22 @@
 package com.sonik.ui.controller;
 
 import com.sonik.ui.navigation.ViewType;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -59,6 +65,62 @@ public class AuxiliaryMethods {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected static void showPopup(String message, Stage ownerStage) {
+        Platform.runLater(() -> {
+            // Crear un Stage personalizado
+            Stage popupStage = new Stage();
+            popupStage.initStyle(StageStyle.TRANSPARENT); // Sin bordes ni decoración
+            popupStage.initModality(Modality.NONE); // No bloqueante
+
+            // Contenido del popup
+            VBox content = new VBox();
+            content.setAlignment(Pos.CENTER);
+            content.setPadding(new Insets(15, 30, 15, 30));
+
+            Label label = new Label(message);
+            label.setStyle("-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-font-family: 'Manrope Medium'");
+
+            content.getChildren().add(label);
+            content.setStyle(
+                    "-fx-background-color: rgba(0, 0, 0, 0.85); " +
+                            "-fx-background-radius: 10; " +
+                            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 2);"
+            );
+
+            Scene scene = new Scene(content);
+            scene.setFill(Color.TRANSPARENT);
+            popupStage.setScene(scene);
+
+            // Posicionar en el centro de la ventana actual
+            popupStage.setX(ownerStage.getX() + ownerStage.getWidth()/2 - 100);
+            popupStage.setY(ownerStage.getY() + ownerStage.getHeight()/2 - 30);
+
+            // Efecto de fade in
+            popupStage.setOpacity(0);
+            popupStage.show();
+
+            Timeline fadeIn = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(popupStage.opacityProperty(), 0)),
+                    new KeyFrame(Duration.millis(200), new KeyValue(popupStage.opacityProperty(), 1))
+            );
+            fadeIn.play();
+
+            // Desaparecer automáticamente después de 3 segundos con fade out
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(3), e -> {
+                        // Fade out
+                        Timeline fadeOut = new Timeline(
+                                new KeyFrame(Duration.ZERO, new KeyValue(popupStage.opacityProperty(), 1)),
+                                new KeyFrame(Duration.millis(300), new KeyValue(popupStage.opacityProperty(), 0))
+                        );
+                        fadeOut.setOnFinished(ev -> popupStage.close());
+                        fadeOut.play();
+                    })
+            );
+            timeline.play();
+        });
     }
 
 }

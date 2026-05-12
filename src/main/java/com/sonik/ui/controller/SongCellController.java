@@ -2,11 +2,8 @@ package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
-import com.sonik.domain.exceptions.DataAccessException;
-import com.sonik.domain.exceptions.DuplicateIdException;
-import com.sonik.domain.exceptions.IncorrectArgumentException;
-import com.sonik.domain.exceptions.ObjectNotFoundException;
 import com.sonik.domain.model.Song;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
@@ -112,12 +109,20 @@ public class SongCellController {
 
     public void likeBtnOnAction(ActionEvent actionEvent) {
         try {
+            Stage ownerStage = (Stage) titleLabel.getScene().getWindow();
+
             if (AppContext.getLibraryService().isFavourite(currentSong)) {
                 AppContext.getLibraryService().removeFavouriteSong(currentSong);
                 likeIcon.setIconLiteral("mdi2h-heart-outline");
+                Platform.runLater(() -> {
+                    AuxiliaryMethods.showPopup("Song removed from favourites correctly",ownerStage);
+                });
             } else {
                 AppContext.getLibraryService().addFavouriteSong(currentSong);
                 likeIcon.setIconLiteral("mdi2h-heart");
+                Platform.runLater(() -> {
+                    AuxiliaryMethods.showPopup("Song added to favourites correctly", ownerStage);
+                });
             }
 
         } catch (Exception ex) {

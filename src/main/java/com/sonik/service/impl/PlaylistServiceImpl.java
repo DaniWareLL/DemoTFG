@@ -51,9 +51,12 @@ public class PlaylistServiceImpl implements PlaylistService {
      */
     @Override
     public void addSongToPlaylist(Playlist playlist, Song song) throws IncorrectArgumentException, DuplicateIdException, DataAccessException, ObjectNotFoundException {
+        Song persistentSong = null;
+
         try {
             AppContext.getJpaSongRepository().save(song);
         } catch (DuplicateIdException | DataAccessException ignored) {
+            persistentSong = AppContext.getJpaSongRepository().findByUrl(song.getOriginalUrl());
             if (ignored instanceof DataAccessException) {
                 if (((DataAccessException) ignored).getErrorCode() != DataAccessException.REVERT_ERROR) {
                     throw (DataAccessException) ignored;
@@ -61,7 +64,11 @@ public class PlaylistServiceImpl implements PlaylistService {
             }
             // This is only to check that the song exists in the database, not in the playlist
         }
-        playlistRepository.addSongToPlaylist(playlist, song);
+        if(persistentSong == null){
+            playlistRepository.addSongToPlaylist(playlist, song);
+        } else {
+            playlistRepository.addSongToPlaylist(playlist, persistentSong);
+        }
     }
 
     @Override

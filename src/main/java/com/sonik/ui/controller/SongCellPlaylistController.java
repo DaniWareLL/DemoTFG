@@ -73,10 +73,10 @@ public class SongCellPlaylistController {
 
     public void optionsBtnMC(MouseEvent mouseEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/remove-song-menu-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/playlist-song-menu-view.fxml"));
             VBox menuRoot = loader.load();
 
-            RemoveSongMenuController controller = loader.getController();
+            PlaylistSongMenuController controller = loader.getController();
             controller.setSong(currentSong);
             controller.setPlaylist(playlist);
 

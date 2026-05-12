@@ -20,10 +20,11 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SignInController">
+<BorderPane minHeight="620.0" minWidth="900.0" prefHeight="620.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SignInController">
    <left>
-      <HBox fx:id="leftHBox" alignment="CENTER" minWidth="415.0" style="-fx-background-image: url('/images/Sonik/FondoSignin.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-radius: 20; -fx-background-insets: 0;" BorderPane.alignment="CENTER">
+      <HBox fx:id="leftHBox" alignment="CENTER" minHeight="565.0" minWidth="415.0" style="-fx-background-image: url('/images/Sonik/FondoSignin.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-radius: 20; -fx-background-insets: 0;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="147.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -43,7 +44,7 @@
          </BorderPane.margin>
          <children>
             <AnchorPane fx:id="leftPane" minWidth="450.0" opacity="0.75" style="-fx-background-size: cover; -fx-background-color: #191919; -fx-background-radius: 20;" HBox.hgrow="ALWAYS">
-      
+
             <children>
                   <HBox alignment="CENTER" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -104,7 +105,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </VBox>
-                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                              <VBox alignment="CENTER_LEFT">
                                  <children>
                                     <Label text="User">
                                        <font>
@@ -184,27 +185,6 @@
                                        <font>
                                           <Font name="Manrope Light" size="15.0" />
                                        </font>
-                                       <effect>
-                                          <Lighting>
-                                             <bumpInput>
-                                                <BoxBlur>
-                                                   <input>
-                                                      <Lighting>
-                                                         <bumpInput>
-                                                            <Shadow />
-                                                         </bumpInput>
-                                                         <light>
-                                                            <Light.Distant />
-                                                         </light>
-                                                      </Lighting>
-                                                   </input>
-                                                </BoxBlur>
-                                             </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
-                                          </Lighting>
-                                       </effect>
                                     </PasswordField>
                                     <Label fx:id="passwordErrorLabel" style="-fx-text-fill: red; -fx-font-size: 12px;" text="The password entered is incorrect" visible="false" />
                                     <CheckBox fx:id="rememberCheckBox" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Remember" textFill="#c96b34">
@@ -300,4 +280,15 @@
          </children>
       </HBox>
    </right>
+   <top>
+      <HBox alignment="TOP_RIGHT" prefWidth="450.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="closeBtn" alignment="CENTER" minHeight="28.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#closeBtnMC" style="-fx-background-color: transparent;" styleClass="window-btn close" textFill="WHITE">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="mdi2c-close" iconSize="18" text="󰅖" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

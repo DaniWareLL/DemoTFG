@@ -90,7 +90,11 @@ public class JpaSongRepository implements SongRepository {
 
         } catch (EntityExistsException e) {
             if (et != null && et.isActive()) {
-                et.rollback();
+                try {
+                    et.rollback();
+                } catch (IllegalStateException ex) {
+                    throw  new DataAccessException(DataAccessException.REVERT_ERROR, ex);
+                }
             }
             throw new DuplicateIdException("Song with id " + song.getId() + " already exists");
         } catch (IllegalArgumentException iae) {

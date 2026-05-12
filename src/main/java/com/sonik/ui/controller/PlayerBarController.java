@@ -2,6 +2,7 @@ package com.sonik.ui.controller;
 
 import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
+import com.sonik.domain.exceptions.AudioExtractorException;
 import com.sonik.domain.model.Song;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -173,8 +174,8 @@ public class PlayerBarController {
 
                     Platform.runLater(() -> updateSongInfo(prev));
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (AudioExtractorException ex) {
+                AuxiliaryMethods.showAlert(ex);
             }
         });
     }

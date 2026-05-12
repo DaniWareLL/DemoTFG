@@ -192,8 +192,8 @@ public class PlayerBarController {
 
                     Platform.runLater(() -> updateSongInfo(next));
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (AudioExtractorException ex) {
+                AuxiliaryMethods.showAlert(ex);
             }
         });
     }

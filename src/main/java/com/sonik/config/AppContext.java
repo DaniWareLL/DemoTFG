@@ -124,10 +124,6 @@ public class AppContext {
         return jpaSongRepository;
     }
 
-    public static PlaylistRepository getJpaPlaylistRepositor() {
-        return jpaPlaylistRepository;
-    }
-
     public static AuthService getAuthService() {
         return authService;
     }

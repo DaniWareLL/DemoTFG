@@ -1,0 +1,26 @@
+.account-created-textarea {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: green;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.account-created-textarea .content {
+    -fx-background-color: transparent;
+    -fx-cursor: default;
+}
+
+.account-created-textarea .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.account-created-textarea .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.account-created-textarea .scroll-bar {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}

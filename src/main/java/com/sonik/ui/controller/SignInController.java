@@ -44,7 +44,7 @@ public class SignInController {
     @FXML
     private Label passwordErrorLabel;
     @FXML
-    private Label accountCreatedLabel;
+    private TextArea accountCreatedLabel;
 
     @FXML
     private CheckBox rememberCheckBox;
@@ -90,6 +90,7 @@ public class SignInController {
 
     public void showAccountCreatedMessage() {
         accountCreatedLabel.setVisible(true);
+        accountCreatedLabel.setManaged(true);
     }
 
     public void OnkeyPressed_UserTexfield(KeyEvent keyEvent) {

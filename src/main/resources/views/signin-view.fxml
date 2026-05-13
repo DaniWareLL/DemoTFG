@@ -22,6 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
+<?import javafx.scene.control.TextArea?>
 <BorderPane minHeight="620.0" minWidth="900.0" prefHeight="620.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SignInController">
    <left>
       <HBox fx:id="leftHBox" alignment="CENTER" minHeight="565.0" minWidth="415.0" style="-fx-background-image: url('/images/Sonik/FondoSignin.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-radius: 20; -fx-background-insets: 0;" BorderPane.alignment="CENTER">
@@ -99,7 +100,11 @@
                                           </LinearGradient>
                                        </textFill>
                                     </Label>
-                                    <Label fx:id="accountCreatedLabel" style="-fx-text-fill: green; -fx-font-size: 12px; -fx-font-weight: bold;" text="Account successfully created!!&#10;You can now log in using your credentials." visible="false" wrapText="true" />
+                                    <TextArea fx:id="accountCreatedLabel" styleClass="account-created-textarea"
+                                              stylesheets="@../css/account-created.css"
+                                           text="Account successfully created!!&#10;You can now log in using your credentials."
+                                              visible="false" managed="false" editable="false" focusTraversable="false" wrapText="true"
+                                           maxWidth="295.0" prefHeight="50.0" minHeight="50.0"/>
                                  </children>
                                  <VBox.margin>
                                     <Insets />

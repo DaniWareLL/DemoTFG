@@ -16,15 +16,6 @@ import java.util.List;
 public interface UserRepository {
 
     /**
-     * Retrieves a user entity matching the given id
-     * @param id
-     * @return
-     * @throws DataAccessException if a data access error occurs
-     * @throws ObjectNotFoundException if no user with the given ID exists.
-     */
-    User findById(Long id) throws DataAccessException, ObjectNotFoundException;
-
-    /**
      * Retrieves a user entity matching the given username
      * @param username The name of the user to search for
      * @return the matching user entity

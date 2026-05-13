@@ -27,24 +27,6 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public User findById(Long id) throws DataAccessException, ObjectNotFoundException {
-
-        try (EntityManager em = emf.createEntityManager();) {
-
-            User user = em.find(User.class, id);
-
-            if(user == null){
-                throw new ObjectNotFoundException("User with id " + id + " not found");
-            }
-
-            return user;
-
-        } catch (PersistenceException ex) {
-            throw new DataAccessException(DataAccessException.CONNECTION_ERROR, ex);
-        }
-    }
-
-    @Override
     public User findByUsername(String username) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException {
 
         if (username.trim().isBlank()) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_USERNAME);

@@ -87,7 +87,6 @@ public class AppContext {
         playerService = new PlayerServiceImpl(audioExtractor);
         metadataService = new MetadataServiceImpl(audioExtractor);
         downloadService = new DownloadServiceImpl(audioExtractor);
-        playerService = new PlayerServiceImpl(audioExtractor);
         playlistService = new PlaylistServiceImpl(jpaPlaylistRepository);
         libraryService = new LibraryServiceImpl();
 

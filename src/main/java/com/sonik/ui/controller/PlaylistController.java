@@ -97,9 +97,9 @@ public class PlaylistController {
         AppContext.getExecutor().submit(() -> {
             List<Song> songs = AppContext.getPlaylistService().getSongs(playlist);
             Platform.runLater(() -> {
-                songListView.getItems().clear();
-                songListView.setCellFactory(list -> new SongCellPlaylist());
-                songListView.getItems().setAll(songs);
+                songsListView.getItems().clear();
+                songsListView.setCellFactory(list -> new SongCellPlaylist());
+                songsListView.getItems().setAll(songs);
             });
         });
     }

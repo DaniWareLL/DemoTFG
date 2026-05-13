@@ -35,7 +35,6 @@ public class JpaPlaylistRepository implements PlaylistRepository {
             AppContext.getJpaUserRepository().findByUsername(username);
             TypedQuery<Playlist> query = em.createQuery("SELECT p FROM Playlist p WHERE p.user.userName =: username", Playlist.class);
             query.setParameter("username", username);
-            List<Playlist> playlists = query.getResultList();
             return query.getResultList();
 
         } catch (PersistenceException | IllegalStateException e) {

@@ -21,7 +21,7 @@ public class PlaylistController {
     @FXML
     public Label description;
     @FXML
-    private ListView<Song> songListView;
+    private ListView<Song> songsListView;
 
     private static Playlist playlist;
 
@@ -36,18 +36,27 @@ public class PlaylistController {
 
     public void initialize() {
         instance = this;
-        songListView.setFixedCellSize(65);
-        songListView.setCellFactory(list -> new SongCellPlaylist());
+        songsListView.setFixedCellSize(65);
+        songsListView.setCellFactory(list -> new SongCellPlaylist());
 
         AppContext.getExecutor().submit(() -> {
             List<Song> songs = AppContext.getPlaylistService().getSongs(playlist);
             Platform.runLater(() -> {
-                songListView.getItems().setAll(songs);
+                songsListView.getItems().setAll(songs);
             });
         });
 
-        songListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        songsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
+
+                int index = songsListView.getItems().indexOf(newVal);
+
+                // Actualizo cola
+                AppContext.getPlaybackQueueService().setQueue(
+                        songsListView.getItems(),
+                        index
+                );
+
                 // Hilo para extraer URL
                 AppContext.getExecutor().submit(() -> {
                     try {
@@ -87,7 +96,7 @@ public class PlaylistController {
     public void refreshSongs() {
         AppContext.getExecutor().submit(() -> {
             List<Song> songs = AppContext.getPlaylistService().getSongs(playlist);
-            Platform.runLater(() -> songListView.getItems().setAll(songs));
+            Platform.runLater(() -> songsListView.getItems().setAll(songs));
         });
     }
 

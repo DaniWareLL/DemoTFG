@@ -1,5 +1,9 @@
 package com.sonik.ui.controller;
 
+import com.sonik.config.AppContext;
+import com.sonik.domain.exceptions.AudioExtractorException;
+import com.sonik.domain.model.Song;
+import com.sonik.ui.navigation.ViewManager;
 import com.sonik.ui.navigation.ViewType;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -122,5 +126,29 @@ public class AuxiliaryMethods {
             timeline.play();
         });
     }
+
+    protected static void loadAndPlay(Song song) {
+        AppContext.getExecutor().submit(() -> {
+            try {
+                String url = AppContext.getPlayerService().getStreamUrl(song.getOriginalUrl());
+                if (!url.isEmpty()) {
+                    // Hilo para reproducir
+                    AppContext.getExecutor().submit(() -> {
+                        AppContext.getAudioPlayer().setCurrentSong(song);
+                        AppContext.getAudioPlayer().play(url);
+                        PlayerBarController playerBar = ViewManager.getPlayerBarController();
+
+                        Platform.runLater(() -> {
+                            playerBar.updateSongInfo(song);
+                        });
+                    });
+
+                }
+            } catch (AudioExtractorException e) {
+                AuxiliaryMethods.showAlert(e);
+            }
+        });
+    }
+
 
 }

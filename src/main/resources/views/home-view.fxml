@@ -11,13 +11,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane fx:id="mainContainer" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.HomeController">
    <left>
-      <VBox fx:id="leftContainer" minWidth="230.0" spacing="10.0" style="-fx-background-color: #191919; -fx-background-radius: 20;">
+      <VBox fx:id="leftContainer" maxWidth="260.0" minWidth="200.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #191919; -fx-background-radius: 20;">
          <BorderPane.margin>
             <Insets left="10.0" right="5.0" />
          </BorderPane.margin>
@@ -97,75 +98,86 @@
                      <Font name="Manrope Medium" size="16.0" />
                   </font>
                </Label>
-               <HBox alignment="CENTER_LEFT" spacing="40.0">
+               <HBox alignment="CENTER_LEFT" spacing="40.0"/>
+               <HBox fx:id="hBoxPlaylists" alignment="CENTER_LEFT" spacing="40.0">
                   <VBox.margin>
                      <Insets top="20.0" />
                   </VBox.margin>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitWidth="180.0" preserveRatio="true">
-                        <Image url="@../images/Sonik/PlaylistSonik.png" />
+
+                  <VBox fx:id="pBox1" HBox.hgrow="SOMETIMES">
+                     <ImageView fx:id="pImg1" fitWidth="180.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/Sonik/PlaylistSonik.png" />
+                        </image>
                      </ImageView>
-                     <Label text="Playlist name" textFill="WHITE">
+                     <Label fx:id="pName1" text="Playlist name" textFill="WHITE">
                         <font>
                            <Font name="Manrope Medium" size="18.0" />
                         </font>
                      </Label>
-                     <Label text="Description" textFill="WHITE">
+                     <Label fx:id="pDesc1" text="Description" textFill="WHITE">
                         <font>
                            <Font name="Manrope Medium" size="13.0" />
                         </font>
                      </Label>
                   </VBox>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitWidth="180.0" preserveRatio="true">
-                        <Image url="@../images/Sonik/PlaylistSonik.png" />
+
+                  <VBox fx:id="pBox2" HBox.hgrow="SOMETIMES">
+                     <ImageView fx:id="pImg2" fitWidth="180.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/Sonik/PlaylistSonik.png" />
+                        </image>
                      </ImageView>
-                     <Label text="Playlist name" textFill="WHITE">
+                     <Label fx:id="pName2" text="Playlist name" textFill="WHITE">
                         <font>
                            <Font name="Manrope Medium" size="18.0" />
                         </font>
                      </Label>
-                     <Label text="Description" textFill="WHITE">
+                     <Label fx:id="pDesc2" text="Description" textFill="WHITE">
                         <font>
                            <Font name="Manrope Medium" size="13.0" />
                         </font>
                      </Label>
                   </VBox>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitWidth="180.0" preserveRatio="true">
-                        <Image url="@../images/Sonik/PlaylistSonik.png" />
+
+                  <VBox fx:id="pBox3" HBox.hgrow="SOMETIMES">
+                     <ImageView fx:id="pImg3" fitWidth="180.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/Sonik/PlaylistSonik.png" />
+                        </image>
                      </ImageView>
-                     <Label text="Playlist name" textFill="WHITE">
+                     <Label fx:id="pName3" text="Playlist name" textFill="WHITE">
                         <font>
                            <Font name="Manrope Medium" size="18.0" />
                         </font>
                      </Label>
-                     <Label text="Description" textFill="WHITE">
+                     <Label fx:id="pDesc3" text="Description" textFill="WHITE">
                         <font>
                            <Font name="Manrope Medium" size="13.0" />
                         </font>
                      </Label>
                   </VBox>
-                  <VBox>
-                     <children>
-                        <ImageView fitWidth="180.0" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Sonik/PlaylistSonik.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Playlist name" textFill="WHITE">
-                           <font>
-                              <Font name="Manrope Medium" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Description" textFill="WHITE">
-                           <font>
-                              <Font name="Manrope Medium" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
+
+                  <VBox fx:id="pBox4" HBox.hgrow="SOMETIMES">
+                     <ImageView fx:id="pImg4" fitWidth="180.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/Sonik/PlaylistSonik.png" />
+                        </image>
+                     </ImageView>
+                     <Label fx:id="pName4" text="Playlist name" textFill="WHITE">
+                        <font>
+                           <Font name="Manrope Medium" size="18.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="pDesc4" text="Description" textFill="WHITE">
+                        <font>
+                           <Font name="Manrope Medium" size="13.0" />
+                        </font>
+                     </Label>
                   </VBox>
+
                </HBox>
+
             </VBox>
 
             <VBox fillWidth="false" VBox.vgrow="ALWAYS">
@@ -190,70 +202,111 @@
                   <VBox.margin>
                      <Insets top="20.0" />
                   </VBox.margin>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
-                        <image>
-                           <Image url="@../images/Sonik/ViniloSonik.png" />
-                        </image>
-                     </ImageView>
-                     <Label text="Song name" textFill="WHITE">
-                        <font>
-                           <Font name="Manrope Medium" size="16.0" />
-                        </font>
+                  <VBox fx:id="fSong1" HBox.hgrow="SOMETIMES">
+                     <StackPane fx:id="cover1"
+                                maxHeight="110.0" maxWidth="110.0"
+                                minHeight="110.0" minWidth="110.0"
+                                prefHeight="110.0" prefWidth="110.0">
+                        <children>
+                           <ImageView fx:id="fImg1" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../images/Sonik/ViniloSonik.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </StackPane>
+                     <Label fx:id="fLabel1" text="Song name" textFill="WHITE">
+                        <font><Font name="Manrope Medium" size="16.0" /></font>
                      </Label>
                   </VBox>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
-                        <image>
-                           <Image url="@../images/Sonik/ViniloSonik.png" />
-                        </image>
-                     </ImageView>
-                     <Label text="Song name" textFill="WHITE">
-                        <font>
-                           <Font name="Manrope Medium" size="13.0" />
-                        </font>
+
+                  <VBox fx:id="fSong2" HBox.hgrow="SOMETIMES">
+                     <StackPane fx:id="cover2"
+                                maxHeight="110.0" maxWidth="110.0"
+                                minHeight="110.0" minWidth="110.0"
+                                prefHeight="110.0" prefWidth="110.0">
+                        <children>
+                           <ImageView fx:id="fImg2" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../images/Sonik/ViniloSonik.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </StackPane>
+                     <Label fx:id="fLabel2" text="Song name" textFill="WHITE">
+                        <font><Font name="Manrope Medium" size="16.0" /></font>
                      </Label>
                   </VBox>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
-                        <image>
-                           <Image url="@../images/Sonik/ViniloSonik.png" />
-                        </image>
-                     </ImageView>
-                     <Label text="Song name" textFill="WHITE">
-                        <font>
-                           <Font name="Manrope Medium" size="13.0" />
-                        </font>
+
+                  <VBox fx:id="fSong3" HBox.hgrow="SOMETIMES">
+                     <StackPane fx:id="cover3"
+                                maxHeight="110.0" maxWidth="110.0"
+                                minHeight="110.0" minWidth="110.0"
+                                prefHeight="110.0" prefWidth="110.0">
+                        <children>
+                           <ImageView fx:id="fImg3" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../images/Sonik/ViniloSonik.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </StackPane>
+                     <Label fx:id="fLabel3" text="Song name" textFill="WHITE">
+                        <font><Font name="Manrope Medium" size="16.0" /></font>
                      </Label>
                   </VBox>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
-                        <Image url="@../images/Sonik/ViniloSonik.png" />
-                     </ImageView>
-                     <Label text="Song name" textFill="WHITE">
-                        <font>
-                           <Font name="Manrope Medium" size="13.0" />
-                        </font>
+
+                  <VBox fx:id="fSong4" HBox.hgrow="SOMETIMES">
+                     <StackPane fx:id="cover4"
+                                maxHeight="110.0" maxWidth="110.0"
+                                minHeight="110.0" minWidth="110.0"
+                                prefHeight="110.0" prefWidth="110.0">
+                        <children>
+                           <ImageView fx:id="fImg4" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../images/Sonik/ViniloSonik.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </StackPane>
+                     <Label fx:id="fLabel4" text="Song name" textFill="WHITE">
+                        <font><Font name="Manrope Medium" size="16.0" /></font>
                      </Label>
                   </VBox>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
-                        <Image url="@../images/Sonik/ViniloSonik.png" />
-                     </ImageView>
-                     <Label text="Song name" textFill="WHITE">
-                        <font>
-                           <Font name="Manrope Medium" size="13.0" />
-                        </font>
+
+                  <VBox fx:id="fSong5" HBox.hgrow="SOMETIMES">
+                     <StackPane fx:id="cover5"
+                                maxHeight="110.0" maxWidth="110.0"
+                                minHeight="110.0" minWidth="110.0"
+                                prefHeight="110.0" prefWidth="110.0">
+                        <children>
+                           <ImageView fx:id="fImg5" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../images/Sonik/ViniloSonik.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </StackPane>
+                     <Label fx:id="fLabel5" text="Song name" textFill="WHITE">
+                        <font><Font name="Manrope Medium" size="16.0" /></font>
                      </Label>
                   </VBox>
-                  <VBox HBox.hgrow="SOMETIMES">
-                     <ImageView fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
-                        <Image url="@../images/Sonik/ViniloSonik.png" />
-                     </ImageView>
-                     <Label text="Song name" textFill="WHITE">
-                        <font>
-                           <Font name="Manrope Medium" size="13.0" />
-                        </font>
+
+                  <VBox fx:id="fSong6" HBox.hgrow="SOMETIMES">
+                     <StackPane fx:id="cover6"
+                                maxHeight="110.0" maxWidth="110.0"
+                                minHeight="110.0" minWidth="110.0"
+                                prefHeight="110.0" prefWidth="110.0">
+                        <children>
+                           <ImageView fx:id="fImg6" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../images/Sonik/ViniloSonik.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </StackPane>
+                     <Label fx:id="fLabel6" text="Song name" textFill="WHITE">
+                        <font><Font name="Manrope Medium" size="16.0" /></font>
                      </Label>
                   </VBox>
                </HBox>

@@ -3,6 +3,7 @@ package com.sonik.ui.navigation;
 
 import com.sonik.ui.controller.PlayerBarController;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -75,6 +76,7 @@ public class ViewManager {
     public static void loadIntoLeft(ViewType viewType) throws IOException {
         FXMLLoader loader = new FXMLLoader(viewType.getUrl());
         Node view = loader.load();
+        BorderPane.setMargin(view, new Insets(0, 5, 0, 10));
         mainContainer.setLeft(view);
     }
 

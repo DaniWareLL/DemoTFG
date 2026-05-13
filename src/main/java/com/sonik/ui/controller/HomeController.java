@@ -1,5 +1,10 @@
 package com.sonik.ui.controller;
 
+import com.sonik.domain.exceptions.AudioExtractorException;
+import com.sonik.domain.exceptions.DataAccessException;
+import com.sonik.domain.exceptions.IncorrectArgumentException;
+import com.sonik.domain.exceptions.ObjectNotFoundException;
+import com.sonik.domain.model.Playlist;
 import com.sonik.domain.model.Song;
 import com.sonik.ui.navigation.ViewManager;
 import com.sonik.ui.navigation.ViewType;
@@ -8,18 +13,27 @@ import com.sonik.config.AppContext;
 import com.sonik.config.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.sonik.ui.controller.AuxiliaryMethods.loadAndPlay;
 
 public class HomeController {
 
@@ -71,6 +85,33 @@ public class HomeController {
     private double xOffset = 0;
     private double yOffset = 0;
 
+    @FXML
+    private HBox hBoxLibrary;
+    @FXML private VBox fSong1, fSong2, fSong3, fSong4, fSong5, fSong6;
+    @FXML private ImageView fImg1, fImg2, fImg3, fImg4, fImg5, fImg6;
+    @FXML private Label fLabel1, fLabel2, fLabel3, fLabel4, fLabel5, fLabel6;
+    @FXML private StackPane cover1, cover2, cover3, cover4, cover5, cover6;
+
+    private VBox[] songBoxes;
+    private ImageView[] songImages;
+    private Label[] songLabels;
+    private StackPane[] covers;
+
+    private List<Song> songsLoaded;
+
+    @FXML private HBox hBoxPlaylists;
+
+    @FXML private VBox pBox1, pBox2, pBox3, pBox4;
+    @FXML private ImageView pImg1, pImg2, pImg3, pImg4;
+    @FXML private Label pName1, pName2, pName3, pName4;
+    @FXML private Label pDesc1, pDesc2, pDesc3, pDesc4;
+
+    private VBox[] playlistBoxes;
+    private ImageView[] playlistImages;
+    private Label[] playlistNames;
+    private Label[] playlistDescs;
+
+
     public void initialize() {
 
         ViewManager.setMainContainer(mainContainer);
@@ -82,6 +123,39 @@ public class HomeController {
 
         homeContent = mainContainer.getCenter();
         leftContent = mainContainer.getLeft();
+
+        songBoxes = new VBox[]{fSong1, fSong2, fSong3, fSong4, fSong5, fSong6};
+        songImages = new ImageView[]{fImg1, fImg2, fImg3, fImg4, fImg5, fImg6};
+        songLabels = new Label[]{fLabel1, fLabel2, fLabel3, fLabel4, fLabel5, fLabel6};
+        covers = new StackPane[]{cover1, cover2, cover3, cover4, cover5, cover6};
+
+        songsLoaded = new ArrayList<>();
+
+        for (VBox box : songBoxes) {
+            box.setOnMouseClicked(event -> {
+                VBox clicked = (VBox) event.getSource();
+                Song s = (Song) clicked.getUserData();
+                if (s != null) playFavoriteSong(s);
+            });
+        }
+
+        loadFavoriteSongs();
+
+        playlistBoxes = new VBox[]{pBox1, pBox2, pBox3, pBox4};
+        playlistImages = new ImageView[]{pImg1, pImg2, pImg3, pImg4};
+        playlistNames = new Label[]{pName1, pName2, pName3, pName4};
+        playlistDescs = new Label[]{pDesc1, pDesc2, pDesc3, pDesc4};
+
+        loadHomePlaylists();
+
+        for (VBox box : playlistBoxes) {
+            box.setOnMouseClicked(event -> {
+                VBox clicked = (VBox) event.getSource();
+                var playlist = clicked.getUserData();
+                if (playlist != null) openPlaylist(playlist);
+            });
+        }
+
 
         userNameLabel.setText(UserSession.getUser().getUserName());
 
@@ -151,10 +225,19 @@ public class HomeController {
 
     public void playlistButtonOnMC(MouseEvent mouseEvent) {
         try {
-            ViewManager.loadIntoCenter(ViewType.PLAYLIST);
+            List<Playlist> playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());
+
+            PlaylistController controller = ViewManager.loadIntoCenterWithController(ViewType.PLAYLIST);
+            controller.loadPlaylist(playlists.getFirst());
             ViewManager.loadIntoLeft(ViewType.PLAYLIST_SIDEBAR);
         } catch (IOException e) {
             AuxiliaryMethods.showAlert(e);
+        } catch (ObjectNotFoundException e) {
+            e.printStackTrace();
+        } catch (IncorrectArgumentException e) {
+            e.printStackTrace();
+        } catch (DataAccessException e) {
+            e.printStackTrace();
         }
     }
 
@@ -210,6 +293,7 @@ public class HomeController {
     public void homeBtnMC(MouseEvent mouseEvent) {
         mainContainer.setCenter(homeContent);
         mainContainer.setLeft(leftContent);
+        searchBar.setText("");
     }
 
     public void libraryBtnMC(ActionEvent actionEvent) {
@@ -219,4 +303,106 @@ public class HomeController {
             e.printStackTrace();
         }
     }
+
+    private void loadFavoriteSongs() {
+
+        AppContext.getExecutor().submit(() -> {
+            try {
+                List<Song> favorites = AppContext.getLibraryService().getFavouriteSongs();
+
+                Platform.runLater(() -> {
+
+                    double size = 110;
+
+                    for (int i = 0; i < favorites.size() && i < 6; i++) {
+
+                        Song song = favorites.get(i);
+
+                        ImageView img = songImages[i];
+                        StackPane container = covers[i];
+
+                        container.setPrefSize(size, size);
+                        container.setMaxSize(size, size);
+
+                        img.setPreserveRatio(true);
+                        img.setFitWidth(size * 1.6);
+                        img.setFitHeight(size * 1.6);
+
+                        StackPane.setAlignment(img, Pos.CENTER);
+
+                        Rectangle clip = new Rectangle(size, size);
+                        clip.setArcWidth(15);
+                        clip.setArcHeight(15);
+                        container.setClip(clip);
+
+                        img.setImage(new Image(song.getThumbnailUrl()));
+
+                        songLabels[i].setMaxWidth(110);
+                        songLabels[i].setText(song.getTitle());
+                        songBoxes[i].setVisible(true);
+
+                        //  Guardar canción para el evento
+                        Song loadedSong = favorites.get(i);
+
+                        songBoxes[i].setUserData(loadedSong);
+                        covers[i].setUserData(loadedSong);
+
+                        int index = favorites.size();
+
+                        // Actualizo cola
+                        AppContext.getPlaybackQueueService().setQueue(
+                                favorites,
+                                index
+                        );
+                    }
+
+                });
+
+            } catch (Exception e) {
+                AuxiliaryMethods.showAlert(e);
+            }
+        });
+    }
+
+    private void playFavoriteSong(Song song) {
+        loadAndPlay(song);
+    }
+
+    private void loadHomePlaylists() {
+
+        AppContext.getExecutor().submit(() -> {
+            try {
+                var playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());
+
+                Platform.runLater(() -> {
+
+                    for (int i = 0; i < playlists.size() && i < 4; i++) {
+
+                        var pl = playlists.get(i);
+
+                        playlistNames[i].setText(pl.getName());
+                        playlistDescs[i].setText(pl.getDescription());
+
+                        playlistBoxes[i].setUserData(pl);
+                        playlistBoxes[i].setVisible(true);
+                    }
+
+                });
+
+            } catch (Exception e) {
+                AuxiliaryMethods.showAlert(e);
+            }
+        });
+    }
+
+    private void openPlaylist(Object playlist) {
+        try {
+            PlaylistController controller = ViewManager.loadIntoCenterWithController(ViewType.PLAYLIST);
+            controller.loadPlaylist((Playlist) playlist);
+            ViewManager.loadIntoLeft(ViewType.PLAYLIST_SIDEBAR);
+        } catch (IOException e) {
+            AuxiliaryMethods.showAlert(e);
+        }
+    }
+
 }

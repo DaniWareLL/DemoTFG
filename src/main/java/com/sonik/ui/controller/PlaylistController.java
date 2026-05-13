@@ -14,6 +14,8 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.List;
 
+import static com.sonik.ui.controller.AuxiliaryMethods.loadAndPlay;
+
 public class PlaylistController {
 
     @FXML
@@ -58,29 +60,7 @@ public class PlaylistController {
                 );
 
                 // Hilo para extraer URL
-                AppContext.getExecutor().submit(() -> {
-                    try {
-                        System.out.println(newVal);
-                        String url = AppContext.getPlayerService().getStreamUrl(newVal.getOriginalUrl());
-                        if (!url.isEmpty()) {
-                            // Hilo para reproducir
-                            AppContext.getExecutor().submit(() -> {
-                                AppContext.getAudioPlayer().setCurrentSong(newVal);
-                                System.out.println(newVal);
-                                System.out.println(url);
-                                AppContext.getAudioPlayer().play(url);
-                                PlayerBarController playerBar = ViewManager.getPlayerBarController();
-
-                                Platform.runLater(() -> {
-                                    playerBar.updateSongInfo(newVal);
-                                });
-                            });
-
-                        }
-                    } catch (AudioExtractorException e) {
-                        AuxiliaryMethods.showAlert(e);
-                    }
-                });
+                loadAndPlay(newVal);
             }
         });
 

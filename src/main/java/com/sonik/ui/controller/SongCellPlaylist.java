@@ -24,7 +24,7 @@ public class SongCellPlaylist extends ListCell<Song> {
         if (loader == null) {
             try {
                 loader = new FXMLLoader(ViewType.SONG_CELL_PLAYLIST.getUrl());
-                setGraphic(loader.load());
+                loader.load();
                 controller = loader.getController();
             } catch (IOException e){
                 AuxiliaryMethods.showAlert(e);
@@ -32,6 +32,7 @@ public class SongCellPlaylist extends ListCell<Song> {
             }
         }
 
+        setGraphic(loader.getRoot());
         controller.setSongAndPlaylist(song, getIndex(), PlaylistController.getPlaylist());
     }
 

@@ -14,14 +14,5 @@ public enum SourceName {
     public String getSearchPrefix() {
         return searchPrefix;
     }
-
-    public static SourceName fromDisplay(String value) {
-        return switch (value.toLowerCase()) {
-            case "youtube" -> YOUTUBE;
-            case "soundcloud" -> SOUNDCLOUD;
-            default -> throw new IllegalArgumentException(
-                    "Plataforma no soportada: " + value
-            );
-        };
-    }
+    
 }

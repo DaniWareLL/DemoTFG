@@ -61,7 +61,7 @@ public class AppContext {
     }
 
     /**
-     * Initializes the application's dependencies and its main components every time it's started(dependency injector)
+     * Initializes the application's dependencies and its main components every time it's started
      */
     public static void initializeApplication() throws DataAccessException {
 
@@ -95,7 +95,7 @@ public class AppContext {
 
     /**
      * Closes every resource and shuts down the application
-     * (this method should only be invoked when exiting the application)
+     * (this method should only be called when exiting the application)
      */
     public static void shutDown() {
         if (emf != null && emf.isOpen()) {

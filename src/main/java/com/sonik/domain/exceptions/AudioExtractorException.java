@@ -1,5 +1,8 @@
 package com.sonik.domain.exceptions;
 
+/**
+ * Signals a problem with the {@link com.sonik.service.audio.AudioExtractor audio extractor}
+ */
 public class AudioExtractorException extends Exception {
 
     public static final int DOWNLOAD_ERROR = 1;
@@ -7,46 +10,57 @@ public class AudioExtractorException extends Exception {
     public static final int SETTING_ERROR = 3;
     public static final int STREAM_URL_ERROR = 4;
 
-    private final int errorCode;
+    private int errorCode = -1;
 
-    private static String resolverCodigo(int errorCode) {
+    /**
+     * Returns an error message depending on the error code received
+     * @param errorCode The error code
+     * @return The error message
+     */
+    private static String solveCode(int errorCode) {
         return switch (errorCode) {
             case DOWNLOAD_ERROR ->
-                    "Error durante la descarga del audio.";
+                    "Error downloading file.";
             case METADATA_ERROR ->
-                    "Error al procesar o extraer los metadatos del audio.";
+                    "Error while processing metadata.";
             case SETTING_ERROR ->
-                    "Error en la configuración del extractor o herramientas externas.";
+                    "Error, invalid extractor configuration.";
             case STREAM_URL_ERROR ->
-                    "Error al obtener o procesar la URL de streaming.";
+                    "Error while processing the streaming url.";
             default ->
-                    "Error desconocido en el extractor de audio.";
+                    "Unknown error.";
         };
     }
 
+    /**
+     * Constructs an {@link AudioExtractorException} with the error code received
+     * @param errorCode The error code
+     * @param cause The cause of the exception
+     */
     public AudioExtractorException(int errorCode, Throwable cause) {
-        super(resolverCodigo(errorCode), cause);
+        super(solveCode(errorCode), cause);
         this.errorCode = errorCode;
     }
 
+    /**
+     * Constructs an {@link AudioExtractorException} with the error code received
+     * @param errorCode The error code
+     */
     public AudioExtractorException(int errorCode) {
-        super(resolverCodigo(errorCode));
+        super(solveCode(errorCode));
         this.errorCode = errorCode;
     }
 
     public AudioExtractorException(String message, Throwable cause) {
         super(message, cause);
-        this.errorCode = -1;
     }
 
     public AudioExtractorException(String message) {
         super(message);
-        this.errorCode = -1;
     }
 
     public AudioExtractorException(Throwable cause) {
         super(cause);
-        this.errorCode = -1;
     }
 
     public int getErrorCode() {

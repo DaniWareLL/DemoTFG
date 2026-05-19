@@ -1,10 +1,16 @@
 package com.sonik.domain.model.enums;
 
+/**
+ * Indicates the source
+ */
 public enum SourceName {
 
     YOUTUBE("ytsearch"),
     SOUNDCLOUD("scsearch");
 
+    /**
+     * The prefix to use alongside YtDlp
+     */
     private final String searchPrefix;
 
     SourceName(String searchPrefix) {
@@ -15,13 +21,4 @@ public enum SourceName {
         return searchPrefix;
     }
 
-    public static SourceName fromDisplay(String value) {
-        return switch (value.toLowerCase()) {
-            case "youtube" -> YOUTUBE;
-            case "soundcloud" -> SOUNDCLOUD;
-            default -> throw new IllegalArgumentException(
-                    "Plataforma no soportada: " + value
-            );
-        };
-    }
 }

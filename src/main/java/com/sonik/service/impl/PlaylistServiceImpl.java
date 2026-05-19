@@ -38,6 +38,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         playlistRepository.save(playlist);
     }
 
+    @Override
     public List<Playlist> findAllPlaylistsForUser(String username) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException {
         return playlistRepository.findAllByUsername(username);
     }

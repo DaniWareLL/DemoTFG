@@ -1,5 +1,8 @@
 package com.sonik.domain.exceptions;
 
+/**
+ * Indicates an error when accessing the data
+ */
 public class DataAccessException extends Exception {
 
     public static final int CHANGES_REVERTED = 1;
@@ -8,9 +11,14 @@ public class DataAccessException extends Exception {
     public static final int CONNECTION_ERROR = 4;
     public static final int ALREADY_CONFIGURED = 5;
 
-    private final int errorCode;
+    private int errorCode = -1;
 
-    private static String resolverCodigo(int errorCode) {
+    /**
+     * Returns an error message depending on the error code received
+     * @param errorCode The error code
+     * @return The error message
+     */
+    private static String resolveCode(int errorCode) {
         return switch (errorCode) {
             case CHANGES_REVERTED ->
                     "Error while accessing data, changes have been reverted.";
@@ -27,33 +35,29 @@ public class DataAccessException extends Exception {
     }
 
     public DataAccessException(int errorCode, Throwable cause) {
-        super(resolverCodigo(errorCode), cause);
+        super(resolveCode(errorCode), cause);
         this.errorCode = errorCode;
     }
 
     public DataAccessException(int errorCode) {
-        super(resolverCodigo(errorCode));
+        super(resolveCode(errorCode));
         this.errorCode = errorCode;
     }
 
     public DataAccessException(String message, Throwable cause) {
         super(message, cause);
-        this.errorCode = -1;
     }
 
     public DataAccessException(String message) {
         super(message);
-        this.errorCode = -1;
     }
 
     public DataAccessException(Throwable cause) {
         super(cause);
-        this.errorCode = -1;
     }
 
     public DataAccessException() {
         super();
-        this.errorCode = -1;
     }
 
     public int getErrorCode() {

@@ -73,18 +73,36 @@ public class Playlist {
     public List<PlaylistsSongs> getSongs()  { return songs; }
 
     // Setters
+    /**
+     * Sets the user who owns this playlist.
+     * @param user The User to assign as owner
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#NULL_OBJECT_RECEIVED} If user is null
+     */
     public void setUser(User user) throws IncorrectArgumentException {
         if (user == null)
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.user = user;
     }
 
+    /**
+     * Sets the name of this playlist.
+     * @param name The name to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#EMPTY_PLAYLIST_NAME} If name is null or blank
+     */
     public void setName(String name) throws IncorrectArgumentException {
         if (name == null || name.isBlank())
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_PLAYLIST_NAME);
         this.name = name;
     }
 
+    /**
+     * Sets the description of this playlist.
+     * @param description The description to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#EMPTY_PLAYLIST_DESCRIPTION} If description is null or blank
+     */
     public void setDescription(String description) throws IncorrectArgumentException {
         if (description == null || description.isBlank()) {
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_PLAYLIST_DESCRIPTION);
@@ -92,12 +110,24 @@ public class Playlist {
         this.description = description;
     }
 
+    /**
+     * Sets the creation date of this playlist.
+     * @param creationDate The creation date to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#INVALID_DATE} If creationDate is null or in the future
+     */
     public void setCreationDate(LocalDate creationDate) throws IncorrectArgumentException {
         if (creationDate == null || creationDate.isAfter(LocalDate.now()))
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DATE);
         this.creationDate = creationDate;
     }
 
+    /**
+     * Sets the sort order of this playlist.
+     * @param sortOrder The sort order to assign, must be zero or positive
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#INVALID_NUMBER} If sortOrder is negative
+     */
     public void setSortOrder(int sortOrder) throws IncorrectArgumentException {
         if (sortOrder < 0)
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_NUMBER);

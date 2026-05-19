@@ -113,13 +113,7 @@ public class JpaPlaylistRepository implements PlaylistRepository {
         }
     }
 
-    /**
-     * Finds a {@link com.sonik.domain.model.Playlist Playlist} by id and returns it
-     * @param id The id from the playlist to search for
-     * @return The playlist with the corresponding id
-     * @throws DataAccessException If JPA finds any errors when searching for the playlist
-     * @throws ObjectNotFoundException If no playlist is found with such id
-     */
+    @Override
     public Playlist findById(Long id) throws DataAccessException, ObjectNotFoundException {
         try (EntityManager em = emf.createEntityManager()) {
 
@@ -134,6 +128,16 @@ public class JpaPlaylistRepository implements PlaylistRepository {
         }
     }
 
+    /**
+     * Finds a playlist by its name.
+     * @param name The name of the playlist to search for
+     * @return The matching Playlist
+     * @throws ObjectNotFoundException If no playlist with the given name exists
+     * @throws DataAccessException <ul>
+     *     <li>If more than one playlist with the same name is found</li>
+     *     <li>If a database connection error occurs</li>
+     * </ul>
+     */
     public Playlist findByName(String name) throws DataAccessException, ObjectNotFoundException {
         try (EntityManager em = emf.createEntityManager()) {
 
@@ -150,12 +154,6 @@ public class JpaPlaylistRepository implements PlaylistRepository {
         }
     }
 
-    /**
-     * Saves a {@link com.sonik.domain.model.Playlist Playlist} to the database
-     * @param playlist The playlist to save
-     * @throws DuplicateIdException If a playlist with the same id already exists in the database
-     * @throws DataAccessException If the database could not be accessed
-     */
     public void save(Playlist playlist) throws DuplicateIdException, DataAccessException {
 
         EntityTransaction tx = null;
@@ -186,11 +184,6 @@ public class JpaPlaylistRepository implements PlaylistRepository {
         }
     }
 
-    /**
-     * Deletes a {@link com.sonik.domain.model.Playlist Playlist} from the database
-     * @param playlist The playlist to be deleted
-     * @throws DataAccessException When a playlist can't be deleted
-     */
     public void delete(Playlist playlist) throws DataAccessException, ObjectNotFoundException {
 
         EntityTransaction et = null;

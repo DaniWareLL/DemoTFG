@@ -12,48 +12,40 @@ import com.sonik.domain.model.UserPref;
 public interface UserService {
 
     /**
-     * Retrieves the preferences of the user with the given username.
-     *
-     * @return the user's preferences
-     * @throws ObjectNotFoundException
-     * @throws DataAccessException
+     * Returns the current user's preferences from the active session.
+     * @return The current UserPref
      */
-    UserPref getPreferences() throws ObjectNotFoundException, DataAccessException;
+    UserPref getPreferences();
 
     /**
-     * Updates the preferences of the user with the given username.
-     *
-     * @param newPreferences the new preferences to apply
-     * @throws ObjectNotFoundException
-     * @throws DataAccessException
+     * Updates the current user's preferences and syncs the session.
+     * @param newPreferences The UserPref containing the updated values
+     * @throws DataAccessException        If a database error occurs
+     * @throws ObjectNotFoundException    If the user cannot be found
+     * @throws IncorrectArgumentException If any preference field is invalid
      */
-    void updatePreferences(UserPref newPreferences) throws ObjectNotFoundException, DataAccessException, IncorrectArgumentException;
+    void updatePreferences(UserPref newPreferences) throws DataAccessException, ObjectNotFoundException, IncorrectArgumentException;
 
     /**
-     * Changes the username of an existing user.
-     * This operation updates the user's profile information but does not
-     * affect authentication logic or credentials validation.
-     *
-     * @param oldUsername the current username of the user
-     * @param newUsername the new username to assign
-     * @throws ObjectNotFoundException
-     * @throws DataAccessException
-     * @throws UserValidationException the current username is taken
+     * Changes the current user's username.
+     * @param oldUsername The current username
+     * @param newUsername The new username to assign
+     * @throws UserValidationException    If the new username is already taken
+     * @throws DataAccessException        If a database error occurs
+     * @throws ObjectNotFoundException    If the user cannot be found
+     * @throws IncorrectArgumentException If the new username is blank
      */
-    void changeUsername(String oldUsername, String newUsername) throws ObjectNotFoundException, DataAccessException, UserValidationException, IncorrectArgumentException;
-
+    void changeUsername(String oldUsername, String newUsername) throws DataAccessException, ObjectNotFoundException, UserValidationException, IncorrectArgumentException;
 
     /**
-     * Updates the password of the user with the given username.
-     * The service is responsible for applying any required transformations,
-     * such as hashing the new password before persisting it.
-     *
-     * @param username the current username
-     * @param currentPassword the current password of the user
-     * @param newPassword the new raw password to set
-     * @throws ObjectNotFoundException
-     * @throws DataAccessException
-     * @throws UserValidationException the credentials are incorrect
+     * Changes the current user's password after validating the current one.
+     * @param username        The username of the user
+     * @param currentPassword The current plain text password to verify
+     * @param newPassword     The new plain text password to set
+     * @throws UserValidationException    If the current password is incorrect
+     * @throws DataAccessException        If a database error occurs
+     * @throws ObjectNotFoundException    If the user cannot be found
+     * @throws IncorrectArgumentException If any password field is blank
      */
-    void changePassword(String username, String currentPassword, String newPassword) throws ObjectNotFoundException, DataAccessException, UserValidationException, IncorrectArgumentException;
+    void changePassword(String username, String currentPassword, String newPassword) throws DataAccessException, ObjectNotFoundException, UserValidationException, IncorrectArgumentException;
 }

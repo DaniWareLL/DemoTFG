@@ -1,12 +1,17 @@
 package com.sonik.domain.model.enums;
 
-
+/**
+ * Indicates the streaming quality
+ */
 public enum StreamingQuality {
 
     LOW("worstaudio"),
     MEDIUM("bestaudio[abr<=128]"),
     HIGH("bestaudio");
 
+    /**
+     * The prefix to use alongside YtDlp
+     */
     private final String ytdlpFormat;
 
     StreamingQuality(String ytdlpFormat) {
@@ -17,13 +22,5 @@ public enum StreamingQuality {
         return ytdlpFormat;
     }
 
-    public static StreamingQuality fromDisplay(String display) {
-        return switch (display) {
-            case "Low" -> LOW;
-            case "Medium" -> MEDIUM;
-            case "High" -> HIGH;
-            default -> throw new IllegalArgumentException("Valor no válido: " + display);
-        };
-    }
 
 }

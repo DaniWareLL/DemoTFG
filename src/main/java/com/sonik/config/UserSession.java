@@ -4,25 +4,17 @@ import com.sonik.domain.model.UserPref;
 
 
 /**
- * Gestiona el estado de sesión del usuario dentro de la aplicación.
- *
- * Esta clase almacena en memoria el usuario autenticado y sus preferencias
- * asociadas, evitando realizar consultas repetidas a la base de datos durante
- * la ejecución.
- *
- * Su propósito es proporcionar acceso rápido y centralizado a los datos del
- * usuario logueado (User y UserPref), permitiendo que los servicios y
- * controladores trabajen con ellos sin necesidad de acceder nuevamente al
- * repositorio o a la tabla user_pref.
- *
- * La sesión se inicializa tras un login exitoso y se limpia al cerrar sesión.
+ * Stores the user's preferences and useful information
  */
-
 public class UserSession {
 
     private static User user;
     private static UserPref preferences;
 
+    /**
+     * Sets the user and preferences for the current session
+     * @param u The user in the current session
+     */
     public static void start(User u) {
         user = u;
         preferences = u.getPreferences();
@@ -40,16 +32,8 @@ public class UserSession {
         preferences = pref;
     }
 
-    public static void clear() {
-        user = null;
-        preferences = null;
-    }
-
     public static void setUser(User user) {
         UserSession.user = user;
     }
 
-    public static void setPreferences(UserPref preferences) {
-        UserSession.preferences = preferences;
-    }
 }

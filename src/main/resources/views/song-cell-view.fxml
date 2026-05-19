@@ -13,60 +13,54 @@
 <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonik.ui.controller.SongCellController">
 
     <children>
-        <!-- ID de la canción -->
         <Label fx:id="idLabel" minWidth="40" styleClass="song-id" textFill="WHITE">
-         <font>
-            <Font name="Manrope Medium" size="15.0" />
-         </font></Label>
-      <StackPane minHeight="40.0" minWidth="40.0" style="-fx-border-color: white; -fx-border-radius: 5;">
-         <children>
-      
-              <!-- Thumbnail -->
-              <ImageView fx:id="thumbnailView" fitHeight="40" fitWidth="40.0" preserveRatio="true" StackPane.alignment="CENTER" />
-         </children>
-      </StackPane>
+            <font>
+                <Font name="Manrope Medium" size="15.0" />
+            </font></Label>
+        <StackPane minHeight="40.0" minWidth="40.0" style="-fx-border-color: white; -fx-border-radius: 5;">
+            <children>
+                <ImageView fx:id="thumbnailView" fitHeight="40" fitWidth="40.0" preserveRatio="true" StackPane.alignment="CENTER" />
+            </children>
+        </StackPane>
 
-        <!-- Información principal -->
         <VBox HBox.hgrow="ALWAYS">
             <children>
                 <Label fx:id="titleLabel" styleClass="song-title" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font size="15.0" />
-               </font></Label>
+                    <font>
+                        <Font size="15.0" />
+                    </font></Label>
                 <HBox spacing="10">
                     <Label fx:id="timeLabel" styleClass="song-time" textFill="WHITE">
-                  <font>
-                     <Font size="15.0" />
-                  </font></Label>
+                        <font>
+                            <Font size="15.0" />
+                        </font></Label>
                     <Label fx:id="sourceLabel" styleClass="song-source" textFill="WHITE">
-                  <font>
-                     <Font size="15.0" />
-                  </font></Label>
+                        <font>
+                            <Font size="15.0" />
+                        </font></Label>
                     <Label fx:id="qualityLabel" styleClass="song-quality" textFill="WHITE">
-                  <font>
-                     <Font size="15.0" />
-                  </font></Label>
+                        <font>
+                            <Font size="15.0" />
+                        </font></Label>
                 </HBox>
             </children>
         </VBox>
 
-        <!-- Fecha -->
         <Label fx:id="dateLabel" styleClass="song-date" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font></Label>
-      <Button fx:id="likeBtn" mnemonicParsing="false" onAction="#likeBtnOnAction" onMouseClicked="#likeBtnMC" style="-fx-background-color: transparent;" textFill="#ffffff00">
-         <graphic>
-            <FontIcon fx:id="likeIcon" iconColor="WHITE" iconLiteral="mdi2h-heart-outline" iconSize="20" onMouseClicked="#likeBtnMC" />
-         </graphic>
-      </Button>
-      <Button fx:id="optionsBtn" mnemonicParsing="false" onMouseClicked="#optionsBtnMC" style="-fx-background-color: transpoarent;">
-         <graphic>
-      
-              <!-- Botón opciones -->
-              <FontIcon fx:id="optionsIcon" iconColor="WHITE" iconLiteral="mdi2d-dots-vertical" iconSize="20" styleClass="song-options" />
-         </graphic>
-      </Button>
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Button fx:id="likeBtn" mnemonicParsing="false" onAction="#likeBtnOnAction" onMouseClicked="#likeBtnMC" style="-fx-background-color: transparent;" textFill="#ffffff00">
+            <graphic>
+                <FontIcon fx:id="likeIcon" iconColor="WHITE" iconLiteral="mdi2h-heart-outline" iconSize="20" onMouseClicked="#likeBtnMC" />
+            </graphic>
+        </Button>
+        <Button fx:id="optionsBtn" mnemonicParsing="false" onMouseClicked="#optionsBtnMC" style="-fx-background-color: transpoarent;">
+            <graphic>
+
+                <FontIcon fx:id="optionsIcon" iconColor="WHITE" iconLiteral="mdi2d-dots-vertical" iconSize="20" styleClass="song-options" />
+            </graphic>
+        </Button>
     </children>
 
     <padding>

@@ -228,16 +228,12 @@ public class HomeController {
             List<Playlist> playlists = AppContext.getPlaylistService().findAllPlaylistsForUser(UserSession.getUser().getUserName());
 
             PlaylistController controller = ViewManager.loadIntoCenterWithController(ViewType.PLAYLIST);
-            controller.loadPlaylist(playlists.getFirst());
+            if (!playlists.isEmpty()){
+                controller.loadPlaylist(playlists.getFirst());
+            }
             ViewManager.loadIntoLeft(ViewType.PLAYLIST_SIDEBAR);
-        } catch (IOException e) {
+        } catch (IOException | ObjectNotFoundException | IncorrectArgumentException | DataAccessException e) {
             AuxiliaryMethods.showAlert(e);
-        } catch (ObjectNotFoundException e) {
-            e.printStackTrace();
-        } catch (IncorrectArgumentException e) {
-            e.printStackTrace();
-        } catch (DataAccessException e) {
-            e.printStackTrace();
         }
     }
 

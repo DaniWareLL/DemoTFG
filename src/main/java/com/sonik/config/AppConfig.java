@@ -24,8 +24,9 @@ public class AppConfig {
     private static boolean alreadyStarted = false;
 
     /**
+     * Sets the default values for the binaries to use depending on the OS
      * This method can only be used once (ideally on startup)
-     * @throws DataAccessException When this method has already been called
+     * @throws DataAccessException {@link DataAccessException#ALREADY_CONFIGURED} When this method has already been called
      */
     protected static void initializeContext() throws DataAccessException {
 

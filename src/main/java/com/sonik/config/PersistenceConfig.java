@@ -10,6 +10,7 @@ import jakarta.persistence.Persistence;
 public class PersistenceConfig {
 
     private static final String persistenceUnitName = "sonik";
+
     /**
      * This constructor is not meant to be used at all, instead use {@link #initializePersistence()}
      */

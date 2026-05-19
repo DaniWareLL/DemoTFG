@@ -16,14 +16,6 @@ public enum StreamingQuality {
     public String getYtdlpFormat() {
         return ytdlpFormat;
     }
-
-    public static StreamingQuality fromDisplay(String display) {
-        return switch (display) {
-            case "Low" -> LOW;
-            case "Medium" -> MEDIUM;
-            case "High" -> HIGH;
-            default -> throw new IllegalArgumentException("Valor no válido: " + display);
-        };
-    }
+    
 
 }

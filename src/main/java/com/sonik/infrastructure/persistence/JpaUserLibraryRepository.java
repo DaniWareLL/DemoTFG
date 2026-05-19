@@ -59,8 +59,8 @@ public class JpaUserLibraryRepository implements UserLibraryRepository {
 
     @Override
     public List<UserLibrary> findByUserId(int userId) throws DataAccessException {
-        try {
-            EntityManager em = emf.createEntityManager();
+        try (EntityManager em = emf.createEntityManager()) {
+
             List<UserLibrary> list = em.createQuery(
                     "SELECT ul FROM UserLibrary ul WHERE ul.user.id = :uid",
                     UserLibrary.class
@@ -74,8 +74,8 @@ public class JpaUserLibraryRepository implements UserLibraryRepository {
 
     @Override
     public boolean exists(int userId, int songId) throws DataAccessException {
-        try {
-            EntityManager em = emf.createEntityManager();
+        try (EntityManager em = emf.createEntityManager()) {
+
             Long count = em.createQuery(
                             "SELECT COUNT(ul) FROM UserLibrary ul WHERE ul.user.id = :uid AND ul.song.id = :sid",
                             Long.class

@@ -13,5 +13,5 @@ public interface DownloadService {
      * @param url
      * @throws AudioExtractorException
      */
-    public void downloadToMp3(String url) throws AudioExtractorException;
+    void downloadToMp3(String url) throws AudioExtractorException;
 }

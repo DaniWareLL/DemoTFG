@@ -19,15 +19,7 @@ public class PlayerServiceImpl implements PlayerService {
     public PlayerServiceImpl(AudioExtractor extractor) {
         this.extractor = extractor;
     }
-
-
-    /**
-     * Obtiene la URL directa del stream de audio usando yt-dlp.
-     * El enlace firmado caduca en minutos.
-     *
-     * @param url url pública de la canción
-     * @return URL directa del stream de audio
-     */
+    
     @Override
     public String getStreamUrl(String url) throws AudioExtractorException {
 

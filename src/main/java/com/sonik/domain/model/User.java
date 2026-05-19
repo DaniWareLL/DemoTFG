@@ -37,6 +37,20 @@ public class User {
     public User() {
     }
 
+    /**
+     * Creates a User.
+     * @param userName      The username to assign
+     * @param email         The email to assign
+     * @param password_hash The hashed password to assign
+     * @param creation_date The account creation date
+     * @throws IncorrectArgumentException <ul>
+     *     <li>{@link IncorrectArgumentException.ErrorType#EMPTY_USERNAME} If userName is blank</li>
+     *     <li>{@link IncorrectArgumentException.ErrorType#EMPTY_EMAIL} If email is blank</li>
+     *     <li>{@link IncorrectArgumentException.ErrorType#INVALID_EMAIL} If email format is invalid</li>
+     *     <li>{@link IncorrectArgumentException.ErrorType#EMPTY_PASSWORD} If password_hash is blank</li>
+     *     <li>{@link IncorrectArgumentException.ErrorType#INVALID_DATE} If creation_date is null or in the future</li>
+     * </ul>
+     */
     public User(String userName, String email, String password_hash, LocalDate creation_date) throws IncorrectArgumentException {
         setUserName(userName);
         setEmail(email);
@@ -52,6 +66,12 @@ public class User {
         return userName;
     }
 
+    /**
+     * Sets the username of this user.
+     * @param userName The username to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#EMPTY_USERNAME} If userName is blank
+     */
     public void setUserName(String userName) throws IncorrectArgumentException {
         if (userName.isBlank()){
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_USERNAME);
@@ -63,6 +83,14 @@ public class User {
         return email;
     }
 
+    /**
+     * Sets the email of this user. Must follow the format {@code local@domain.tld}.
+     * @param email The email to assign
+     * @throws IncorrectArgumentException <ul>
+     *     <li>{@link IncorrectArgumentException.ErrorType#EMPTY_EMAIL} If email is blank</li>
+     *     <li>{@link IncorrectArgumentException.ErrorType#INVALID_EMAIL} If email format is invalid</li>
+     * </ul>
+     */
     public void setEmail(String email) throws IncorrectArgumentException {
         if (email.isBlank()){
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_EMAIL);
@@ -77,6 +105,12 @@ public class User {
         return password_hash;
     }
 
+    /**
+     * Sets the hashed password of this user.
+     * @param password_hash The hashed password to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#EMPTY_PASSWORD} If password_hash is blank
+     */
     public void setPassword_hash(String password_hash) throws IncorrectArgumentException {
         if (password_hash.isBlank()){
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.EMPTY_PASSWORD);
@@ -88,6 +122,12 @@ public class User {
         return creation_date;
     }
 
+    /**
+     * Sets the account creation date of this user.
+     * @param creation_date The date to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#INVALID_DATE} If creation_date is null or in the future
+     */
     public void setCreation_date(LocalDate creation_date) throws IncorrectArgumentException {
         if (creation_date == null || creation_date.isAfter(LocalDate.now()))
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DATE);
@@ -98,6 +138,11 @@ public class User {
         return preferences;
     }
 
+    /**
+     * Sets the preferences of this user.
+     * @param preferences The UserPref to assign
+     * @throws IllegalArgumentException If preferences is null
+     */
     public void setPreferences(UserPref preferences) {
         if (preferences == null) {
             throw new IllegalArgumentException("Preferences cannot be null");

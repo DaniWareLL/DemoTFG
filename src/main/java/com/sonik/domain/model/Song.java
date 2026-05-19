@@ -80,12 +80,24 @@ public class Song {
 
 
     // Setters
+    /**
+     * Sets the title of this song.
+     * @param title The title to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#NULL_OBJECT_RECEIVED} If title is null or blank
+     */
     public void setTitle(String title) throws IncorrectArgumentException {
         if (title == null || title.isBlank())
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.NULL_OBJECT_RECEIVED);
         this.title = title;
     }
 
+    /**
+     * Sets the duration of this song in seconds.
+     * @param durationSec The duration to assign in seconds, must be zero or positive. Can be null if unknown.
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#INVALID_NUMBER} If durationSec is negative
+     */
     public void setDurationSec(Integer durationSec) throws IncorrectArgumentException {
         if (durationSec != null && durationSec < 0)
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_NUMBER);
@@ -100,20 +112,37 @@ public class Song {
         this.thumbnailUrl = thumbnailUrl;
     }
 
+    /**
+     * Sets the aggregation date of this song.
+     * @param aggregationDate The date to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#INVALID_DATE} If aggregationDate is null or in the future
+     */
     public void setAggregationDate(LocalDate aggregationDate) throws IncorrectArgumentException {
         if (aggregationDate == null || aggregationDate.isAfter(LocalDate.now()))
             throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DATE);
         this.aggregationDate = aggregationDate;
     }
 
-
+    /**
+     * Sets the source platform of this song (e.g. YouTube, SoundCloud).
+     * @param source The source to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#INVALID_SOURCE} If source is null or blank
+     */
     public void setSource(String source) throws IncorrectArgumentException {
         if (source == null || source.isBlank()) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_SOURCE);
         this.source = source;
     }
 
+    /**
+     * Sets the local download path of this song.
+     * @param downloadPath The path to assign
+     * @throws IncorrectArgumentException
+     *     {@link IncorrectArgumentException.ErrorType#INVALID_DOWNLOAD_PATH} If downloadPath is null or blank
+     */
     public void setDownloadPath(String downloadPath) throws IncorrectArgumentException {
-        if (downloadPath == null || downloadPath.isBlank()) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DONWLOAD_PATH);
+        if (downloadPath == null || downloadPath.isBlank()) throw new IncorrectArgumentException(IncorrectArgumentException.ErrorType.INVALID_DOWNLOAD_PATH);
         this.downloadPath = downloadPath;
     }
 

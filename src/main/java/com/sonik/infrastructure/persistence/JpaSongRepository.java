@@ -20,13 +20,7 @@ public class JpaSongRepository implements SongRepository {
         this.emf = emf;
     }
 
-    /**
-     * Finds a {@link com.sonik.domain.model.Song Song} by id and returns it
-     * @param id The id from the song to search for
-     * @return The song with the corresponding id
-     * @throws DataAccessException If JPA finds any errors when searching for the song
-     * @throws ObjectNotFoundException If no song is found with such id
-     */
+
     @Override
     public Song findById(int id) throws DataAccessException, ObjectNotFoundException {
         try (EntityManager em = emf.createEntityManager()) {
@@ -71,12 +65,6 @@ public class JpaSongRepository implements SongRepository {
     }
 
 
-    /**
-     * Saves a {@link com.sonik.domain.model.Song Song} to the database
-     * @param song The song to save
-     * @throws DuplicateIdException If a song with the same id already exists in the database
-     * @throws DataAccessException If the database could not be accessed
-     */
     @Override
     public void save(Song song) throws DuplicateIdException, DataAccessException {
 
@@ -103,11 +91,6 @@ public class JpaSongRepository implements SongRepository {
         }
     }
 
-    /**
-     * Deletes a {@link com.sonik.domain.model.Song Song} from the database
-     * @param song The song to be deleted
-     * @throws DataAccessException When a song can't be deleted
-     */
     @Override
     public void delete(Song song) throws DataAccessException, ObjectNotFoundException {
 

@@ -9,9 +9,10 @@ import com.sonik.domain.exceptions.AudioExtractorException;
 public interface DownloadService {
 
     /**
-     *
-     * @param url
-     * @throws AudioExtractorException
+     * Downloads a song from the given URL and converts it to MP3.
+     * Output directory and quality are taken from the current user's session preferences.
+     * @param url The URL of the song to download
+     * @throws AudioExtractorException If the download or conversion fails
      */
     void downloadToMp3(String url) throws AudioExtractorException;
 }

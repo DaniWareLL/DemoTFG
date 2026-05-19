@@ -5,13 +5,16 @@ import com.sonik.domain.exceptions.AudioExtractorException;
 public interface SettingService {
 
     /**
-     * Devuelve la versión actual de yt-dlp instalada.
+     * Returns the current version of yt-dlp.
+     * @return The version string
+     * @throws AudioExtractorException If the version cannot be retrieved
      */
     String getToolVersion() throws AudioExtractorException;
 
     /**
-     * Actualiza yt-dlp a la última versión disponible.
-     * Necesario porque YouTube cambia su arquitectura frecuentemente.
+     * Updates yt-dlp to the latest version.
+     * @return The output of the update command
+     * @throws AudioExtractorException If the update fails
      */
     String updateTool() throws AudioExtractorException;
 

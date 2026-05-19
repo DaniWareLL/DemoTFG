@@ -19,7 +19,7 @@ public class PlayerServiceImpl implements PlayerService {
     public PlayerServiceImpl(AudioExtractor extractor) {
         this.extractor = extractor;
     }
-    
+
     @Override
     public String getStreamUrl(String url) throws AudioExtractorException {
 

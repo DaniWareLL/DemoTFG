@@ -1,10 +1,16 @@
 package com.sonik.domain.model.enums;
 
+/**
+ * Indicates the source
+ */
 public enum SourceName {
 
     YOUTUBE("ytsearch"),
     SOUNDCLOUD("scsearch");
 
+    /**
+     * The prefix to use alongside YtDlp
+     */
     private final String searchPrefix;
 
     SourceName(String searchPrefix) {
@@ -14,5 +20,5 @@ public enum SourceName {
     public String getSearchPrefix() {
         return searchPrefix;
     }
-    
+
 }

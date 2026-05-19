@@ -7,24 +7,24 @@ import com.sonik.domain.model.Song;
  */
 public interface AudioPlayer {
 
-    public void play(String streamUrl);
-    public void resume();
-    public void pause();
-    public void stop();
+    void play(String streamUrl);
+    void resume();
+    void pause();
+    void stop();
 
     void setOnPlaying(Runnable callback);
     boolean isPlaying();
 
-    public String getCurrentUrl();
-    public Song getCurrentSong();
+    String getCurrentUrl();
+    Song getCurrentSong();
 
-    public void setCurrentUrl(String currentUrl);
-    public void setCurrentSong(Song currentSong);
+    void setCurrentUrl(String currentUrl);
+    void setCurrentSong(Song currentSong);
 
-    public int getCurrentTimeSec();
+    int getCurrentTimeSec();
 
-    public double getPosition();
-    public void seekToPosition(double pos);
+    double getPosition();
+    void seekToPosition(double pos);
 
     void setVolume(int volume);
     int getVolume();

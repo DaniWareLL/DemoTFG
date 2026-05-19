@@ -40,16 +40,8 @@ public class UserSession {
         preferences = pref;
     }
 
-    public static void clear() {
-        user = null;
-        preferences = null;
-    }
-
     public static void setUser(User user) {
         UserSession.user = user;
     }
 
-    public static void setPreferences(UserPref preferences) {
-        UserSession.preferences = preferences;
-    }
 }
